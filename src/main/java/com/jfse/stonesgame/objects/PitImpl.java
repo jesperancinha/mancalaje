@@ -10,18 +10,40 @@ public class PitImpl implements Pit{
 
     private Pit nextPit;
 
-    private int nInitialStones;
+    private int nStones;
 
     public PitImpl(int nInitialStones, Player player) {
-        this.nInitialStones = nInitialStones;
+        this.nStones = nInitialStones;
         this.player = player;
     }
 
+    @Override
     public void setNextPit(Pit nextPit) {
         this.nextPit = nextPit;
     }
 
+    @Override
     public void setOpositePit(Pit opositePit) {
         this.opositePit = opositePit;
+    }
+
+    @Override
+    public int getnStones() {
+        return nStones;
+    }
+
+    @Override
+    public Pit getNextPit() {
+        return nextPit;
+    }
+
+    @Override
+    public Player getPlayer() {
+        return player;
+    }
+
+    @Override
+    public Pit getOpositePit() {
+        return opositePit;
     }
 }

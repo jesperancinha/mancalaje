@@ -6,4 +6,13 @@ package com.jfse.stonesgame.objects;
 public interface Board {
 
 
+    void createPitsForPlayer(int nPits, int nInitialStones, Player player1, Player player2);
+
+    int getnPits();
+
+    Player getPlayer1();
+
+    Player getPlayer2();
+
+    Pit getTopLeftPiece();
 }

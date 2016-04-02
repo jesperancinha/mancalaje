@@ -5,4 +5,15 @@ package com.jfse.stonesgame.objects;
  */
 public interface Pit {
 
+    void setNextPit(Pit nextPit);
+
+    void setOpositePit(Pit opositePit);
+
+    int getnStones();
+
+    Pit getNextPit();
+
+    Player getPlayer();
+
+    Pit getOpositePit();
 }
