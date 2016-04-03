@@ -17,6 +17,7 @@
         <junit>4.12</junit>
         <maven.compiler.plugin>2.3.2</maven.compiler.plugin>
         <jmock.junit4>2.8.2</jmock.junit4>
+        <tomcat.plugin.version>2.2</tomcat.plugin.version>
     </properties>
 
     <build>
@@ -29,6 +30,15 @@
                 <configuration>
                     <source>${jdk.version}</source>
                     <target>${jdk.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>${tomcat.plugin.version}</version>
+                <configuration>
+                    <port>8080</port>
+                    <path>/stones-game</path>
                 </configuration>
             </plugin>
         </plugins>

@@ -1,8 +1,9 @@
 # Intellij
-
 .idea/
 
 
 # Maven
-
 target/
+
+# Bower
+src/main/webapp/resources
