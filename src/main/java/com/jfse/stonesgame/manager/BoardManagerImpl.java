@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 @Component
 public class BoardManagerImpl implements BoardManager {
 
-    private final Board board;
+    private  Board board;
 
     BoardManagerImpl() {
-        this.board = new BoardImpl(6, 6, new PlayerImpl(), new PlayerImpl());
+        startBoard();
     }
 
     BoardManagerImpl(int nPits, int nInitialStones, Player player1, Player player2) {
@@ -38,5 +38,10 @@ public class BoardManagerImpl implements BoardManager {
     @Override
     public Board getBoard() {
         return board;
+    }
+
+    @Override
+    public void startBoard() {
+        this.board = new BoardImpl(6, 6, new PlayerImpl(), new PlayerImpl());
     }
 }

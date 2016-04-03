@@ -9,4 +9,6 @@ public interface BoardManager {
     void moveStones(String chosenPitKey);
 
     Board getBoard();
+
+    void startBoard();
 }
