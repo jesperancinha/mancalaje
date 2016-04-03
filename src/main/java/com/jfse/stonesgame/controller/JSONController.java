@@ -76,4 +76,8 @@ public class JSONController {
                 boardManager.getWinner() == null ? null : boardManager.getWinner().getPlayerName() //
         );
     }
+
+    protected void setBoardManager(BoardManager boardManager) {
+        this.boardManager = boardManager;
+    }
 }
