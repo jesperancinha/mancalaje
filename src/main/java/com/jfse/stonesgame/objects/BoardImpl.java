@@ -42,7 +42,7 @@ public class BoardImpl implements Board {
         player2.setPlayerBigPit(nextBigPit2);
         for (int i = 0; i < nPits; i++) {
             lastPlayerPit1 = new PitImpl(nInitialStones, player1, PLAYER1 + i);
-            lastPlayerPit2 = new PitImpl(nInitialStones, player2,PLAYER2 + (nPits - i - 1));
+            lastPlayerPit2 = new PitImpl(nInitialStones, player2, PLAYER2 + (nPits - i - 1));
             pitMap.put(lastPlayerPit1.getSharedKey(), lastPlayerPit1);
             pitMap.put(lastPlayerPit2.getSharedKey(), lastPlayerPit2);
             player1.addPit(lastPlayerPit1);
@@ -68,6 +68,7 @@ public class BoardImpl implements Board {
         }
         lastPlayerPit1.setNextPit(nextBigPit1);
         nextBigPit1.setNextPit(lastPlayerPit2);
+        player1.invertPits();
         player2.orderPits();
     }
 

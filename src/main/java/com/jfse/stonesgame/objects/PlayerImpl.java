@@ -54,4 +54,10 @@ public class PlayerImpl implements Player {
     public void orderPits() {
         Collections.sort(ownedPits, (o1, o2) -> o1.getSharedKey().compareTo(o2.getSharedKey()));
     }
+
+    @Override
+    public void invertPits() {
+        Collections.sort(ownedPits, (o1, o2) -> o2.getSharedKey().compareTo(o1.getSharedKey()));
+
+    }
 }

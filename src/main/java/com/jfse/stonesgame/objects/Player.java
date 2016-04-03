@@ -20,4 +20,6 @@ public interface Player {
     String getPlayerName();
 
     void orderPits();
+
+    void invertPits();
 }

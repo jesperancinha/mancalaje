@@ -31,8 +31,13 @@ public class BoardImplTest {
 
         context.checking(new Expectations() {
             {
-                oneOf(mockPlayer1).setPlayerBigPit(with(any(Pit.class)));
-                oneOf(mockPlayer2).setPlayerBigPit(with(any(Pit.class)));
+                exactly(1).of(mockPlayer1).setPlayerBigPit(with(any(Pit.class)));
+                exactly(6).of(mockPlayer1).addPit(with(any(Pit.class)));
+                exactly(1).of(mockPlayer2).setPlayerBigPit(with(any(Pit.class)));
+                exactly(6).of(mockPlayer2).addPit(with(any(Pit.class)));
+                exactly(1).of(mockPlayer1).invertPits();
+                exactly(1).of(mockPlayer2).orderPits();
+
             }
         });
 
