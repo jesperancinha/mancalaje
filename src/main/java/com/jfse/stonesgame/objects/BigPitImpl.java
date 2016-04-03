@@ -5,8 +5,8 @@ package com.jfse.stonesgame.objects;
  */
 public class BigPitImpl extends PitImpl {
 
-    public BigPitImpl(int nStones, Player player) {
-        super(nStones, player);
+    public BigPitImpl(int nStones, Player player, String sharedKey) {
+        super(nStones, player, sharedKey);
     }
 
     @Override

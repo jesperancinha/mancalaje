@@ -18,6 +18,7 @@
         <maven.compiler.plugin>2.3.2</maven.compiler.plugin>
         <jmock.junit4>2.8.2</jmock.junit4>
         <tomcat.plugin.version>2.2</tomcat.plugin.version>
+        <jackson.databind>2.7.3</jackson.databind>
     </properties>
 
     <build>
@@ -68,6 +69,11 @@
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
             <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.databind}</version>
         </dependency>
 
         <!-- JUnit -->

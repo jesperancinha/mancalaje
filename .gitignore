@@ -6,4 +6,4 @@
 target/
 
 # Bower
-src/main/webapp/resources
+src/main/webapp/resources/bower_components

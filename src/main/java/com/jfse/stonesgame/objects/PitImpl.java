@@ -7,14 +7,16 @@ public class PitImpl implements Pit {
     private Pit opositePit;
 
     private Player player;
+    private String sharedKey;
 
     private Pit nextPit;
 
     private int nStones;
 
-    public PitImpl(int nInitialStones, Player player) {
+    public PitImpl(int nInitialStones, Player player, String sharedKey) {
         this.nStones = nInitialStones;
         this.player = player;
+        this.sharedKey = sharedKey;
     }
 
     @Override
@@ -64,5 +66,10 @@ public class PitImpl implements Pit {
     @Override
     public void addOneStone() {
         nStones++;
+    }
+
+    @Override
+    public String getSharedKey() {
+        return sharedKey;
     }
 }

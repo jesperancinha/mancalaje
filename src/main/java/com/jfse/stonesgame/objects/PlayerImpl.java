@@ -29,4 +29,9 @@ public class PlayerImpl implements Player {
     public Pit getPlayerBigPit() {
         return playerBigPit;
     }
+
+    @Override
+    public List<Pit> getOwnedPits() {
+        return ownedPits;
+    }
 }

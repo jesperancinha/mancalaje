@@ -22,4 +22,6 @@ public interface Pit {
     Pit getMextPitNotThisOne(Pit oponentBigPit);
 
     void addOneStone();
+
+    String getSharedKey();
 }
