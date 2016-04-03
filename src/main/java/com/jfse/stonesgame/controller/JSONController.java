@@ -21,6 +21,25 @@ public class JSONController {
     @Autowired
     private BoardManager boardManager;
 
+    @RequestMapping(value = "startAgain", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    BoardModel startAgain() {
+        boardManager.startBoard();
+        final Player player1 = boardManager.getBoard().getPlayer1();
+        final Player player2 = boardManager.getBoard().getPlayer2();
+        return new BoardModel(player1.getPlayerBigPit(), //
+                player2.getPlayerBigPit(), //
+                player1.getOwnedPits(), //
+                player2.getOwnedPits(), //
+                boardManager.getCurrentPlayer().getPlayerName(), //
+                boardManager.getCurrentPlayer().getPlayerId(), //
+                "", //
+                boardManager.isGameOver(), //
+                boardManager.getWinner() == null ? null : boardManager.getWinner().getPlayerName()//
+        );
+    }
+
     @RequestMapping(value = "refreshBoard", method = RequestMethod.GET)
     public
     @ResponseBody
@@ -33,7 +52,10 @@ public class JSONController {
                 player2.getOwnedPits(), //
                 boardManager.getCurrentPlayer().getPlayerName(), //
                 boardManager.getCurrentPlayer().getPlayerId(), //
-                "", boardManager.isGameOver());
+                "", //
+                boardManager.isGameOver(), //
+                boardManager.getWinner() == null ? null : boardManager.getWinner().getPlayerName() //
+        );
     }
 
     @RequestMapping(value = "selectPit/{pitIdentifier}", method = RequestMethod.GET)
@@ -43,14 +65,15 @@ public class JSONController {
         final Player player1 = boardManager.getBoard().getPlayer1();
         final Player player2 = boardManager.getBoard().getPlayer2();
         final String valid = boardManager.moveStones(pitIdentifier);
-        return new BoardModel(player1.getPlayerBigPit(), //
+        return  new BoardModel(player1.getPlayerBigPit(), //
                 player2.getPlayerBigPit(), //
                 player1.getOwnedPits(), //
                 player2.getOwnedPits(), //
                 boardManager.getCurrentPlayer().getPlayerName(), //
                 boardManager.getCurrentPlayer().getPlayerId(), //
                 valid,
-                boardManager.isGameOver()//
+                boardManager.isGameOver(),//
+                boardManager.getWinner() == null ? null : boardManager.getWinner().getPlayerName() //
         );
     }
 }

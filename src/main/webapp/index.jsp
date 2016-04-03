@@ -23,5 +23,12 @@
   </br>
   <p style="color:red">{{board.errorMessage}}</p>
 </div>
+<div ng-show="board.gameOver">
+  <p>You have finished the game!</p>
+  <p>Winner is {{board.winnerPlayerName}}</p>
+</div>
+  <button ng-click="startAgain()">
+    Start again!
+  </button>
 </body>
 </html>

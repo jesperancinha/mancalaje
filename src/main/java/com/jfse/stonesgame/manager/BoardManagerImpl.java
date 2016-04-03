@@ -11,11 +11,12 @@ import org.springframework.stereotype.Service;
 @Component
 public class BoardManagerImpl implements BoardManager {
 
-    private  Board board;
+    private Board board;
 
     private Player currentPlayer;
 
     private boolean gameOver;
+    private Player winner;
 
     BoardManagerImpl() {
         startBoard();
@@ -29,7 +30,7 @@ public class BoardManagerImpl implements BoardManager {
     @Override
     public String moveStones(String chosenPitKey) {
         final Pit emptiedPit = this.board.getPitMap().get(chosenPitKey);
-        if(emptiedPit.getPlayer() != currentPlayer){
+        if (emptiedPit.getPlayer() != currentPlayer) {
             return "Invalid move!";
         }
         final Player oponent = emptiedPit.getOpositePit().getPlayer();
@@ -54,8 +55,30 @@ public class BoardManagerImpl implements BoardManager {
             }
             changePlayer();
         }
-        gameOver = board.getPlayer1().arePitsEmpty() || board.getPlayer2().arePitsEmpty();
+        final Player player1 = board.getPlayer1();
+        final Player player2 = board.getPlayer2();
+        gameOver = player1.arePitsEmpty() || player2.arePitsEmpty();
+        if (gameOver) {
+            collectStones(player1);
+            collectStones(player2);
+            if (player1.getPlayerBigPit().getnStones() > player2.getPlayerBigPit().getnStones()) {
+                winner = player1;
+            } else {
+                winner = player2;
+            }
+        }
+
         return "";
+    }
+
+    @Override
+    public void collectStones(Player player) {
+        int totalStones = 0;
+        for (Pit p : player.getOwnedPits()) {
+            totalStones += p.getnStones();
+            p.emptyPit();
+        }
+        player.getPlayerBigPit().addStones(totalStones);
     }
 
     @Override
@@ -88,5 +111,10 @@ public class BoardManagerImpl implements BoardManager {
         this.board = new BoardImpl(6, 6, new PlayerImpl(1, "Player One"), new PlayerImpl(2, "Player Two"));
         this.currentPlayer = board.getPlayer1();
         gameOver = false;
+    }
+
+    @Override
+    public Player getWinner() {
+        return winner;
     }
 }

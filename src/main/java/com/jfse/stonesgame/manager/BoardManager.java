@@ -9,6 +9,8 @@ import com.jfse.stonesgame.objects.Player;
 public interface BoardManager {
     String moveStones(String chosenPitKey);
 
+    void collectStones(Player player1);
+
     void changePlayer();
 
     Board getBoard();
@@ -18,4 +20,6 @@ public interface BoardManager {
     Player getCurrentPlayer();
 
     boolean isGameOver();
+
+    Player getWinner();
 }
