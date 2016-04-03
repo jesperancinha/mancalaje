@@ -1,0 +1,12 @@
+{
+    "name": "stones-game",
+    "version": "1.0.0",
+    "authors": [
+        "jofisaes@gmail.com"
+    ],
+    "description": "Stones game Spring MVC | AngularJs project",
+    "dependencies": {
+        "angular": "1.5.3",
+        "angular-messages": "1.5.3"
+    }
+}

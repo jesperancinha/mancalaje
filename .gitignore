@@ -1,0 +1,9 @@
+# Intellij
+.idea/
+
+
+# Maven
+target/
+
+# Bower
+src/main/webapp/resources/bower_components
