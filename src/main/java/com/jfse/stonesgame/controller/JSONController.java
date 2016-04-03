@@ -33,7 +33,7 @@ public class JSONController {
                 player2.getOwnedPits(), //
                 boardManager.getCurrentPlayer().getPlayerName(), //
                 boardManager.getCurrentPlayer().getPlayerId(), //
-                "");
+                "", boardManager.isGameOver());
     }
 
     @RequestMapping(value = "selectPit/{pitIdentifier}", method = RequestMethod.GET)
@@ -49,7 +49,8 @@ public class JSONController {
                 player2.getOwnedPits(), //
                 boardManager.getCurrentPlayer().getPlayerName(), //
                 boardManager.getCurrentPlayer().getPlayerId(), //
-                valid//
+                valid,
+                boardManager.isGameOver()//
         );
     }
 }

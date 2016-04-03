@@ -16,4 +16,6 @@ public interface BoardManager {
     void startBoard();
 
     Player getCurrentPlayer();
+
+    boolean isGameOver();
 }

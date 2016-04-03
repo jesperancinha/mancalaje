@@ -24,11 +24,13 @@ public class BoardModel {
 
     private String errorMessage;
 
+    private boolean gameOver;
+
     public BoardModel(Pit largePit1, //
                       Pit largePit2, //
                       List<Pit> pits1, //
                       List<Pit> pits2,
-                      String currentPlayerName, Integer currentPlayerId, String errorMessage) {
+                      String currentPlayerName, Integer currentPlayerId, String errorMessage, boolean gameOver) {
         this.currentPlayerName = currentPlayerName;
         this.currentPlayerId = currentPlayerId;
         this.largePit1 = new PitModel(largePit1.getnStones(), BoardImpl.PLAYER1);
@@ -38,6 +40,7 @@ public class BoardModel {
         this.pits2 = convertPitsToModel(pits2);
 
         this.errorMessage = errorMessage;
+        this.gameOver = gameOver;
     }
 
     private List<PitModel> convertPitsToModel(List<Pit> pits) {
@@ -74,5 +77,13 @@ public class BoardModel {
 
     public String getErrorMessage() {
         return errorMessage;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
     }
 }

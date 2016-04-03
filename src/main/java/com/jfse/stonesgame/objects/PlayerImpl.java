@@ -60,4 +60,16 @@ public class PlayerImpl implements Player {
         Collections.sort(ownedPits, (o1, o2) -> o2.getSharedKey().compareTo(o1.getSharedKey()));
 
     }
+
+    @Override
+    public boolean arePitsEmpty() {
+        boolean empty = true;
+        for (Pit p : ownedPits) {
+            if (p.getnStones() > 0) {
+                empty = false;
+                break;
+            }
+        }
+        return empty;
+    }
 }

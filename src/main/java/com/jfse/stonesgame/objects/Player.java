@@ -22,4 +22,6 @@ public interface Player {
     void orderPits();
 
     void invertPits();
+
+    boolean arePitsEmpty();
 }

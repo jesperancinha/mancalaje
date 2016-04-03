@@ -15,6 +15,8 @@ public class BoardManagerImpl implements BoardManager {
 
     private Player currentPlayer;
 
+    private boolean gameOver;
+
     BoardManagerImpl() {
         startBoard();
     }
@@ -51,8 +53,8 @@ public class BoardManagerImpl implements BoardManager {
                 lastPit.getOpositePit().emptyPit();
             }
             changePlayer();
-
         }
+        gameOver = board.getPlayer1().arePitsEmpty() || board.getPlayer2().arePitsEmpty();
         return "";
     }
 
@@ -77,8 +79,14 @@ public class BoardManagerImpl implements BoardManager {
     }
 
     @Override
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    @Override
     public void startBoard() {
         this.board = new BoardImpl(6, 6, new PlayerImpl(1, "Player One"), new PlayerImpl(2, "Player Two"));
         this.currentPlayer = board.getPlayer1();
+        gameOver = false;
     }
 }
