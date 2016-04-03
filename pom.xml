@@ -7,6 +7,8 @@
     <artifactId>stones-game</artifactId>
     <packaging>war</packaging>
     <version>1.0.0-SNAPSHOT</version>
+    <name>stones-game Maven Webapp</name>
+    <url>http://maven.apache.org</url>
 
     <properties>
         <spring.version>4.2.5.RELEASE</spring.version>
@@ -18,6 +20,7 @@
     </properties>
 
     <build>
+        <finalName>stones-game</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
