@@ -1,13 +1,20 @@
 package com.jfse.stonesgame.objects;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by joaofilipesabinoesperancinha on 02-04-16.
  */
 public class BoardImpl implements Board {
-    private int nPits;
-    private int nInitialStones;
-    private Player player1;
-    private Player player2;
+    private final static String PLAYER1 = "player1";
+    private final static String PLAYER2 = "player2";
+
+    private final int nPits;
+    private final int nInitialStones;
+    private final Player player1;
+    private final Player player2;
+    private final Map<String, Pit> pitMap;
     private Pit topLeftPiece;
 
     public BoardImpl(int nPits, int nInitialStones, Player player1, Player player2) {
@@ -16,6 +23,7 @@ public class BoardImpl implements Board {
         this.nInitialStones = nInitialStones;
         this.player1 = player1;
         this.player2 = player2;
+        this.pitMap = new HashMap<>();
 
         createPitsForPlayer(nPits, nInitialStones, player1, player2);
     }
@@ -28,25 +36,26 @@ public class BoardImpl implements Board {
         Pit lastPlayerPit2 = null;
         final BigPitImpl nextBigPit1 = new BigPitImpl(0, player2);
         final BigPitImpl nextBigPit2 = new BigPitImpl(0, player1);
-        for (int i = 0; i< nPits; i++) {
+        pitMap.put(PLAYER1, nextBigPit1);
+        pitMap.put(PLAYER2, nextBigPit2);
+        for (int i = 0; i < nPits; i++) {
             lastPlayerPit1 = new PitImpl(nInitialStones, player1);
             lastPlayerPit2 = new PitImpl(nInitialStones, player2);
-            if(topLeftPiece == null)
-            {
+            pitMap.put(PLAYER1 + i, lastPlayerPit1);
+            pitMap.put(PLAYER2 + (nPits - i - 1), lastPlayerPit2);
+
+            if (topLeftPiece == null) {
                 topLeftPiece = lastPlayerPit1;
                 nextBigPit2.setNextPit(topLeftPiece);
             }
             lastPlayerPit1.setOpositePit(lastPlayerPit2);
             lastPlayerPit2.setOpositePit(lastPlayerPit1);
-            if(previous1 != null)
-            {
+            if (previous1 != null) {
                 previous1.setNextPit(lastPlayerPit1);
             }
-            if(previous2 !=  null)
-            {
+            if (previous2 != null) {
                 lastPlayerPit2.setNextPit(previous2);
-            }else
-            {
+            } else {
                 lastPlayerPit2.setNextPit(nextBigPit2);
             }
             previous1 = lastPlayerPit1;
@@ -63,10 +72,6 @@ public class BoardImpl implements Board {
         return nPits;
     }
 
-    public void setnInitialStones(int nInitialStones) {
-        this.nInitialStones = nInitialStones;
-    }
-
     @Override
     public Player getPlayer1() {
         return player1;
@@ -80,5 +85,10 @@ public class BoardImpl implements Board {
     @Override
     public Pit getTopLeftPiece() {
         return topLeftPiece;
+    }
+
+    @Override
+    public Map<String, Pit> getPitMap() {
+        return pitMap;
     }
 }
