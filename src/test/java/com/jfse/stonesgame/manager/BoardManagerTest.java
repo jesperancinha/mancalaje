@@ -78,7 +78,7 @@ public class BoardManagerTest {
         expectedStoneNumbers.push(8);
         expectedStoneNumbers.push(8);
         expectedStoneNumbers.push(8);
-        expectedStoneNumbers.push(9);
+        expectedStoneNumbers.push(18);
 
         for (int i = 0; i < TEST_PITS + 2; i++) {
             assertEquals(expectedStoneNumbers.pop(), currentPit.getnStones());
