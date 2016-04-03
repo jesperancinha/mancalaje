@@ -5,4 +5,9 @@ package com.jfse.stonesgame.objects;
  */
 public interface Player {
 
+    void setPlayerBigPit(Pit playerBigPit);
+
+    void addPit(Pit pit);
+
+    Pit getPlayerBigPit();
 }

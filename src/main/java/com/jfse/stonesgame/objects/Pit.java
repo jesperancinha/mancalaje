@@ -9,11 +9,17 @@ public interface Pit {
 
     void setOpositePit(Pit opositePit);
 
-    int getnStones();
+    Integer getnStones();
 
     Pit getNextPit();
 
     Player getPlayer();
 
     Pit getOpositePit();
+
+    void emptyPit();
+
+    Pit getMextPitNotThisOne(Pit oponentBigPit);
+
+    void addOneStone();
 }

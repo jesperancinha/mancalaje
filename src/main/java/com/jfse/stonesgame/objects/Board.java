@@ -16,7 +16,7 @@ public interface Board {
 
     Player getPlayer2();
 
-    Pit getTopLeftPiece();
+    Pit getPlayerOnePiece();
 
     Map<String, Pit> getPitMap();
 }

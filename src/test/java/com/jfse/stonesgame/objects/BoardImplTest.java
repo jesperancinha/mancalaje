@@ -1,5 +1,6 @@
 package com.jfse.stonesgame.objects;
 
+import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.junit.Test;
 
@@ -14,9 +15,9 @@ public class BoardImplTest {
 
     final static Mockery context = new Mockery();
 
-    final static int TEST_PITS = 6;
+    final static Integer TEST_PITS = 6;
 
-    final static int TEST_STONES = 6;
+    final static Integer TEST_STONES = 6;
 
     final static String PLAYER1 = "Player-1";
 
@@ -28,9 +29,16 @@ public class BoardImplTest {
         final Player mockPlayer1 = context.mock(Player.class, PLAYER1);
         final Player mockPlayer2 = context.mock(Player.class, PLAYER2);
 
+        context.checking(new Expectations() {
+            {
+                oneOf(mockPlayer1).setPlayerBigPit(with(any(Pit.class)));
+                oneOf(mockPlayer2).setPlayerBigPit(with(any(Pit.class)));
+            }
+        });
+
         final Board board = new BoardImpl(TEST_PITS, TEST_STONES, mockPlayer1, mockPlayer2);
 
-        final Pit firstPit = board.getTopLeftPiece();
+        final Pit firstPit = board.getPlayerOnePiece();
 
         Pit currentPit = firstPit;
 
@@ -52,7 +60,7 @@ public class BoardImplTest {
     private Pit testBigPit(Pit currentPit) {
         assertNotNull(currentPit);
         assertTrue(currentPit instanceof BigPitImpl);
-        assertEquals(0,currentPit.getnStones());
+        assertEquals(0,currentPit.getnStones().intValue());
         currentPit = currentPit.getNextPit();
         return currentPit;
     }

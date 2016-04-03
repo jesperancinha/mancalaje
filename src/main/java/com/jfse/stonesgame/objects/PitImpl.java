@@ -3,7 +3,7 @@ package com.jfse.stonesgame.objects;
 /**
  * Created by joaofilipesabinoesperancinha on 02-04-16.
  */
-public class PitImpl implements Pit{
+public class PitImpl implements Pit {
     private Pit opositePit;
 
     private Player player;
@@ -28,7 +28,7 @@ public class PitImpl implements Pit{
     }
 
     @Override
-    public int getnStones() {
+    public Integer getnStones() {
         return nStones;
     }
 
@@ -45,5 +45,24 @@ public class PitImpl implements Pit{
     @Override
     public Pit getOpositePit() {
         return opositePit;
+    }
+
+    @Override
+    public void emptyPit() {
+        this.nStones = 0;
+    }
+
+    @Override
+    public Pit getMextPitNotThisOne(Pit oponentBigPit) {
+        if (nextPit == oponentBigPit) {
+            return nextPit.getNextPit();
+        } else {
+            return nextPit;
+        }
+    }
+
+    @Override
+    public void addOneStone() {
+        nStones++;
     }
 }

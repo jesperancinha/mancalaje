@@ -15,7 +15,7 @@ public class BoardImpl implements Board {
     private final Player player1;
     private final Player player2;
     private final Map<String, Pit> pitMap;
-    private Pit topLeftPiece;
+    private Pit playerOnePiece;
 
     public BoardImpl(int nPits, int nInitialStones, Player player1, Player player2) {
 
@@ -38,15 +38,17 @@ public class BoardImpl implements Board {
         final BigPitImpl nextBigPit2 = new BigPitImpl(0, player1);
         pitMap.put(PLAYER1, nextBigPit1);
         pitMap.put(PLAYER2, nextBigPit2);
+        player1.setPlayerBigPit(nextBigPit1);
+        player2.setPlayerBigPit(nextBigPit2);
         for (int i = 0; i < nPits; i++) {
             lastPlayerPit1 = new PitImpl(nInitialStones, player1);
             lastPlayerPit2 = new PitImpl(nInitialStones, player2);
             pitMap.put(PLAYER1 + i, lastPlayerPit1);
             pitMap.put(PLAYER2 + (nPits - i - 1), lastPlayerPit2);
 
-            if (topLeftPiece == null) {
-                topLeftPiece = lastPlayerPit1;
-                nextBigPit2.setNextPit(topLeftPiece);
+            if (playerOnePiece == null) {
+                playerOnePiece = lastPlayerPit1;
+                nextBigPit2.setNextPit(playerOnePiece);
             }
             lastPlayerPit1.setOpositePit(lastPlayerPit2);
             lastPlayerPit2.setOpositePit(lastPlayerPit1);
@@ -82,9 +84,8 @@ public class BoardImpl implements Board {
         return player2;
     }
 
-    @Override
-    public Pit getTopLeftPiece() {
-        return topLeftPiece;
+    public Pit getPlayerOnePiece() {
+        return playerOnePiece;
     }
 
     @Override
