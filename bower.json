@@ -7,10 +7,6 @@
     "description": "Stones game Spring MVC | AngularJs project",
     "dependencies": {
         "angular": "1.5.3",
-        "angular-messages": "1.5.3",
-	"lodash": "2.4.1",
-        "pure": "0.5.0",
-        "requirejs": "2.1.15",
-        "spring-security-csrf-token-interceptor": "0.1.5"
+        "angular-messages": "1.5.3"
     }
 }
