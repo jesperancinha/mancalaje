@@ -61,14 +61,23 @@ public class BoardManagerImpl implements BoardManager {
         if (gameOver) {
             collectStones(player1);
             collectStones(player2);
-            if (player1.getPlayerBigPit().getnStones() > player2.getPlayerBigPit().getnStones()) {
-                winner = player1;
-            } else {
-                winner = player2;
-            }
+            decideWinner(player1, player2);
         }
 
         return "";
+    }
+
+    @Override
+    public void decideWinner(Player player1, Player player2) {
+        final Integer playerOneStones = player1.getPlayerBigPit().getnStones();
+        final Integer playerTwoStones = player2.getPlayerBigPit().getnStones();
+        if (playerOneStones > playerTwoStones) {
+            winner = player1;
+        } else if (playerOneStones < playerTwoStones) {
+            winner = player2;
+        } else {
+            winner = null;
+        }
     }
 
     @Override
