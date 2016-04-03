@@ -68,6 +68,7 @@ public class BoardImpl implements Board {
         }
         lastPlayerPit1.setNextPit(nextBigPit1);
         nextBigPit1.setNextPit(lastPlayerPit2);
+        player2.orderPits();
     }
 
 

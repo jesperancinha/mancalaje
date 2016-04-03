@@ -1,7 +1,6 @@
 package com.jfse.stonesgame.objects;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by joaofilipesabinoesperancinha on 02-04-16.
@@ -49,5 +48,10 @@ public class PlayerImpl implements Player {
     @Override
     public String getPlayerName() {
         return playerName;
+    }
+
+    @Override
+    public void orderPits() {
+        Collections.sort(ownedPits, (o1, o2) -> o1.getSharedKey().compareTo(o2.getSharedKey()));
     }
 }

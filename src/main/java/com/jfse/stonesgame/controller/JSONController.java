@@ -5,6 +5,7 @@ import com.jfse.stonesgame.model.BoardModel;
 import com.jfse.stonesgame.objects.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,11 +21,29 @@ public class JSONController {
     @Autowired
     private BoardManager boardManager;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody
+    @RequestMapping(value = "refreshBoard", method = RequestMethod.GET)
+    public
+    @ResponseBody
     BoardModel getBoard() {
         final Player player1 = boardManager.getBoard().getPlayer1();
         final Player player2 = boardManager.getBoard().getPlayer2();
+        return new BoardModel(player1.getPlayerBigPit(), //
+                player2.getPlayerBigPit(), //
+                player1.getOwnedPits(), //
+                player2.getOwnedPits(), //
+                boardManager.getCurrentPlayer().getPlayerName(), //
+                boardManager.getCurrentPlayer().getPlayerId() //
+        );
+    }
+
+    @RequestMapping(value = "selectPit/{pitIdentifier}", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    BoardModel selectPit(@PathVariable String pitIdentifier) {
+        System.out.println(pitIdentifier);
+        final Player player1 = boardManager.getBoard().getPlayer1();
+        final Player player2 = boardManager.getBoard().getPlayer2();
+        boardManager.moveStones(pitIdentifier);
         return new BoardModel(player1.getPlayerBigPit(), //
                 player2.getPlayerBigPit(), //
                 player1.getOwnedPits(), //

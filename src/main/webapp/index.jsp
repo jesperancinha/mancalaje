@@ -12,11 +12,11 @@
   <table border="1">
     <tr>
       <td rowspan="2">{{board.largePit1.nStones}}</td>
-      <td ng-repeat="test in board.pits1">{{test.nStones}}</td>
+      <td ng-repeat="test in board.pits1" ng-click="selectPit(test.keyName)">{{test.nStones}}</td>
       <td rowspan="2">{{board.largePit2.nStones}}</td>
     </tr>
     <tr>
-      <td ng-repeat="test in board.pits2">{{test.nStones}}</td>
+      <td ng-repeat="test in board.pits2" ng-click="selectPit(test.keyName)">{{test.nStones}}</td>
     </tr>
   </table>
 

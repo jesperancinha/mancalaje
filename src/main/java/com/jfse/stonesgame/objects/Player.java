@@ -18,4 +18,6 @@ public interface Player {
     Integer getPlayerId();
 
     String getPlayerName();
+
+    void orderPits();
 }
