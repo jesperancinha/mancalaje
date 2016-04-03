@@ -15,4 +15,7 @@ public interface Player {
 
     List<Pit> getOwnedPits();
 
+    Integer getPlayerId();
+
+    String getPlayerName();
 }

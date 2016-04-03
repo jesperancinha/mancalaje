@@ -13,12 +13,15 @@ public class BoardManagerImpl implements BoardManager {
 
     private  Board board;
 
+    private Player currentPlayer;
+
     BoardManagerImpl() {
         startBoard();
     }
 
     BoardManagerImpl(int nPits, int nInitialStones, Player player1, Player player2) {
         this.board = new BoardImpl(nPits, nInitialStones, player1, player2);
+        currentPlayer = player1;
     }
 
     @Override
@@ -33,6 +36,16 @@ public class BoardManagerImpl implements BoardManager {
             currentPit.addOneStone();
             currentPit = currentPit.getMextPitNotThisOne(oponentBigPit);
         }
+        changePlayer();
+    }
+
+    @Override
+    public void changePlayer() {
+        if (currentPlayer == board.getPlayer1()) {
+            currentPlayer = board.getPlayer2();
+        } else {
+            currentPlayer = board.getPlayer1();
+        }
     }
 
     @Override
@@ -40,8 +53,15 @@ public class BoardManagerImpl implements BoardManager {
         return board;
     }
 
+
+    @Override
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
     @Override
     public void startBoard() {
-        this.board = new BoardImpl(6, 6, new PlayerImpl(), new PlayerImpl());
+        this.board = new BoardImpl(6, 6, new PlayerImpl(1, "Player One"), new PlayerImpl(2, "Player Two"));
+        this.currentPlayer = board.getPlayer1();
     }
 }

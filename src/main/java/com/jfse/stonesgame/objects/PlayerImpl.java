@@ -11,7 +11,13 @@ public class PlayerImpl implements Player {
 
     private final List<Pit> ownedPits;
 
-    public PlayerImpl() {
+    private Integer playerId;
+
+    private String playerName;
+
+    public PlayerImpl(Integer playerId, String playerName) {
+        this.playerId = playerId;
+        this.playerName = playerName;
         ownedPits = new ArrayList<>();
     }
 
@@ -33,5 +39,15 @@ public class PlayerImpl implements Player {
     @Override
     public List<Pit> getOwnedPits() {
         return ownedPits;
+    }
+
+    @Override
+    public Integer getPlayerId() {
+        return playerId;
+    }
+
+    @Override
+    public String getPlayerName() {
+        return playerName;
     }
 }

@@ -16,10 +16,19 @@ public class BoardModel {
     private PitModel largePit1;
     private PitModel largePit2;
 
+    private String currentPlayerName;
+    private Integer currentPlayerId;
+
     private List<PitModel> pits1;
     private List<PitModel> pits2;
 
-    public BoardModel(Pit largePit1, Pit largePit2, List<Pit> pits1, List<Pit> pits2) {
+    public BoardModel(Pit largePit1, //
+                      Pit largePit2, //
+                      List<Pit> pits1, //
+                      List<Pit> pits2,
+                      String currentPlayerName, Integer currentPlayerId) {
+        this.currentPlayerName = currentPlayerName;
+        this.currentPlayerId = currentPlayerId;
         this.largePit1 = new PitModel(largePit1.getnStones(), BoardImpl.PLAYER1);
         this.largePit2 = new PitModel(largePit2.getnStones(), BoardImpl.PLAYER2);
 
@@ -32,7 +41,7 @@ public class BoardModel {
         for (Pit p : pits) {
             modelPits.add(new PitModel(p.getnStones(), p.getSharedKey()));
         }
-        return  modelPits;
+        return modelPits;
     }
 
     public PitModel getLargePit1() {
@@ -49,5 +58,13 @@ public class BoardModel {
 
     public List<PitModel> getPits2() {
         return pits2;
+    }
+
+    public Integer getCurrentPlayerId() {
+        return currentPlayerId;
+    }
+
+    public String getCurrentPlayerName() {
+        return currentPlayerName;
     }
 }

@@ -25,9 +25,12 @@ public class JSONController {
     BoardModel getBoard() {
         final Player player1 = boardManager.getBoard().getPlayer1();
         final Player player2 = boardManager.getBoard().getPlayer2();
-        return new BoardModel(player1.getPlayerBigPit(),
-                player2.getPlayerBigPit(),
-                player1.getOwnedPits(),
-                player2.getOwnedPits());
+        return new BoardModel(player1.getPlayerBigPit(), //
+                player2.getPlayerBigPit(), //
+                player1.getOwnedPits(), //
+                player2.getOwnedPits(), //
+                boardManager.getCurrentPlayer().getPlayerName(), //
+                boardManager.getCurrentPlayer().getPlayerId() //
+        );
     }
 }
