@@ -7,7 +7,7 @@ import com.jfse.stonesgame.objects.Player;
  * Created by joaofilipesabinoesperancinha on 03-04-16.
  */
 public interface BoardManager {
-    void moveStones(String chosenPitKey);
+    String moveStones(String chosenPitKey);
 
     void changePlayer();
 

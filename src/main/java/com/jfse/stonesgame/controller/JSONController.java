@@ -32,24 +32,24 @@ public class JSONController {
                 player1.getOwnedPits(), //
                 player2.getOwnedPits(), //
                 boardManager.getCurrentPlayer().getPlayerName(), //
-                boardManager.getCurrentPlayer().getPlayerId() //
-        );
+                boardManager.getCurrentPlayer().getPlayerId(), //
+                "");
     }
 
     @RequestMapping(value = "selectPit/{pitIdentifier}", method = RequestMethod.GET)
     public
     @ResponseBody
     BoardModel selectPit(@PathVariable String pitIdentifier) {
-        System.out.println(pitIdentifier);
         final Player player1 = boardManager.getBoard().getPlayer1();
         final Player player2 = boardManager.getBoard().getPlayer2();
-        boardManager.moveStones(pitIdentifier);
+        final String valid = boardManager.moveStones(pitIdentifier);
         return new BoardModel(player1.getPlayerBigPit(), //
                 player2.getPlayerBigPit(), //
                 player1.getOwnedPits(), //
                 player2.getOwnedPits(), //
                 boardManager.getCurrentPlayer().getPlayerName(), //
-                boardManager.getCurrentPlayer().getPlayerId() //
+                boardManager.getCurrentPlayer().getPlayerId(), //
+                valid//
         );
     }
 }

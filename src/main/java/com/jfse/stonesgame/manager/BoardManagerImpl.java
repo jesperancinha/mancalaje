@@ -25,8 +25,11 @@ public class BoardManagerImpl implements BoardManager {
     }
 
     @Override
-    public void moveStones(String chosenPitKey) {
+    public String moveStones(String chosenPitKey) {
         final Pit emptiedPit = this.board.getPitMap().get(chosenPitKey);
+        if(emptiedPit.getPlayer() != currentPlayer){
+            return "Invalid move!";
+        }
         final Player oponent = emptiedPit.getOpositePit().getPlayer();
         final Pit oponentBigPit = oponent.getPlayerBigPit();
         int currentStones = emptiedPit.getnStones();
@@ -37,6 +40,8 @@ public class BoardManagerImpl implements BoardManager {
             currentPit = currentPit.getMextPitNotThisOne(oponentBigPit);
         }
         changePlayer();
+
+        return "";
     }
 
     @Override

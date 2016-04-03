@@ -19,8 +19,9 @@
       <td ng-repeat="test in board.pits2" ng-click="selectPit(test.keyName)">{{test.nStones}}</td>
     </tr>
   </table>
-
-
+  </br>
+  </br>
+  <p style="color:red">{{board.errorMessage}}</p>
 </div>
 </body>
 </html>

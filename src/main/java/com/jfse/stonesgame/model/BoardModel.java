@@ -22,11 +22,13 @@ public class BoardModel {
     private List<PitModel> pits1;
     private List<PitModel> pits2;
 
+    private String errorMessage;
+
     public BoardModel(Pit largePit1, //
                       Pit largePit2, //
                       List<Pit> pits1, //
                       List<Pit> pits2,
-                      String currentPlayerName, Integer currentPlayerId) {
+                      String currentPlayerName, Integer currentPlayerId, String errorMessage) {
         this.currentPlayerName = currentPlayerName;
         this.currentPlayerId = currentPlayerId;
         this.largePit1 = new PitModel(largePit1.getnStones(), BoardImpl.PLAYER1);
@@ -34,6 +36,8 @@ public class BoardModel {
 
         this.pits1 = convertPitsToModel(pits1);
         this.pits2 = convertPitsToModel(pits2);
+
+        this.errorMessage = errorMessage;
     }
 
     private List<PitModel> convertPitsToModel(List<Pit> pits) {
@@ -66,5 +70,9 @@ public class BoardModel {
 
     public String getCurrentPlayerName() {
         return currentPlayerName;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
     }
 }
