@@ -55,7 +55,7 @@ public class PitImpl implements Pit {
     }
 
     @Override
-    public Pit getMextPitNotThisOne(Pit oponentBigPit) {
+    public Pit getNextPitNotThisOne(Pit oponentBigPit) {
         if (nextPit == oponentBigPit) {
             return nextPit.getNextPit();
         } else {
@@ -71,5 +71,10 @@ public class PitImpl implements Pit {
     @Override
     public String getSharedKey() {
         return sharedKey;
+    }
+
+    @Override
+    public void addStones(Integer nStones) {
+        this.nStones += nStones;
     }
 }

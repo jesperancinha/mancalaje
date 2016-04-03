@@ -33,14 +33,26 @@ public class BoardManagerImpl implements BoardManager {
         final Player oponent = emptiedPit.getOpositePit().getPlayer();
         final Pit oponentBigPit = oponent.getPlayerBigPit();
         int currentStones = emptiedPit.getnStones();
+        if (currentStones == 0) {
+            return "You cannot select an empty pit!";
+        }
         emptiedPit.emptyPit();
         Pit currentPit = emptiedPit.getNextPit();
+        boolean changePlayer = true;
+        Pit lastPit = null;
         while (currentStones-- > 0) {
             currentPit.addOneStone();
-            currentPit = currentPit.getMextPitNotThisOne(oponentBigPit);
+            lastPit = currentPit;
+            currentPit = currentPit.getNextPitNotThisOne(oponentBigPit);
         }
-        changePlayer();
+        if (lastPit != currentPlayer.getPlayerBigPit()) {
+            if (lastPit.getOpositePit().getPlayer() != currentPlayer) {
+                lastPit.addStones(lastPit.getOpositePit().getnStones());
+                lastPit.getOpositePit().emptyPit();
+            }
+            changePlayer();
 
+        }
         return "";
     }
 

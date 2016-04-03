@@ -19,9 +19,11 @@ public interface Pit {
 
     void emptyPit();
 
-    Pit getMextPitNotThisOne(Pit oponentBigPit);
+    Pit getNextPitNotThisOne(Pit oponentBigPit);
 
     void addOneStone();
 
     String getSharedKey();
+
+    void addStones(Integer integer);
 }
