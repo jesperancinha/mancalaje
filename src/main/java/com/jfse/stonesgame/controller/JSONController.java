@@ -2,13 +2,21 @@ package com.jfse.stonesgame.controller;
 
 import com.jfse.stonesgame.manager.BoardManager;
 import com.jfse.stonesgame.model.BoardModel;
+import com.jfse.stonesgame.model.Username;
 import com.jfse.stonesgame.objects.Player;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.session.SessionInformation;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by joaofilipesabinoesperancinha on 02-04-16.
@@ -20,6 +28,43 @@ public class JSONController {
 
     @Autowired
     private BoardManager boardManager;
+
+
+    @Bean(name = "sessionRegistry")
+    public SessionRegistry sessionRegistry(){
+        return new SessionRegistryImpl();
+    }
+
+    @Autowired
+    private SessionRegistry sessionRegistry;
+
+    public List<SessionInformation> getActiveSessions() {
+        List<SessionInformation> activeSessions = new ArrayList<>();
+        for(Object principal : sessionRegistry.getAllPrincipals()) {
+            activeSessions.addAll(sessionRegistry.getAllSessions(principal, false));
+        }
+        return activeSessions;
+    }
+
+
+    public void logoutSession(String sessionId) {
+        SessionInformation session = sessionRegistry.getSessionInformation(sessionId);
+        Object principalObj = session.getPrincipal();
+        if (principalObj instanceof User) {
+            User user = (User) principalObj;
+        }
+
+        if (session != null) {
+            session.expireNow();
+        }
+    }
+
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    public @ResponseBody String addTitle(@ModelAttribute(value = "username") Username userInfo, BindingResult result)
+            throws URISyntaxException {
+        sessionRegistry.registerNewSession( userInfo.getUsername(), "principal");
+        return "{}";
+    }
 
     @RequestMapping(value = "startAgain", method = RequestMethod.GET)
     public
