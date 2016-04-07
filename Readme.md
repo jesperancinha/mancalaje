@@ -48,4 +48,4 @@ This is just a very simple implementation that I intend to grow further in the f
 
 * REST services
 
-* AngularJS
+* AngularJS (To be replaced by AngularJS 2...)
