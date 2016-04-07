@@ -14,7 +14,7 @@ app.controller("LoginUser", function($scope, $http, $window) {
         $http.post("/stones-game/stones/board/login", data, config)
         .success(function (data, status, headers, config) {
                         $scope.PostDataResponse = data;
-                        $window.location.href = '/stones-game/stones-game.jsp';
+                        $window.location.href = '/stones-game/board/stonesgame.htm';
                     })
         .error(function (data, status, header, config) {
                         $scope.ResponseDetails = "Data: " + data +

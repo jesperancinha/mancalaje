@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by joaofilipesabinoesperancinha on 02-04-16.
+ * Created by joaofi    lipesabinoesperancinha on 02-04-16.
  */
 
 @Controller
@@ -46,7 +46,6 @@ public class JSONController {
         return activeSessions;
     }
 
-
     public void logoutSession(String sessionId) {
         SessionInformation session = sessionRegistry.getSessionInformation(sessionId);
         Object principalObj = session.getPrincipal();
@@ -70,6 +69,15 @@ public class JSONController {
     public
     @ResponseBody
     BoardModel startAgain() {
+        return startBoard();
+    }
+
+    @RequestMapping(value = "/stonesgame.htm", method = RequestMethod.GET)
+    public String startStonesGame() {
+        return "stonesgame";
+    }
+
+    private BoardModel startBoard() {
         boardManager.startBoard();
         final Player player1 = boardManager.getBoard().getPlayer1();
         final Player player2 = boardManager.getBoard().getPlayer2();
