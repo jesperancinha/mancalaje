@@ -29,7 +29,7 @@ public class JSONControllerTest {
     public void startAgain() throws Exception {
         boardManager.startBoard();
         final JSONController jsonController = new JSONController();
-        jsonController.setBoardManager(boardManager);
+        jsonController.setBoardEnterpriseImpl(boardManager);
         final Pit playerBigPit1 = boardManager.getBoard().getPlayer1().getPlayerBigPit();
         playerBigPit1.addStones(10);
         final Pit playerBigPit2 = boardManager.getBoard().getPlayer2().getPlayerBigPit();
@@ -48,7 +48,7 @@ public class JSONControllerTest {
     public void getBoard() throws Exception {
         boardManager.startBoard();
         final JSONController jsonController = new JSONController();
-        jsonController.setBoardManager(boardManager);
+        jsonController.setBoardEnterpriseImpl(boardManager);
         Player player1 = boardManager.getBoard().getPlayer1();
 
         BoardModel board = jsonController.getBoard();
@@ -74,7 +74,7 @@ public class JSONControllerTest {
     @Test
     public void selectPit() throws Exception {
         final JSONController jsonController = new JSONController();
-        jsonController.setBoardManager(boardManager);
+        jsonController.setBoardEnterpriseImpl(boardManager);
         final Player player1 = boardManager.getBoard().getPlayer1();
         final Player player2 = boardManager.getBoard().getPlayer2();
 

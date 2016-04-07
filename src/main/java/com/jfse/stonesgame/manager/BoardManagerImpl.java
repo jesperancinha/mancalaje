@@ -1,14 +1,10 @@
 package com.jfse.stonesgame.manager;
 
 import com.jfse.stonesgame.objects.*;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 /**
  * Created by joaofilipesabinoesperancinha on 02-04-16.
  */
-@Service("boardManagerService")
-@Component
 public class BoardManagerImpl implements BoardManager {
 
     private Board board;

@@ -14,6 +14,8 @@ public class PlayerImpl implements Player {
 
     private String playerName;
 
+    private String sessionId;
+
     public PlayerImpl(Integer playerId, String playerName) {
         this.playerId = playerId;
         this.playerName = playerName;
@@ -71,5 +73,13 @@ public class PlayerImpl implements Player {
             }
         }
         return empty;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 }

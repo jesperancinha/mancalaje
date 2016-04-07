@@ -6,7 +6,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.session.SessionInformation;
 import org.springframework.security.core.session.SessionRegistry;
 
 @Configuration
@@ -24,10 +23,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .maximumSessions(1) // How many session the same user can have? This can be any number you pick
                 .expiredUrl("/login?expired")
                 .sessionRegistry(sessionRegistry);
-        sessionRegistry.registerNewSession("joao1", "principal");
-        sessionRegistry.registerNewSession("joao2", "principal");
-        SessionInformation info = sessionRegistry.getSessionInformation("joao1");
-        System.out.print(info.getSessionId());
     }
 
     @Override

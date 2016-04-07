@@ -1,10 +1,8 @@
 package com.jfse.stonesgame.controller;
 
-import com.jfse.stonesgame.manager.BoardManager;
-import com.jfse.stonesgame.model.BoardModel;
-import com.jfse.stonesgame.model.Response;
+import com.jfse.stonesgame.manager.*;
+import com.jfse.stonesgame.model.*;
 import com.jfse.stonesgame.model.ResponseStatus;
-import com.jfse.stonesgame.model.Username;
 import com.jfse.stonesgame.objects.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +13,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -29,23 +28,35 @@ import java.util.List;
 public class JSONController {
 
     @Autowired
-    private BoardManager boardManager;
+    private BoardEnterprise boardEnterpriseImpl;
 
-
+    /**
+     * Session based user
+     */
     @Autowired
     private Username currentUser;
-
-    @Bean(name = "sessionRegistry")
-    public SessionRegistry sessionRegistry(){
-        return new SessionRegistryImpl();
-    }
 
     @Autowired
     private SessionRegistry sessionRegistry;
 
-    public List<SessionInformation> getActiveSessions() {
+    @Autowired
+    private SessionListKeeper sessionListKeeper;
+
+    @Bean(name = "sessionRegistry")
+    public SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl();
+    }
+
+    @Bean(name = "sessionListKeeper")
+    public SessionListKeeper sessionListKeeper()
+    {
+        return new SessionListKeeperImpl();
+    }
+
+
+    private List<SessionInformation> getActiveSessions() {
         List<SessionInformation> activeSessions = new ArrayList<>();
-        for(Object principal : sessionRegistry.getAllPrincipals()) {
+        for (Object principal : sessionRegistry.getAllPrincipals()) {
             activeSessions.addAll(sessionRegistry.getAllSessions(principal, false));
         }
         return activeSessions;
@@ -63,11 +74,23 @@ public class JSONController {
         }
     }
 
-    @RequestMapping(value = "login", method = RequestMethod.POST)
-    public @ResponseBody
-    Response addTitle(@ModelAttribute(value = "username") Username userInfo, BindingResult result)
+
+    @RequestMapping(value = "sessionlist", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    SessionList login(BindingResult result)
             throws URISyntaxException {
-        sessionRegistry.registerNewSession( userInfo.getUsername(), "principal");
+        sessionListKeeper.setSessionList(getActiveSessions());
+        return new SessionList(sessionListKeeper.getSessionList());
+    }
+
+
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    Response login(@ModelAttribute(value = "username") Username userInfo, BindingResult result)
+            throws URISyntaxException {
+        sessionRegistry.registerNewSession(getSessionId(), userInfo.getUsername());
         currentUser.setUsername(userInfo.getUsername());
         return new Response(ResponseStatus.OK);
     }
@@ -81,14 +104,20 @@ public class JSONController {
 
     @RequestMapping(value = "/stonesgame.htm", method = RequestMethod.GET)
     public String startStonesGame() {
-        if (currentUser.getUsername() == null) {
+        if (currentUser.getUsername() == null || //
+                sessionRegistry.getSessionInformation(getSessionId()) == null) {
             return "login";
         } else {
             return "stonesgame";
         }
     }
 
+    private String getSessionId() {
+        return RequestContextHolder.currentRequestAttributes().getSessionId();
+    }
+
     private BoardModel startBoard() {
+        final BoardManager boardManager= boardEnterpriseImpl.getBoardManagerByBoardID(getSessionId());
         boardManager.startBoard();
         final Player player1 = boardManager.getBoard().getPlayer1();
         final Player player2 = boardManager.getBoard().getPlayer2();
@@ -108,6 +137,7 @@ public class JSONController {
     public
     @ResponseBody
     BoardModel getBoard() {
+        final BoardManager boardManager= boardEnterpriseImpl.getBoardManagerByBoardID(getSessionId());
         final Player player1 = boardManager.getBoard().getPlayer1();
         final Player player2 = boardManager.getBoard().getPlayer2();
         return new BoardModel(player1.getPlayerBigPit(), //
@@ -126,10 +156,11 @@ public class JSONController {
     public
     @ResponseBody
     BoardModel selectPit(@PathVariable String pitIdentifier) {
+        final BoardManager boardManager= boardEnterpriseImpl.getBoardManagerByBoardID(getSessionId());
         final Player player1 = boardManager.getBoard().getPlayer1();
         final Player player2 = boardManager.getBoard().getPlayer2();
         final String valid = boardManager.moveStones(pitIdentifier);
-        return  new BoardModel(player1.getPlayerBigPit(), //
+        return new BoardModel(player1.getPlayerBigPit(), //
                 player2.getPlayerBigPit(), //
                 player1.getOwnedPits(), //
                 player2.getOwnedPits(), //
@@ -141,7 +172,12 @@ public class JSONController {
         );
     }
 
-    protected void setBoardManager(BoardManager boardManager) {
-        this.boardManager = boardManager;
+
+    /**
+     * For tests only
+     * @param boardEnterpriseImpl
+     */
+    protected void setBoardEnterpriseImpl(BoardEnterpriseImpl boardEnterpriseImpl) {
+        this.boardEnterpriseImpl = boardEnterpriseImpl;
     }
 }
