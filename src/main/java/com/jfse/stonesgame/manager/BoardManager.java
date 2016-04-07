@@ -23,5 +23,11 @@ public interface BoardManager {
 
     boolean isGameOver();
 
+    boolean isGameExit();
+
     Player getWinner();
+
+    void stopGame();
+
+    void exitGame();
 }

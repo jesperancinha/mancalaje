@@ -25,4 +25,9 @@ public class BoardEnterpriseImpl implements BoardEnterprise{
     {
         boardManagerMap.put(boardId, boardManager);
     }
+
+    @Override
+    public void removeBoardManager(String sessionId) {
+        boardManagerMap.remove(sessionId);
+    }
 }

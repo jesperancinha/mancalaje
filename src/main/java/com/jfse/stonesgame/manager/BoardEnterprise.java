@@ -7,4 +7,6 @@ public interface BoardEnterprise {
     BoardManager getBoardManagerByBoardID(String id);
 
     void addBoardManager(String boardId, BoardManager boardManager);
+
+    void removeBoardManager(String sessionId);
 }

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by joaofi    lipesabinoesperancinha on 02-04-16.
+ * Created by joaofilipesabinoesperancinha on 02-04-16.
  */
 
 @Controller
@@ -74,6 +74,15 @@ public class JSONController {
         }
     }
 
+    @RequestMapping (value = "leaveBoard", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    Response leaveBoard() {
+        final BoardManager boardManager = boardEnterpriseImpl.getBoardManagerByBoardID(getSessionId());
+        boardManager.exitGame();
+        boardEnterpriseImpl.removeBoardManager(getSessionId());
+        return new Response(ResponseStatus.OK);
+    }
 
     @RequestMapping(value = "sessionlist", method = RequestMethod.GET)
     public
@@ -171,11 +180,18 @@ public class JSONController {
     BoardModel getBoard() {
         final BoardManager boardManager = boardEnterpriseImpl.getBoardManagerByBoardID(getSessionId());
 
+        if(boardManager == null)
+        {
+            return new BoardModel();
+        }
         final Player player1 = boardManager.getBoard().getPlayer1();
         final Player player2 = boardManager.getBoard().getPlayer2();
 
         final String sessionPlayer = currentUser.getUsername();
-
+        if(boardManager.isGameExit())
+        {
+            boardEnterpriseImpl.removeBoardManager(getSessionId());
+        }
         return new BoardModel(player1.getPlayerBigPit(), //
                 player2.getPlayerBigPit(), //
                 player1.getOwnedPits(), //

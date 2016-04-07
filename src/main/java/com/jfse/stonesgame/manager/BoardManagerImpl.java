@@ -12,6 +12,8 @@ public class BoardManagerImpl implements BoardManager {
     private Player currentPlayer;
 
     private boolean gameOver;
+    private boolean gameExit;
+
     private Player winner;
 
     public BoardManagerImpl( //
@@ -125,6 +127,11 @@ public class BoardManagerImpl implements BoardManager {
     }
 
     @Override
+    public boolean isGameExit() {
+        return gameExit;
+    }
+
+    @Override
     public void startBoard( //
                             String playerOneName, //
                             String sessionId1, //
@@ -143,5 +150,15 @@ public class BoardManagerImpl implements BoardManager {
     @Override
     public Player getWinner() {
         return winner;
+    }
+
+    @Override
+    public void stopGame() {
+        gameOver = true;
+    }
+
+    @Override
+    public void exitGame() {
+        gameExit = true;
     }
 }
