@@ -76,10 +76,12 @@ public class PlayerImpl implements Player {
         return empty;
     }
 
+    @Override
     public String getSessionId() {
         return sessionId;
     }
 
+    @Override
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
     }

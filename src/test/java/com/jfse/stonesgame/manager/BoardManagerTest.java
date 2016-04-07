@@ -25,7 +25,7 @@ public class BoardManagerTest {
 
         final BoardManager boardManager = new BoardManagerImpl(TEST_PITS, TEST_STONES, mockPlayer1, mockPlayer2);
 
-        boardManager.moveStones("player10");
+        boardManager.moveStones("player10", "SESSIONID1");
 
         Pit currentPit = boardManager.getBoard().getPlayerOnePiece();
 
@@ -59,7 +59,7 @@ public class BoardManagerTest {
 
         final BoardManager boardManager = new BoardManagerImpl(TEST_PITS, TEST_STONES, mockPlayer1, mockPlayer2);
 
-        boardManager.moveStones("player15");
+        boardManager.moveStones("player15", "SESSIONID1");
 
         Pit currentPit = boardManager.getBoard().getPlayerOnePiece();
 

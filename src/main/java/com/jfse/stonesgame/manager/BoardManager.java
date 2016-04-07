@@ -7,7 +7,7 @@ import com.jfse.stonesgame.objects.Player;
  * Created by joaofilipesabinoesperancinha on 03-04-16.
  */
 public interface BoardManager {
-    String moveStones(String chosenPitKey);
+    String moveStones(String chosenPitKey, String sessionId);
 
     void decideWinner(Player player1, Player player2);
 

@@ -195,7 +195,7 @@ public class JSONController {
         final BoardManager boardManager = boardEnterpriseImpl.getBoardManagerByBoardID(getSessionId());
         final Player player1 = boardManager.getBoard().getPlayer1();
         final Player player2 = boardManager.getBoard().getPlayer2();
-        final String valid = boardManager.moveStones(pitIdentifier);
+        final String valid = boardManager.moveStones(pitIdentifier, getSessionId());
 
         final String sessionPlayer = currentUser.getUsername();
 

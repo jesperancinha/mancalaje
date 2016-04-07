@@ -24,4 +24,8 @@ public interface Player {
     void invertPits();
 
     boolean arePitsEmpty();
+
+    String getSessionId();
+
+    void setSessionId(String sessionId);
 }

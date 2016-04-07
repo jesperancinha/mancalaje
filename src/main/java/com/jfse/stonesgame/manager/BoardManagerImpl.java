@@ -33,10 +33,14 @@ public class BoardManagerImpl implements BoardManager {
     }
 
     @Override
-    public String moveStones(String chosenPitKey) {
+    public String moveStones(String chosenPitKey, String sessionId) {
         final Pit emptiedPit = this.board.getPitMap().get(chosenPitKey);
         if (emptiedPit.getPlayer() != currentPlayer) {
             return "Invalid move!";
+        }
+
+        if (!emptiedPit.getPlayer().getSessionId().equals(sessionId)) {
+            return "It's not your turn!";
         }
         final Player oponent = emptiedPit.getOpositePit().getPlayer();
         final Pit oponentBigPit = oponent.getPlayerBigPit();
