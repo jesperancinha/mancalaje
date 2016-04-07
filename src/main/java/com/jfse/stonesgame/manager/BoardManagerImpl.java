@@ -1,14 +1,10 @@
 package com.jfse.stonesgame.manager;
 
 import com.jfse.stonesgame.objects.*;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 /**
  * Created by joaofilipesabinoesperancinha on 02-04-16.
  */
-@Service("boardManagerService")
-@Component
 public class BoardManagerImpl implements BoardManager {
 
     private Board board;
@@ -16,10 +12,21 @@ public class BoardManagerImpl implements BoardManager {
     private Player currentPlayer;
 
     private boolean gameOver;
+    private boolean gameExit;
+
     private Player winner;
 
-    BoardManagerImpl() {
-        startBoard();
+    public BoardManagerImpl( //
+            String playerOneName, //
+            String sessionId1, //
+            String playerTwoName, //
+            String sessionId2) { //
+        startBoard( //
+                playerOneName, //
+                sessionId1, //
+                playerTwoName, //
+                sessionId2 //
+        );
     }
 
     BoardManagerImpl(int nPits, int nInitialStones, Player player1, Player player2) {
@@ -28,10 +35,14 @@ public class BoardManagerImpl implements BoardManager {
     }
 
     @Override
-    public String moveStones(String chosenPitKey) {
+    public String moveStones(String chosenPitKey, String sessionId) {
         final Pit emptiedPit = this.board.getPitMap().get(chosenPitKey);
         if (emptiedPit.getPlayer() != currentPlayer) {
             return "Invalid move!";
+        }
+
+        if (!emptiedPit.getPlayer().getSessionId().equals(sessionId)) {
+            return "It's not your turn!";
         }
         final Player oponent = emptiedPit.getOpositePit().getPlayer();
         final Pit oponentBigPit = oponent.getPlayerBigPit();
@@ -116,8 +127,22 @@ public class BoardManagerImpl implements BoardManager {
     }
 
     @Override
-    public void startBoard() {
-        this.board = new BoardImpl(6, 6, new PlayerImpl(1, "Player One"), new PlayerImpl(2, "Player Two"));
+    public boolean isGameExit() {
+        return gameExit;
+    }
+
+    @Override
+    public void startBoard( //
+                            String playerOneName, //
+                            String sessionId1, //
+                            String playerTwoName, //
+                            String sessionId2) { //
+        this.board = new BoardImpl( //
+                6, //
+                6, //
+                new PlayerImpl(1, playerOneName, sessionId1), //
+                new PlayerImpl(2, playerTwoName, sessionId2) //
+        );
         this.currentPlayer = board.getPlayer1();
         gameOver = false;
     }
@@ -125,5 +150,15 @@ public class BoardManagerImpl implements BoardManager {
     @Override
     public Player getWinner() {
         return winner;
+    }
+
+    @Override
+    public void stopGame() {
+        gameOver = true;
+    }
+
+    @Override
+    public void exitGame() {
+        gameExit = true;
     }
 }

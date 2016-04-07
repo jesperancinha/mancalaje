@@ -14,10 +14,13 @@ public class PlayerImpl implements Player {
 
     private String playerName;
 
-    public PlayerImpl(Integer playerId, String playerName) {
+    private String sessionId;
+
+    public PlayerImpl(Integer playerId, String playerName, String sessionId) {
         this.playerId = playerId;
         this.playerName = playerName;
-        ownedPits = new ArrayList<>();
+        this.ownedPits = new ArrayList<>();
+        this.sessionId = sessionId;
     }
 
     @Override
@@ -71,5 +74,15 @@ public class PlayerImpl implements Player {
             }
         }
         return empty;
+    }
+
+    @Override
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    @Override
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 }

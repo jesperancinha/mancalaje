@@ -26,6 +26,8 @@
 
 * To empty a pit and roll : localhost:8080/stones-game/stones/board/selectPit/{pitId}
 
+* For a session list : http://localhost:8080/stones-game/stones/board/sessionlist
+
 ## Tecnologies used:
 
 * Bower

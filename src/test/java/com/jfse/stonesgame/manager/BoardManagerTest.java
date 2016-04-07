@@ -20,12 +20,12 @@ public class BoardManagerTest {
 
     @Test
     public void moveStonesPlayer1Stone0() throws Exception {
-        final Player mockPlayer1 = new PlayerImpl(1, "Player One");
-        final Player mockPlayer2 = new PlayerImpl(2, "Player Two");
+        final Player mockPlayer1 = new PlayerImpl(1, "Player One", "SESSIONID1");
+        final Player mockPlayer2 = new PlayerImpl(2, "Player Two", "SESSIONID2");
 
         final BoardManager boardManager = new BoardManagerImpl(TEST_PITS, TEST_STONES, mockPlayer1, mockPlayer2);
 
-        boardManager.moveStones("player10");
+        boardManager.moveStones("player10", "SESSIONID1");
 
         Pit currentPit = boardManager.getBoard().getPlayerOnePiece();
 
@@ -54,12 +54,12 @@ public class BoardManagerTest {
 
     @Test
     public void moveStonesPlayer1Stone5() throws Exception {
-        final Player mockPlayer1 = new PlayerImpl(1, "Player One");
-        final Player mockPlayer2 = new PlayerImpl(2, "Player Two");
+        final Player mockPlayer1 = new PlayerImpl(1, "Player One", "SESSIONID1");
+        final Player mockPlayer2 = new PlayerImpl(2, "Player Two", "SESSIONID2");
 
         final BoardManager boardManager = new BoardManagerImpl(TEST_PITS, TEST_STONES, mockPlayer1, mockPlayer2);
 
-        boardManager.moveStones("player15");
+        boardManager.moveStones("player15", "SESSIONID1");
 
         Pit currentPit = boardManager.getBoard().getPlayerOnePiece();
 

@@ -1,23 +1,40 @@
 var stonesApp = angular.module("StonesApp", []);
 
-stonesApp.controller('RefreshBoardController', ['$scope', '$http', function($scope, $http) {
-   $http.get('http://localhost:8080/stones-game/stones/board/refreshBoard').
+stonesApp.controller('RefreshBoardController', ['$scope', '$http', '$interval', '$window',
+   function($scope, $http, $interval, $window) {
+    $interval(function(){
+            $scope.reload();
+          },1000);
+
+   $http.get('/stones-game/stones/board/refreshBoard').
           success(function(data) {
               $scope.board = data;
           });
 
    $scope.selectPit = function(selectPit){
-          $http.get('http://localhost:8080/stones-game/stones/board/selectPit/' + selectPit).
+          $http.get('/stones-game/stones/board/selectPit/' + selectPit).
                   success(function(data) {
                       $scope.board = data;
                   });
    };
 
    $scope.startAgain = function() {
-         $http.get('http://localhost:8080/stones-game/stones/board/startAgain').
+         $http.get('/stones-game/stones/board/leaveBoard').
                  success(function(data) {
                      $scope.board = data;
                  });
+         $window.location.href = '/stones-game/stones/board/sessionlist.htm';
+   };
+
+   $scope.reload = function () {
+           $http.get('/stones-game/stones/board/refreshBoard').
+               success(function (data) {
+                   $scope.board = data;
+                   if(data.gameExit)
+                   {
+                        $window.location.href = '/stones-game/stones/board/sessionlist.htm';
+                   }
+               });
    };
  }
 ]);
