@@ -27,6 +27,8 @@ public class BoardModel {
     private boolean gameOver;
     private String winnerPlayerName;
 
+    private String sessionPlayer;
+
     public BoardModel(Pit largePit1, //
                       Pit largePit2, //
                       List<Pit> pits1, //
@@ -35,11 +37,13 @@ public class BoardModel {
                       Integer currentPlayerId, //
                       String errorMessage, //
                       boolean gameOver, //
-                      String winnerPlayerName) {
+                      String winnerPlayerName, //
+                      String sessionPlayer) {
 
         this.currentPlayerName = currentPlayerName;
         this.currentPlayerId = currentPlayerId;
         this.winnerPlayerName = winnerPlayerName;
+        this.sessionPlayer = sessionPlayer;
 
         this.largePit1 = new PitModel(largePit1.getnStones(), BoardImpl.PLAYER1);
         this.largePit2 = new PitModel(largePit2.getnStones(), BoardImpl.PLAYER2);
@@ -49,6 +53,8 @@ public class BoardModel {
 
         this.errorMessage = errorMessage;
         this.gameOver = gameOver;
+
+        this.sessionPlayer = sessionPlayer;
     }
 
     private List<PitModel> convertPitsToModel(List<Pit> pits) {
@@ -97,5 +103,9 @@ public class BoardModel {
 
     public String getWinnerPlayerName() {
         return winnerPlayerName;
+    }
+
+    public String getSessionPlayer() {
+        return sessionPlayer;
     }
 }

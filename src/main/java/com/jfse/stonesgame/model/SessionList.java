@@ -13,16 +13,28 @@ import java.util.List;
 public class SessionList {
     private List<Session> sessions = new ArrayList<>();
 
-    public SessionList(List<SessionInformation> sessionList, String sessionId) {
+    private boolean gamestarted;
+
+    public SessionList(List<SessionInformation> sessionList, String sessionId, boolean gamestarted) {
         int id = 0;
         for (SessionInformation sessionInformation : sessionList) {
             if (!sessionInformation.getSessionId().equals(sessionId)){
                 sessions.add(new Session(id++, (String) sessionInformation.getPrincipal()));
             }
         }
+
+        this.gamestarted = gamestarted;
     }
 
     public List<Session> getSessions() {
         return sessions;
+    }
+
+    public void setGamestarted(boolean gamestarted) {
+        this.gamestarted = gamestarted;
+    }
+
+    public boolean isGamestarted() {
+        return gamestarted;
     }
 }

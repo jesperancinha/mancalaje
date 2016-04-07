@@ -58,6 +58,7 @@ public class JSONController {
         for (Object principal : sessionRegistry.getAllPrincipals()) {
             activeSessions.addAll(sessionRegistry.getAllSessions(principal, false));
         }
+        activeSessions.remove(sessionRegistry.getSessionInformation(getSessionId()));
         return activeSessions;
     }
 
@@ -80,9 +81,31 @@ public class JSONController {
     SessionList sessionList()
             throws URISyntaxException {
         sessionListKeeper.setSessionList(getActiveSessions());
-        return new SessionList(sessionListKeeper.getSessionList(), getSessionId());
+        final BoardManager boardManager = boardEnterpriseImpl.getBoardManagerByBoardID(getSessionId());
+        boolean gamestarted = false;
+        if(boardManager != null)
+        {
+            gamestarted = !boardManager.isGameOver();
+        }
+        return new SessionList(sessionListKeeper.getSessionList(), getSessionId(), gamestarted);
     }
 
+
+    @RequestMapping(value = "/login.htm", method = RequestMethod.GET)
+    public String loginStart() {
+            return "login";
+    }
+
+    @RequestMapping(value = "/sessionlist.htm", method = RequestMethod.GET)
+    public String startSessionList() {
+        if (isLogged()) {
+            return "login";
+        } else if (boardEnterpriseImpl.getBoardManagerByBoardID(getSessionId()) != null) {
+            return "stonesgame";
+        } else {
+            return "sessionlist";
+        }
+    }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public
@@ -100,17 +123,6 @@ public class JSONController {
     BoardModel startAgain(@ModelAttribute(value = "userKeepId") SelectedUserKeep userInfo, BindingResult result) {
         SessionInformation selectedSession = sessionListKeeper.getSessionList().get(userInfo.getId());
         return startBoard((String) selectedSession.getPrincipal(), selectedSession.getSessionId());
-    }
-
-    @RequestMapping(value = "/sessionlist.htm", method = RequestMethod.GET)
-    public String startSessionList() {
-        if (isLogged()) {
-            return "login";
-        } else if (boardEnterpriseImpl.getBoardManagerByBoardID(getSessionId()) != null) {
-            return "stonesgame";
-        } else {
-            return "sessionlist";
-        }
     }
 
     @RequestMapping(value = "/stonesgame.htm", method = RequestMethod.GET)
@@ -138,6 +150,9 @@ public class JSONController {
 
         boardEnterpriseImpl.addBoardManager(getSessionId(), boardManager);
         boardEnterpriseImpl.addBoardManager(sessionId2, boardManager);
+
+        final String sessionPlayer = currentUser.getUsername();
+
         return new BoardModel(player1.getPlayerBigPit(), //
                 player2.getPlayerBigPit(), //
                 player1.getOwnedPits(), //
@@ -146,8 +161,8 @@ public class JSONController {
                 boardManager.getCurrentPlayer().getPlayerId(), //
                 "", //
                 boardManager.isGameOver(), //
-                boardManager.getWinner() == null ? null : boardManager.getWinner().getPlayerName()//
-        );
+                boardManager.getWinner() == null ? null : boardManager.getWinner().getPlayerName(),//
+                sessionPlayer);
     }
 
     @RequestMapping(value = "refreshBoard", method = RequestMethod.GET)
@@ -155,8 +170,12 @@ public class JSONController {
     @ResponseBody
     BoardModel getBoard() {
         final BoardManager boardManager = boardEnterpriseImpl.getBoardManagerByBoardID(getSessionId());
+
         final Player player1 = boardManager.getBoard().getPlayer1();
         final Player player2 = boardManager.getBoard().getPlayer2();
+
+        final String sessionPlayer = currentUser.getUsername();
+
         return new BoardModel(player1.getPlayerBigPit(), //
                 player2.getPlayerBigPit(), //
                 player1.getOwnedPits(), //
@@ -165,8 +184,8 @@ public class JSONController {
                 boardManager.getCurrentPlayer().getPlayerId(), //
                 "", //
                 boardManager.isGameOver(), //
-                boardManager.getWinner() == null ? null : boardManager.getWinner().getPlayerName() //
-        );
+                boardManager.getWinner() == null ? null : boardManager.getWinner().getPlayerName(), //
+                sessionPlayer);
     }
 
     @RequestMapping(value = "selectPit/{pitIdentifier}", method = RequestMethod.GET)
@@ -177,6 +196,9 @@ public class JSONController {
         final Player player1 = boardManager.getBoard().getPlayer1();
         final Player player2 = boardManager.getBoard().getPlayer2();
         final String valid = boardManager.moveStones(pitIdentifier);
+
+        final String sessionPlayer = currentUser.getUsername();
+
         return new BoardModel(player1.getPlayerBigPit(), //
                 player2.getPlayerBigPit(), //
                 player1.getOwnedPits(), //
@@ -185,8 +207,8 @@ public class JSONController {
                 boardManager.getCurrentPlayer().getPlayerId(), //
                 valid,
                 boardManager.isGameOver(),//
-                boardManager.getWinner() == null ? null : boardManager.getWinner().getPlayerName() //
-        );
+                boardManager.getWinner() == null ? null : boardManager.getWinner().getPlayerName(), //
+                sessionPlayer);
     }
 
 
