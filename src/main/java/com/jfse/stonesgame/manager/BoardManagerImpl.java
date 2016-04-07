@@ -14,8 +14,17 @@ public class BoardManagerImpl implements BoardManager {
     private boolean gameOver;
     private Player winner;
 
-    public BoardManagerImpl() {
-        startBoard();
+    public BoardManagerImpl( //
+            String playerOneName, //
+            String sessionId1, //
+            String playerTwoName, //
+            String sessionId2) { //
+        startBoard( //
+                playerOneName, //
+                sessionId1, //
+                playerTwoName, //
+                sessionId2 //
+        );
     }
 
     BoardManagerImpl(int nPits, int nInitialStones, Player player1, Player player2) {
@@ -112,8 +121,17 @@ public class BoardManagerImpl implements BoardManager {
     }
 
     @Override
-    public void startBoard() {
-        this.board = new BoardImpl(6, 6, new PlayerImpl(1, "Player One"), new PlayerImpl(2, "Player Two"));
+    public void startBoard( //
+                            String playerOneName, //
+                            String sessionId1, //
+                            String playerTwoName, //
+                            String sessionId2) { //
+        this.board = new BoardImpl( //
+                6, //
+                6, //
+                new PlayerImpl(1, playerOneName, sessionId1), //
+                new PlayerImpl(2, playerTwoName, sessionId2) //
+        );
         this.currentPlayer = board.getPlayer1();
         gameOver = false;
     }

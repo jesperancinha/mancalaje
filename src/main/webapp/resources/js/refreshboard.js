@@ -1,6 +1,10 @@
 var stonesApp = angular.module("StonesApp", []);
 
-stonesApp.controller('RefreshBoardController', ['$scope', '$http', function($scope, $http) {
+stonesApp.controller('RefreshBoardController', ['$scope', '$http', '$interval', function($scope, $http, $interval) {
+    $interval(function(){
+            $scope.reload();
+          },1000);
+
    $http.get('/stones-game/stones/board/refreshBoard').
           success(function(data) {
               $scope.board = data;
@@ -18,6 +22,13 @@ stonesApp.controller('RefreshBoardController', ['$scope', '$http', function($sco
                  success(function(data) {
                      $scope.board = data;
                  });
+   };
+
+   $scope.reload = function () {
+           $http.get('/stones-game/stones/board/refreshBoard').
+               success(function (data) {
+                   $scope.board = data;
+               });
    };
  }
 ]);

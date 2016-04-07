@@ -6,6 +6,30 @@ app.controller("SessionPicker", function($scope, $http, $window) {
                $scope.sessions = data;
            });
 
+
+
+     $scope.startGame = function (userKeepIdIn){
+            var data = $.param({
+                        id: userKeepIdIn,
+                    });
+            var config = {
+                            headers : {
+                                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+                            }
+                         }
+
+            $http.post("/stones-game/stones/board/startAgain", data, config)
+            .success(function (data, status, headers, config) {
+                            $scope.PostDataResponse = data;
+                            $window.location.href = '/stones-game/board/stonesgame.htm';
+                        })
+            .error(function (data, status, header, config) {
+                            $scope.ResponseDetails = "Data: " + data +
+                                "<hr />status: " + status +
+                                "<hr />headers: " + header +
+                                "<hr />config: " + config;
+            });
+        };
     }
  );
 

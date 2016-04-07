@@ -16,10 +16,11 @@ public class PlayerImpl implements Player {
 
     private String sessionId;
 
-    public PlayerImpl(Integer playerId, String playerName) {
+    public PlayerImpl(Integer playerId, String playerName, String sessionId) {
         this.playerId = playerId;
         this.playerName = playerName;
-        ownedPits = new ArrayList<>();
+        this.ownedPits = new ArrayList<>();
+        this.sessionId = sessionId;
     }
 
     @Override

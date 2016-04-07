@@ -48,8 +48,7 @@ public class JSONController {
     }
 
     @Bean(name = "sessionListKeeper")
-    public SessionListKeeper sessionListKeeper()
-    {
+    public SessionListKeeper sessionListKeeper() {
         return new SessionListKeeperImpl();
     }
 
@@ -95,17 +94,20 @@ public class JSONController {
         return new Response(ResponseStatus.OK);
     }
 
-    @RequestMapping(value = "startAgain", method = RequestMethod.GET)
+    @RequestMapping(value = "startAgain", method = RequestMethod.POST)
     public
     @ResponseBody
-    BoardModel startAgain() {
-        return startBoard();
+    BoardModel startAgain(@ModelAttribute(value = "userKeepId") SelectedUserKeep userInfo, BindingResult result) {
+        SessionInformation selectedSession = sessionListKeeper.getSessionList().get(userInfo.getId());
+        return startBoard((String) selectedSession.getPrincipal(), selectedSession.getSessionId());
     }
 
     @RequestMapping(value = "/sessionlist.htm", method = RequestMethod.GET)
     public String startSessionList() {
         if (isLogged()) {
             return "login";
+        } else if (boardEnterpriseImpl.getBoardManagerByBoardID(getSessionId()) != null) {
+            return "stonesgame";
         } else {
             return "sessionlist";
         }
@@ -129,11 +131,13 @@ public class JSONController {
         return RequestContextHolder.currentRequestAttributes().getSessionId();
     }
 
-    private BoardModel startBoard() {
-        final BoardManager boardManager= boardEnterpriseImpl.getBoardManagerByBoardID(getSessionId());
-        boardManager.startBoard();
+    private BoardModel startBoard(String playerTwoName, String sessionId2) {
+        final BoardManager boardManager = new BoardManagerImpl(currentUser.getUsername(), getSessionId(), playerTwoName, sessionId2);
         final Player player1 = boardManager.getBoard().getPlayer1();
         final Player player2 = boardManager.getBoard().getPlayer2();
+
+        boardEnterpriseImpl.addBoardManager(getSessionId(), boardManager);
+        boardEnterpriseImpl.addBoardManager(sessionId2, boardManager);
         return new BoardModel(player1.getPlayerBigPit(), //
                 player2.getPlayerBigPit(), //
                 player1.getOwnedPits(), //
@@ -150,7 +154,7 @@ public class JSONController {
     public
     @ResponseBody
     BoardModel getBoard() {
-        final BoardManager boardManager= boardEnterpriseImpl.getBoardManagerByBoardID(getSessionId());
+        final BoardManager boardManager = boardEnterpriseImpl.getBoardManagerByBoardID(getSessionId());
         final Player player1 = boardManager.getBoard().getPlayer1();
         final Player player2 = boardManager.getBoard().getPlayer2();
         return new BoardModel(player1.getPlayerBigPit(), //
@@ -169,7 +173,7 @@ public class JSONController {
     public
     @ResponseBody
     BoardModel selectPit(@PathVariable String pitIdentifier) {
-        final BoardManager boardManager= boardEnterpriseImpl.getBoardManagerByBoardID(getSessionId());
+        final BoardManager boardManager = boardEnterpriseImpl.getBoardManagerByBoardID(getSessionId());
         final Player player1 = boardManager.getBoard().getPlayer1();
         final Player player2 = boardManager.getBoard().getPlayer2();
         final String valid = boardManager.moveStones(pitIdentifier);
@@ -188,6 +192,7 @@ public class JSONController {
 
     /**
      * For tests only
+     *
      * @param boardEnterpriseImpl
      */
     protected void setBoardEnterpriseImpl(BoardEnterprise boardEnterpriseImpl) {

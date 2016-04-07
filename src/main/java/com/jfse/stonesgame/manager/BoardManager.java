@@ -17,7 +17,7 @@ public interface BoardManager {
 
     Board getBoard();
 
-    void startBoard();
+    void startBoard(String playerOneName, String sessionId1, String playerTwoName, String sessionId2);
 
     Player getCurrentPlayer();
 

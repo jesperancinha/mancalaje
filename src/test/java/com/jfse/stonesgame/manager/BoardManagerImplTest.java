@@ -13,7 +13,12 @@ import static org.junit.Assert.assertSame;
 public class BoardManagerImplTest {
     @Test
     public void decideWinner_Tie() throws Exception {
-        final BoardManager boardManager = new BoardManagerImpl();
+        final String playerOneName = "player1";
+        final String sessionId1 = "SESSIONID1";
+        final String playerTwoName = "player2";
+        final String sessionId2 = "SESSIONID2";
+
+        final BoardManager boardManager = new BoardManagerImpl(playerOneName, sessionId1, playerTwoName, sessionId2);
         final Player player1 = boardManager.getBoard().getPlayer1();
         boardManager.collectStones(player1);
         final Player player2 = boardManager.getBoard().getPlayer2();
@@ -26,7 +31,12 @@ public class BoardManagerImplTest {
 
     @Test
     public void decideWinner_Player1() throws Exception {
-        final BoardManager boardManager = new BoardManagerImpl();
+        final String playerOneName = "player1";
+        final String sessionId1 = "SESSIONID1";
+        final String playerTwoName = "player2";
+        final String sessionId2 = "SESSIONID2";
+
+        final BoardManager boardManager = new BoardManagerImpl(playerOneName, sessionId1, playerTwoName, sessionId2);
         final Player player1 = boardManager.getBoard().getPlayer1();
         boardManager.collectStones(player1);
         final Player player2 = boardManager.getBoard().getPlayer2();
@@ -40,7 +50,12 @@ public class BoardManagerImplTest {
 
     @Test
     public void decideWinner_Player2() throws Exception {
-        final BoardManager boardManager = new BoardManagerImpl();
+        final String playerOneName = "player1";
+        final String sessionId1 = "SESSIONID1";
+        final String playerTwoName = "player2";
+        final String sessionId2 = "SESSIONID2";
+
+        final BoardManager boardManager = new BoardManagerImpl(playerOneName, sessionId1, playerTwoName, sessionId2);
         final Player player1 = boardManager.getBoard().getPlayer1();
         boardManager.collectStones(player1);
         final Player player2 = boardManager.getBoard().getPlayer2();
@@ -54,7 +69,12 @@ public class BoardManagerImplTest {
 
     @Test
     public void collectStones() throws Exception {
-        final BoardManager boardManager = new BoardManagerImpl();
+        final String playerOneName = "player1";
+        final String sessionId1 = "SESSIONID1";
+        final String playerTwoName = "player2";
+        final String sessionId2 = "SESSIONID2";
+
+        final BoardManager boardManager = new BoardManagerImpl(playerOneName, sessionId1, playerTwoName, sessionId2);
         final Player player1 = boardManager.getBoard().getPlayer1();
         boardManager.collectStones(player1);
         final Player player2 = boardManager.getBoard().getPlayer2();
