@@ -8,7 +8,7 @@
 </head>
 <body ng-app="StonesApp" ng-controller="LoginUser">
 <div>
-  <h1>Stones game</h1>
+  <h1>MancalaJE</h1>
   <h2>Login page</h2>
 </div>
         <p>Username: <input type="text" name="username" ng-model="username" required /></p>

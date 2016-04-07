@@ -8,7 +8,7 @@
 </head>
 <body ng-app="StonesApp" ng-controller="SessionPicker">
 <div>
-  <h1>Stones game</h1>
+  <h1>MancalaJE</h1>
   <h2>Login page</h2>
 </div>
        <table border="1">
@@ -16,5 +16,10 @@
             <td>{{session.userName}}</td>
           </tr>
         </table>
+
+        </br>
+        <button ng-click="logOut()">
+            Logout
+        </button>
 </body>
 </html>

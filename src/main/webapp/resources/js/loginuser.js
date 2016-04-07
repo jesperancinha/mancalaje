@@ -11,10 +11,10 @@ app.controller("LoginUser", function($scope, $http, $window) {
                         }
                      }
 
-        $http.post("/stones-game/stones/board/login", data, config)
+        $http.post("/mancalaje/stones/board/login", data, config)
         .success(function (data, status, headers, config) {
                         $scope.PostDataResponse = data;
-                        $window.location.href = '/stones-game/stones/board/sessionlist.htm';
+                        $window.location.href = '/mancalaje/stones/board/sessionlist.htm';
                     })
         .error(function (data, status, header, config) {
                         $scope.ResponseDetails = "Data: " + data +
