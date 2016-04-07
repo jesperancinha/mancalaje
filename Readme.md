@@ -1,8 +1,18 @@
 # MancalaJE
 
+Almost all developers and engineers do a Mancala implementation at some point in their experimentations.
+
+This is my own implementation.
+
+This implementation allows two users to connect online
+
+The principle is that two or more users login and then one of them decides with whom he wants to play with.
+
+This is just a very simple implementation that I intend to grow further in the future to different possbilities.
+
 ## Creation commands
 
-* mvn archetype:generate -DgroupId=jfse -DartifactId=mancalaje -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+* mvn archetype:generate -DgroupId=steelzack -DartifactId=mancalaje -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
 
 ## Installation commands
 
