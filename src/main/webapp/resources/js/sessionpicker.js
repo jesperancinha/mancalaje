@@ -6,19 +6,19 @@ app.controller("SessionPicker", function($scope, $http, $window, $interval) {
                $scope.reload();
              },1000);
 
-    $http.get('/stones-game/stones/board/sessionlist').
+    $http.get('/mancalaje/stones/board/sessionlist').
            success(function(data) {
                $scope.sessions = data;
            });
 
     $scope.reload = function (){
-        $http.get('/stones-game/stones/board/sessionlist').
+        $http.get('/mancalaje/stones/board/sessionlist').
                success(function(data) {
                    $scope.sessions = data;
                });
 
          if($scope.sessions.gamestarted) {
-               $window.location.href = '/stones-game/stones/board/stonesgame.htm';
+               $window.location.href = '/mancalaje/stones/board/mancalaje.htm';
          };
     }
 
@@ -34,10 +34,10 @@ app.controller("SessionPicker", function($scope, $http, $window, $interval) {
                             }
                          }
 
-            $http.post("/stones-game/stones/board/startAgain", data, config)
+            $http.post("/mancalaje/stones/board/startAgain", data, config)
             .success(function (data, status, headers, config) {
                             $scope.PostDataResponse = data;
-                            $window.location.href = '/stones-game/stones/board/stonesgame.htm';
+                            $window.location.href = '/mancalaje/stones/board/mancalaje.htm';
                         })
             .error(function (data, status, header, config) {
                             $scope.ResponseDetails = "Data: " + data +

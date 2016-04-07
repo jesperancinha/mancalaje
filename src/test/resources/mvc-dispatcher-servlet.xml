@@ -9,7 +9,7 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
-	<context:component-scan base-package="com.jfse.stonesgame.controller, com.jfse.stonesgame.manager" />
+	<context:component-scan base-package="com.steelzack.mancalaje.controller, com.steelzack.mancalaje.manager" />
 
 	<mvc:annotation-driven />
 	<!-- Resolves view names to protected .jsp resources within the /WEB-INF/views 

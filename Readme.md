@@ -2,7 +2,7 @@
 
 ## Creation commands
 
-* mvn archetype:generate -DgroupId=jfse -DartifactId=stones-game -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+* mvn archetype:generate -DgroupId=jfse -DartifactId=mancalaje -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
 
 ## Installation commands
 
@@ -16,17 +16,17 @@
 
 ## Endpoints
 
-* Main page: http://localhost:8080/stones-game/
+* Main page: http://localhost:8080/mancalaje/
 
 ## REST service endpoints:
 
-* To refresh: http://localhost:8080/stones-game/stones/board/refreshBoard
+* To refresh: http://localhost:8080/mancalaje/stones/board/refreshBoard
 
-* To restart: http://localhost:8080/stones-game/stones/board/startAgain
+* To restart: http://localhost:8080/mancalaje/stones/board/startAgain
 
-* To empty a pit and roll : localhost:8080/stones-game/stones/board/selectPit/{pitId}
+* To empty a pit and roll : localhost:8080/mancalaje/stones/board/selectPit/{pitId}
 
-* For a session list : http://localhost:8080/stones-game/stones/board/sessionlist
+* For a session list : http://localhost:8080/mancalaje/stones/board/sessionlist
 
 ## Tecnologies used:
 
