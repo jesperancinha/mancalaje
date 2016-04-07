@@ -2,6 +2,8 @@ package com.jfse.stonesgame.controller;
 
 import com.jfse.stonesgame.manager.BoardManager;
 import com.jfse.stonesgame.model.BoardModel;
+import com.jfse.stonesgame.model.Response;
+import com.jfse.stonesgame.model.ResponseStatus;
 import com.jfse.stonesgame.model.Username;
 import com.jfse.stonesgame.objects.Player;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,9 @@ public class JSONController {
     @Autowired
     private BoardManager boardManager;
 
+
+    @Autowired
+    private Username currentUser;
 
     @Bean(name = "sessionRegistry")
     public SessionRegistry sessionRegistry(){
@@ -59,10 +64,12 @@ public class JSONController {
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public @ResponseBody String addTitle(@ModelAttribute(value = "username") Username userInfo, BindingResult result)
+    public @ResponseBody
+    Response addTitle(@ModelAttribute(value = "username") Username userInfo, BindingResult result)
             throws URISyntaxException {
         sessionRegistry.registerNewSession( userInfo.getUsername(), "principal");
-        return "{}";
+        currentUser.setUsername(userInfo.getUsername());
+        return new Response(ResponseStatus.OK);
     }
 
     @RequestMapping(value = "startAgain", method = RequestMethod.GET)
@@ -74,7 +81,11 @@ public class JSONController {
 
     @RequestMapping(value = "/stonesgame.htm", method = RequestMethod.GET)
     public String startStonesGame() {
-        return "stonesgame";
+        if (currentUser.getUsername() == null) {
+            return "login";
+        } else {
+            return "stonesgame";
+        }
     }
 
     private BoardModel startBoard() {
