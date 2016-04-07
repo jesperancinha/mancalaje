@@ -81,7 +81,7 @@ public class JSONController {
     SessionList sessionList()
             throws URISyntaxException {
         sessionListKeeper.setSessionList(getActiveSessions());
-        return new SessionList(sessionListKeeper.getSessionList());
+        return new SessionList(sessionListKeeper.getSessionList(), getSessionId());
     }
 
 
@@ -102,14 +102,27 @@ public class JSONController {
         return startBoard();
     }
 
+    @RequestMapping(value = "/sessionlist.htm", method = RequestMethod.GET)
+    public String startSessionList() {
+        if (isLogged()) {
+            return "login";
+        } else {
+            return "sessionlist";
+        }
+    }
+
     @RequestMapping(value = "/stonesgame.htm", method = RequestMethod.GET)
     public String startStonesGame() {
-        if (currentUser.getUsername() == null || //
-                sessionRegistry.getSessionInformation(getSessionId()) == null) {
+        if (isLogged()) {
             return "login";
         } else {
             return "stonesgame";
         }
+    }
+
+    private boolean isLogged() {
+        return currentUser.getUsername() == null || //
+                sessionRegistry.getSessionInformation(getSessionId()) == null;
     }
 
     private String getSessionId() {

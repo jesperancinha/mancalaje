@@ -13,11 +13,12 @@ import java.util.List;
 public class SessionList {
     private List<Session> sessions = new ArrayList<>();
 
-    public SessionList(List<SessionInformation> sessionList) {
+    public SessionList(List<SessionInformation> sessionList, String sessionId) {
         int id = 0;
-        for(SessionInformation sessionInformation : sessionList)
-        {
-            sessions.add(new Session(id++, (String) sessionInformation.getPrincipal()));
+        for (SessionInformation sessionInformation : sessionList) {
+            if (!sessionInformation.getSessionId().equals(sessionId)){
+                sessions.add(new Session(id++, (String) sessionInformation.getPrincipal()));
+            }
         }
     }
 
