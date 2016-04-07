@@ -30,11 +30,13 @@ public class BoardModel {
     private String winnerPlayerName;
 
     private String sessionPlayer;
+    private Integer sessionPlayerId;
 
-    public  BoardModel (){
+    public BoardModel() {
         gameOver = false;
         gameExit = true;
     }
+
     public BoardModel(Pit largePit1, //
                       Pit largePit2, //
                       List<Pit> pits1, //
@@ -44,15 +46,20 @@ public class BoardModel {
                       String errorMessage, //
                       boolean gameOver, //
                       String winnerPlayerName, //
-                      String sessionPlayer) {
+                      String sessionPlayer, //
+                      Integer sessionPlayerId) {
 
         this.currentPlayerName = currentPlayerName;
         this.currentPlayerId = currentPlayerId;
+
         this.winnerPlayerName = winnerPlayerName;
         this.sessionPlayer = sessionPlayer;
 
-        this.largePit1 = new PitModel(largePit1.getnStones(), BoardImpl.PLAYER1);
-        this.largePit2 = new PitModel(largePit2.getnStones(), BoardImpl.PLAYER2);
+        this.largePit1 = new PitModel(largePit1.getnStones(), BoardImpl.PLAYER1, 0);
+        this.largePit2 = new PitModel(largePit2.getnStones(), BoardImpl.PLAYER2, 0);
+
+        this.sessionPlayer = sessionPlayer;
+        this.sessionPlayerId = sessionPlayerId;
 
         this.pits1 = convertPitsToModel(pits1);
         this.pits2 = convertPitsToModel(pits2);
@@ -60,16 +67,23 @@ public class BoardModel {
         this.errorMessage = errorMessage;
         this.gameOver = gameOver;
 
-        this.sessionPlayer = sessionPlayer;
         this.gameExit = false;
     }
 
     private List<PitModel> convertPitsToModel(List<Pit> pits) {
         List<PitModel> modelPits = new ArrayList<>();
         for (Pit p : pits) {
-            modelPits.add(new PitModel(p.getnStones(), p.getSharedKey()));
+            int clickMode = //
+                    getclickMode(p, currentPlayerId, sessionPlayerId); //
+            modelPits.add(new PitModel(p.getnStones(), p.getSharedKey(), clickMode));
         }
         return modelPits;
+    }
+
+    protected int getclickMode(Pit p, Integer currentPlayerIdP, Integer sessionPlayerIdP) {
+        return currentPlayerIdP == p.getPlayer().getPlayerId() ? //
+                (sessionPlayerIdP == currentPlayerIdP ? 1 : 2) //
+                : 2;
     }
 
     public PitModel getLargePit1() {

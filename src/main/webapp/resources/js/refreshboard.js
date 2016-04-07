@@ -18,7 +18,7 @@ stonesApp.controller('RefreshBoardController', ['$scope', '$http', '$interval', 
                   });
    };
 
-   $scope.startAgain = function() {
+   $scope.startBoardGame = function() {
          $http.get('/mancalaje/stones/board/leaveBoard').
                  success(function(data) {
                      $scope.board = data;

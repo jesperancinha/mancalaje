@@ -16,6 +16,11 @@ public class PlayerImpl implements Player {
 
     private String sessionId;
 
+    public PlayerImpl(Integer playerId)
+    {
+        this.playerId = playerId;
+        this.ownedPits = null;
+    }
     public PlayerImpl(Integer playerId, String playerName, String sessionId) {
         this.playerId = playerId;
         this.playerName = playerName;

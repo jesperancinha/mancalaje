@@ -12,12 +12,16 @@
   </br>
   <table border="1">
     <tr>
-      <td rowspan="2">{{board.largePit1.nStones}}</td>
-      <td ng-repeat="test in board.pits1" ng-click="selectPit(test.keyName)">{{test.nStones}}</td>
-      <td rowspan="2">{{board.largePit2.nStones}}</td>
+      <td style="width:50px" rowspan="2">{{board.largePit1.nStones}}</td>
+      <td ng-if="test.clickMode==0" style="width:50px;color:black" ng-repeat="test in board.pits1" ng-click="selectPit(test.keyName)">{{test.nStones}}</td>
+      <td ng-if="test.clickMode==1" style="width:50px;color:green" ng-repeat="test in board.pits1" ng-click="selectPit(test.keyName)">{{test.nStones}}</td>
+      <td ng-if="test.clickMode==2" style="width:50px;color:red" ng-repeat="test in board.pits1" ng-click="selectPit(test.keyName)">{{test.nStones}}</td>
+      <td style="width:50px" rowspan="2">{{board.largePit2.nStones}}</td>
     </tr>
     <tr>
-      <td ng-repeat="test in board.pits2" ng-click="selectPit(test.keyName)">{{test.nStones}}</td>
+      <td ng-if="test.clickMode==0" style="width:50px;color:black" style="width:50px" ng-repeat="test in board.pits2" ng-click="selectPit(test.keyName)">{{test.nStones}}</td>
+      <td ng-if="test.clickMode==1" style="width:50px;color:green" style="width:50px" ng-repeat="test in board.pits2" ng-click="selectPit(test.keyName)">{{test.nStones}}</td>
+      <td ng-if="test.clickMode==2" style="width:50px;color:red" style="width:50px" ng-repeat="test in board.pits2" ng-click="selectPit(test.keyName)">{{test.nStones}}</td>
     </tr>
   </table>
   </br>
@@ -28,7 +32,7 @@
   <p>You have finished the game!</p>
   <p>Winner is {{board.winnerPlayerName}}</p>
 </div>
-  <button ng-click="startAgain()">
+  <button ng-click="startBoardGame()">
     Start again!
   </button>
 </body>

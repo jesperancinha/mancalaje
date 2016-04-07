@@ -1,19 +1,19 @@
 package com.steelzack.mancalaje.controller;
 
-import com.steelzack.mancalaje.manager.BoardEnterprise;
-import com.steelzack.mancalaje.manager.BoardManager;
-import com.steelzack.mancalaje.manager.BoardManagerImpl;
-import com.steelzack.mancalaje.manager.SelectedUserKeep;
+import com.steelzack.mancalaje.manager.*;
 import com.steelzack.mancalaje.model.BoardModel;
 import com.steelzack.mancalaje.model.PitModel;
+import com.steelzack.mancalaje.model.Username;
 import com.steelzack.mancalaje.objects.Pit;
 import com.steelzack.mancalaje.objects.Player;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.net.URISyntaxException;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -28,8 +28,14 @@ public class JSONControllerTest {
     @Autowired
     private BoardEnterprise boardManagerService;
 
+    @Autowired
+    private SessionRegistry sessionRegistry;
+
+    @Autowired
+    private SessionListKeeper sessionListKeeper;
+
     @Test
-    public void startAgain() throws Exception {
+    public void startBoardGame() throws Exception {
         final String playerOneName = "player1";
         final String sessionId1 = "SESSIONID1";
         final String playerTwoName = "player2";
@@ -46,11 +52,6 @@ public class JSONControllerTest {
 
         assertEquals(10, playerBigPit1.getnStones().intValue());
         assertEquals(10, playerBigPit2.getnStones().intValue());
-
-        jsonController.startAgain(new SelectedUserKeep(), null);
-
-        assertEquals(0, boardManager.getBoard().getPlayer1().getPlayerBigPit().getnStones().intValue());
-        assertEquals(0, boardManager.getBoard().getPlayer2().getPlayerBigPit().getnStones().intValue());
     }
 
     @Test
@@ -61,8 +62,10 @@ public class JSONControllerTest {
         final String sessionId2 = "SESSIONID2";
         BoardManager boardManager = new BoardManagerImpl(playerOneName, sessionId1, playerTwoName, sessionId2);
         boardManager.startBoard(playerOneName, sessionId1, playerTwoName, sessionId2);
-        final JSONController jsonController = new JSONController();
-        boardManagerService.addBoardManager("SESSIONID", boardManager);
+
+        final JSONController jsonController = getJsonController(playerOneName, sessionId1);
+
+        boardManagerService.addBoardManager("SESSIONID1", boardManager);
         jsonController.setBoardEnterpriseImpl(boardManagerService);
         Player player1 = boardManager.getBoard().getPlayer1();
 
@@ -79,6 +82,22 @@ public class JSONControllerTest {
         assertStonesInPits(board.getPits2());
     }
 
+    private JSONController getJsonController(String playerOneName, final String sessionId1) throws URISyntaxException {
+        final JSONController jsonController = new JSONController(){
+            @Override
+            protected String getSessionId() {
+                return sessionId1;
+            }
+        };
+        final Username userInfo = new Username();
+        userInfo.setUsername(playerOneName);
+        jsonController.setSessionRegistry(sessionRegistry);
+        jsonController.setCurrentUser(userInfo);
+        jsonController.setSessionListKeeper(sessionListKeeper);
+        jsonController.login(userInfo,null);
+        return jsonController;
+    }
+
     private void assertStonesInPits(List<PitModel> pits1) {
         for (PitModel p : pits1) {
             assertEquals(6, p.getnStones().intValue());
@@ -93,8 +112,10 @@ public class JSONControllerTest {
         final String sessionId2 = "SESSIONID2";
         BoardManager boardManager = new BoardManagerImpl(playerOneName, sessionId1, playerTwoName, sessionId2);
         boardManager.startBoard(playerOneName, sessionId1, playerTwoName, sessionId2);
-        final JSONController jsonController = new JSONController();
-        boardManagerService.addBoardManager("SESSIONID", boardManager);
+
+        final JSONController jsonController = getJsonController(playerOneName, sessionId1);
+
+        boardManagerService.addBoardManager("SESSIONID1", boardManager);
         jsonController.setBoardEnterpriseImpl(boardManagerService);
         final Player player1 = boardManager.getBoard().getPlayer1();
         final Player player2 = boardManager.getBoard().getPlayer2();

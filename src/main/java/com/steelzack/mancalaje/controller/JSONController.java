@@ -30,17 +30,17 @@ public class JSONController {
     @Autowired
     private BoardEnterprise boardEnterpriseImpl;
 
-    /**
-     * Session based user
-     */
-    @Autowired
-    private Username currentUser;
-
     @Autowired
     private SessionRegistry sessionRegistry;
 
     @Autowired
     private SessionListKeeper sessionListKeeper;
+
+    /**
+     * Session based user
+     */
+    @Autowired
+    private Username currentUser;
 
     @Bean(name = "sessionRegistry")
     public SessionRegistry sessionRegistry() {
@@ -52,57 +52,13 @@ public class JSONController {
         return new SessionListKeeperImpl();
     }
 
-
-    private List<SessionInformation> getActiveSessions() {
-        List<SessionInformation> activeSessions = new ArrayList<>();
-        for (Object principal : sessionRegistry.getAllPrincipals()) {
-            activeSessions.addAll(sessionRegistry.getAllSessions(principal, false));
-        }
-        activeSessions.remove(sessionRegistry.getSessionInformation(getSessionId()));
-        return activeSessions;
-    }
-
-    public void logoutSession(String sessionId) {
-        SessionInformation session = sessionRegistry.getSessionInformation(sessionId);
-        Object principalObj = session.getPrincipal();
-        if (principalObj instanceof User) {
-            User user = (User) principalObj;
-        }
-
-        if (session != null) {
-            session.expireNow();
-        }
-    }
-
-    @RequestMapping (value = "leaveBoard", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    Response leaveBoard() {
-        final BoardManager boardManager = boardEnterpriseImpl.getBoardManagerByBoardID(getSessionId());
-        boardManager.exitGame();
-        boardEnterpriseImpl.removeBoardManager(getSessionId());
-        return new Response(ResponseStatus.OK);
-    }
-
-    @RequestMapping(value = "sessionlist", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    SessionList sessionList()
-            throws URISyntaxException {
-        sessionListKeeper.setSessionList(getActiveSessions());
-        final BoardManager boardManager = boardEnterpriseImpl.getBoardManagerByBoardID(getSessionId());
-        boolean gamestarted = false;
-        if(boardManager != null)
-        {
-            gamestarted = !boardManager.isGameOver();
-        }
-        return new SessionList(sessionListKeeper.getSessionList(), getSessionId(), gamestarted);
-    }
-
-
     @RequestMapping(value = "/login.htm", method = RequestMethod.GET)
     public String loginStart() {
-            return "login";
+        if (sessionRegistry.getSessionInformation(getSessionId()) != null) {
+            logoutSession(getSessionId());
+            sessionRegistry.removeSessionInformation(getSessionId());
+        }
+        return "login";
     }
 
     @RequestMapping(value = "/sessionlist.htm", method = RequestMethod.GET)
@@ -126,10 +82,25 @@ public class JSONController {
         return new Response(ResponseStatus.OK);
     }
 
-    @RequestMapping(value = "startAgain", method = RequestMethod.POST)
+    @RequestMapping(value = "sessionlist", method = RequestMethod.GET)
     public
     @ResponseBody
-    BoardModel startAgain(@ModelAttribute(value = "userKeepId") SelectedUserKeep userInfo, BindingResult result) {
+    SessionList sessionList()
+            throws URISyntaxException {
+        sessionListKeeper.setSessionList(getActiveSessions());
+        final BoardManager boardManager = boardEnterpriseImpl.getBoardManagerByBoardID(getSessionId());
+        boolean gamestarted = false;
+        if (boardManager != null) {
+            gamestarted = !boardManager.isGameOver();
+        }
+        return new SessionList(sessionListKeeper.getSessionList(), getSessionId(), gamestarted);
+    }
+
+    @RequestMapping(value = "startBoardGame", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    BoardModel startBoardGame(@ModelAttribute(value = "userKeepId") SelectedUserKeep userInfo, BindingResult result) {
+        currentUser.setId("1");
         SessionInformation selectedSession = sessionListKeeper.getSessionList().get(userInfo.getId());
         return startBoard((String) selectedSession.getPrincipal(), selectedSession.getSessionId());
     }
@@ -143,53 +114,22 @@ public class JSONController {
         }
     }
 
-    private boolean isLogged() {
-        return currentUser.getUsername() == null || //
-                sessionRegistry.getSessionInformation(getSessionId()) == null;
-    }
-
-    private String getSessionId() {
-        return RequestContextHolder.currentRequestAttributes().getSessionId();
-    }
-
-    private BoardModel startBoard(String playerTwoName, String sessionId2) {
-        final BoardManager boardManager = new BoardManagerImpl(currentUser.getUsername(), getSessionId(), playerTwoName, sessionId2);
-        final Player player1 = boardManager.getBoard().getPlayer1();
-        final Player player2 = boardManager.getBoard().getPlayer2();
-
-        boardEnterpriseImpl.addBoardManager(getSessionId(), boardManager);
-        boardEnterpriseImpl.addBoardManager(sessionId2, boardManager);
-
-        final String sessionPlayer = currentUser.getUsername();
-
-        return new BoardModel(player1.getPlayerBigPit(), //
-                player2.getPlayerBigPit(), //
-                player1.getOwnedPits(), //
-                player2.getOwnedPits(), //
-                boardManager.getCurrentPlayer().getPlayerName(), //
-                boardManager.getCurrentPlayer().getPlayerId(), //
-                "", //
-                boardManager.isGameOver(), //
-                boardManager.getWinner() == null ? null : boardManager.getWinner().getPlayerName(),//
-                sessionPlayer);
-    }
-
     @RequestMapping(value = "refreshBoard", method = RequestMethod.GET)
     public
     @ResponseBody
     BoardModel getBoard() {
         final BoardManager boardManager = boardEnterpriseImpl.getBoardManagerByBoardID(getSessionId());
 
-        if(boardManager == null)
-        {
+        if (boardManager == null) {
             return new BoardModel();
         }
         final Player player1 = boardManager.getBoard().getPlayer1();
         final Player player2 = boardManager.getBoard().getPlayer2();
 
+        Integer loggedUser = player1.getSessionId() == getSessionId() ? 1 : 2;
+
         final String sessionPlayer = currentUser.getUsername();
-        if(boardManager.isGameExit())
-        {
+        if (boardManager.isGameExit()) {
             boardEnterpriseImpl.removeBoardManager(getSessionId());
         }
         return new BoardModel(player1.getPlayerBigPit(), //
@@ -201,7 +141,9 @@ public class JSONController {
                 "", //
                 boardManager.isGameOver(), //
                 boardManager.getWinner() == null ? null : boardManager.getWinner().getPlayerName(), //
-                sessionPlayer);
+                sessionPlayer, //
+                loggedUser //
+        );
     }
 
     @RequestMapping(value = "selectPit/{pitIdentifier}", method = RequestMethod.GET)
@@ -212,6 +154,8 @@ public class JSONController {
         final Player player1 = boardManager.getBoard().getPlayer1();
         final Player player2 = boardManager.getBoard().getPlayer2();
         final String valid = boardManager.moveStones(pitIdentifier, getSessionId());
+
+        final Integer loggedUser = player1.getSessionId() == getSessionId() ? 1 : 2;
 
         final String sessionPlayer = currentUser.getUsername();
 
@@ -224,9 +168,66 @@ public class JSONController {
                 valid,
                 boardManager.isGameOver(),//
                 boardManager.getWinner() == null ? null : boardManager.getWinner().getPlayerName(), //
-                sessionPlayer);
+                sessionPlayer, //
+                loggedUser  //
+        );
     }
 
+    private BoardModel startBoard(String playerTwoName, String sessionId2) {
+        final BoardManager boardManager = new BoardManagerImpl(currentUser.getUsername(), getSessionId(), playerTwoName, sessionId2);
+        final Player player1 = boardManager.getBoard().getPlayer1();
+        final Player player2 = boardManager.getBoard().getPlayer2();
+
+        boardEnterpriseImpl.addBoardManager(getSessionId(), boardManager);
+        boardEnterpriseImpl.addBoardManager(sessionId2, boardManager);
+
+        final String sessionPlayer = currentUser.getUsername();
+
+        final Integer loggedUser = player1.getSessionId() == getSessionId() ? 1 : 2;
+
+        return new BoardModel(player1.getPlayerBigPit(), //
+                player2.getPlayerBigPit(), //
+                player1.getOwnedPits(), //
+                player2.getOwnedPits(), //
+                boardManager.getCurrentPlayer().getPlayerName(), //
+                boardManager.getCurrentPlayer().getPlayerId(), //
+                "", //
+                boardManager.isGameOver(), //
+                boardManager.getWinner() == null ? null : boardManager.getWinner().getPlayerName(),//
+                sessionPlayer, //
+                loggedUser//
+        );
+    }
+
+    private boolean isLogged() {
+        return currentUser.getUsername() == null || //
+                sessionRegistry.getSessionInformation(getSessionId()) == null;
+    }
+
+    protected String getSessionId() {
+        return RequestContextHolder.currentRequestAttributes().getSessionId();
+    }
+
+    private List<SessionInformation> getActiveSessions() {
+        List<SessionInformation> activeSessions = new ArrayList<>();
+        for (Object principal : sessionRegistry.getAllPrincipals()) {
+            activeSessions.addAll(sessionRegistry.getAllSessions(principal, false));
+        }
+        activeSessions.remove(sessionRegistry.getSessionInformation(getSessionId()));
+        return activeSessions;
+    }
+
+    public void logoutSession(String sessionId) {
+        SessionInformation session = sessionRegistry.getSessionInformation(sessionId);
+        Object principalObj = session.getPrincipal();
+        if (principalObj instanceof User) {
+            User user = (User) principalObj;
+        }
+
+        if (session != null) {
+            session.expireNow();
+        }
+    }
 
     /**
      * For tests only
@@ -235,5 +236,42 @@ public class JSONController {
      */
     protected void setBoardEnterpriseImpl(BoardEnterprise boardEnterpriseImpl) {
         this.boardEnterpriseImpl = boardEnterpriseImpl;
+    }
+
+    @RequestMapping(value = "leaveBoard", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    Response leaveBoard() {
+        final BoardManager boardManager = boardEnterpriseImpl.getBoardManagerByBoardID(getSessionId());
+        boardManager.exitGame();
+        boardEnterpriseImpl.removeBoardManager(getSessionId());
+        return new Response(ResponseStatus.OK);
+    }
+
+    /**
+     * For tests only
+     *
+     * @param sessionRegistry
+     */
+    public void setSessionRegistry(SessionRegistry sessionRegistry) {
+        this.sessionRegistry = sessionRegistry;
+    }
+
+    /**
+     * For tests only
+     *
+     * @param sessionListKeeper
+     */
+    public void setSessionListKeeper(SessionListKeeper sessionListKeeper) {
+        this.sessionListKeeper = sessionListKeeper;
+    }
+
+    /**
+     * For tests only
+     *
+     * @param currentUser
+     */
+    public void setCurrentUser(Username currentUser) {
+        this.currentUser = currentUser;
     }
 }

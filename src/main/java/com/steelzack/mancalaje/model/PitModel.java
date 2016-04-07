@@ -11,9 +11,15 @@ public class PitModel {
 
     private String keyName;
 
-    public PitModel(Integer nStones, String keyName) {
+    // 0 - No click
+    // 1 - Can click
+    // 2 - forbidden
+    private int clickMode;
+
+    public PitModel(Integer nStones, String keyName, int clickMode) {
         this.nStones = nStones;
         this.keyName = keyName;
+        this.clickMode = clickMode;
     }
 
     public Integer getnStones() {
@@ -22,5 +28,9 @@ public class PitModel {
 
     public String getKeyName() {
         return keyName;
+    }
+
+    public int getClickMode() {
+        return clickMode;
     }
 }

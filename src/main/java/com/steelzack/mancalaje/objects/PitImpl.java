@@ -13,6 +13,11 @@ public class PitImpl implements Pit {
 
     private int nStones;
 
+    public  PitImpl()
+    {
+        
+    }
+
     public PitImpl(int nInitialStones, Player player, String sharedKey) {
         this.nStones = nInitialStones;
         this.player = player;

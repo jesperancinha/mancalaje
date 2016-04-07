@@ -16,5 +16,10 @@
             <td>{{session.userName}}</td>
           </tr>
         </table>
+
+        </br>
+        <button ng-click="logOut()">
+            Logout
+        </button>
 </body>
 </html>

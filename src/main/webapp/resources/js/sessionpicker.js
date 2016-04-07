@@ -22,7 +22,9 @@ app.controller("SessionPicker", function($scope, $http, $window, $interval) {
          };
     }
 
-
+    $scope.logOut = function (){
+        $window.location.href = '/mancalaje/stones/board/login.htm';
+    };
 
     $scope.startGame = function (userKeepIdIn){
             var data = $.param({
@@ -34,7 +36,7 @@ app.controller("SessionPicker", function($scope, $http, $window, $interval) {
                             }
                          }
 
-            $http.post("/mancalaje/stones/board/startAgain", data, config)
+            $http.post("/mancalaje/stones/board/startBoardGame", data, config)
             .success(function (data, status, headers, config) {
                             $scope.PostDataResponse = data;
                             $window.location.href = '/mancalaje/stones/board/mancalaje.htm';

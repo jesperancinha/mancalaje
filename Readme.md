@@ -22,7 +22,7 @@
 
 * To refresh: http://localhost:8080/mancalaje/stones/board/refreshBoard
 
-* To restart: http://localhost:8080/mancalaje/stones/board/startAgain
+* To restart: http://localhost:8080/mancalaje/stones/board/startBoardGame
 
 * To empty a pit and roll : localhost:8080/mancalaje/stones/board/selectPit/{pitId}
 
