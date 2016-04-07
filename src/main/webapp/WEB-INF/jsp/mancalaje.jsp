@@ -5,7 +5,7 @@
 </head>
 <body ng-app="StonesApp" ng-controller="RefreshBoardController">
 <div>
-  <h1>Stones game</h1>
+  <h1>MancalaJE</h1>
   <p style="color:green"><b>Current player: {{board.currentPlayerName}}</b></p>
   <p> You are player {{board.sessionPlayer}} </p>
   </br>

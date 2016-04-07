@@ -1,4 +1,4 @@
-# Stones game
+# MancalaJE
 
 ## Creation commands
 
