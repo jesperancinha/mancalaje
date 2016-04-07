@@ -6,5 +6,5 @@ package com.jfse.stonesgame.manager;
 public interface BoardEnterprise {
     BoardManager getBoardManagerByBoardID(String id);
 
-    void addBoardManager(String boardId, BoardManagerImpl boardManager);
+    void addBoardManager(String boardId, BoardManager boardManager);
 }

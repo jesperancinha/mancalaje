@@ -14,7 +14,7 @@ public class BoardManagerImpl implements BoardManager {
     private boolean gameOver;
     private Player winner;
 
-    BoardManagerImpl() {
+    public BoardManagerImpl() {
         startBoard();
     }
 

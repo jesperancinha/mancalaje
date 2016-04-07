@@ -78,7 +78,7 @@ public class JSONController {
     @RequestMapping(value = "sessionlist", method = RequestMethod.GET)
     public
     @ResponseBody
-    SessionList login(BindingResult result)
+    SessionList sessionList()
             throws URISyntaxException {
         sessionListKeeper.setSessionList(getActiveSessions());
         return new SessionList(sessionListKeeper.getSessionList());
@@ -177,7 +177,7 @@ public class JSONController {
      * For tests only
      * @param boardEnterpriseImpl
      */
-    protected void setBoardEnterpriseImpl(BoardEnterpriseImpl boardEnterpriseImpl) {
+    protected void setBoardEnterpriseImpl(BoardEnterprise boardEnterpriseImpl) {
         this.boardEnterpriseImpl = boardEnterpriseImpl;
     }
 }

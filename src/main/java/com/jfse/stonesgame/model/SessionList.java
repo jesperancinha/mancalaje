@@ -1,33 +1,27 @@
 package com.jfse.stonesgame.model;
 
+import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.springframework.security.core.session.SessionInformation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by joaofilipesabinoesperancinha on 07-04-16.
  */
+@JsonAutoDetect
 public class SessionList {
-
-    private Integer id;
-
-    private String userName;
-
-    public SessionList(Integer id, String userName) {
-        this.id = id;
-        this.userName = userName;
-    }
+    private List<Session> sessions = new ArrayList<>();
 
     public SessionList(List<SessionInformation> sessionList) {
-
+        int id = 0;
+        for(SessionInformation sessionInformation : sessionList)
+        {
+            sessions.add(new Session(id++, (String) sessionInformation.getPrincipal()));
+        }
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-
-    public String getUserName() {
-        return userName;
+    public List<Session> getSessions() {
+        return sessions;
     }
 }

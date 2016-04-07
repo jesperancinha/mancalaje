@@ -21,7 +21,7 @@ public class BoardEnterpriseImpl implements BoardEnterprise{
     }
 
     @Override
-    public void addBoardManager(String boardId, BoardManagerImpl boardManager)
+    public void addBoardManager(String boardId, BoardManager boardManager)
     {
         boardManagerMap.put(boardId, boardManager);
     }

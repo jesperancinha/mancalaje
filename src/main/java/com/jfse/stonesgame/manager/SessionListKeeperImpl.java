@@ -10,8 +10,8 @@ import java.util.List;
 /**
  * Created by joaofilipesabinoesperancinha on 07-04-16.
  */
-@Component
-@Scope(value = "sessionListKeeper", proxyMode= ScopedProxyMode.TARGET_CLASS)
+@Component("sessionListKeeper")
+@Scope(value = "session", proxyMode= ScopedProxyMode.TARGET_CLASS)
 public class SessionListKeeperImpl implements SessionListKeeper {
     private List<SessionInformation> sessionList;
 

@@ -1,6 +1,8 @@
 package com.jfse.stonesgame.controller;
 
+import com.jfse.stonesgame.manager.BoardEnterprise;
 import com.jfse.stonesgame.manager.BoardManager;
+import com.jfse.stonesgame.manager.BoardManagerImpl;
 import com.jfse.stonesgame.model.BoardModel;
 import com.jfse.stonesgame.model.PitModel;
 import com.jfse.stonesgame.objects.Pit;
@@ -23,13 +25,15 @@ import static org.junit.Assert.*;
 public class JSONControllerTest {
 
     @Autowired
-    private BoardManager boardManager;
+    private BoardEnterprise boardManagerService;
 
     @Test
     public void startAgain() throws Exception {
+        BoardManager boardManager = new BoardManagerImpl();
         boardManager.startBoard();
         final JSONController jsonController = new JSONController();
-        jsonController.setBoardEnterpriseImpl(boardManager);
+        boardManagerService.addBoardManager("SESSIONID", boardManager);
+        jsonController.setBoardEnterpriseImpl(boardManagerService);
         final Pit playerBigPit1 = boardManager.getBoard().getPlayer1().getPlayerBigPit();
         playerBigPit1.addStones(10);
         final Pit playerBigPit2 = boardManager.getBoard().getPlayer2().getPlayerBigPit();
@@ -46,17 +50,19 @@ public class JSONControllerTest {
 
     @Test
     public void getBoard() throws Exception {
+        BoardManager boardManager = new BoardManagerImpl();
         boardManager.startBoard();
         final JSONController jsonController = new JSONController();
-        jsonController.setBoardEnterpriseImpl(boardManager);
+        boardManagerService.addBoardManager("SESSIONID", boardManager);
+        jsonController.setBoardEnterpriseImpl(boardManagerService);
         Player player1 = boardManager.getBoard().getPlayer1();
 
         BoardModel board = jsonController.getBoard();
 
         assertEquals("", board.getErrorMessage());
         assertEquals(player1.getPlayerName(), board.getCurrentPlayerName());
-        assertEquals("player1",board.getLargePit1().getKeyName());
-        assertEquals("player2",board.getLargePit2().getKeyName());
+        assertEquals("player1", board.getLargePit1().getKeyName());
+        assertEquals("player2", board.getLargePit2().getKeyName());
         assertNull(board.getWinnerPlayerName());
         assertFalse(board.isGameOver());
 
@@ -65,16 +71,18 @@ public class JSONControllerTest {
     }
 
     private void assertStonesInPits(List<PitModel> pits1) {
-        for(PitModel p : pits1)
-        {
-            assertEquals(6,p.getnStones().intValue());
+        for (PitModel p : pits1) {
+            assertEquals(6, p.getnStones().intValue());
         }
     }
 
     @Test
     public void selectPit() throws Exception {
+        BoardManager boardManager = new BoardManagerImpl();
+        boardManager.startBoard();
         final JSONController jsonController = new JSONController();
-        jsonController.setBoardEnterpriseImpl(boardManager);
+        boardManagerService.addBoardManager("SESSIONID", boardManager);
+        jsonController.setBoardEnterpriseImpl(boardManagerService);
         final Player player1 = boardManager.getBoard().getPlayer1();
         final Player player2 = boardManager.getBoard().getPlayer2();
 
@@ -82,8 +90,8 @@ public class JSONControllerTest {
 
         assertEquals("", board.getErrorMessage());
         assertEquals(player1.getPlayerName(), board.getCurrentPlayerName());
-        assertEquals("player1",board.getLargePit1().getKeyName());
-        assertEquals("player2",board.getLargePit2().getKeyName());
+        assertEquals("player1", board.getLargePit1().getKeyName());
+        assertEquals("player2", board.getLargePit2().getKeyName());
         assertNull(board.getWinnerPlayerName());
         assertFalse(board.isGameOver());
 
