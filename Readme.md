@@ -16,7 +16,22 @@ This is just a very simple implementation that I intend to grow further in the f
 
 ## Installation commands
 
-* bower install
+´´´
+$ bower install
+
+$ npm install -g karma-cli
+
+$ npm install karma
+
+$ npm install karma-jasmine
+
+$ npm install karma-coverage
+
+$ npm install phantomjs
+
+$ 
+
+´´´
 
 ## How to run:
 
