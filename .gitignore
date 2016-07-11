@@ -26,3 +26,6 @@ hs_err_pid*
 # Karma and NodeJS
 node/
 npm-debug.log
+
+# Grunt
+output.css
