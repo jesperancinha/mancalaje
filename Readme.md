@@ -16,7 +16,26 @@ This is just a very simple implementation that I intend to grow further in the f
 
 ## Installation commands
 
-* bower install
+´´´
+$ bower install
+
+$ npm install -g karma-cli
+
+$ npm install karma
+
+$ npm install karma-jasmine
+
+$ npm install karma-coverage
+
+$ npm install phantomjs
+
+$ npm install grunt
+
+$ sudo npm install -g grunt-cli
+
+$ sudo npm install grunt-contrib-cssmin --save-dev
+
+´´´
 
 ## How to run:
 
@@ -49,3 +68,9 @@ This is just a very simple implementation that I intend to grow further in the f
 * REST services
 
 * AngularJS (To be replaced by AngularJS 2...)
+
+## References:
+
+* https://github.com/eirslett/frontend-maven-plugin
+
+* http://gruntjs.com/getting-started

@@ -64,6 +64,24 @@
                     <path>/mancalaje</path>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>0.0.14</version>
+                <executions>
+                    <!-- Run karma tests -->
+                    <execution>
+                        <id>javascript tests</id>
+                        <goals>
+                            <goal>karma</goal>
+                        </goals>
+                        <phase>test</phase>
+                        <configuration>
+                            <karmaConfPath>karma.conf.js</karmaConfPath>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
     <dependencies>

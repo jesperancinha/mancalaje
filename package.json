@@ -1,0 +1,33 @@
+{
+  "name": "mancalaje",
+  "version": "1.0.0",
+  "description": "mancalaje testing",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "grunt": "^1.0.1",
+    "jasmine-core": "^2.4.1"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-cssmin": "^1.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jesperancinha/mancalaje.git"
+  },
+  "keywords": [
+    "test"
+  ],
+  "author": "jesperancinha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jesperancinha/mancalaje/issues"
+  },
+  "homepage": "https://github.com/jesperancinha/mancalaje#readme"
+}
