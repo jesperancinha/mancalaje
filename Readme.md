@@ -29,8 +29,6 @@ $ npm install karma-coverage
 
 $ npm install phantomjs
 
-$ 
-
 ´´´
 
 ## How to run:
@@ -64,3 +62,7 @@ $
 * REST services
 
 * AngularJS (To be replaced by AngularJS 2...)
+
+## References:
+
+* https://github.com/eirslett/frontend-maven-plugin
