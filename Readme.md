@@ -29,6 +29,10 @@ $ npm install karma-coverage
 
 $ npm install phantomjs
 
+$ npm install grunt
+
+$ sudo npm install -g grunt-cli
+
 ´´´
 
 ## How to run:
@@ -66,3 +70,5 @@ $ npm install phantomjs
 ## References:
 
 * https://github.com/eirslett/frontend-maven-plugin
+
+* http://gruntjs.com/getting-started
