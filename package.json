@@ -11,7 +11,8 @@
     "jasmine-core": "^2.4.1"
   },
   "devDependencies": {
-    "grunt": "^1.0.1"
+    "grunt": "^1.0.1",
+    "grunt-contrib-cssmin": "^1.0.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

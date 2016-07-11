@@ -33,6 +33,8 @@ $ npm install grunt
 
 $ sudo npm install -g grunt-cli
 
+$ sudo npm install grunt-contrib-cssmin --save-dev
+
 ´´´
 
 ## How to run:
