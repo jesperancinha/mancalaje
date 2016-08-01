@@ -1,10 +1,6 @@
 <html>
 <head>
-     <script src="../../resources/bower_components/angular/angular.min.js"></script>
-     <script src="../../resources/bower_components/jquery/dist/jquery.min.js"></script>
-     <script src="../../resources/bower_components/angular-route/angular-route.min.js"></script>
-     <script src="../../resources/js/sessionpicker.js"></script>
-
+     <script src="../../resources/js/sessionpicker.bundle.min.js"></script>
 </head>
 <body ng-app="StonesApp" ng-controller="SessionPicker">
 <div>

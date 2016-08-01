@@ -1,41 +1,10 @@
 # MancalaJE
 
-Almost all developers and engineers do a Mancala implementation at some point in their experimentations.
-
-This is my own implementation.
-
-This implementation allows two users to connect online
-
-The principle is that two or more users login and then one of them decides with whom he wants to play with.
-
-This is just a very simple implementation that I intend to grow further in the future to different possbilities.
+Alternative implementation of Mancala JE
 
 ## Creation commands
 
 * mvn archetype:generate -DgroupId=steelzack -DartifactId=mancalaje -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
-
-## Installation commands
-
-´´´
-$ bower install
-
-$ npm install -g karma-cli
-
-$ npm install karma
-
-$ npm install karma-jasmine
-
-$ npm install karma-coverage
-
-$ npm install phantomjs
-
-$ npm install grunt
-
-$ sudo npm install -g grunt-cli
-
-$ sudo npm install grunt-contrib-cssmin --save-dev
-
-´´´
 
 ## How to run:
 
@@ -59,8 +28,6 @@ $ sudo npm install grunt-contrib-cssmin --save-dev
 
 ## Tecnologies used:
 
-* Bower
-
 * Spring MVC
 
 * Maven
@@ -68,6 +35,12 @@ $ sudo npm install grunt-contrib-cssmin --save-dev
 * REST services
 
 * AngularJS (To be replaced by AngularJS 2...)
+
+* Webpack
+
+* GruntJS
+
+* NPM
 
 ## References:
 

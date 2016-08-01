@@ -1,7 +1,6 @@
 <html>
 <head>
-     <script src="../../resources/bower_components/angular/angular.min.js"></script>
-     <script src="../../resources/js/refreshboard.js"></script>
+     <script src="../../resources/js/refreshboard.bundle.min.js"></script>
 </head>
 <body ng-app="StonesApp" ng-controller="RefreshBoardController">
 <div>

@@ -1,4 +1,7 @@
-var app = angular.module ("StonesApp", ['ngRoute']);
+var angular = require('angular');
+var $ = require('jquery');
+
+var app = angular.module ("StonesApp", []);
 
 app.controller("SessionPicker", function($scope, $http, $window, $interval) {
 

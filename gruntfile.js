@@ -1,16 +1,24 @@
 module.exports = function(grunt){
-	grunt.initConfig({
 
-        pkg: grunt.file.readJSON('package.json'),
-        cssmin: {
-             options: {
-             }, target: {
-                    files: {
-                        'output.css' : [ 'style.css', 'reset.css']
-                    }
-             }
-        }
-   });
-   grunt.loadNpmTasks('grunt-contrib-cssmin');
-   grunt.registerTask('default', ['cssmin'])
-};
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+
+    grunt.initConfig({
+     uglify: {
+         options: {
+               sourceMap: false,
+               wrap: 'exports',
+               mangle: false
+         },
+         my_target: {
+           files: {
+             'src/main/webapp/resources/js/start.bundle.min.js': ['src/main/webapp/resources/js/start.bundle.js'],
+             'src/main/webapp/resources/js/refreshboard.bundle.min.js': ['src/main/webapp/resources/js/refreshboard.bundle.js'],
+             'src/main/webapp/resources/js/loginuser.bundle.min.js': ['src/main/webapp/resources/js/loginuser.bundle.js'],
+             'src/main/webapp/resources/js/sessionpicker.bundle.min.js': ['src/main/webapp/resources/js/sessionpicker.bundle.js']
+           }
+         }
+       }
+    });
+
+    grunt.registerTask('default', ['uglify']);
+}
