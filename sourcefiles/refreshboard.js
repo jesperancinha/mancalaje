@@ -1,3 +1,5 @@
+var angular = require('angular');
+
 var stonesApp = angular.module("StonesApp", []);
 
 stonesApp.controller('RefreshBoardController', ['$scope', '$http', '$interval', '$window',
