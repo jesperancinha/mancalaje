@@ -1,17 +1,16 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xsi:schemaLocation="
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="
         http://www.springframework.org/schema/beans     
-        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
         http://www.springframework.org/schema/context 
-        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 
-	<context:component-scan base-package="com.steelzack.mancalaje.controller, com.steelzack.mancalaje.manager, com.steelzack.mancalaje.model" />
-
+	<context:component-scan base-package="com.steelzack.mancalaje.config" />
+	<context:annotation-config/>
 	<mvc:annotation-driven />
 	<!-- Resolves view names to protected .jsp resources within the /WEB-INF/views 
 		directory -->
