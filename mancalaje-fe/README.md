@@ -1,3 +1,12 @@
+# MancalaJe Front End
+
+
+## References:
+
+-   [Create a New React App](https://reactjs.org/docs/create-a-new-react-app.html)
+-   [Update all the Node dependencies to their latest version](https://flaviocopes.com/update-npm-dependencies/)
+
+---
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
