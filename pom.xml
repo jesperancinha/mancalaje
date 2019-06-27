@@ -19,7 +19,7 @@
     <properties>
         <java.version>11</java.version>
         <assertj-core.version>3.11.1</assertj-core.version>
-        <maven.compiler>3.5.1</maven.compiler>
+        <maven.compiler>3.8.1</maven.compiler>
     </properties>
 
     <modules>
