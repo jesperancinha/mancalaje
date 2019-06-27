@@ -1,4 +1,4 @@
-# MancalaJE  
+# MancalaJe
     
 ```                                                                                               
 @@@@@@@@@@    @@@@@@   @@@  @@@   @@@@@@@   @@@@@@   @@@        @@@@@@                   @@@  @@@@@@@@  
@@ -22,6 +22,15 @@ All Front end is being updated.
 
 stay tuned!
 
+## Status
+
+**Under development**
+
+
+## Notes
+
+*   [Postman](https://www.getpostman.com/)
+
 ## License
 
 ```
@@ -40,19 +49,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
-## Status
+## About me
 
-**Under development**
-
-
-## Notes
-
-*   [Postman](https://www.getpostman.com/)
-
-
-## Location:
-
-[GitHub location](https://github.com/jesperancinha/mancalaje)
-
-*   Twitter [@jofisaes](https://twitter.com/jofisaes)
-*   GitHub [jesperancinha](https://github.com/jesperancinha)
+-   Twitter [@jofisaes](https://twitter.com/jofisaes)
+-   GitHub [jesperancinha](https://github.com/jesperancinha)
+-   Free Code Camp [jofisaes](https://www.freecodecamp.org/jofisaes)
+-   Hackerrank [jofisaes](https://www.hackerrank.com/jofisaes)
+-   Acclaim Badges [joao-esperancinha](https://www.youracclaim.com/users/joao-esperancinha/badges)
+-   Home Page [joaofilipesabinoesperancinha](http://joaofilipesabinoesperancinha.nl)
