@@ -5,6 +5,8 @@
 
 -   [Create a New React App](https://reactjs.org/docs/create-a-new-react-app.html)
 -   [Update all the Node dependencies to their latest version](https://flaviocopes.com/update-npm-dependencies/)
+-   [Creating a Single-Page App in React using React Router](https://www.kirupa.com/react/creating_single_page_app_react_using_react_router.htm)
+-   [Using React Router for a Single Page Application](https://www.taniarascia.com/using-react-router-spa/)
 
 ---
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
