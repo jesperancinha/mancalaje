@@ -1,8 +1,7 @@
 package com.jofisaes.mancala.services;
 
-import lombok.Getter;
-
 import com.jofisaes.mancala.entities.Player;
+import lombok.Getter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 

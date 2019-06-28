@@ -12,7 +12,7 @@ class Home extends React.Component {
             <div className="App">
                 <MuiThemeProvider theme={theme}>
                     <header className="App-header">
-                        <Typography variant="h1">Welcome do MancalaJe</Typography>
+                        <Typography variant="h1">Welcome to MancalaJe</Typography>
                         <Typography component="p">click on the giant reactjs logo to start</Typography>
                         <Link to={`/game`}>
                             <img src={logo} className="App-logo" alt="logo"/>

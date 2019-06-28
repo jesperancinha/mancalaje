@@ -1,8 +1,5 @@
 package com.jofisaes.mancala.services;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-
 import com.jofisaes.mancala.entities.Player;
 import com.jofisaes.mancala.game.BoardManager;
 import org.junit.Test;
@@ -12,6 +9,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Collection;
 import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 
 @RunWith(MockitoJUnitRunner.class)

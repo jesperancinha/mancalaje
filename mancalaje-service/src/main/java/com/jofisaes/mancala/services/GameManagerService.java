@@ -1,14 +1,13 @@
 package com.jofisaes.mancala.services;
 
+import com.jofisaes.mancala.entities.Player;
+import com.jofisaes.mancala.game.BoardManager;
+import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.ApplicationScope;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.jofisaes.mancala.entities.Player;
-import org.springframework.stereotype.Service;
-
-import com.jofisaes.mancala.game.BoardManager;
-import org.springframework.web.context.annotation.ApplicationScope;
 
 @Service
 @ApplicationScope

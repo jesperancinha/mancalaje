@@ -9,15 +9,12 @@ import lombok.Setter;
 @Setter
 public class Hole {
 
-    @JsonProperty("id")
-    private Integer id;
-
-    @JsonProperty("stones")
-    private Integer stones = 4;
-
     @JsonProperty("player")
     private final Player player;
-
+    @JsonProperty("id")
+    private Integer id;
+    @JsonProperty("stones")
+    private Integer stones = 4;
     @JsonProperty("enabled")
     private boolean enabled;
 

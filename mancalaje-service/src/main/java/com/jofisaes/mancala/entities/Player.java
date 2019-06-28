@@ -14,20 +14,20 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Player {
 
-	@JsonProperty("name")
-	private String name;
+    @JsonProperty("name")
+    private String name;
 
-	@JsonIgnore
-	private BoardManager boardManager;
+    @JsonIgnore
+    private BoardManager boardManager;
 
-	@JsonIgnore
-	private List<Hole> allPlayerHoles;
+    @JsonIgnore
+    private List<Hole> allPlayerHoles;
 
-	@JsonIgnore
-	private Store playerStore;
+    @JsonIgnore
+    private Store playerStore;
 
-	public void setHoles(List<Hole> allPlayerHoles, Store playerStore) {
-		this.allPlayerHoles = allPlayerHoles;
-		this.playerStore = playerStore;
-	}
+    public void setHoles(List<Hole> allPlayerHoles, Store playerStore) {
+        this.allPlayerHoles = allPlayerHoles;
+        this.playerStore = playerStore;
+    }
 }

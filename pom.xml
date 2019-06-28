@@ -20,6 +20,7 @@
         <java.version>11</java.version>
         <assertj-core.version>3.11.1</assertj-core.version>
         <maven.compiler>3.8.1</maven.compiler>
+        <h2.version>1.4.197</h2.version>
     </properties>
 
     <modules>
@@ -27,4 +28,13 @@
         <module>mancalaje-service</module>
     </modules>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
