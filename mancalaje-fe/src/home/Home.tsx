@@ -10,18 +10,18 @@ class Home extends React.Component {
                 <header className="App-header">
                     <h1>Welcome do MancalaJe</h1>
                     <p>click on the giant reactjs logo to start</p>
-                    <Link to={`/game`} activeClassName="active">
+                    <Link to={`/game`}>
                         <img src={logo} className="App-logo" alt="logo"/>
                     </Link>
                     <a
                         className="App-link"
                         href="https://reactjs.org"
-                        target="/game"
+                        target="_blank"
                         rel="noopener noreferrer"
                     >
                         Learn React
                     </a>
-                    <p>coming soon...  this is just a test app!</p>
+                    <p>coming soon... this is just a test app!</p>
                 </header>
             </div>
         );
