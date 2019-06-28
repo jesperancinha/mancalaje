@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -13,9 +14,12 @@ import java.util.stream.IntStream;
 
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Board {
+public class Board implements Serializable {
 
     private static Predicate<Hole> holePredicate = hole -> hole.getStones() == 0;
+
+    @JsonProperty("name")
+    private String name;
 
     @JsonProperty("player1")
     private Player player1;
@@ -38,10 +42,11 @@ public class Board {
     @JsonIgnore
     private Store playerTwoStore;
 
-    public Board() {
+    public Board(String boardName) {
         calculateBoard();
         calculateNextHoles();
         calculateOppositeHoles();
+        this.name = boardName;
     }
 
     /**

@@ -9,10 +9,12 @@ import com.jofisaes.mancala.entities.Player;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class BoardManager {
+public class BoardManager implements Serializable {
     @JsonIgnore
     private Player currentPlayer;
 
@@ -29,9 +31,9 @@ public class BoardManager {
         this.boardManagerId = boardManagerId;
     }
 
-    public static BoardManager create(Player player, Long boardManagerId) {
+    public static BoardManager create(Player player, Long boardManagerId, String boardName) {
         BoardManager boardManager = new BoardManager(boardManagerId);
-        Board board = new Board();
+        Board board = new Board(boardName);
         board.setPlayer1(player);
         boardManager.setBoard(board);
         return boardManager;

@@ -7,12 +7,13 @@ import com.jofisaes.mancala.game.BoardManager;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Player {
+public class Player implements Serializable {
 
     @JsonProperty("name")
     private String name;

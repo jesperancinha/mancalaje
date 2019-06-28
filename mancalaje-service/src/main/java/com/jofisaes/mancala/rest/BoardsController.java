@@ -2,21 +2,21 @@ package com.jofisaes.mancala.rest;
 
 import com.jofisaes.mancala.entities.Player;
 import com.jofisaes.mancala.game.BoardManager;
+import com.jofisaes.mancala.game.RoomsManager;
 import com.jofisaes.mancala.services.GameManagerService;
 import com.jofisaes.mancala.services.UserManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.annotation.SessionScope;
 
-import java.util.Collection;
+import javax.websocket.server.PathParam;
+import java.io.Serializable;
 
 import static com.jofisaes.mancala.rest.Mappings.MANCALA_BOARDS;
 
-@SessionScope
 @RestController()
 @RequestMapping(MANCALA_BOARDS)
-public class BoardsController {
+public class BoardsController implements Serializable {
 
     @Autowired
     private GameManagerService gameManagerService;
@@ -24,14 +24,14 @@ public class BoardsController {
     @Autowired
     private UserManagerService userManagerService;
 
-    @GetMapping(value = "create", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void createGame() {
+    @GetMapping(value = "create/{boardName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public void createGame(@PathVariable("boardName") String boardName) {
         Player sessionUser = userManagerService.getSessionUser();
-        gameManagerService.createBoard(sessionUser);
+        gameManagerService.createBoard(sessionUser, boardName);
     }
 
     @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Collection<BoardManager> listAllCurrentGames() {
+    public RoomsManager listAllCurrentGames() {
         return gameManagerService.listAllGames();
     }
 
