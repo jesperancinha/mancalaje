@@ -13,23 +13,27 @@ import java.util.Map;
 @ApplicationScope
 public class GameManagerService {
 
-    private Map<Long, BoardManager> boardManagerMap = new HashMap<>();
 
     private RoomsManager roomsManager = new RoomsManager();
 
     public void createBoard(Player player, String boardName) {
-        Long highestId = boardManagerMap.keySet().stream().max(Long::compare).orElse(0L) + 1;
+        Long highestId = roomsManager.getBoardManagerMap().keySet().stream().max(Long::compare).orElse(0L) + 1;
         BoardManager board = BoardManager.create(player, highestId,boardName);
-        boardManagerMap.put(highestId, board);
+        roomsManager.getBoardManagerMap().put(highestId, board);
         roomsManager.getBoardManagers().add(board);
     }
+
+    public BoardManager listPlayerGame(Player player) {
+        return player.getBoardManager();
+    }
+
 
     public RoomsManager listAllGames() {
         return roomsManager;
     }
 
     public BoardManager joinPlayer(Long boardManagerId, Player player2) {
-        BoardManager boardManager = boardManagerMap.get(boardManagerId);
+        BoardManager boardManager = roomsManager.getBoardManagerMap().get(boardManagerId);
         boardManager.setPlayer2(player2);
         return boardManager;
     }

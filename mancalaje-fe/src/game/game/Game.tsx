@@ -31,7 +31,7 @@ class Game extends Component {
                     </AppBar>
                 </Grid>
                 <Grid item xs={12}>
-                    <div style={control}></div>
+                    <div style={control}>---</div>
                 </Grid>
                 <Grid item xs={12}>
                     <MuiThemeProvider theme={theme}>

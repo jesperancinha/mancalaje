@@ -35,6 +35,7 @@ public class BoardManager implements Serializable {
         BoardManager boardManager = new BoardManager(boardManagerId);
         Board board = new Board(boardName);
         board.setPlayer1(player);
+        player.setBoardManager(boardManager);
         boardManager.setBoard(board);
         return boardManager;
     }

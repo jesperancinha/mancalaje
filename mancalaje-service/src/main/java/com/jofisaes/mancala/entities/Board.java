@@ -57,7 +57,7 @@ public class Board implements Serializable {
         allPlayerOneHoles = IntStream.range(0, 6).boxed().map(id -> new Hole(player1, id)).collect(Collectors.toList());
         this.playerOneStore = new Store(player1, 6);
         allPlayerTwoHoles = IntStream.range(7, 13).boxed().map(id -> new Hole(player2, id))
-                .collect(Collectors.toList());
+            .collect(Collectors.toList());
         this.playerTwoStore = new Store(player2, 13);
         allHoles.addAll(allPlayerOneHoles);
         allHoles.add(playerOneStore);
@@ -107,16 +107,16 @@ public class Board implements Serializable {
             return hole;
         }
         if ((hole == playerTwoStore || hole == playerOneStore)
-                && hole.getPlayer() != currentPlayer) {
-            return swayStonseFromHole(currentPlayer, hole.getOppositeHole(), stones--);
+            && hole.getPlayer() != currentPlayer) {
+            return swayStonseFromHole(currentPlayer, hole.getOppositeHole(), stones - 1);
         } else {
-            return swayStonseFromHole(currentPlayer, hole.getNextHole(), stones--);
+            return swayStonseFromHole(currentPlayer, hole.getNextHole(), stones - 1);
         }
 
     }
 
     public boolean isGameOver() {
         return allPlayerOneHoles.stream().allMatch(holePredicate)
-                && allPlayerTwoHoles.stream().allMatch(holePredicate);
+            && allPlayerTwoHoles.stream().allMatch(holePredicate);
     }
 }
