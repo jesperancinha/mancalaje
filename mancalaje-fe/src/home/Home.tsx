@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './Home.css';
 import {Link} from "react-router-dom";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
-import theme from "../theme";
+import {theme} from "../theme";
 import {Typography} from "@material-ui/core";
 
 class Home extends React.Component {

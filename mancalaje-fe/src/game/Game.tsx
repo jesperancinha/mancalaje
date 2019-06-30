@@ -3,7 +3,7 @@ import AppBar from '@material-ui/core/AppBar';
 import TextField from '@material-ui/core/TextField';
 import React, {Component} from 'react';
 import {Button, Grid} from "@material-ui/core";
-import theme from "../theme";
+import {theme} from "../theme";
 import Typography from "@material-ui/core/Typography";
 
 class Game extends Component {
