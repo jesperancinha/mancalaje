@@ -3,8 +3,8 @@ import AppBar from '@material-ui/core/AppBar';
 import TextField from '@material-ui/core/TextField';
 import React, {Component} from 'react';
 import {Button, Grid} from "@material-ui/core";
-import {theme} from "../theme";
 import Typography from "@material-ui/core/Typography";
+import {theme} from "../../theme";
 
 class Game extends Component {
     constructor({props}: { props: any }) {
@@ -50,7 +50,7 @@ class Game extends Component {
                             <br/>
                             <Button
                                 style={control}
-                                onClick={(event) => this.handleClick(event)} href={`gameStart`}>Submit</Button>
+                                onClick={(event) => this.handleClick(event)} href={`gameList`}>Submit</Button>
                         </AppBar>
                     </MuiThemeProvider>
                 </Grid>

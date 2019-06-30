@@ -4,24 +4,29 @@ import {createStyles} from "@material-ui/styles";
 import makeStyles from "@material-ui/styles/makeStyles";
 
 
-export const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'flex-end',
-        },
-        icon: {
-            margin: theme.spacing(2),
-        },
-        iconHover: {
-            margin: theme.spacing(2),
-            '&:hover': {
-                color: red[800],
+export const useStyles = makeStyles((theme: Theme) => {
+        let themeSpacing = 2;
+        if (theme.spacing) {
+            themeSpacing = theme.spacing(2);
+        }
+        let newStyles = {
+            root: {
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'flex-end',
             },
-        },
-    }),
-);
+            icon: {
+                margin: themeSpacing,
+            },
+            iconHover: {
+                margin: themeSpacing,
+                '&:hover': {
+                    color: red[800],
+                },
+            },
+        };
+        return createStyles(newStyles)
+    });
 
 export const theme = createMuiTheme({
     typography: {
@@ -48,6 +53,5 @@ export const theme = createMuiTheme({
         tonalOffset: 0.2,
         type: "light",
         background: {default: '#fff'}
-
     }
 });

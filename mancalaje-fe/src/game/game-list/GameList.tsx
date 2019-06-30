@@ -1,24 +1,13 @@
 import React from 'react';
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
-import {theme} from "../theme";
 import {Typography} from "@material-ui/core";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import {RoomComponentIcon} from "../components/Icons";
-
-
-class Board {
-    name: string = '';
-}
-
-class BoardManager {
-    board: Board = new Board;
-}
-
-class Game {
-    boardManagers: BoardManager[] = [];
-}
+import {Link} from "react-router-dom";
+import {theme} from "../../theme";
+import {RoomComponentIcon} from "../../components/Icons";
+import {Game} from "../../types";
 
 let response: Game = {
     boardManagers: [
@@ -30,7 +19,7 @@ let response: Game = {
     ]
 };
 
-class GameStart extends React.Component {
+class GameList extends React.Component {
     render() {
         return (
             <MuiThemeProvider theme={theme}>
@@ -43,7 +32,7 @@ class GameStart extends React.Component {
                             <ListItemIcon>
                                 <RoomComponentIcon/>
                             </ListItemIcon>
-                            {row.board.name}
+                            <Link to={`gameStart`}>{row.board.name}</Link>
                         </ListItem>
                     ))}
                 </List>
@@ -52,4 +41,4 @@ class GameStart extends React.Component {
     }
 }
 
-export default GameStart
+export default GameList
