@@ -1,39 +1,44 @@
 import {useStyles} from "../theme";
 import {Paper} from "@material-ui/core";
-import Table from "@material-ui/core/Table";
-import TableRow from "@material-ui/core/TableRow";
 import * as React from "react";
-import TableCell from "@material-ui/core/TableCell";
+import {BoardManager} from "../types";
+import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
-import {BoardManager, Game} from "../types";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+import logo from "../home/logo.svg";
+import "./MancalaBoard.css"
 
-const MancalaBoard = ({data} : { data: BoardManager}) => {
+const MancalaBoard = ({data}: { data: BoardManager }) => {
+    console.log(data);
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <Paper>
-                <Table>
-                    <TableBody>
-                        <TableRow>
-                            <TableCell align="right" rowSpan={2}>Mancala 2</TableCell>
-                            <TableCell align="right">6</TableCell>
-                            <TableCell align="right">5</TableCell>
-                            <TableCell align="right">4</TableCell>
-                            <TableCell align="right">3</TableCell>
-                            <TableCell align="right">2</TableCell>
-                            <TableCell align="right">1</TableCell>
-                            <TableCell align="right" rowSpan={2}>Mancala 1</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell align="right">1</TableCell>
-                            <TableCell align="right">2</TableCell>
-                            <TableCell align="right">3</TableCell>
-                            <TableCell align="right">4</TableCell>
-                            <TableCell align="right">5</TableCell>
-                            <TableCell align="left">6</TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
+                {data ? (
+                    <Table>
+                        <TableBody>
+                            <TableRow>
+                                <TableCell align="right" rowSpan={2}>{data.board.allHoles[13].stones}</TableCell>
+                                <TableCell align="right">{data.board.allHoles[12].stones}</TableCell>
+                                <TableCell align="right">{data.board.allHoles[11].stones}</TableCell>
+                                <TableCell align="right">{data.board.allHoles[10].stones}</TableCell>
+                                <TableCell align="right">{data.board.allHoles[9].stones}</TableCell>
+                                <TableCell align="right">{data.board.allHoles[8].stones}</TableCell>
+                                <TableCell align="right">{data.board.allHoles[7].stones}</TableCell>
+                                <TableCell align="right" rowSpan={2}>{data.board.allHoles[6].stones}</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell align="right">{data.board.allHoles[0].stones}</TableCell>
+                                <TableCell align="right">{data.board.allHoles[1].stones}</TableCell>
+                                <TableCell align="right">{data.board.allHoles[2].stones}</TableCell>
+                                <TableCell align="right">{data.board.allHoles[3].stones}</TableCell>
+                                <TableCell align="right">{data.board.allHoles[4].stones}</TableCell>
+                                <TableCell align="left"> {data.board.allHoles[5].stones}</TableCell>
+                            </TableRow>
+                        </TableBody>
+                    </Table>
+                ) : (<h1>Loading data...<img src={logo} className="App-logo" alt="logo"/></h1>)}
             </Paper>
         </div>
     );

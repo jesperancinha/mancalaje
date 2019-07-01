@@ -13,7 +13,8 @@ let response: Game = {
     boardManagers: [
         {
             board: {
-                name: "Room 1"
+                name: "Room 1",
+                allHoles: []
             }
         }
     ]
