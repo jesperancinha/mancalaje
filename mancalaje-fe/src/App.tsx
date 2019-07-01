@@ -5,6 +5,7 @@ import Home from "./home/Home";
 import Game from "./game/game/Game";
 import GameList from "./game/game-list/GameList";
 import GameStart from "./game/game-start/GameStart";
+import './index.css';
 
 const App: React.FC = () => {
     return (

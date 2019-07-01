@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import React, {Component} from 'react';
 import {Button, Grid} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import {control, theme} from "../../theme";
+import {appBar, control, theme} from "../../theme";
 
 class Game extends Component {
     constructor({props}: { props: any }) {
@@ -40,13 +40,13 @@ class Game extends Component {
                             <TextField
                                 style={control}
                                 label={'Username'}
-                                onChange={(newValue) => this.setState({username: newValue})}/>
+                                onChange={(newValue) => this.setState({username: newValue.target.value})}/>
                             <br/>
                             <TextField
                                 style={control}
                                 label={'Password'}
                                 type="password"
-                                onChange={(newValue) => this.setState({password: newValue})}/>
+                                onChange={(newValue) => this.setState({password: newValue.target.value})}/>
                             <br/>
                             <Button
                                 style={control}
@@ -59,12 +59,8 @@ class Game extends Component {
     }
 
     private handleClick(event: any) {
-
+        // console.log(this.state);
     }
 }
 
 export default Game;
-
-const appBar = {
-    width: 800
-};

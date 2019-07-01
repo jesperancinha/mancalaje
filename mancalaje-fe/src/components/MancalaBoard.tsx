@@ -10,7 +10,6 @@ import logo from "../home/logo.svg";
 import "./MancalaBoard.css"
 
 const MancalaBoard = ({data}: { data: BoardManager }) => {
-    console.log(data);
     const classes = useStyles();
     return (
         <div className={classes.root}>

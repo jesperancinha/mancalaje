@@ -60,3 +60,8 @@ export const control = {
     margin: 15,
     backgroundColor: 'white'
 };
+
+
+export const appBar = {
+    width: 800
+};
