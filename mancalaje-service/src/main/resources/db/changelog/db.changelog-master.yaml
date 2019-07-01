@@ -1,0 +1,93 @@
+databaseChangeLog:
+- changeSet:
+      id: oauth2 token store
+      author: João Esperancinha
+      changes:
+      - createTable:
+            tableName: oauth_access_token
+            columns:
+            - column:
+                  name: authentication_id
+                  type: varchar(256)
+                  constraints:
+                      primaryKey: true
+                      nullable: false
+            - column:
+                  name: token_id
+                  type: varchar(256)
+            - column:
+                  name: token
+                  type: bytea
+            - column:
+                  name: user_name
+                  type: varchar(256)
+            - column:
+                  name: client_id
+                  type: varchar(256)
+            - column:
+                  name: authentication
+                  type: bytea
+            - column:
+                  name: refresh_token
+                  type: varchar(256)
+      - createTable:
+            tableName: oauth_refresh_token
+            columns:
+            - column:
+                  name: token_id
+                  type: varchar(256)
+            - column:
+                  name: token
+                  type: bytea
+            - column:
+                  name: authentication
+                  type: bytea
+
+- changeSet:
+      id: players store
+      author: João Esperancinha
+      changes:
+      - createTable:
+            tableName: user
+            columns:
+            - column:
+                  name: email
+                  type: varchar(256)
+                  constraints:
+                        primaryKey: true
+                        nullable: false
+            - column:
+                  name: password
+                  type: varchar(256)
+            - column:
+                    name: role
+                    type: varchar(256)
+
+- changeSet:
+      id: insert default players
+      author: João Esperancinha
+      changes:
+      - insert:
+            tableName: user
+            columns:
+            - column:
+                    name: email
+                    value: "playerOne@mancalaje.com"
+            - column:
+                    name: password
+                    value: "admin123"
+            - column:
+                    name: role
+                    value: "ROLE_USER"
+      - insert:
+            tableName: user
+            columns:
+            - column:
+                    name: email
+                    value: "playerTwo@mancalaje.com"
+            - column:
+                    name: password
+                    value: "admin123"
+            - column:
+                    name: role
+                    value: "ROLE_USER"
