@@ -13,6 +13,9 @@
 -   [Update all the Node dependencies to their latest version](https://flaviocopes.com/update-npm-dependencies/)
 -   [Creating a Single-Page App in React using React Router](https://www.kirupa.com/react/creating_single_page_app_react_using_react_router.htm)
 -   [Using React Router for a Single Page Application](https://www.taniarascia.com/using-react-router-spa/)
+-   [Using React's Proxy to get ahead of CORS & use HTTPS for API calls](https://blog.praveen.science/using-reacts-proxy-to-get-ahead-of-cors/)
+-   [How to consume a restful api in react](https://pusher.com/tutorials/consume-restful-api-react)
+-   [How to pass props to components in React](https://www.robinwieruch.de/react-pass-props-to-component/)
 
 ---
 

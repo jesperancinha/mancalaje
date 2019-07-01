@@ -5,8 +5,9 @@ import TableRow from "@material-ui/core/TableRow";
 import * as React from "react";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
+import {BoardManager, Game} from "../types";
 
-export default function MancalaBoard() {
+const MancalaBoard = ({data} : { data: BoardManager}) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -36,4 +37,5 @@ export default function MancalaBoard() {
             </Paper>
         </div>
     );
-}
+};
+export default MancalaBoard;
