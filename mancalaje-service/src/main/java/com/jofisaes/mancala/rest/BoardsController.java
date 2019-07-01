@@ -6,7 +6,6 @@ import com.jofisaes.mancala.game.RoomsManager;
 import com.jofisaes.mancala.services.GameManagerService;
 import com.jofisaes.mancala.services.UserManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +13,7 @@ import java.io.Serializable;
 import java.util.Map;
 
 import static com.jofisaes.mancala.rest.Mappings.MANCALA_BOARDS;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController()
 @RequestMapping(MANCALA_BOARDS)
@@ -25,26 +25,26 @@ public class BoardsController implements Serializable {
     @Autowired
     private UserManagerService userManagerService;
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public void createGame(@RequestBody Map<String, Object> payload) {
+    @PostMapping(produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
+    public BoardManager createGame(@RequestBody Map<String, Object> payload) {
         Player sessionUser = userManagerService.getSessionUser();
         if (StringUtils.isEmpty(sessionUser.getName())) {
             sessionUser.setName("Player One");
         }
-        gameManagerService.createBoard(sessionUser, payload.get("boardName").toString());
+        return gameManagerService.createBoard(sessionUser, payload.get("boardName").toString());
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = APPLICATION_JSON_VALUE)
     public BoardManager listCurrentGame() {
         return gameManagerService.listPlayerGame(userManagerService.getSessionUser());
     }
 
-    @GetMapping(value = "all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "all", produces = APPLICATION_JSON_VALUE)
     public RoomsManager listAllCurrentGames() {
         return gameManagerService.listAllGames();
     }
 
-    @PutMapping(value = "join/{boardId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "join/{boardId}", produces = APPLICATION_JSON_VALUE)
     public BoardManager joinGame(
             @PathVariable("boardId") Long gameId) {
         return gameManagerService.joinPlayer(gameId, userManagerService.getSessionUser());

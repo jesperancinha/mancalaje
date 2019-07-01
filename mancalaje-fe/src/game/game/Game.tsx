@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import React, {Component} from 'react';
 import {Button, Grid} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import {theme} from "../../theme";
+import {control, theme} from "../../theme";
 
 class Game extends Component {
     constructor({props}: { props: any }) {
@@ -17,24 +17,24 @@ class Game extends Component {
 
     render() {
         return (
-            <Grid
-                container
-                spacing={0}
-                direction="column"
-                alignItems="center"
-                justify="center"
-                style={{minHeight: '100vh'}}
-            >
-                <Grid item xs={12}>
-                    <AppBar title="Title" position="relative">
-                        <Typography align="center" component="h1" variant="h1">MancalaJe</Typography>
-                    </AppBar>
-                </Grid>
-                <Grid item xs={12}>
-                    <div style={control}>---</div>
-                </Grid>
-                <Grid item xs={12}>
-                    <MuiThemeProvider theme={theme}>
+            <MuiThemeProvider theme={theme}>
+                <Grid
+                    container
+                    spacing={0}
+                    direction="column"
+                    alignItems="center"
+                    justify="center"
+                    style={{minHeight: '100vh'}}
+                >
+                    <Grid item xs={12}>
+                        <AppBar title="Title" position="relative">
+                            <Typography align="center" component="h1" variant="h1">MancalaJe</Typography>
+                        </AppBar>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <div style={control}>---</div>
+                    </Grid>
+                    <Grid item xs={12}>
                         <AppBar title="Login" position="relative" style={appBar}>
                             <Typography variant="h3" align={"center"}>Please login to start playing!</Typography>
                             <TextField
@@ -52,9 +52,9 @@ class Game extends Component {
                                 style={control}
                                 onClick={(event) => this.handleClick(event)} href={`gameList`}>Submit</Button>
                         </AppBar>
-                    </MuiThemeProvider>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </MuiThemeProvider>
         );
     }
 
@@ -62,11 +62,6 @@ class Game extends Component {
 
     }
 }
-
-const control = {
-    margin: 15,
-    backgroundColor: 'white'
-};
 
 export default Game;
 

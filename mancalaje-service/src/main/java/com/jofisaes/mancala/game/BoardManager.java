@@ -21,7 +21,7 @@ public class BoardManager implements Serializable {
     @JsonProperty("board")
     private Board board;
 
-    @JsonIgnore
+    @JsonProperty("boardManagerId")
     private Long boardManagerId;
 
     @JsonProperty("gameover")

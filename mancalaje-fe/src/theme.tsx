@@ -52,6 +52,11 @@ export const theme = createMuiTheme({
         contrastThreshold: 3,
         tonalOffset: 0.2,
         type: "light",
-        background: {default: '#fff'}
+        background: {default: '#000'}
     }
 });
+
+export const control = {
+    margin: 15,
+    backgroundColor: 'white'
+};

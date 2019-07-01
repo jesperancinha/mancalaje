@@ -18,6 +18,7 @@
 -   [How to pass props to components in React](https://www.robinwieruch.de/react-pass-props-to-component/)
 -   [Why use Redux? Reasons with clear examples](https://blog.logrocket.com/why-use-redux-reasons-with-clear-examples-d21bffd5835/)
 -   [React Redux Basic Tutorial](https://react-redux.js.org/introduction/basic-tutorial)
+-   [Fetch API POST sample](https://googlechrome.github.io/samples/fetch-api/fetch-post.html)
 
 ---
 

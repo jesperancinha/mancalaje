@@ -9,7 +9,7 @@ import logo from "../../home/logo.svg";
 class GameStart extends React.Component<BoardManager, BoardManager> {
 
     componentDidMount() {
-        fetch('mancala/boards/list')
+        fetch('mancala/boards')
             .then(res => res.json())
             .then((data: BoardManager) => {
                 this.setState(data);
@@ -23,7 +23,7 @@ class GameStart extends React.Component<BoardManager, BoardManager> {
                 this.state ? (<MuiThemeProvider theme={theme}>
                         <Typography variant="h1">MancalaJe</Typography>
                         <Typography variant="h2">You are currently playing mancala with</Typography>
-                        <span></span>
+                        <span>---</span>
                         <MancalaBoard data={this.state}/>
                     </MuiThemeProvider>)
                     : (<h1>Loading data...<img src={logo} className="App-logo-loading" alt="logo"/></h1>)
