@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import static com.jofisaes.mancala.rest.Mappings.MANCALA_BOARDS;
 
@@ -24,21 +25,21 @@ public class BoardsController implements Serializable {
     @Autowired
     private UserManagerService userManagerService;
 
-    @GetMapping(value = "create/{boardName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void createGame(@PathVariable("boardName") String boardName) {
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public void createGame(@RequestBody Map<String, Object> payload) {
         Player sessionUser = userManagerService.getSessionUser();
-        if(StringUtils.isEmpty(sessionUser.getName())){
+        if (StringUtils.isEmpty(sessionUser.getName())) {
             sessionUser.setName("Player One");
         }
-        gameManagerService.createBoard(sessionUser, boardName);
+        gameManagerService.createBoard(sessionUser, payload.get("boardName").toString());
     }
 
-    @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public BoardManager listCurrentGame() {
         return gameManagerService.listPlayerGame(userManagerService.getSessionUser());
     }
 
-    @GetMapping(value = "listAll", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "all", produces = MediaType.APPLICATION_JSON_VALUE)
     public RoomsManager listAllCurrentGames() {
         return gameManagerService.listAllGames();
     }

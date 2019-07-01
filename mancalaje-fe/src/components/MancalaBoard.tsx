@@ -38,7 +38,7 @@ const MancalaBoard = ({data}: { data: BoardManager }) => {
                             </TableRow>
                         </TableBody>
                     </Table>
-                ) : (<h1>Loading data...<img src={logo} className="App-logo" alt="logo"/></h1>)}
+                ) : (<h1>Loading data...<img src={logo} className="App-logo-loading" alt="logo"/></h1>)}
             </Paper>
         </div>
     );

@@ -16,6 +16,8 @@
 -   [Using React's Proxy to get ahead of CORS & use HTTPS for API calls](https://blog.praveen.science/using-reacts-proxy-to-get-ahead-of-cors/)
 -   [How to consume a restful api in react](https://pusher.com/tutorials/consume-restful-api-react)
 -   [How to pass props to components in React](https://www.robinwieruch.de/react-pass-props-to-component/)
+-   [Why use Redux? Reasons with clear examples](https://blog.logrocket.com/why-use-redux-reasons-with-clear-examples-d21bffd5835/)
+-   [React Redux Basic Tutorial](https://react-redux.js.org/introduction/basic-tutorial)
 
 ---
 
