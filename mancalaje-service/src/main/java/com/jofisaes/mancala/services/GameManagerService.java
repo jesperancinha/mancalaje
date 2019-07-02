@@ -39,4 +39,5 @@ public class GameManagerService {
     public void swayStonesFromHole(Player sessionUser, Integer holeId) {
         sessionUser.getBoardManager().swayStonesFromHole(sessionUser, holeId);
     }
+
 }

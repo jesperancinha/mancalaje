@@ -10,7 +10,7 @@ class Hole {
 }
 
 export class BoardManager {
-    board: Board = new Board;
+    board: Board = new Board();
     boardManagerId: number = -1;
 }
 

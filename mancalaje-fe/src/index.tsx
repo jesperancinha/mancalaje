@@ -9,6 +9,8 @@ import {OAuth2} from "fetch-mw-oauth2/dist";
 import {ConnectedRouter} from 'connected-react-router'
 import history from "./history/history";
 import configureStore from "./store";
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+import {theme} from "./theme";
 
 export const createOAuth = (payload: OAuth2) => {
     return ({
@@ -22,7 +24,9 @@ export const store = configureStore({});
 ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
-            <App/>
+            <MuiThemeProvider theme={theme}>
+                <App/>
+            </MuiThemeProvider>
         </ConnectedRouter>
     </Provider>,
     document.getElementById('root'));

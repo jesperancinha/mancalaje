@@ -1,11 +1,9 @@
 import React from 'react';
-import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import {Button, Typography} from "@material-ui/core";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import {Link} from "react-router-dom";
-import {appBar, control, theme} from "../../theme";
+import {appBar, control} from "../../theme";
 import {RoomComponentIcon} from "../../components/Icons";
 import {BoardManager, Game} from "../../types";
 import logo from "../../home/logo.svg";
@@ -13,10 +11,9 @@ import AppBar from "@material-ui/core/AppBar";
 import './../../index.css';
 import TextField from "@material-ui/core/TextField";
 import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
-import mancalaReducer from "../../reducers/reducer";
 import {State} from "../../reducers/reducerIndex";
-import {store} from "../../index";
+import MancalaJeHeader from "../../components/MancalaJeHeader";
+import {Link} from "react-router-dom";
 
 
 interface GameListProps extends State {
@@ -42,7 +39,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
 
     render() {
         return (
-            <MuiThemeProvider theme={theme}>
+            <MancalaJeHeader>
                 <AppBar title="Game room center" position="relative" style={appBar}>
                     <Typography variant="h1">Let the games begin!</Typography>
                     <Typography component="h2" variant="h2">We're sorry, but MancalaJe isn't ready yet. Please try
@@ -55,7 +52,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                                     <ListItemIcon>
                                         <RoomComponentIcon/>
                                     </ListItemIcon>
-                                    <Link to={`gameStart`}>{row.board.name}</Link>
+                                    <Link to={`gameStart/${row.boardManagerId}`}>{row.board.name}</Link>
                                 </ListItem>
                             ))}
                         </List>) : (
@@ -71,7 +68,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                         style={control}
                         onClick={(event) => this.handleClick(event)}>Submit</Button>
                 </AppBar>
-            </MuiThemeProvider>
+            </MancalaJeHeader>
         );
     }
 
@@ -106,14 +103,15 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     }
 }
 
-function mapDispatchToProps(dispatch: any) {
-    return {actions: bindActionCreators(mancalaReducer, dispatch)}
-}
+// function mapDispatchToProps(dispatch: any) {
+//     return {actions: bindActionCreators(mancalaReducer, dispatch)}
+// }
 
 const mapStateToProps = (state: GameListProps) => {
     return {
-    oauth: state.mancalaReducer.oauth,
-    router: state.router
-}};
+        oauth: state.mancalaReducer.oauth,
+        router: state.router
+    }
+};
 // @ts-ignore
 export default connect(mapStateToProps)(GameList);

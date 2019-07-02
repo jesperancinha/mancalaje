@@ -44,10 +44,10 @@ public class BoardsController implements Serializable {
         return gameManagerService.listAllGames();
     }
 
-    @PutMapping(value = "join/{boardId}", produces = APPLICATION_JSON_VALUE)
+    @PutMapping(value = "{roomId}", produces = APPLICATION_JSON_VALUE)
     public BoardManager joinGame(
-            @PathVariable("boardId") Long gameId) {
-        return gameManagerService.joinPlayer(gameId, userManagerService.getSessionUser());
+            @PathVariable("roomId") Long roomId) {
+        return gameManagerService.joinPlayer(roomId, userManagerService.getSessionUser());
     }
 
     @PutMapping(value = "nextMove/{holeId}")
