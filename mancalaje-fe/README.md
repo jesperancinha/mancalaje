@@ -19,6 +19,9 @@
 -   [Why use Redux? Reasons with clear examples](https://blog.logrocket.com/why-use-redux-reasons-with-clear-examples-d21bffd5835/)
 -   [React Redux Basic Tutorial](https://react-redux.js.org/introduction/basic-tutorial)
 -   [Fetch API POST sample](https://googlechrome.github.io/samples/fetch-api/fetch-post.html)
+-   [An OAuth2 middleware for fetch()](https://evertpot.com/fetch-mw-oauth2/)
+-   [Redux Tutorial For Beginners](https://www.codingame.com/playgrounds/8894/redux-tutorial-for-beginners)
+-   [RealWorld example app](https://github.com/gothinkster/react-redux-realworld-example-app)
 
 ---
 

@@ -17,3 +17,13 @@ export class BoardManager {
 export class Game {
     boardManagers: BoardManager[] = [];
 }
+
+
+export class User {
+    username: string = '';
+    password: string = '';
+}
+
+export class MancalaState {
+    oauth: any = null;
+}

@@ -12,13 +12,32 @@ import logo from "../../home/logo.svg";
 import AppBar from "@material-ui/core/AppBar";
 import './../../index.css';
 import TextField from "@material-ui/core/TextField";
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import mancalaReducer from "../../reducers/reducer";
+import {State} from "../../reducers/reducerIndex";
+import {store} from "../../index";
 
-class GameList extends React.Component<Game, Game> {
+
+interface GameListProps extends State {
+    game: Game
+    mancalaReducer: any
+}
+
+class GameList extends React.Component<GameListProps, GameListProps> {
 
     boardName: any = '';
 
+    constructor({props}: { props: GameListProps }) {
+        super(props);
+    }
+
     componentDidMount() {
         this.loadAllBoards();
+    }
+
+    componentWillReceiveProps(nextProps: any) {
+        console.log(nextProps);
     }
 
     render() {
@@ -26,11 +45,12 @@ class GameList extends React.Component<Game, Game> {
             <MuiThemeProvider theme={theme}>
                 <AppBar title="Game room center" position="relative" style={appBar}>
                     <Typography variant="h1">Let the games begin!</Typography>
-                    <Typography component="h2" variant="h2">We're sorry, but MancalaJe isn't ready yet. Please try again
+                    <Typography component="h2" variant="h2">We're sorry, but MancalaJe isn't ready yet. Please try
+                        again
                         later!</Typography>
                     {this.state ? (
                         <List component="nav" aria-label="Game room list">
-                            {this.state.boardManagers.map(row => (
+                            {this.state.game.boardManagers.map(row => (
                                 <ListItem key={row.boardManagerId}>
                                     <ListItemIcon>
                                         <RoomComponentIcon/>
@@ -38,28 +58,28 @@ class GameList extends React.Component<Game, Game> {
                                     <Link to={`gameStart`}>{row.board.name}</Link>
                                 </ListItem>
                             ))}
-                        </List>) : (<h1>Loading data...<img src={logo} className="App-logo-loading" alt="logo"/></h1>)}
+                        </List>) : (
+                        <h1>Loading data...<img src={logo} className="App-logo-loading" alt="logo"/></h1>)}
                     <TextField
                         style={control}
                         label={'Room name'}
                         onChange={(newValue) => {
                             this.boardName = newValue.target.value
                         }}/>
-                <br/>
-                <Button
-                    style={control}
-                    onClick={(event) => this.handleClick(event)}>Submit</Button>
-            </AppBar>
-    </MuiThemeProvider>
-    )
-        ;
+                    <br/>
+                    <Button
+                        style={control}
+                        onClick={(event) => this.handleClick(event)}>Submit</Button>
+                </AppBar>
+            </MuiThemeProvider>
+        );
     }
 
     private handleClick(event: any) {
         let messageBody = JSON.stringify({
             boardName: this.boardName
         });
-        fetch('mancala/boards', {
+        this.props.oauth.fetch('mancala/boards', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -75,15 +95,25 @@ class GameList extends React.Component<Game, Game> {
 
 
     private loadAllBoards() {
-        fetch('mancala/boards/all')
-            .then(res => res.json())
+        this.props.oauth.fetch('mancala/boards/all')
+            .then((res: any) => res.json())
             .then((data: Game) => {
-                this.setState(data);
+                this.setState({
+                    game: data
+                });
             })
             .catch(console.log)
     }
-
-
 }
 
-export default GameList
+function mapDispatchToProps(dispatch: any) {
+    return {actions: bindActionCreators(mancalaReducer, dispatch)}
+}
+
+const mapStateToProps = (state: GameListProps) => {
+    return {
+    oauth: state.mancalaReducer.oauth,
+    router: state.router
+}};
+// @ts-ignore
+export default connect(mapStateToProps)(GameList);

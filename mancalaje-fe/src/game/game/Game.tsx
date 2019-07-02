@@ -6,13 +6,28 @@ import {Button, Grid} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import {appBar, control, theme} from "../../theme";
 
-class Game extends Component {
-    constructor({props}: { props: any }) {
+import OAuth2 from 'fetch-mw-oauth2';
+import {bindActionCreators, Dispatch} from "redux";
+import {connect} from "react-redux";
+import {createOAuth, store} from "../../index";
+import {State} from "../../reducers/reducerIndex";
+import mancalaReducer from "../../reducers/reducer";
+import {Route} from "react-router";
+
+interface GameProps extends State {
+    username: string;
+    password: string;
+    dispatch: any;
+
+}
+
+class Game extends Component<any, any> {
+    constructor({props}: { props: GameProps }) {
         super(props);
         this.state = {
-            username: '',
-            password: ''
-        }
+            username: 'playerOne@mancalaje.com',
+            password: 'admin123'
+        };
     }
 
     render() {
@@ -48,9 +63,16 @@ class Game extends Component {
                                 type="password"
                                 onChange={(newValue) => this.setState({password: newValue.target.value})}/>
                             <br/>
-                            <Button
-                                style={control}
-                                onClick={(event) => this.handleClick(event)} href={`gameList`}>Submit</Button>
+                            <Route render={({history}) => (
+                                <Button
+                                    style={control}
+                                    onClick={(event) => {
+                                        this.props.dispatch(createOAuth(this.handleClick()));
+                                        history.push('gameList');
+                                    }}
+                                    // href={`gameList`}
+                                >Submit</Button>)}/>
+
                         </AppBar>
                     </Grid>
                 </Grid>
@@ -58,9 +80,34 @@ class Game extends Component {
         );
     }
 
-    private handleClick(event: any) {
-        // console.log(this.state);
+    private handleClick() {
+        return new OAuth2({
+            grantType: 'password',
+            clientId: 'mancala-client',
+            clientSecret: 'mancala',
+            userName: this.state.username,
+            password: this.state.password,
+            tokenEndpoint: 'http://localhost:3000/oauth/token',
+        });
     }
+
 }
 
-export default Game;
+function mapDispatchToProps(dispatch: Dispatch) {
+    return {actions: bindActionCreators(mancalaReducer, dispatch)}
+}
+
+
+const mapStateToProps = (state: GameProps) => ({
+    username: state.username,
+    password: state.password,
+    dispatch: state.dispatch,
+    pathname: state.router.location.pathname,
+    search: state.router.location.search,
+    hash: state.router.location.hash,
+    oauth: state.oauth,
+    router: state.router
+});
+
+// @ts-ignore
+export default connect(mapDispatchToProps)(Game)

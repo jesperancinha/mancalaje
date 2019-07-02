@@ -4,6 +4,12 @@
 
 >$ brew cask install homebrew/cask-versions/java11.
 
+## OAuth2 Requests
+
+>$ brew install httpie  
+>$ http -a mancala-client:mancala --form POST http://localhost:8080/oauth/token username='playerOne@mancalaje.com' password='admin123' grant_type='password'  
+>$ curl -X POST -u "mancala-client:mancala" -d "grant_type=password&username=playerOne@mancalaje.com&password=admin123" http://localhost:8080/oauth/token
+
 ## References
 
 -   [Spring Session with JDBC](https://www.baeldung.com/spring-session-jdbc)

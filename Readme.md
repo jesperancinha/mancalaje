@@ -30,6 +30,10 @@ stay tuned!
 
 ## Change Logs and Milestones
 
+2019-07-02:
+
+-   OAuth2 Login
+
 2019-07-01:
 
 -   OAuth2 Implementation

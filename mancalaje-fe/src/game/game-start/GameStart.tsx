@@ -5,14 +5,22 @@ import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import {theme} from "../../theme";
 import {Typography} from "@material-ui/core";
 import logo from "../../home/logo.svg";
+import {connect} from "react-redux";
+import {State} from "../../reducers/reducerIndex";
 
-class GameStart extends React.Component<BoardManager, BoardManager> {
+interface GameStartProps extends State {
+    mancalaReducer: any
+    boardManager: BoardManager
+}
+class GameStart extends React.Component<GameStartProps, GameStartProps> {
 
     componentDidMount() {
-        fetch('mancala/boards')
+        this.props.oauth.fetch('mancala/boards')
             .then(res => res.json())
             .then((data: BoardManager) => {
-                this.setState(data);
+                this.setState({
+                    boardManager: data
+                });
             })
             .catch(console.log)
     }
@@ -24,7 +32,7 @@ class GameStart extends React.Component<BoardManager, BoardManager> {
                         <Typography variant="h1">MancalaJe</Typography>
                         <Typography variant="h2">You are currently playing mancala with</Typography>
                         <span>---</span>
-                        <MancalaBoard data={this.state}/>
+                        <MancalaBoard data={this.state.boardManager}/>
                     </MuiThemeProvider>)
                     : (<h1>Loading data...<img src={logo} className="App-logo-loading" alt="logo"/></h1>)
             }
@@ -32,4 +40,11 @@ class GameStart extends React.Component<BoardManager, BoardManager> {
     }
 }
 
-export default GameStart;
+
+const mapStateToProps = (state: GameStartProps) => {
+    return {
+        oauth: state.mancalaReducer.oauth,
+        router: state.router
+    }};
+// @ts-ignore
+export default connect(mapStateToProps)(GameStart);
