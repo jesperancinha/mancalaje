@@ -69,3 +69,7 @@ limitations under the License.
 -   Hackerrank [jofisaes](https://www.hackerrank.com/jofisaes)
 -   Acclaim Badges [joao-esperancinha](https://www.youracclaim.com/users/joao-esperancinha/badges)
 -   Home Page [joaofilipesabinoesperancinha](http://joaofilipesabinoesperancinha.nl)
+-   Personal Projects:
+    -   [Time Disruption Studios](http://tds.joaofilipesabinoesperancinha.nl/)
+    -   [Image Train Filters](http://itf.joaofilipesabinoesperancinha.nl/)
+    -   Google play apps: [Joao+Filipe+Sabino+Esperancinha](https://play.google.com/store/apps/developer?id=Joao+Filipe+Sabino+Esperancinha)
