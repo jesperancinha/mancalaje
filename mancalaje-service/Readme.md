@@ -1,4 +1,4 @@
-#MancalaJe Service
+# MancalaJe Service
 
 ## Setting up environment
 
