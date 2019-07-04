@@ -8,6 +8,7 @@ import logo from "../../home/logo.svg";
 import {connect} from "react-redux";
 import {State} from "../../reducers/reducerIndex";
 import MancalaJeHeader from "../../components/MancalaJeHeader";
+import {makePutRequest} from "../../actions/OAuthRouting";
 
 interface GameStartProps extends State {
     mancalaReducer: any
@@ -18,22 +19,15 @@ interface GameStartProps extends State {
 
 class GameStart extends React.Component<GameStartProps, GameStartProps> {
 
-    constructor({props}: {props: GameStartProps}){
+    constructor({props}: { props: GameStartProps }) {
         super(props);
     }
 
     componentDidMount() {
-        this.props.oauth.fetch('/mancala/boards/' + this.props.match.params.id,
-            {
-                method: "PUT"
-            })
-            .then(res => res.json())
-            .then((data: BoardManager) => {
-                this.setState({
-                    boardManager: data
-                });
-            })
-            .catch(console.log)
+        makePutRequest('/mancala/boards/' + this.props.match.params.id, this.props,
+            (data: any) => this.setState({
+                boardManager: data
+            }), null);
     }
 
     render() {

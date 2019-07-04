@@ -5,7 +5,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import {appBar, control} from "../../theme";
 import {RoomComponentIcon} from "../../components/Icons";
-import {BoardManager, Game} from "../../types";
+import {Game} from "../../types";
 import logo from "../../home/logo.svg";
 import AppBar from "@material-ui/core/AppBar";
 import './../../index.css';
@@ -14,7 +14,7 @@ import {connect} from "react-redux";
 import {State} from "../../reducers/reducerIndex";
 import MancalaJeHeader from "../../components/MancalaJeHeader";
 import {Link} from "react-router-dom";
-import {makeRequest} from "../../actions/OAuthRouting";
+import {makeGetRequest, makePostRequest} from "../../actions/OAuthRouting";
 
 
 interface GameListProps extends State {
@@ -73,23 +73,12 @@ class GameList extends React.Component<GameListProps, GameListProps> {
         let messageBody = JSON.stringify({
             boardName: this.boardName
         });
-        this.props.oauth.fetch('mancala/boards', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: messageBody
-        })
-            .then(res => res.json())
-            .then((data: BoardManager) => {
-                this.loadAllBoards()
-            })
-            .catch(console.log);
+        makePostRequest('mancala/boards', this.props, () => this.loadAllBoards(), messageBody);
     }
 
 
     private loadAllBoards() {
-        makeRequest('GET', 'mancala/boards/all', this.props, (data: any)=> {
+        makeGetRequest('mancala/boards/all', this.props, (data: any) => {
             this.setState({
                 game: data
             });

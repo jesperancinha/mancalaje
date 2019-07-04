@@ -10,8 +10,8 @@ export default (history: History) => combineReducers({
 });
 
 export interface State {
-    oauth: OAuth2;
-    router: RouterState;
-    history: any;
+    oauth?: OAuth2;
+    router?: RouterState;
+    history?: any;
 }
 
