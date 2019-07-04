@@ -14,11 +14,12 @@ import {connect} from "react-redux";
 import {State} from "../../reducers/reducerIndex";
 import MancalaJeHeader from "../../components/MancalaJeHeader";
 import {Link} from "react-router-dom";
+import {makeRequest} from "../../actions/OAuthRouting";
 
 
 interface GameListProps extends State {
-    game: Game
-    mancalaReducer: any
+    game: Game;
+    mancalaReducer: any;
 }
 
 class GameList extends React.Component<GameListProps, GameListProps> {
@@ -31,10 +32,6 @@ class GameList extends React.Component<GameListProps, GameListProps> {
 
     componentDidMount() {
         this.loadAllBoards();
-    }
-
-    componentWillReceiveProps(nextProps: any) {
-        console.log(nextProps);
     }
 
     render() {
@@ -92,15 +89,13 @@ class GameList extends React.Component<GameListProps, GameListProps> {
 
 
     private loadAllBoards() {
-        this.props.oauth.fetch('mancala/boards/all')
-            .then((res: any) => res.json())
-            .then((data: Game) => {
-                this.setState({
-                    game: data
-                });
-            })
-            .catch(console.log)
+        makeRequest('GET', 'mancala/boards/all', this.props, (data: any)=> {
+            this.setState({
+                game: data
+            });
+        });
     }
+
 }
 
 // function mapDispatchToProps(dispatch: any) {

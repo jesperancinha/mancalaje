@@ -21,12 +21,12 @@ interface GameProps extends State {
 
 }
 
-class Game extends Component<any, any> {
+class GameLogin extends Component<any, any> {
     constructor({props}: { props: GameProps }) {
         super(props);
         this.state = {
-            username: 'playerOne@mancalaje.com',
-            password: 'admin123'
+            username: '',
+            password: ''
         };
     }
 
@@ -55,19 +55,22 @@ class Game extends Component<any, any> {
                                 style={control}
                                 onClick={(event) => {
                                     this.props.dispatch(createOAuth(this.handleClick()));
-                                    history.push('gameList');
                                 }}
                                 // href={`gameList`}
                             >Submit</Button>)}/>
 
                     </AppBar>
                 </Grid>
+                <Grid item xs={12}>
+                    <Typography variant="h4" align={"center"}>Pssst! Don't tell anyone but the username and password is
+                        playerOne@mancalaje.com/admin123</Typography>
+                </Grid>
             </MancalaJeHeader>
         );
     }
 
     private handleClick() {
-        return new OAuth2({
+        let oAuth2 = new OAuth2({
             grantType: 'password',
             clientId: 'mancala-client',
             clientSecret: 'mancala',
@@ -75,6 +78,10 @@ class Game extends Component<any, any> {
             password: this.state.password,
             tokenEndpoint: 'http://localhost:3000/oauth/token',
         });
+        oAuth2.getAccessToken().then(() => {
+            this.props.history.push('gameList');
+        });
+        return oAuth2;
     }
 
 }
@@ -96,4 +103,4 @@ function mapDispatchToProps(dispatch: Dispatch) {
 // });
 
 // @ts-ignore
-export default connect(mapDispatchToProps)(Game)
+export default connect(mapDispatchToProps)(GameLogin)

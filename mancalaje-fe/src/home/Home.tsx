@@ -11,7 +11,7 @@ class Home extends React.Component {
                 <header className="App-header">
                     <Typography variant="h1">Welcome to MancalaJe</Typography>
                     <Typography component="p">click on the giant reactjs logo to start</Typography>
-                    <Link to={`/game`}>
+                    <Link to={`/login`}>
                         <img src={logo} className="App-logo" alt="logo"/>
                     </Link>
                     <a
