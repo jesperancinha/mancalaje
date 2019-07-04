@@ -6,6 +6,8 @@ import com.jofisaes.mancala.game.RoomsManager;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.ApplicationScope;
 
+import java.util.Map;
+
 @Service
 @ApplicationScope
 public class GameManagerService {
@@ -40,4 +42,12 @@ public class GameManagerService {
         sessionUser.getBoardManager().swayStonesFromHole(sessionUser, holeId);
     }
 
+    public BoardManager removeRoom(Long roomId, Player sessionUser) {
+        Map<Long, BoardManager> boardManagerMap = roomsManager.getBoardManagerMap();
+        BoardManager room = boardManagerMap.get(roomId);
+        if(room.getBoard().getPlayer1().getName().equals(sessionUser.getName())){
+           return roomsManager.removeRoom(roomId);
+        }
+        return null;
+    }
 }

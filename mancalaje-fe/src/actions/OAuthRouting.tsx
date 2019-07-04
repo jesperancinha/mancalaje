@@ -12,11 +12,8 @@ export function makeGetRequest<T>(urlString: string, props: T & State, transform
             .then((res: any) => res.json())
             .then((data: any) => transformData(data))
             .catch(console.log)
-            .finally(() => {
-                if (props.oauth && !props.oauth.token.accessToken) {
-                    props.history.push(LOGIN_PATH);
-                }
-            });
+            .finally(logOut(props));
+
     }
 }
 
@@ -34,15 +31,12 @@ export function makePostRequest<T>(urlString: string, props: T & State, transfor
             .then((res: any) => res.json())
             .then((data: any) => transformData(data))
             .catch(console.log)
-            .finally(() => {
-                if (props.oauth && !props.oauth.token.accessToken) {
-                    props.history.push(LOGIN_PATH);
-                }
-            });
+            .finally(logOut(props));
+
     }
 }
 
-export function makePutRequest<T>(urlString: string, props: T & State, transformData: any, messsageBody: any) {
+export function makePutRequest<T>(urlString: string, props: T & State, transformData: any, messageBody: any) {
     if (!props.oauth) {
         props.history.push(LOGIN_PATH);
     } else {
@@ -51,15 +45,33 @@ export function makePutRequest<T>(urlString: string, props: T & State, transform
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: messsageBody
+            body: messageBody
         })
             .then((res: any) => res.json())
             .then((data: any) => transformData(data))
             .catch(console.log)
-            .finally(() => {
-                if (props.oauth && !props.oauth.token.accessToken) {
-                    props.history.push(LOGIN_PATH);
-                }
-            });
+            .finally(logOut(props));
+
+    }
+}
+
+export function makeDeleteRequest<T>(urlString: string, props: T & State, transformData: any = () => {
+}) {
+    if (!props.oauth) {
+        props.history.push(LOGIN_PATH);
+    } else {
+        props.oauth.fetch(urlString, {
+            method: 'DELETE'
+        })
+            .then((res: any) => res.json())
+            .then((data: any) => transformData(data))
+            .catch(console.log)
+            .finally(logOut(props));
+    }
+}
+
+function logOut<T>(props: T & State) {
+    if (props.oauth && !props.oauth.token.accessToken) {
+        return props.history.push(LOGIN_PATH);
     }
 }

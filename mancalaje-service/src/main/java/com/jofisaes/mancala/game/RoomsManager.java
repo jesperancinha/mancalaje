@@ -21,5 +21,10 @@ public class RoomsManager implements Serializable {
     @JsonIgnore
     private Map<Long, BoardManager> boardManagerMap = new HashMap<>();
 
+    public BoardManager removeRoom(Long roomId){
+        BoardManager boardManager = boardManagerMap.get(roomId);
+        boardManagers.remove(boardManager);
+        return boardManagerMap.remove(roomId);
+    }
 
 }

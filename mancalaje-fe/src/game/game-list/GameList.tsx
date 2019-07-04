@@ -4,7 +4,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import {appBar, control} from "../../theme";
-import {RoomComponentIcon} from "../../components/Icons";
+import {ListItemLink, RemoveComponentIcon, RoomComponentIcon} from "../../components/Icons";
 import {Game} from "../../types";
 import logo from "../../home/logo.svg";
 import AppBar from "@material-ui/core/AppBar";
@@ -14,7 +14,7 @@ import {connect} from "react-redux";
 import {State} from "../../reducers/reducerIndex";
 import MancalaJeHeader from "../../components/MancalaJeHeader";
 import {Link} from "react-router-dom";
-import {makeGetRequest, makePostRequest} from "../../actions/OAuthRouting";
+import {makeDeleteRequest, makeGetRequest, makePostRequest} from "../../actions/OAuthRouting";
 
 
 interface GameListProps extends State {
@@ -46,10 +46,17 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                         <List component="nav" aria-label="Game room list">
                             {this.state.game.boardManagers.map(row => (
                                 <ListItem key={row.boardManagerId}>
-                                    <ListItemIcon>
-                                        <RoomComponentIcon/>
-                                    </ListItemIcon>
-                                    <Link to={`gameStart/${row.boardManagerId}`}>{row.board.name}</Link>
+                                    <Link to={`gameStart/${row.boardManagerId}`}>
+                                        <ListItem component="span" button>
+                                            <ListItemIcon>
+                                                <RoomComponentIcon/>
+                                            </ListItemIcon>
+                                            {row.board.name}
+                                        </ListItem>
+                                    </Link>
+                                    <ListItemLink onClick={() => this.handleRemoveRoom(row.boardManagerId)}>
+                                        <RemoveComponentIcon/>
+                                    </ListItemLink>
                                 </ListItem>
                             ))}
                         </List>) : (
@@ -63,13 +70,13 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                     <br/>
                     <Button
                         style={control}
-                        onClick={(event) => this.handleClick(event)}>Submit</Button>
+                        onClick={() => this.handleClick()}>Submit</Button>
                 </AppBar>
             </MancalaJeHeader>
         );
     }
 
-    private handleClick(event: any) {
+    private handleClick() {
         let messageBody = JSON.stringify({
             boardName: this.boardName
         });
@@ -85,6 +92,9 @@ class GameList extends React.Component<GameListProps, GameListProps> {
         });
     }
 
+    private handleRemoveRoom(roomId: number) {
+        makeDeleteRequest('mancala/boards/' + roomId, this.props, () => this.loadAllBoards());
+    }
 }
 
 // function mapDispatchToProps(dispatch: any) {

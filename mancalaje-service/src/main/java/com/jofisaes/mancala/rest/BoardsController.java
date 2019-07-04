@@ -50,6 +50,12 @@ public class BoardsController implements Serializable {
         return gameManagerService.joinPlayer(roomId, userManagerService.getSessionUser());
     }
 
+    @DeleteMapping(value = "{roomId}")
+    public BoardManager removeRoom(
+            @PathVariable("roomId") Long roomId) {
+        return gameManagerService. removeRoom(roomId, userManagerService.getSessionUser());
+    }
+
     @PutMapping(value = "nextMove/{holeId}")
     public BoardManager pressHoleId(
             @PathVariable("holeId") Integer holeId) {

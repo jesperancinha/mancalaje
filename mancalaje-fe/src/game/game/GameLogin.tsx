@@ -11,7 +11,6 @@ import {connect} from "react-redux";
 import {createOAuth} from "../../index";
 import {State} from "../../reducers/reducerIndex";
 import mancalaReducer from "../../reducers/reducer";
-import {Route} from "react-router";
 import MancalaJeHeader from "../../components/MancalaJeHeader";
 
 interface GameProps extends State {
@@ -26,8 +25,8 @@ class GameLogin extends Component<GameProps, GameProps> {
     constructor({props}: { props: GameProps }) {
         super(props);
         this.state = {
-            username: '',
-            password: ''
+            username: 'playerOne@mancalaje.com',
+            password: 'admin123'
         };
     }
 
@@ -55,14 +54,9 @@ class GameLogin extends Component<GameProps, GameProps> {
                             helperText={this.getPassordHelperText()}
                             onChange={(newValue) => this.setState({password: newValue.target.value, loginError: ''})}/>
                         <br/>
-                        <Route render={({history}) => (
-                            <Button
-                                style={control}
-                                onClick={(event) => {
-                                    this.props.dispatch(createOAuth(this.handleClick()));
-                                }}
-                                // href={`gameList`}
-                            >Submit</Button>)}/>
+                        <Button
+                            style={control}
+                            onClick={() => this.props.dispatch(createOAuth(this.handleClick()))}>Submit</Button>
 
                     </AppBar>
                 </Grid>
