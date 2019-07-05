@@ -12,11 +12,11 @@ import {createOAuth} from "../../index";
 import {State} from "../../reducers/reducerIndex";
 import mancalaReducer from "../../reducers/reducer";
 import MancalaJeHeader from "../../components/MancalaJeHeader";
+import {MySnackbarContentWrapper} from "../../components/SnackbarContent";
 
 interface GameProps extends State {
     username: string;
     password: string;
-    dispatch?: any;
     loginError?: string;
 
 }
@@ -59,15 +59,20 @@ class GameLogin extends Component<GameProps, GameProps> {
                 </Grid>
                 <Grid item xs={12}>
                     <AppBar title={"Login cheat"} position={"relative"} style={appBar}>
-                    <Typography variant="h4" align={"center"}>Pssst! Don't tell anyone but the username and password is
-                        playerOne@mancalaje.com/admin123</Typography>
+                        <Typography variant="h4" align={"center"}>Pssst! Don't tell anyone but the username and password
+                            is
+                            playerOne@mancalaje.com/admin123</Typography>
                     </AppBar>
                 </Grid>
                 {this.state.loginError ? (
                     <Grid item xs={12}>
-                        <AppBar title="Login status" position="relative">
-                            <Typography align="center" component="h1" variant="h1">{this.state.loginError}</Typography>
-                        </AppBar>
+                        <MySnackbarContentWrapper
+                            variant="error"
+                            message={this.state.loginError}
+                            onClose={() => this.setState({
+                                loginError: ''
+                            })}
+                        />
                     </Grid>) : <div/>}
             </MancalaJeHeader>
         );
@@ -84,7 +89,7 @@ class GameLogin extends Component<GameProps, GameProps> {
         });
         oAuth2.getAccessToken().then(() => {
             this.props.history.push('gameList');
-        }).catch(error => this.setState({
+        }).catch(() => this.setState({
             loginError: 'Login failed!'
         }));
         return oAuth2;
@@ -101,6 +106,7 @@ class GameLogin extends Component<GameProps, GameProps> {
             return "Please enter a password"
         }
     }
+
 }
 
 function mapDispatchToProps(dispatch: Dispatch) {

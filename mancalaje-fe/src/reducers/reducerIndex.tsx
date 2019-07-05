@@ -13,5 +13,6 @@ export interface State {
     oauth?: OAuth2;
     router?: RouterState;
     history?: any;
+    dispatch?: any;
 }
 

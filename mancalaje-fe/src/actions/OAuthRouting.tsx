@@ -11,9 +11,9 @@ export function makeGetRequest<T>(urlString: string, props: T & State, transform
         })
             .then((res: any) => res.json())
             .then((data: any) => transformData(data))
-            .catch(console.log)
-            .finally(logOut(props));
-
+            .catch(()=>{
+                logOut(props);
+            })
     }
 }
 
@@ -30,8 +30,9 @@ export function makePostRequest<T>(urlString: string, props: T & State, transfor
         })
             .then((res: any) => res.json())
             .then((data: any) => transformData(data))
-            .catch(console.log)
-            .finally(logOut(props));
+            .catch(()=>{
+                logOut(props);
+            })
 
     }
 }
@@ -49,8 +50,9 @@ export function makePutRequest<T>(urlString: string, props: T & State, transform
         })
             .then((res: any) => res.json())
             .then((data: any) => transformData(data))
-            .catch(console.log)
-            .finally(logOut(props));
+            .catch(()=>{
+                logOut(props);
+            })
 
     }
 }
@@ -65,13 +67,12 @@ export function makeDeleteRequest<T>(urlString: string, props: T & State, transf
         })
             .then((res: any) => res.json())
             .then((data: any) => transformData(data))
-            .catch(console.log)
-            .finally(logOut(props));
+            .catch(()=>{
+                logOut(props);
+            })
     }
 }
 
-function logOut<T>(props: T & State) {
-    if (props.oauth && !props.oauth.token.accessToken) {
+export function logOut<T>(props: T & State) {
         return props.history.push(LOGIN_PATH);
-    }
 }

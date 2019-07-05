@@ -14,7 +14,8 @@ import {connect} from "react-redux";
 import {State} from "../../reducers/reducerIndex";
 import MancalaJeHeader from "../../components/MancalaJeHeader";
 import {Link} from "react-router-dom";
-import {makeDeleteRequest, makeGetRequest, makePostRequest} from "../../actions/OAuthRouting";
+import {logOut, makeDeleteRequest, makeGetRequest, makePostRequest} from "../../actions/OAuthRouting";
+import {createOAuth} from "../../index";
 
 
 interface GameListProps extends State {
@@ -37,11 +38,16 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     render() {
         return (
             <MancalaJeHeader>
-                <AppBar title="Game room center" position="relative" style={appBar}>
-                    <Typography variant="h1">Let the games begin!</Typography>
+                <AppBar title="Game room center title" position="relative" style={appBar}>
+                    <Typography variant="h1">Select a room or create one</Typography>
+                </AppBar>
+                <AppBar title="Game room center warning" position="relative" style={appBar}>
+
                     <Typography component="h2" variant="h2">We're sorry, but MancalaJe isn't ready yet. Please try
                         again
                         later!</Typography>
+                </AppBar>
+                <AppBar title="Game room center options" position="relative" style={appBar}>
                     {this.state ? (
                         <List component="nav" aria-label="Game room list">
                             {this.state.game.boardManagers.map(row => (
@@ -71,6 +77,9 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                     <Button
                         style={control}
                         onClick={() => this.handleClick()}>Submit</Button>
+                    <Button
+                        style={control}
+                        onClick={() => this.logOut()}>Logout</Button>
                 </AppBar>
             </MancalaJeHeader>
         );
@@ -94,6 +103,11 @@ class GameList extends React.Component<GameListProps, GameListProps> {
 
     private handleRemoveRoom(roomId: number) {
         makeDeleteRequest('mancala/boards/' + roomId, this.props, () => this.loadAllBoards());
+    }
+
+    private logOut() {
+        this.props.dispatch(createOAuth({}));
+        logOut(this.props);
     }
 }
 

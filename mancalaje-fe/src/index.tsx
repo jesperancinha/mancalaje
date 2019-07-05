@@ -5,14 +5,13 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux';
 import {CREATE_OAUTH2} from "./actions/ActionType";
-import {OAuth2} from "fetch-mw-oauth2/dist";
 import {ConnectedRouter} from 'connected-react-router'
 import history from "./history/history";
 import configureStore from "./store";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import {theme} from "./theme";
 
-export const createOAuth = (payload: OAuth2) => {
+export const createOAuth = (payload: any) => {
     return ({
         type: CREATE_OAUTH2,
         payload
