@@ -8,6 +8,8 @@
 
 ## References:
 
+-   [Compass SASS](http://compass-style.org/install/)
+-   [Material-UI](https://material-ui.com/)
 -   [Adding TypeScript](https://facebook.github.io/create-react-app/docs/adding-typescript)
 -   [Create a New React App](https://reactjs.org/docs/create-a-new-react-app.html)
 -   [Update all the Node dependencies to their latest version](https://flaviocopes.com/update-npm-dependencies/)
@@ -22,7 +24,6 @@
 -   [An OAuth2 middleware for fetch()](https://evertpot.com/fetch-mw-oauth2/)
 -   [Redux Tutorial For Beginners](https://www.codingame.com/playgrounds/8894/redux-tutorial-for-beginners)
 -   [RealWorld example app](https://github.com/gothinkster/react-redux-realworld-example-app)
--   [Material-UI](https://material-ui.com/)
 ---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

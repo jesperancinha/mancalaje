@@ -3,32 +3,59 @@ import {blue, green, red} from "@material-ui/core/colors";
 import {createStyles} from "@material-ui/styles";
 import makeStyles from "@material-ui/styles/makeStyles";
 
-
 export const useStyles = makeStyles((theme: Theme) => {
-        let themeSpacing = 2;
-        if (theme.spacing) {
-            themeSpacing = theme.spacing(2);
+    let themeSpacing = 2;
+    if (theme.spacing) {
+        themeSpacing = theme.spacing(2);
+    }
+    let newStyles = {
+        root: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+            borderRadius: '10px'
+        },
+        icon: {
+            margin: themeSpacing,
+        },
+        iconHover: {
+            margin: themeSpacing,
+            '&:hover': {
+                color: red[800],
+            },
+        },
+        shape: {
+            borderRadius: 50
         }
-        let newStyles = {
-            root: {
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'flex-end',
-            },
-            icon: {
-                margin: themeSpacing,
-            },
-            iconHover: {
-                margin: themeSpacing,
-                '&:hover': {
-                    color: red[800],
-                },
-            },
-        };
-        return createStyles(newStyles)
-    });
+    };
+    return createStyles(newStyles)
+});
 
 export const theme = createMuiTheme({
+    overrides: {
+        MuiTextField: {
+            root: {
+                borderRadius: 5,
+                minWidth: "100%",
+            }
+        },
+        MuiAppBar: {
+            root: {
+                borderRadius: 5,
+                margin:10,
+                padding: 10,
+                alignItems: "center"
+            },
+        },
+        MuiButton: {
+            root: {
+                minWidth: "100%"
+            }
+        }
+    },
+    shape: {
+        borderRadius: 50
+    },
     typography: {
         fontFamily: [
             'Raleway',
@@ -46,7 +73,7 @@ export const theme = createMuiTheme({
         fontSize: 10
     },
     palette: {
-        primary: {main: blue[50]},
+        primary: {main: blue[500],},
         secondary: {main: green[100]},
         error: red,
         contrastThreshold: 3,
@@ -58,7 +85,7 @@ export const theme = createMuiTheme({
 
 export const control = {
     margin: 15,
-    backgroundColor: 'white'
+    backgroundColor: '#8de4e1',
 };
 
 

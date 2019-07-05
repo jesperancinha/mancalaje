@@ -34,9 +34,6 @@ class GameLogin extends Component<GameProps, GameProps> {
         return (
             <MancalaJeHeader>
                 <Grid item xs={12}>
-                    <div style={control}>---</div>
-                </Grid>
-                <Grid item xs={12}>
                     <AppBar title="Login" position="relative" style={appBar}>
                         <Typography variant="h3" align={"center"}>Please login to start playing!</Typography>
                         <TextField
@@ -61,8 +58,10 @@ class GameLogin extends Component<GameProps, GameProps> {
                     </AppBar>
                 </Grid>
                 <Grid item xs={12}>
+                    <AppBar title={"Login cheat"} position={"relative"} style={appBar}>
                     <Typography variant="h4" align={"center"}>Pssst! Don't tell anyone but the username and password is
                         playerOne@mancalaje.com/admin123</Typography>
+                    </AppBar>
                 </Grid>
                 {this.state.loginError ? (
                     <Grid item xs={12}>

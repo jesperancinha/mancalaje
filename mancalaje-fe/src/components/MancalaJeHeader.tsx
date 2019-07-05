@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Grid, Typography} from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
-import {control} from "../theme";
+import Box from "@material-ui/core/Box";
 
 class MancalaJeHeader extends React.Component {
     render() {
@@ -12,16 +12,15 @@ class MancalaJeHeader extends React.Component {
                 direction="column"
                 alignItems="center"
                 justify="center"
-                style={{minHeight: '100vh'}}
-            >
+                style={{minHeight: '100vh'}}>
                 <Grid item xs={12}>
-                    <AppBar title="Title" position="relative">
-                        <Typography align="center" component="h1" variant="h1">MancalaJe</Typography>
-                    </AppBar>
+                    <Box margin={2}>
+                        <AppBar title="Title" position="relative">
+                            <Typography align="center" component="h1" variant="h1">MancalaJe</Typography>
+                        </AppBar>
+                    </Box>
                 </Grid>
-                <Grid item xs={12}>
-                    <div style={control}>---</div>
-                </Grid>
+                <Grid item xs={12}/>
                 {this.props.children}
             </Grid>
         )
