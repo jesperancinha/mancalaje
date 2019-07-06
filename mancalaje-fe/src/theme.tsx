@@ -44,7 +44,8 @@ export const theme = createMuiTheme({
                 borderRadius: 5,
                 margin:10,
                 padding: 10,
-                alignItems: "center"
+                alignItems: "center",
+                width: 800
             },
         },
         MuiButton: {
@@ -86,9 +87,4 @@ export const theme = createMuiTheme({
 export const control = {
     margin: 15,
     backgroundColor: '#8de4e1',
-};
-
-
-export const appBar = {
-    width: 800
 };

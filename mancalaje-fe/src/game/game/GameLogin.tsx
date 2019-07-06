@@ -3,8 +3,6 @@ import TextField from '@material-ui/core/TextField';
 import React, {Component} from 'react';
 import {Button, Grid} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import {appBar, control} from "../../theme";
-
 import OAuth2 from 'fetch-mw-oauth2';
 import {bindActionCreators, Dispatch} from "redux";
 import {connect} from "react-redux";
@@ -13,12 +11,11 @@ import {State} from "../../reducers/reducerIndex";
 import mancalaReducer from "../../reducers/reducer";
 import MancalaJeHeader from "../../components/MancalaJeHeader";
 import {MySnackbarContentWrapper} from "../../components/SnackbarContent";
+import {control} from "../../theme";
 
 interface GameProps extends State {
     username: string;
     password: string;
-    loginError?: string;
-
 }
 
 class GameLogin extends Component<GameProps, GameProps> {
@@ -34,14 +31,14 @@ class GameLogin extends Component<GameProps, GameProps> {
         return (
             <MancalaJeHeader>
                 <Grid item xs={12}>
-                    <AppBar title="Login" position="relative" style={appBar}>
+                    <AppBar title="Login" position="relative">
                         <Typography variant="h3" align={"center"}>Please login to start playing!</Typography>
                         <TextField
                             style={control}
                             label={'Username'}
                             error={this.state.username.length === 0}
                             helperText={this.getUserHelperText()}
-                            onChange={(newValue) => this.setState({username: newValue.target.value, loginError: ''})}/>
+                            onChange={(newValue) => this.setState({username: newValue.target.value, statusError: ''})}/>
                         <br/>
                         <TextField
                             style={control}
@@ -49,7 +46,7 @@ class GameLogin extends Component<GameProps, GameProps> {
                             type="password"
                             error={this.state.password.length === 0}
                             helperText={this.getPassordHelperText()}
-                            onChange={(newValue) => this.setState({password: newValue.target.value, loginError: ''})}/>
+                            onChange={(newValue) => this.setState({password: newValue.target.value, statusError: ''})}/>
                         <br/>
                         <Button
                             style={control}
@@ -58,19 +55,19 @@ class GameLogin extends Component<GameProps, GameProps> {
                     </AppBar>
                 </Grid>
                 <Grid item xs={12}>
-                    <AppBar title={"Login cheat"} position={"relative"} style={appBar}>
+                    <AppBar title={"Login cheat"} position={"relative"}>
                         <Typography variant="h4" align={"center"}>Pssst! Don't tell anyone but the username and password
                             is
                             playerOne@mancalaje.com/admin123</Typography>
                     </AppBar>
                 </Grid>
-                {this.state.loginError ? (
+                {this.state.statusError ? (
                     <Grid item xs={12}>
                         <MySnackbarContentWrapper
                             variant="error"
-                            message={this.state.loginError}
+                            message={this.state.statusError}
                             onClose={() => this.setState({
-                                loginError: ''
+                                statusError: ''
                             })}
                         />
                     </Grid>) : <div/>}
@@ -90,7 +87,7 @@ class GameLogin extends Component<GameProps, GameProps> {
         oAuth2.getAccessToken().then(() => {
             this.props.history.push('gameList');
         }).catch(() => this.setState({
-            loginError: 'Login failed!'
+            statusError: 'Login failed!'
         }));
         return oAuth2;
     }

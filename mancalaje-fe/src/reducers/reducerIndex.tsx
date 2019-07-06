@@ -14,5 +14,6 @@ export interface State {
     router?: RouterState;
     history?: any;
     dispatch?: any;
+    statusError?: string;
 }
 

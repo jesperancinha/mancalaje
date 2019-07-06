@@ -1,9 +1,9 @@
 import React from 'react';
-import {Button, Typography} from "@material-ui/core";
+import {Button, Grid, Typography} from "@material-ui/core";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import {appBar, control} from "../../theme";
+import {control} from "../../theme";
 import {ListItemLink, RemoveComponentIcon, RoomComponentIcon} from "../../components/Icons";
 import {Game} from "../../types";
 import logo from "../../home/logo.svg";
@@ -16,19 +16,22 @@ import MancalaJeHeader from "../../components/MancalaJeHeader";
 import {Link} from "react-router-dom";
 import {logOut, makeDeleteRequest, makeGetRequest, makePostRequest} from "../../actions/OAuthRouting";
 import {createOAuth} from "../../index";
+import {MySnackbarContentWrapper} from "../../components/SnackbarContent";
+import Box from "@material-ui/core/Box";
 
 
 interface GameListProps extends State {
-    game: Game;
-    mancalaReducer: any;
+    game?: Game;
+    mancalaReducer?: any;
+    boardName: string;
 }
 
 class GameList extends React.Component<GameListProps, GameListProps> {
 
-    boardName: any = '';
 
     constructor({props}: { props: GameListProps }) {
         super(props);
+        this.state = {boardName: ''};
     }
 
     componentDidMount() {
@@ -38,45 +41,63 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     render() {
         return (
             <MancalaJeHeader>
-                <AppBar title="Game room center title" position="relative" style={appBar}>
+                <AppBar title="Game room center title" position="relative">
                     <Typography variant="h1">Select a room or create one</Typography>
                 </AppBar>
-                <AppBar title="Game room center warning" position="relative" style={appBar}>
+                <AppBar title="Game room center warning" position="relative">
 
                     <Typography component="h2" variant="h2">We're sorry, but MancalaJe isn't ready yet. Please try
                         again
                         later!</Typography>
                 </AppBar>
-                <AppBar title="Game room center options" position="relative" style={appBar}>
-                    {this.state ? (
-                        <List component="nav" aria-label="Game room list">
-                            {this.state.game.boardManagers.map(row => (
-                                <ListItem key={row.boardManagerId}>
-                                    <Link to={`gameStart/${row.boardManagerId}`}>
-                                        <ListItem component="span" button>
-                                            <ListItemIcon>
-                                                <RoomComponentIcon/>
-                                            </ListItemIcon>
-                                            {row.board.name}
-                                        </ListItem>
-                                    </Link>
-                                    <ListItemLink onClick={() => this.handleRemoveRoom(row.boardManagerId)}>
-                                        <RemoveComponentIcon/>
-                                    </ListItemLink>
-                                </ListItem>
-                            ))}
-                        </List>) : (
-                        <h1>Loading data...<img src={logo} className="App-logo-loading" alt="logo"/></h1>)}
+                <AppBar title={"Game list controls"} position={"relative"}>
                     <TextField
                         style={control}
                         label={'Room name'}
-                        onChange={(newValue) => {
-                            this.boardName = newValue.target.value
-                        }}/>
+                        error={this.state.boardName.length === 0}
+                        helperText={this.getRoomNameHelperText()}
+                        onChange={(newValue) => this.setState({
+                            boardName: newValue.target.value
+                        })}/>
                     <br/>
                     <Button
                         style={control}
                         onClick={() => this.handleClick()}>Submit</Button>
+                </AppBar>
+                {this.state.statusError ? (
+                    <Grid item xs={12}>
+                        <MySnackbarContentWrapper
+                            variant="error"
+                            message={this.state.statusError}
+                            onClose={() => this.setState({
+                                statusError: ''
+                            })}
+                        />
+                    </Grid>) : <div/>}
+                <AppBar title="Game room center options" position="relative">
+                    {this.state && this.state.game ? (
+                        <Box>
+                            <Typography variant="h3"
+                                        component="h3">Listing {this.state.game.boardManagers.length} rooms</Typography>
+                            <List component="nav" aria-label="Game room list">
+                                {this.state.game.boardManagers.map(row => (
+                                    <ListItem key={row.boardManagerId} component={'li'}>
+                                        <Link to={`gameStart/${row.boardManagerId}`}>
+                                            <ListItem component="span" button>
+                                                <ListItemIcon>
+                                                    <RoomComponentIcon/>
+                                                </ListItemIcon>
+                                                {row.board.name}
+                                            </ListItem>
+                                        </Link>
+                                        <ListItemLink onClick={() => this.handleRemoveRoom(row.boardManagerId)}>
+                                            <RemoveComponentIcon/>
+                                        </ListItemLink>
+                                    </ListItem>
+                                ))}
+                            </List>
+                        </Box>) : (
+                        <h1>Loading data...<img src={logo} className="App-logo-loading" alt="logo"/></h1>)}
                     <Button
                         style={control}
                         onClick={() => this.logOut()}>Logout</Button>
@@ -87,9 +108,9 @@ class GameList extends React.Component<GameListProps, GameListProps> {
 
     private handleClick() {
         let messageBody = JSON.stringify({
-            boardName: this.boardName
+            boardName: this.state.boardName
         });
-        makePostRequest('mancala/boards', this.props, () => this.loadAllBoards(), messageBody);
+        makePostRequest('mancala/boards', this.state, this.props, () => this.loadAllBoards(), messageBody);
     }
 
 
@@ -108,6 +129,13 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     private logOut() {
         this.props.dispatch(createOAuth({}));
         logOut(this.props);
+    }
+
+    private getRoomNameHelperText() {
+        if (!this.state.boardName) {
+            return 'Room must have a name!';
+        }
+        return '';
     }
 }
 

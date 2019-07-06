@@ -1,4 +1,5 @@
 import {State} from "../reducers/reducerIndex";
+import {ErrorMessage} from "../types";
 
 const LOGIN_PATH = '/login';
 
@@ -11,13 +12,13 @@ export function makeGetRequest<T>(urlString: string, props: T & State, transform
         })
             .then((res: any) => res.json())
             .then((data: any) => transformData(data))
-            .catch(()=>{
+            .catch(() => {
                 logOut(props);
             })
     }
 }
 
-export function makePostRequest<T>(urlString: string, props: T & State, transformData: any, messsageBody: any) {
+export function makePostRequest<T>(urlString: string, state: T & State, props: T & State, transformData: any, messsageBody: any) {
     if (!props.oauth) {
         props.history.push(LOGIN_PATH);
     } else {
@@ -28,9 +29,17 @@ export function makePostRequest<T>(urlString: string, props: T & State, transfor
             },
             body: messsageBody
         })
-            .then((res: any) => res.json())
+            .then((res: any) => {
+                if (res.status === 409) {
+                    res.json().then((errorMessage: ErrorMessage) => {
+                        state.statusError = errorMessage.localizedMessage;
+                    });
+                    return {};
+                }
+                return res.json()
+            })
             .then((data: any) => transformData(data))
-            .catch(()=>{
+            .catch(() => {
                 logOut(props);
             })
 
@@ -50,7 +59,7 @@ export function makePutRequest<T>(urlString: string, props: T & State, transform
         })
             .then((res: any) => res.json())
             .then((data: any) => transformData(data))
-            .catch(()=>{
+            .catch(() => {
                 logOut(props);
             })
 
@@ -67,12 +76,12 @@ export function makeDeleteRequest<T>(urlString: string, props: T & State, transf
         })
             .then((res: any) => res.json())
             .then((data: any) => transformData(data))
-            .catch(()=>{
+            .catch(() => {
                 logOut(props);
             })
     }
 }
 
 export function logOut<T>(props: T & State) {
-        return props.history.push(LOGIN_PATH);
+    return props.history.push(LOGIN_PATH);
 }

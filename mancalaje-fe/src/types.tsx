@@ -20,10 +20,14 @@ export class Game {
 
 
 export class User {
-    username: string = '';
-    password: string = '';
+    username?: string;
+    password?: string;
 }
 
 export class MancalaState {
     oauth: any = null;
+}
+
+export class ErrorMessage {
+    localizedMessage?: string;
 }
