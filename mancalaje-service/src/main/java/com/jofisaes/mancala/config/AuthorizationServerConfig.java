@@ -14,6 +14,8 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
+    public static final String CLIENT_ID = "mancala-client";
+    public static final String CLIENT_SECRET = "{noop}mancala";
     private static final String GRANT_TYPE_PASSWORD = "password";
     private static final String AUTHORIZATION_CODE = "authorization_code";
     private static final String REFRESH_TOKEN = "refresh_token";
@@ -21,10 +23,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private static final String SCOPE_WRITE = "write";
     private static final String TRUST = "trust";
     private static final int VALID_FOREVER = -1;
-
-    public static final String CLIENT_ID = "mancala-client";
-    public static final String CLIENT_SECRET = "{noop}mancala";
-
     @Autowired
     private AuthenticationManager authManager;
 

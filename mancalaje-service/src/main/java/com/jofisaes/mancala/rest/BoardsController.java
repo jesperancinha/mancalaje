@@ -2,8 +2,8 @@ package com.jofisaes.mancala.rest;
 
 import com.jofisaes.mancala.entities.Player;
 import com.jofisaes.mancala.game.BoardManager;
-import com.jofisaes.mancala.game.RoomsManager;
 import com.jofisaes.mancala.services.GameManagerService;
+import com.jofisaes.mancala.services.RoomsManager;
 import com.jofisaes.mancala.services.UserManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -53,7 +53,7 @@ public class BoardsController implements Serializable {
     @DeleteMapping(value = "{roomId}")
     public BoardManager removeRoom(
             @PathVariable("roomId") Long roomId) {
-        return gameManagerService. removeRoom(roomId, userManagerService.getSessionUser());
+        return gameManagerService.removeRoom(roomId, userManagerService.getSessionUser());
     }
 
     @PutMapping(value = "nextMove/{holeId}")

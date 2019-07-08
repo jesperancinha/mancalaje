@@ -1,12 +1,11 @@
 package com.jofisaes.mancala.services;
 
-import antlr.StringUtils;
 import com.jofisaes.mancala.entities.Player;
 import com.jofisaes.mancala.exception.NoRoomNameException;
 import com.jofisaes.mancala.exception.TooManyRoomsException;
 import com.jofisaes.mancala.game.BoardManager;
-import com.jofisaes.mancala.game.RoomsManager;
 import org.apache.logging.log4j.util.Strings;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.ApplicationScope;
@@ -17,16 +16,21 @@ import java.util.Map;
 @ApplicationScope
 public class GameManagerService {
 
-    @Value("${mancalaje.max-rooms:20}")
     private int maxRooms;
 
-    private RoomsManager roomsManager = new RoomsManager();
+    @Autowired
+    private RoomsManager roomsManager;
+
+    public GameManagerService(final @Value("${mancalaje.max-rooms:20}") int maxRooms, final RoomsManager roomsManager) {
+        this.maxRooms = maxRooms;
+        this.roomsManager = roomsManager;
+    }
 
     public BoardManager createBoard(Player player, String boardName) {
         if (roomsManager.getBoardManagers().size() == maxRooms) {
             throw new TooManyRoomsException(maxRooms);
         }
-        if (Strings.isEmpty(boardName)){
+        if (Strings.isEmpty(boardName)) {
             throw new NoRoomNameException();
         }
         Long highestId = roomsManager.getBoardManagerMap().keySet().stream().max(Long::compare).orElse(0L) + 1;

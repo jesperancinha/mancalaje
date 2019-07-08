@@ -1,93 +1,93 @@
 databaseChangeLog:
-- changeSet:
+  - changeSet:
       id: oauth2 token store
       author: João Esperancinha
       changes:
-      - createTable:
+        - createTable:
             tableName: oauth_access_token
             columns:
-            - column:
+              - column:
                   name: authentication_id
                   type: varchar(256)
                   constraints:
-                      primaryKey: true
-                      nullable: false
-            - column:
+                    primaryKey: true
+                    nullable: false
+              - column:
                   name: token_id
                   type: varchar(256)
-            - column:
+              - column:
                   name: token
                   type: bytea
-            - column:
+              - column:
                   name: user_name
                   type: varchar(256)
-            - column:
+              - column:
                   name: client_id
                   type: varchar(256)
-            - column:
+              - column:
                   name: authentication
                   type: bytea
-            - column:
+              - column:
                   name: refresh_token
                   type: varchar(256)
-      - createTable:
+        - createTable:
             tableName: oauth_refresh_token
             columns:
-            - column:
+              - column:
                   name: token_id
                   type: varchar(256)
-            - column:
+              - column:
                   name: token
                   type: bytea
-            - column:
+              - column:
                   name: authentication
                   type: bytea
 
-- changeSet:
+  - changeSet:
       id: players store
       author: João Esperancinha
       changes:
-      - createTable:
+        - createTable:
             tableName: user
             columns:
-            - column:
+              - column:
                   name: email
                   type: varchar(256)
                   constraints:
-                        primaryKey: true
-                        nullable: false
-            - column:
+                    primaryKey: true
+                    nullable: false
+              - column:
                   name: password
                   type: varchar(256)
-            - column:
-                    name: role
-                    type: varchar(256)
+              - column:
+                  name: role
+                  type: varchar(256)
 
-- changeSet:
+  - changeSet:
       id: insert default players
       author: João Esperancinha
       changes:
-      - insert:
+        - insert:
             tableName: user
             columns:
-            - column:
-                    name: email
-                    value: "playerOne@mancalaje.com"
-            - column:
-                    name: password
-                    value: "admin123"
-            - column:
-                    name: role
-                    value: "ROLE_USER"
-      - insert:
+              - column:
+                  name: email
+                  value: "playerOne@mancalaje.com"
+              - column:
+                  name: password
+                  value: "admin123"
+              - column:
+                  name: role
+                  value: "ROLE_USER"
+        - insert:
             tableName: user
             columns:
-            - column:
-                    name: email
-                    value: "playerTwo@mancalaje.com"
-            - column:
-                    name: password
-                    value: "admin123"
-            - column:
-                    name: role
-                    value: "ROLE_USER"
+              - column:
+                  name: email
+                  value: "playerTwo@mancalaje.com"
+              - column:
+                  name: password
+                  value: "admin123"
+              - column:
+                  name: role
+                  value: "ROLE_USER"

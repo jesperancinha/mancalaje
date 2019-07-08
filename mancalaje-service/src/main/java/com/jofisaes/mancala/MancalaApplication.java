@@ -10,13 +10,13 @@ import org.springframework.web.context.request.RequestContextListener;
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class MancalaApplication extends SpringBootServletInitializer {
 
+    public static void main(String[] args) {
+        SpringApplication.run(MancalaApplication.class, args);
+    }
+
     @Bean
     public RequestContextListener requestContextListener() {
         return new RequestContextListener();
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(MancalaApplication.class, args);
     }
 
 }

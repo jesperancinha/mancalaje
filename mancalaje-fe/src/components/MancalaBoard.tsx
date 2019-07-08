@@ -14,7 +14,7 @@ const MancalaBoard = ({data}: { data: BoardManager }) => {
     return (
         <div className={classes.root}>
             <Paper>
-                {data.board  ? (
+                {data.board ? (
                     <Table>
                         <TableBody>
                             <TableRow>

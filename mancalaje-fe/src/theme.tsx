@@ -42,7 +42,7 @@ export const theme = createMuiTheme({
         MuiAppBar: {
             root: {
                 borderRadius: 5,
-                margin:10,
+                margin: 10,
                 padding: 10,
                 alignItems: "center",
                 width: 800

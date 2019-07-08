@@ -12,6 +12,7 @@ public class MancalaControllerAdvice {
     public ResponseEntity<Object> tooManyRoomsException(TooManyRoomsException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception);
     }
+
     @ExceptionHandler(value = NoRoomNameException.class)
     public ResponseEntity<Object> noRoomNameException(NoRoomNameException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception);
