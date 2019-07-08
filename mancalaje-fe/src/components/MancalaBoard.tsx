@@ -9,12 +9,12 @@ import TableCell from "@material-ui/core/TableCell";
 import logo from "../home/logo.svg";
 import "./MancalaBoard.css"
 
-const MancalaBoard = ({data}: { data: BoardManager }) => {
+const MancalaBoard = ({data}: { data?: BoardManager }) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <Paper>
-                {data.board ? (
+                {data && data.board && data.board.allHoles? (
                     <Table>
                         <TableBody>
                             <TableRow>

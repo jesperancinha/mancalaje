@@ -1,15 +1,18 @@
 package com.jofisaes.mancala.rest;
 
 import com.jofisaes.mancala.entities.Player;
+import com.jofisaes.mancala.entities.User;
 import com.jofisaes.mancala.game.BoardManager;
+import com.jofisaes.mancala.game.BoardManagerDto;
 import com.jofisaes.mancala.services.GameManagerService;
 import com.jofisaes.mancala.services.RoomsManager;
 import com.jofisaes.mancala.services.UserManagerService;
+import com.jofisaes.mancala.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
+import java.security.Principal;
 import java.util.Map;
 
 import static com.jofisaes.mancala.rest.Mappings.MANCALA_BOARDS;
@@ -25,13 +28,16 @@ public class BoardsController implements Serializable {
     @Autowired
     private UserManagerService userManagerService;
 
+    @Autowired
+    private UserService userService;
+
     @PostMapping(produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
-    public BoardManager createGame(@RequestBody Map<String, Object> payload) {
+    public BoardManagerDto createGame(@RequestBody Map<String, Object> payload, Principal principal) {
         Player sessionUser = userManagerService.getSessionUser();
-        if (StringUtils.isEmpty(sessionUser.getName())) {
-            sessionUser.setName("Player One");
-        }
-        return gameManagerService.createBoard(sessionUser, payload.get("boardName").toString());
+        User userByEmail = userService.getUserByEmail(principal.getName());
+        sessionUser.setName(userByEmail.getName());
+        sessionUser.setEmail(userByEmail.getEmail());
+        return BoardManagerDto.builder().boardManager(gameManagerService.createBoard(sessionUser, payload.get("boardName").toString())).loggedPlayer(sessionUser).build();
     }
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
@@ -45,9 +51,10 @@ public class BoardsController implements Serializable {
     }
 
     @PutMapping(value = "{roomId}", produces = APPLICATION_JSON_VALUE)
-    public BoardManager joinGame(
+    public BoardManagerDto joinGame(
             @PathVariable("roomId") Long roomId) {
-        return gameManagerService.joinPlayer(roomId, userManagerService.getSessionUser());
+        BoardManager boardManager = gameManagerService.joinPlayer(roomId, userManagerService.getSessionUser());
+        return BoardManagerDto.builder().boardManager(boardManager).loggedPlayer(this.userManagerService.getSessionUser()).build();
     }
 
     @DeleteMapping(value = "{roomId}")

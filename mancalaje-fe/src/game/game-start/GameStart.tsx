@@ -1,6 +1,6 @@
 import React from "react";
 import MancalaBoard from "../../components/MancalaBoard";
-import {BoardManager} from "../../types";
+import {PlayerState} from "../../types";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import {control, theme} from "../../theme";
 import {Button, Typography} from "@material-ui/core";
@@ -13,7 +13,7 @@ import AppBar from "@material-ui/core/AppBar";
 
 interface GameStartProps extends State {
     mancalaReducer: any
-    boardManager: BoardManager
+    playerState: PlayerState
     id: number
     match: any
 }
@@ -27,19 +27,28 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
     componentDidMount() {
         makePutRequest('/mancala/boards/' + this.props.match.params.id, this.props,
             (data: any) => this.setState({
-                boardManager: data
+                playerState: data
             }), null);
     }
 
     render() {
         return (<MancalaJeHeader>
             {
-                this.state ? (<MuiThemeProvider theme={theme}>
+                this.state && this.state.playerState ? (<MuiThemeProvider theme={theme}>
                         <AppBar title="Game Start Titkle" position="relative">
-                            <Typography variant="h2">You are currently playing mancala with</Typography>
+                            {this.state.playerState.loggedPlayer ?
+                                (<Typography variant="h2">Hello {this.state.playerState.loggedPlayer.name}
+                                    {this.state.playerState.loggedPlayer.opponent ?
+                                        (<Typography variant="h2">You are currently playing mancalaje
+                                            with {this.state.playerState.loggedPlayer.opponent.name}</Typography>) : (
+                                            <Typography variant="h2">Waiting for player to join room...</Typography>)
+
+                                    }
+                                </Typography>) : (<Typography variant="h2">Loading...</Typography>)}
+
                         </AppBar>
                         <AppBar title="Game Start Board" position="relative">
-                            <MancalaBoard data={this.state.boardManager}/>
+                            <MancalaBoard data={this.state.playerState.boardManager}/>
                         </AppBar>
                         <AppBar title={'Game Start Controls'} position={"relative"}>
                             <Button

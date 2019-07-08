@@ -1,6 +1,19 @@
+export class PlayerState {
+    boardManager?: BoardManager;
+    loggedPlayer?: Player;
+}
+
+
+export class Player {
+    name?: string;
+    opponent?: Player;
+}
+
 export class Board {
-    name: string = '';
-    allHoles: Hole[] = [];
+    name?: string;
+    allHoles?: Hole[];
+    player1?: Player;
+    player2?: Player;
 }
 
 class Hole {

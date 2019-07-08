@@ -15,6 +15,7 @@ import java.io.Serializable;
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BoardManager implements Serializable {
+
     @JsonIgnore
     private Player currentPlayer;
 

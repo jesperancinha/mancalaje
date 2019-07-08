@@ -15,6 +15,7 @@ public class UsersController {
     @Autowired
     private UserManagerService userManagerService;
 
+    //TODO: After the static version is working
     @GetMapping(value = "create/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
     public void createGame(@PathVariable("username") String username) {
         userManagerService.getSessionUser().setName(username);

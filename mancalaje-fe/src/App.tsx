@@ -2,7 +2,7 @@ import React from 'react';
 import './App.sass';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Home from "./home/Home";
-import GameLogin from "./game/game/GameLogin";
+import GameLogin from "./game/game-login/GameLogin";
 import GameList from "./game/game-list/GameList";
 import GameStart from "./game/game-start/GameStart";
 import './index.css';

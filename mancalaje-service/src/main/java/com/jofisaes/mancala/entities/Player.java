@@ -18,6 +18,12 @@ public class Player implements Serializable {
     @JsonProperty("name")
     private String name;
 
+    @JsonProperty("email")
+    private String email;
+
+    @JsonProperty("opponent")
+    private Player opponent;
+
     @JsonIgnore
     private BoardManager boardManager;
 
