@@ -50,7 +50,26 @@ export const theme = createMuiTheme({
         },
         MuiButton: {
             root: {
-                minWidth: "100%"
+                minWidth: "100%",
+                alignItems: "center"
+            }
+        },
+        MuiButtonBase: {
+            root: {
+                padding: 0,
+            }
+        },
+        MuiList:{
+            root: {
+                alignItems: "left"
+            }
+
+        },
+        MuiListItem: {
+            root: {
+                alignItems: "left",
+                padding: 0,
+                margin: 0
             }
         }
     },
