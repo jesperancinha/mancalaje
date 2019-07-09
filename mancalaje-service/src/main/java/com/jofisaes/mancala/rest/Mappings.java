@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class Mappings {
     private static final String MANCALA = "/mancala/";
+    static final String MANCALA_ACTIONS = MANCALA + "actions";
     static final String MANCALA_BOARDS = MANCALA + "boards";
     static final String MANCALA_ROOMS = MANCALA + "rooms";
     static final String MANCALA_USERS = MANCALA + "users";

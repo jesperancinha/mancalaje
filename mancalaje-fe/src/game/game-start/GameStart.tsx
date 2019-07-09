@@ -62,7 +62,7 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
 
                         </AppBar>
                         <AppBar title="Game Start Board" position="relative">
-                            <MancalaBoard data={this.state.playerState.boardManager}/>
+                            <MancalaBoard data={this.state.playerState.boardManager} state={this.state} props={this.props}/>
                         </AppBar>
                         <AppBar title={'Game Start Controls'} position={"relative"}>
                             <Button

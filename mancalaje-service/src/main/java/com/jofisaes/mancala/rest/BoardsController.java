@@ -46,12 +46,4 @@ public class BoardsController extends AbstractUserController implements Serializ
         return gameManagerService.listAllGames();
     }
 
-
-    @PutMapping(value = "nextMove/{holeId}")
-    public BoardManager pressHoleId(
-            @PathVariable("holeId") Integer holeId) {
-        gameManagerService.swayStonesFromHole(userManagerService.getSessionUser(), holeId);
-        return userManagerService.getSessionUser().getBoardManager();
-    }
-
 }
