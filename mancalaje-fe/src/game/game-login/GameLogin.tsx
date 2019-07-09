@@ -23,7 +23,8 @@ class GameLogin extends Component<GameProps, GameProps> {
         super(props);
         this.state = {
             username: 'playerOne@mancalaje.com',
-            password: 'admin123'
+            password: 'admin123',
+            refreshers: [],
         };
     }
 

@@ -15,6 +15,6 @@ export interface State {
     history?: any;
     dispatch?: any;
     statusError?: string;
-    refresher?: any;
+    refreshers: number[];
 }
 

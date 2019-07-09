@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -21,7 +22,7 @@ public class Player implements Serializable {
     @JsonProperty("email")
     private String email;
 
-    @JsonProperty("opponent")
+    @JsonIgnore
     private Player opponent;
 
     @JsonIgnore
@@ -33,8 +34,22 @@ public class Player implements Serializable {
     @JsonIgnore
     private Store playerStore;
 
+
+    @JsonProperty("opponentName")
+    public String getOpponentName() {
+        if (Objects.nonNull(this.opponent)) {
+            return this.opponent.getName();
+        }
+        return null;
+    }
+
     public void setHoles(List<Hole> allPlayerHoles, Store playerStore) {
         this.allPlayerHoles = allPlayerHoles;
         this.playerStore = playerStore;
+    }
+
+    public void reset() {
+        this.setBoardManager(null);
+        this.setHoles(null, null);
     }
 }

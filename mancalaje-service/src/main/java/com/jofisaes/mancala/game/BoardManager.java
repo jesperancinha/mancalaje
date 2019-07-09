@@ -11,6 +11,8 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
+import static com.jofisaes.mancala.rest.Mappings.playerMatch;
+
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -66,5 +68,15 @@ public class BoardManager implements Serializable {
             }
         }
         this.gameOver = this.board.isGameOver();
+    }
+
+    public Player refreshSessionUser(Player sessionUser) {
+        if (playerMatch(sessionUser, getBoard().getPlayer1())) {
+            return getBoard().getPlayer1();
+        }
+        if (playerMatch(sessionUser, getBoard().getPlayer2())) {
+            return getBoard().getPlayer2();
+        }
+        return null;
     }
 }

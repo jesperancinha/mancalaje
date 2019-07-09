@@ -65,6 +65,10 @@ public class GameManagerService {
         } else if (Objects.isNull(board.getPlayer2())) {
             throw new AlreadyInGameException();
         } else throw new RoomFullException();
+        if (board.isReady()) {
+            board.getPlayer1().setOpponent(board.getPlayer2());
+            board.getPlayer2().setOpponent(board.getPlayer1());
+        }
         return boardManager;
     }
 
@@ -74,12 +78,13 @@ public class GameManagerService {
      *
      * @param roomId
      * @param player
+     * @return
      */
-    public void removePlayer(Long roomId, Player player) {
+    public Player leaveRoom(Long roomId, Player player) {
         BoardManager boardManager = roomsManager.getBoardManagerMap().get(roomId);
         boardManager.setCurrentPlayer(null);
         Board board = boardManager.getBoard();
-        board.removePlayer(player);
+        return board.removePlayer(player);
     }
 
     public void swayStonesFromHole(Player sessionUser, Integer holeId) {

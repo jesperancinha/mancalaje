@@ -6,7 +6,7 @@ export class PlayerState {
 
 export class Player {
     name?: string;
-    opponent?: Player;
+    opponentName?: String;
 }
 
 export class Board {

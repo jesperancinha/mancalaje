@@ -5,12 +5,13 @@ import com.jofisaes.mancala.entities.Player;
 import java.util.Objects;
 
 public class Mappings {
-    static final String MANCALA_BOARDS = "mancala/boards";
-    static final String MANCALA_ROOMS = "mancala/rooms";
-    static final String MANCALA_USERS = "mancala/users";
+    private static final String MANCALA = "/mancala/";
+    static final String MANCALA_BOARDS = MANCALA + "boards";
+    static final String MANCALA_ROOMS = MANCALA + "rooms";
+    static final String MANCALA_USERS = MANCALA + "users";
 
 
-    public static boolean playerMatch(Player player, Player player1) {
-        return Objects.nonNull(player1) && player.getEmail().equals(player1.getEmail());
+    public static boolean playerMatch(Player playerA, Player playerB) {
+        return Objects.nonNull(playerB) && Objects.nonNull(playerA) && playerA.getEmail().equals(playerB.getEmail());
     }
 }

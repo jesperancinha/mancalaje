@@ -23,21 +23,22 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
 
     constructor({props}: { props: GameStartProps }) {
         super(props);
-        this.state = {};
-
+        this.state = {
+            refreshers: []
+        }
     }
 
     componentDidMount() {
         this.loadGameData();
-        this.setState({
-            refresher: setInterval(() => {
-                this.loadGameData();
-            }, 1000)
-        });
+        let refresher: number = setInterval(() => {
+            this.loadGameData();
+        }, 1000);
+        this.state.refreshers.push(refresher);
+
     }
 
     private loadGameData() {
-        makeGetRequest('/mancala/boards/' + this.props.match.params.id, this.props,
+        makeGetRequest('/mancala/boards/' + this.props.match.params.id, this.state, this.props,
             (data: any) => this.setState({
                 playerState: data
             }));
@@ -47,13 +48,13 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
         return (<MancalaJeHeader>
             {
                 this.state && this.state.playerState ? (<MuiThemeProvider theme={theme}>
-                        <AppBar title="Game Start Titkle" position="relative">
+                        <AppBar title="Game Start Title" position="relative">
                             {this.state.playerState.loggedPlayer ?
                                 (<Box>
                                     <Typography variant="h2">Hello {this.state.playerState.loggedPlayer.name}</Typography>
-                                    {this.state.playerState.loggedPlayer.opponent ?
+                                    {this.state.playerState.loggedPlayer.opponentName ?
                                         (<Typography variant="h2">You are currently playing mancalaje
-                                            with {this.state.playerState.loggedPlayer.opponent.name}</Typography>) : (
+                                            with {this.state.playerState.loggedPlayer.opponentName}</Typography>) : (
                                             <Typography variant="h2">Waiting for player to join room...</Typography>)
 
                                     }
@@ -75,7 +76,7 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
     }
 
     private leaveRoom() {
-        clearInterval(this.state.refresher);
+        this.state.refreshers.forEach(clearInterval);
         makeDeleteRequest('/mancala/rooms/' + this.props.match.params.id, this.state, this.props, () => {
             this.props.history.push(`/gameList`)
         });
@@ -86,7 +87,8 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
 const mapStateToProps = (state: GameStartProps) => {
     return {
         oauth: state.mancalaReducer.oauth,
-        router: state.router
+        router: state.router,
+        refreshers: state.refreshers
     }
 };
 // @ts-ignore

@@ -3,6 +3,7 @@ package com.jofisaes.mancala.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
@@ -15,6 +16,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableJdbcHttpSession
+@EnableAspectJAutoProxy
 public class MancalaConfiguration
         extends AbstractHttpSessionApplicationInitializer {
 

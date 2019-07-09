@@ -3,7 +3,7 @@ import {ErrorMessage} from "../types";
 
 const LOGIN_PATH = '/login';
 
-export function makeGetRequest<T>(urlString: string, props: T & State, transformData: any) {
+export function makeGetRequest<T>(urlString: string, state: T & State, props: T & State, transformData: any) {
     if (!props.oauth) {
         props.history.push(LOGIN_PATH);
     } else {
@@ -13,7 +13,7 @@ export function makeGetRequest<T>(urlString: string, props: T & State, transform
             .then((res: any) => res.json())
             .then((data: any) => transformData(data))
             .catch(() => {
-                logOut(props);
+                logOut(props, state);
             })
     }
 }
@@ -38,7 +38,7 @@ export function makePostRequest<T>(urlString: string, state: T & State, props: T
             })
             .then((data: any) => transformData(data))
             .catch(() => {
-                logOut(props);
+                logOut(props, state);
             })
 
     }
@@ -77,7 +77,7 @@ export function makePutRequest<T>(urlString: string, state: T & State, props: T 
                 }
             })
             .catch(() => {
-                logOut(props);
+                logOut(props, state);
             })
 
     }
@@ -114,12 +114,14 @@ export function makeDeleteRequest<T>(urlString: string, state: T & State, props:
             .then((data: any) => transformData(data))
             .catch((error) => {
                 console.log(error);
-                logOut(props);
+                logOut(props, state);
             })
     }
 }
 
-export function logOut<T>(props: T & State) {
-    clearInterval(props.refresher);
+export function logOut<T>(props: T & State, state: T & State) {
+    if (state.refreshers) {
+        state.refreshers.map(clearInterval);
+    }
     return props.history.push(LOGIN_PATH);
 }

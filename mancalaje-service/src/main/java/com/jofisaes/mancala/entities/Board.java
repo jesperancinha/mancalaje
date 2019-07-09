@@ -9,6 +9,7 @@ import javax.validation.constraints.Null;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -126,13 +127,26 @@ public class Board implements Serializable {
                 && allPlayerTwoHoles.stream().allMatch(holePredicate);
     }
 
-    public void removePlayer(Player player) {
+    public Player removePlayer(Player player) {
         if (playerMatch(player, getPlayer1())) {
+            if (Objects.nonNull(player2))  {
+                player2.setOpponent(null);
+            }
             player1 = null;
+            return getPlayer1();
         }
         if (playerMatch(player, getPlayer2())) {
+            if (Objects.nonNull(player1)) {
+                player1.setOpponent(null);
+            }
             player2 = null;
+            return getPlayer2();
         }
+        return null;
+    }
+
+    public boolean isReady() {
+        return Objects.nonNull(player1) && Objects.nonNull(player2);
     }
 
 }

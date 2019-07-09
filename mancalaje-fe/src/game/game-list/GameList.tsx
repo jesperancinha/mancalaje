@@ -31,16 +31,16 @@ class GameList extends React.Component<GameListProps, GameListProps> {
 
     constructor({props}: { props: GameListProps }) {
         super(props);
-        this.state = {boardName: ''};
+        this.state = {boardName: '', refreshers: []};
     }
 
     componentDidMount() {
         this.loadAllBoards();
-        this.setState({
-            refresher: setInterval(() => {
-                this.loadAllBoards();
-            }, 1000)
-        });
+        let refresher = setInterval(() => {
+            this.loadAllBoards();
+        }, 1000);
+        this.state.refreshers.push(refresher);
+        this.setState(this.state);
     }
 
     render() {
@@ -78,7 +78,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                         />
                     </Grid>) : <div/>}
                 <AppBar title="Game room center options" position="relative">
-                    {this.state && this.state.game ? (
+                    {this.state && this.state.game && this.state.game.boardManagers ? (
                         <Box>
                             <Typography variant="h3"
                                         component="h3"
@@ -130,7 +130,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
 
 
     private loadAllBoards() {
-        makeGetRequest('mancala/boards/all', this.props, (data: any) => {
+        makeGetRequest('mancala/boards/all', this.state, this.props, (data: any) => {
             this.setState({
                 game: data
             });
@@ -143,7 +143,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
 
     private logOut() {
         this.props.dispatch(createOAuth({}));
-        logOut(this.props);
+        logOut(this.props, this.state);
     }
 
     private getRoomNameHelperText() {
@@ -154,7 +154,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     }
 
     private redirectToGamePage(row: BoardManager) {
-        clearInterval(this.state.refresher);
+        this.state.refreshers.map(clearInterval);
         makePutRequest('/mancala/rooms/' + row.boardManagerId, this.state, this.props,
             () => this.props.history.push(`gameStart/${row.boardManagerId}`), '{}', (errorMessage: string) => this.setState({
                 statusError: errorMessage
@@ -185,7 +185,8 @@ class GameList extends React.Component<GameListProps, GameListProps> {
 const mapStateToProps = (state: GameListProps) => {
     return {
         oauth: state.mancalaReducer.oauth,
-        router: state.router
+        router: state.router,
+        refreshers: state.refreshers
     }
 };
 // @ts-ignore
