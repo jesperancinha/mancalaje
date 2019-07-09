@@ -83,17 +83,37 @@ export function makePutRequest<T>(urlString: string, state: T & State, props: T 
     }
 }
 
-export function makeDeleteRequest<T>(urlString: string, props: T & State, transformData: any = () => {
-}) {
+export function makeDeleteRequest<T>(urlString: string, state: T & State, props: T & State, transformData: any = () => {
+}, errorCatch?: any) {
     if (!props.oauth) {
         props.history.push(LOGIN_PATH);
     } else {
         props.oauth.fetch(urlString, {
             method: 'DELETE'
         })
-            .then((res: any) => res.json())
+            .then((res: any) => {
+                if (res.status === 409) {
+                    res.json().then((errorMessage: ErrorMessage) => {
+                        if (errorCatch) {
+                            errorCatch(errorMessage.localizedMessage);
+                        } else {
+                            state.statusError = errorMessage.localizedMessage
+                        }
+                    });
+                    return null;
+                }
+                return res.text()
+            })
+            .then((text => {
+                if (text) {
+                    return text;
+                } else {
+                    return {};
+                }
+            }))
             .then((data: any) => transformData(data))
-            .catch(() => {
+            .catch((error) => {
+                console.log(error);
                 logOut(props);
             })
     }

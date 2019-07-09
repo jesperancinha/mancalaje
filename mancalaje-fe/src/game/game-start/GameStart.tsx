@@ -8,7 +8,7 @@ import logo from "../../home/logo.svg";
 import {connect} from "react-redux";
 import {State} from "../../reducers/reducerIndex";
 import MancalaJeHeader from "../../components/MancalaJeHeader";
-import {makeGetRequest} from "../../actions/OAuthRouting";
+import {makeDeleteRequest, makeGetRequest} from "../../actions/OAuthRouting";
 import AppBar from "@material-ui/core/AppBar";
 import Box from "@material-ui/core/Box";
 
@@ -24,6 +24,7 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
     constructor({props}: { props: GameStartProps }) {
         super(props);
         this.state = {};
+
     }
 
     componentDidMount() {
@@ -65,7 +66,9 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
     }
 
     private leaveRoom() {
-        this.props.history.push(`/gameList`)
+        makeDeleteRequest('/mancala/rooms/' + this.props.match.params.id, this.state, this.props, () => {
+            this.props.history.push(`/gameList`)
+        });
     }
 }
 

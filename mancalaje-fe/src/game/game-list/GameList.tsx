@@ -133,7 +133,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     }
 
     private handleRemoveRoom(roomId: number) {
-        makeDeleteRequest('mancala/boards/' + roomId, this.props, () => this.loadAllBoards());
+        makeDeleteRequest('mancala/boards/' + roomId, this.state, this.props, () => this.loadAllBoards());
     }
 
     private logOut() {
@@ -149,7 +149,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     }
 
     private redirectToGamePage(row: BoardManager) {
-        makePutRequest('/mancala/boards/' + row.boardManagerId, this.state, this.props,
+        makePutRequest('/mancala/rooms/' + row.boardManagerId, this.state, this.props,
             () => this.props.history.push(`gameStart/${row.boardManagerId}`), '{}', (errorMessage: string) => this.setState({
                 statusError: errorMessage
             }));

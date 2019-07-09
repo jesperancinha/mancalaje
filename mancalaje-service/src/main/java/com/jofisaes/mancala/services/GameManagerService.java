@@ -2,10 +2,7 @@ package com.jofisaes.mancala.services;
 
 import com.jofisaes.mancala.entities.Board;
 import com.jofisaes.mancala.entities.Player;
-import com.jofisaes.mancala.exception.AlreadyInGameException;
-import com.jofisaes.mancala.exception.NoRoomNameException;
-import com.jofisaes.mancala.exception.RoomFullException;
-import com.jofisaes.mancala.exception.TooManyRoomsException;
+import com.jofisaes.mancala.exception.*;
 import com.jofisaes.mancala.game.BoardManager;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +12,8 @@ import org.springframework.web.context.annotation.ApplicationScope;
 
 import java.util.Map;
 import java.util.Objects;
+
+import static com.jofisaes.mancala.rest.Mappings.playerMatch;
 
 @Service
 @ApplicationScope
@@ -48,7 +47,7 @@ public class GameManagerService {
         return player.getBoardManager();
     }
 
-    public BoardManager getBoardManagerByRoomnId(Long roomId){
+    public BoardManager getBoardManagerByRoomnId(Long roomId) {
         return roomsManager.getBoardManagerMap().get(roomId);
     }
 
@@ -69,6 +68,20 @@ public class GameManagerService {
         return boardManager;
     }
 
+    /**
+     * Once a player leaves the room, the current player is also not available.
+     * Once a new player comes in his player, both players must decide which player starts first to resume the game.
+     *
+     * @param roomId
+     * @param player
+     */
+    public void removePlayer(Long roomId, Player player) {
+        BoardManager boardManager = roomsManager.getBoardManagerMap().get(roomId);
+        boardManager.setCurrentPlayer(null);
+        Board board = boardManager.getBoard();
+        board.removePlayer(player);
+    }
+
     public void swayStonesFromHole(Player sessionUser, Integer holeId) {
         sessionUser.getBoardManager().swayStonesFromHole(sessionUser, holeId);
     }
@@ -76,9 +89,9 @@ public class GameManagerService {
     public BoardManager removeRoom(Long roomId, Player sessionUser) {
         Map<Long, BoardManager> boardManagerMap = roomsManager.getBoardManagerMap();
         BoardManager room = boardManagerMap.get(roomId);
-        if (room.getBoard().getPlayer1().getName().equals(sessionUser.getName())) {
+        if (playerMatch(room.getOwner(), sessionUser)) {
             return roomsManager.removeRoom(roomId);
         }
-        return null;
+        throw new WrongRoomOwnerException();
     }
 }

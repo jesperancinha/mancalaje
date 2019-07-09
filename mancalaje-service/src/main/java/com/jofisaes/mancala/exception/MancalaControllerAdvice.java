@@ -27,4 +27,9 @@ public class MancalaControllerAdvice {
     public ResponseEntity<Object> aleradyInGame(AlreadyInGameException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception);
     }
+
+    @ExceptionHandler(value = WrongRoomOwnerException.class)
+    public ResponseEntity<Object> wrongRoonOwnerExcpetion(WrongRoomOwnerException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception);
+    }
 }

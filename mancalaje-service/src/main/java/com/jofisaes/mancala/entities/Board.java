@@ -5,12 +5,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
+import javax.validation.constraints.Null;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static com.jofisaes.mancala.rest.Mappings.playerMatch;
 
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -22,9 +25,12 @@ public class Board implements Serializable {
     private String name;
 
     @JsonProperty("player1")
+    @Null
     private Player player1;
 
+
     @JsonProperty("player2")
+    @Null
     private Player player2;
 
     @JsonProperty("allHoles")
@@ -119,4 +125,14 @@ public class Board implements Serializable {
         return allPlayerOneHoles.stream().allMatch(holePredicate)
                 && allPlayerTwoHoles.stream().allMatch(holePredicate);
     }
+
+    public void removePlayer(Player player) {
+        if (playerMatch(player, getPlayer1())) {
+            player1 = null;
+        }
+        if (playerMatch(player, getPlayer2())) {
+            player2 = null;
+        }
+    }
+
 }
