@@ -8,8 +8,9 @@ import logo from "../../home/logo.svg";
 import {connect} from "react-redux";
 import {State} from "../../reducers/reducerIndex";
 import MancalaJeHeader from "../../components/MancalaJeHeader";
-import {makePutRequest} from "../../actions/OAuthRouting";
+import {makeGetRequest} from "../../actions/OAuthRouting";
 import AppBar from "@material-ui/core/AppBar";
+import Box from "@material-ui/core/Box";
 
 interface GameStartProps extends State {
     mancalaReducer?: any
@@ -26,10 +27,10 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
     }
 
     componentDidMount() {
-        makePutRequest('/mancala/boards/' + this.props.match.params.id, this.state, this.props,
+        makeGetRequest('/mancala/boards/' + this.props.match.params.id, this.props,
             (data: any) => this.setState({
                 playerState: data
-            }), null);
+            }));
     }
 
     render() {
@@ -38,14 +39,15 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
                 this.state && this.state.playerState ? (<MuiThemeProvider theme={theme}>
                         <AppBar title="Game Start Titkle" position="relative">
                             {this.state.playerState.loggedPlayer ?
-                                (<Typography variant="h2">Hello {this.state.playerState.loggedPlayer.name}
+                                (<Box>
+                                    <Typography variant="h2">Hello {this.state.playerState.loggedPlayer.name}</Typography>
                                     {this.state.playerState.loggedPlayer.opponent ?
                                         (<Typography variant="h2">You are currently playing mancalaje
                                             with {this.state.playerState.loggedPlayer.opponent.name}</Typography>) : (
                                             <Typography variant="h2">Waiting for player to join room...</Typography>)
 
                                     }
-                                </Typography>) : (<Typography variant="h2">Loading...</Typography>)}
+                                </Box>) : (<Typography variant="h2">Loading...</Typography>)}
 
                         </AppBar>
                         <AppBar title="Game Start Board" position="relative">

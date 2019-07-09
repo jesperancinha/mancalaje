@@ -19,6 +19,9 @@ public class BoardManager implements Serializable {
     @JsonIgnore
     private Player currentPlayer;
 
+    @JsonProperty("owner")
+    private Player owner;
+
     @JsonProperty("board")
     private Board board;
 
@@ -28,16 +31,16 @@ public class BoardManager implements Serializable {
     @JsonProperty("gameover")
     private boolean gameOver;
 
-    public BoardManager(Long boardManagerId) {
+    private BoardManager(Long boardManagerId) {
         this.boardManagerId = boardManagerId;
     }
 
     public static BoardManager create(Player player, Long boardManagerId, String boardName) {
         BoardManager boardManager = new BoardManager(boardManagerId);
         Board board = new Board(boardName);
-        board.setPlayer1(player);
         player.setBoardManager(boardManager);
         boardManager.setBoard(board);
+        boardManager.setOwner(player);
         return boardManager;
     }
 

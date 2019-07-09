@@ -47,6 +47,14 @@ public class BoardsController implements Serializable {
         return gameManagerService.listAllGames();
     }
 
+
+    @GetMapping(value = "{roomId}", produces = APPLICATION_JSON_VALUE)
+    public BoardManagerDto getGame(
+            @PathVariable("roomId") Long roomId, Principal principal) {
+        this.setUpPlayer(principal);
+        return BoardManagerDto.builder().boardManager(gameManagerService.getBoardManagerByRoomnId(roomId)).loggedPlayer(this.userManagerService.getSessionUser()).build();
+    }
+
     @PutMapping(value = "{roomId}", produces = APPLICATION_JSON_VALUE)
     public BoardManagerDto joinGame(
             @PathVariable("roomId") Long roomId, Principal principal) {

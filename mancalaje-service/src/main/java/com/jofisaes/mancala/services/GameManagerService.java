@@ -48,6 +48,9 @@ public class GameManagerService {
         return player.getBoardManager();
     }
 
+    public BoardManager getBoardManagerByRoomnId(Long roomId){
+        return roomsManager.getBoardManagerMap().get(roomId);
+    }
 
     public RoomsManager listAllGames() {
         return roomsManager;

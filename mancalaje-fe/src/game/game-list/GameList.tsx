@@ -76,20 +76,26 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                     {this.state && this.state.game ? (
                         <Box>
                             <Typography variant="h3"
-                                        component="h3" align={"center"}>Listing {this.state.game.boardManagers.length} rooms</Typography>
+                                        component="h3"
+                                        align={"center"}>Listing {this.state.game.boardManagers.length} rooms</Typography>
                             <List component="nav" aria-label="Game room list">
                                 {this.state.game.boardManagers.map(row => (
                                     <ListItem key={row.boardManagerId} component={'div'}>
-                                        <ListItem component="span" button  onClick={() => this.redirectToGamePage(row)}>
+                                        <ListItem component="span" button onClick={() => this.redirectToGamePage(row)}>
                                             <ListItemIcon>
                                                 <RoomComponentIcon/>
                                             </ListItemIcon>
                                             {row.board.name}
                                         </ListItem>
-
                                         <ListItemLink onClick={() => this.handleRemoveRoom(row.boardManagerId)}>
                                             <RemoveComponentIcon/>
                                         </ListItemLink>
+                                        <ListItem>
+                                            {this.getCurrentPlayersText(row)}
+                                        </ListItem>
+                                        <ListItem>
+                                            {"Owner:" + row.owner.name}
+                                        </ListItem>
                                     </ListItem>
                                 ))}
                             </List>
@@ -149,6 +155,21 @@ class GameList extends React.Component<GameListProps, GameListProps> {
             }));
     }
 
+    private getCurrentPlayersText(row: BoardManager) {
+        const player1 = row.board.player1;
+        const player2 = row.board.player2;
+        if (player1 && player2) {
+            return "Current players: " + player1.name + " and " + player2.name;
+        }
+        if (player1) {
+            return "Current player: " + player1.name;
+        }
+        if (player2) {
+            return "Current player: " + player2.name;
+        }
+        return "No players in the game. Room is free";
+
+    }
 }
 
 // function mapDispatchToProps(dispatch: any) {

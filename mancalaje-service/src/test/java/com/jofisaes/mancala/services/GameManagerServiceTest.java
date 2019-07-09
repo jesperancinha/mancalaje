@@ -28,6 +28,8 @@ public class GameManagerServiceTest {
         BoardManager boardManager = first.orElse(null);
         assertThat(boardManager).isNotNull();
         assertThat(boardManager.getBoardManagerId()).isEqualTo(1);
-        assertThat(boardManager.getBoard().getPlayer1()).isSameAs(mockPlayer);
+        assertThat(boardManager.getOwner()).isSameAs(mockPlayer);
+        assertThat(boardManager.getBoard().getPlayer1()).isNull();
+        assertThat(boardManager.getBoard().getPlayer2()).isNull();
     }
 }
