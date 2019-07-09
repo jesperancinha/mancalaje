@@ -31,10 +31,8 @@ export function makePostRequest<T>(urlString: string, state: T & State, props: T
         })
             .then((res: any) => {
                 if (res.status === 409) {
-                    res.json().then((errorMessage: ErrorMessage) => {
-                        state.statusError = errorMessage.localizedMessage;
-                    });
-                    return {};
+                    res.json().then((errorMessage: ErrorMessage) => state.statusError = errorMessage.localizedMessage);
+                    return null;
                 }
                 return res.json()
             })
@@ -46,19 +44,38 @@ export function makePostRequest<T>(urlString: string, state: T & State, props: T
     }
 }
 
-export function makePutRequest<T>(urlString: string, props: T & State, transformData: any, messageBody: any) {
+export function makePutRequest<T>(urlString: string, state: T & State, props: T & State, transformData: any, messageBody: any, errorCatch?: any) {
     if (!props.oauth) {
         props.history.push(LOGIN_PATH);
     } else {
-        props.oauth.fetch(urlString, {
+        const config: RequestInit = {
             method: 'PUT',
-            headers: {
+        };
+        if (messageBody) {
+            config.body = messageBody;
+            config.headers = {
                 'Content-Type': 'application/json'
-            },
-            body: messageBody
-        })
-            .then((res: any) => res.json())
-            .then((data: any) => transformData(data))
+            };
+        }
+        props.oauth.fetch(urlString, config)
+            .then((res: any) => {
+                if (res.status === 409) {
+                    res.json().then((errorMessage: ErrorMessage) => {
+                        if (errorCatch) {
+                            errorCatch(errorMessage.localizedMessage);
+                        } else {
+                            state.statusError = errorMessage.localizedMessage
+                        }
+                    });
+                    return null;
+                }
+                return res.json()
+            })
+            .then((data: any) => {
+                if (data) {
+                    transformData(data)
+                }
+            })
             .catch(() => {
                 logOut(props);
             })

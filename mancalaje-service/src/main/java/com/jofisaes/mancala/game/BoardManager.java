@@ -42,6 +42,11 @@ public class BoardManager implements Serializable {
     }
 
     @JsonIgnore
+    public void setPlayer1(Player player1) {
+        this.board.setPlayer1(player1);
+    }
+
+    @JsonIgnore
     public void setPlayer2(Player player2) {
         this.board.setPlayer2(player2);
     }

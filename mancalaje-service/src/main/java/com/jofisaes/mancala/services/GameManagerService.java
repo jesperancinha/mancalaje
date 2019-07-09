@@ -1,7 +1,10 @@
 package com.jofisaes.mancala.services;
 
+import com.jofisaes.mancala.entities.Board;
 import com.jofisaes.mancala.entities.Player;
+import com.jofisaes.mancala.exception.AlreadyInGameException;
 import com.jofisaes.mancala.exception.NoRoomNameException;
+import com.jofisaes.mancala.exception.RoomFullException;
 import com.jofisaes.mancala.exception.TooManyRoomsException;
 import com.jofisaes.mancala.game.BoardManager;
 import org.apache.logging.log4j.util.Strings;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.ApplicationScope;
 
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 @ApplicationScope
@@ -49,9 +53,16 @@ public class GameManagerService {
         return roomsManager;
     }
 
-    public BoardManager joinPlayer(Long boardManagerId, Player player2) {
+    public BoardManager joinPlayer(Long boardManagerId, Player player) {
         BoardManager boardManager = roomsManager.getBoardManagerMap().get(boardManagerId);
-        boardManager.setPlayer2(player2);
+        Board board = boardManager.getBoard();
+        if (Objects.isNull(board.getPlayer1())) {
+            boardManager.setPlayer1(player);
+        } else if (Objects.isNull(board.getPlayer2()) && !board.getPlayer1().getEmail().equals(player.getEmail())) {
+            boardManager.setPlayer2(player);
+        } else if (Objects.isNull(board.getPlayer2())) {
+            throw new AlreadyInGameException();
+        } else throw new RoomFullException();
         return boardManager;
     }
 

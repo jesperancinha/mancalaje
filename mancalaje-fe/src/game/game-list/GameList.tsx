@@ -5,7 +5,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import {control} from "../../theme";
 import {ListItemLink, RemoveComponentIcon, RoomComponentIcon} from "../../components/Icons";
-import {Game} from "../../types";
+import {BoardManager, Game, PlayerState} from "../../types";
 import logo from "../../home/logo.svg";
 import AppBar from "@material-ui/core/AppBar";
 import './../../index.css';
@@ -13,8 +13,7 @@ import TextField from "@material-ui/core/TextField";
 import {connect} from "react-redux";
 import {State} from "../../reducers/reducerIndex";
 import MancalaJeHeader from "../../components/MancalaJeHeader";
-import {Link} from "react-router-dom";
-import {logOut, makeDeleteRequest, makeGetRequest, makePostRequest} from "../../actions/OAuthRouting";
+import {logOut, makeDeleteRequest, makeGetRequest, makePostRequest, makePutRequest} from "../../actions/OAuthRouting";
 import {createOAuth} from "../../index";
 import {MySnackbarContentWrapper} from "../../components/SnackbarContent";
 import Box from "@material-ui/core/Box";
@@ -24,6 +23,7 @@ interface GameListProps extends State {
     game?: Game;
     mancalaReducer?: any;
     boardName: string;
+    playerState?: PlayerState
 }
 
 class GameList extends React.Component<GameListProps, GameListProps> {
@@ -56,9 +56,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                         label={'Room name'}
                         error={this.state.boardName.length === 0}
                         helperText={this.getRoomNameHelperText()}
-                        onChange={(newValue) => this.setState({
-                            boardName: newValue.target.value
-                        })}/>
+                        onChange={(newValue) => this.changeState(newValue)}/>
                     <br/>
                     <Button
                         style={control}
@@ -82,14 +80,14 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                             <List component="nav" aria-label="Game room list">
                                 {this.state.game.boardManagers.map(row => (
                                     <ListItem key={row.boardManagerId} component={'li'}>
-                                        <Link to={`gameStart/${row.boardManagerId}`}>
-                                            <ListItem component="span" button>
-                                                <ListItemIcon>
-                                                    <RoomComponentIcon/>
-                                                </ListItemIcon>
-                                                {row.board.name}
-                                            </ListItem>
-                                        </Link>
+                                        <ListItem component="span" button>
+                                            <ListItemIcon>
+                                                <RoomComponentIcon/>
+                                            </ListItemIcon>
+                                        </ListItem>
+                                        <Button
+                                            style={control}
+                                            onClick={() => this.redirectToGamePage(row)}>{row.board.name})</Button>
                                         <ListItemLink onClick={() => this.handleRemoveRoom(row.boardManagerId)}>
                                             <RemoveComponentIcon/>
                                         </ListItemLink>
@@ -104,6 +102,13 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                 </AppBar>
             </MancalaJeHeader>
         );
+    }
+
+    private changeState(newValue: any) {
+        this.setState({
+            boardName: newValue.target.value,
+            statusError: '',
+        });
     }
 
     private handleClick() {
@@ -137,6 +142,14 @@ class GameList extends React.Component<GameListProps, GameListProps> {
         }
         return '';
     }
+
+    private redirectToGamePage(row: BoardManager) {
+        makePutRequest('/mancala/boards/' + row.boardManagerId, this.state, this.props,
+            () => this.props.history.push(`gameStart/${row.boardManagerId}`), '{}', (errorMessage: string) => this.setState({
+                statusError: errorMessage
+            }));
+    }
+
 }
 
 // function mapDispatchToProps(dispatch: any) {

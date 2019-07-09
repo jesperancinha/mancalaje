@@ -12,20 +12,21 @@ import {makePutRequest} from "../../actions/OAuthRouting";
 import AppBar from "@material-ui/core/AppBar";
 
 interface GameStartProps extends State {
-    mancalaReducer: any
-    playerState: PlayerState
-    id: number
-    match: any
+    mancalaReducer?: any
+    playerState?: PlayerState
+    id?: number
+    match?: any
 }
 
 class GameStart extends React.Component<GameStartProps, GameStartProps> {
 
     constructor({props}: { props: GameStartProps }) {
         super(props);
+        this.state = {};
     }
 
     componentDidMount() {
-        makePutRequest('/mancala/boards/' + this.props.match.params.id, this.props,
+        makePutRequest('/mancala/boards/' + this.props.match.params.id, this.state, this.props,
             (data: any) => this.setState({
                 playerState: data
             }), null);

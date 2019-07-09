@@ -33,10 +33,7 @@ public class BoardsController implements Serializable {
 
     @PostMapping(produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public BoardManagerDto createGame(@RequestBody Map<String, Object> payload, Principal principal) {
-        Player sessionUser = userManagerService.getSessionUser();
-        User userByEmail = userService.getUserByEmail(principal.getName());
-        sessionUser.setName(userByEmail.getName());
-        sessionUser.setEmail(userByEmail.getEmail());
+        Player sessionUser = setUpPlayer(principal);
         return BoardManagerDto.builder().boardManager(gameManagerService.createBoard(sessionUser, payload.get("boardName").toString())).loggedPlayer(sessionUser).build();
     }
 
@@ -52,7 +49,8 @@ public class BoardsController implements Serializable {
 
     @PutMapping(value = "{roomId}", produces = APPLICATION_JSON_VALUE)
     public BoardManagerDto joinGame(
-            @PathVariable("roomId") Long roomId) {
+            @PathVariable("roomId") Long roomId, Principal principal) {
+        this.setUpPlayer(principal);
         BoardManager boardManager = gameManagerService.joinPlayer(roomId, userManagerService.getSessionUser());
         return BoardManagerDto.builder().boardManager(boardManager).loggedPlayer(this.userManagerService.getSessionUser()).build();
     }
@@ -70,5 +68,11 @@ public class BoardsController implements Serializable {
         return userManagerService.getSessionUser().getBoardManager();
     }
 
-
+    private Player setUpPlayer(Principal principal) {
+        Player sessionUser = userManagerService.getSessionUser();
+        User userByEmail = userService.getUserByEmail(principal.getName());
+        sessionUser.setName(userByEmail.getName());
+        sessionUser.setEmail(userByEmail.getEmail());
+        return sessionUser;
+    }
 }
