@@ -36,17 +36,22 @@ class GameList extends React.Component<GameListProps, GameListProps> {
 
     componentDidMount() {
         this.loadAllBoards();
+        this.setState({
+            refresher: setInterval(() => {
+                this.loadAllBoards();
+            }, 1000)
+        });
     }
 
     render() {
         return (
             <MancalaJeHeader>
                 <AppBar title="Game room center title" position="relative">
-                    <Typography variant="h1">Select a room or create one</Typography>
+                    <Typography variant="h3">Select a room or create one</Typography>
                 </AppBar>
                 <AppBar title="Game room center warning" position="relative">
 
-                    <Typography component="h2" variant="h2">We're sorry, but MancalaJe isn't ready yet. Please try
+                    <Typography component="h4" variant="h4">We're sorry, but MancalaJe isn't ready yet. Please try
                         again
                         later!</Typography>
                 </AppBar>
@@ -149,6 +154,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     }
 
     private redirectToGamePage(row: BoardManager) {
+        clearInterval(this.state.refresher);
         makePutRequest('/mancala/rooms/' + row.boardManagerId, this.state, this.props,
             () => this.props.history.push(`gameStart/${row.boardManagerId}`), '{}', (errorMessage: string) => this.setState({
                 statusError: errorMessage

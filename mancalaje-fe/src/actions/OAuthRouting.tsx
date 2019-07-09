@@ -120,5 +120,6 @@ export function makeDeleteRequest<T>(urlString: string, state: T & State, props:
 }
 
 export function logOut<T>(props: T & State) {
+    clearInterval(props.refresher);
     return props.history.push(LOGIN_PATH);
 }

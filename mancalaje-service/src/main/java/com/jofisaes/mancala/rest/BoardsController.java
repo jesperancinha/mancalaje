@@ -34,7 +34,8 @@ public class BoardsController extends AbstractUserController implements Serializ
 
     @DeleteMapping(value = "{roomId}")
     public BoardManager removeRoom(
-            @PathVariable("roomId") Long roomId) {
+            @PathVariable("roomId") Long roomId, Principal principal) {
+        setUpPlayer(principal);
         return gameManagerService.removeRoom(roomId, userManagerService.getSessionUser());
     }
 

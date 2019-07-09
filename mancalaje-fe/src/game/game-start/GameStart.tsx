@@ -28,6 +28,15 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
     }
 
     componentDidMount() {
+        this.loadGameData();
+        this.setState({
+            refresher: setInterval(() => {
+                this.loadGameData();
+            }, 1000)
+        });
+    }
+
+    private loadGameData() {
         makeGetRequest('/mancala/boards/' + this.props.match.params.id, this.props,
             (data: any) => this.setState({
                 playerState: data
@@ -66,6 +75,7 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
     }
 
     private leaveRoom() {
+        clearInterval(this.state.refresher);
         makeDeleteRequest('/mancala/rooms/' + this.props.match.params.id, this.state, this.props, () => {
             this.props.history.push(`/gameList`)
         });
