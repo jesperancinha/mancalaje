@@ -80,7 +80,7 @@ public class Board implements Serializable {
         List<Hole> nextHoleArrayList = new ArrayList<>();
         nextHoleArrayList.add(allHoles.get(allHoles.size() - 1));
         nextHoleArrayList.addAll(allHoles.subList(1, allHoles.size()));
-        IntStream.range(0, 13).boxed().forEach(index -> allHoles.get(index).setNextHole(nextHoleArrayList.get(index)));
+        IntStream.range(0, 13).boxed().forEach(index -> allHoles.get(index).setNextHole(nextHoleArrayList.get(index + 1)));
     }
 
     /**
@@ -110,12 +110,12 @@ public class Board implements Serializable {
             return hole;
         }
         hole.addOne();
-        if (stones == 1) {
-            return hole;
-        }
-        if ((hole == playerTwoStore || hole == playerOneStore)
-                && hole.getPlayer() != currentPlayer) {
+
+        if ((hole != playerTwoStore && hole != playerOneStore)
+                && hole.getPlayer() == currentPlayer && hole.getStones() == 1) {
             return swayStonseFromHole(currentPlayer, hole.getOppositeHole(), stones - 1);
+        } else if (stones == 1) {
+            return hole;
         } else {
             return swayStonseFromHole(currentPlayer, hole.getNextHole(), stones - 1);
         }
@@ -129,7 +129,7 @@ public class Board implements Serializable {
 
     public Player removePlayer(Player player) {
         if (playerMatch(player, getPlayer1())) {
-            if (Objects.nonNull(player2))  {
+            if (Objects.nonNull(player2)) {
                 player2.setOpponent(null);
             }
             player1 = null;

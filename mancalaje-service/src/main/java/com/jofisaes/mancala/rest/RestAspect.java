@@ -24,7 +24,7 @@ public class RestAspect {
 
     private void setUpPlayer(User principal) {
         Player sessionUser = userManagerService.getSessionUser();
-        if(Objects.isNull(sessionUser)){
+        if (Objects.isNull(sessionUser)) {
             sessionUser = new Player();
             userManagerService.setSessionUser(sessionUser);
         }
@@ -35,12 +35,17 @@ public class RestAspect {
 
 
     @Before("execution(* com.jofisaes.mancala.rest.BoardsController.*(..))")
-    public void logBeforeAllMethods() {
+    public void logBeforeAllBoardController() {
         this.setUpPlayer((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
     }
 
     @Before("execution(* com.jofisaes.mancala.rest.RoomController.*(..))")
-    public void logBeforeGetEmployee() {
+    public void logBeforeAllRoomController() {
+        this.setUpPlayer((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    }
+
+    @Before("execution(* com.jofisaes.mancala.rest.GameActionsController.*(..))")
+    public void logBeforeAllGameActionController() {
         this.setUpPlayer((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
     }
 }

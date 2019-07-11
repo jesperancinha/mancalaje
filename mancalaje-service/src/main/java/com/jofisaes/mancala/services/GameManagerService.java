@@ -66,10 +66,19 @@ public class GameManagerService {
             throw new AlreadyInGameException();
         } else throw new RoomFullException();
         if (board.isReady()) {
-            board.getPlayer1().setOpponent(board.getPlayer2());
-            board.getPlayer2().setOpponent(board.getPlayer1());
+            Player player1 = board.getPlayer1();
+            Player player2 = board.getPlayer2();
+            player1.setBoardManager(boardManager);
+            player2.setBoardManager(boardManager);
+            player1.setOpponent(board.getPlayer2());
+            player2.setOpponent(board.getPlayer1());
+            calculateFirstPlayer(boardManager, board);
         }
         return boardManager;
+    }
+
+    private void calculateFirstPlayer(BoardManager boardManager, Board board) {
+        boardManager.setCurrentPlayer(board.getPlayer1());
     }
 
     /**

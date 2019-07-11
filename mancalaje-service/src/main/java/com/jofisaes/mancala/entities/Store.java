@@ -7,7 +7,7 @@ public class Store extends Hole {
         this.setStones(0);
     }
 
-    public void addStones(Integer flushPickedUpStones) {
+    public void addStones(int flushPickedUpStones) {
         super.addStones(flushPickedUpStones);
     }
 }

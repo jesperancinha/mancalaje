@@ -17,9 +17,9 @@ export class Board {
 }
 
 class Hole {
-    id: number = -1;
-    stones: number = 4;
-    enabled: boolean = false;
+    id?: number;
+    stones?: number;
+    enabled?: boolean;
 }
 
 export class BoardManager {

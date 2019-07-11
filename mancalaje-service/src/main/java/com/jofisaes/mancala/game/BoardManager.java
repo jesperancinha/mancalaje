@@ -61,7 +61,8 @@ public class BoardManager implements Serializable {
         if (currentPlayer == sessionUser) {
             final Hole hole = board.getAllHoles().get(holeId);
             if (sessionUser.getAllPlayerHoles().contains(hole)) {
-                Hole lastHole = board.swayStonseFromHole(sessionUser, hole, hole.pickStones());
+                Integer stones = hole.pickStones();
+                Hole lastHole = board.swayStonseFromHole(sessionUser, hole.getNextHole(), stones);
                 if (lastHole.getPickedUpStones() > 0) {
                     sessionUser.getPlayerStore().addStones(lastHole.flushPickedUpStones());
                 }

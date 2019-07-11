@@ -16,12 +16,12 @@ public class Hole implements Serializable {
     @JsonProperty("id")
     private Integer id;
     @JsonProperty("stones")
-    private Integer stones = 4;
+    private Integer stones;
     @JsonProperty("enabled")
     private boolean enabled;
 
     @JsonIgnore
-    private Integer pickedUpStones;
+    private int pickedUpStones;
 
     @JsonIgnore
     private Hole nextHole;
@@ -32,6 +32,7 @@ public class Hole implements Serializable {
     public Hole(Player player, Integer id) {
         this.player = player;
         this.id = id;
+        this.stones = 4;
     }
 
     public Integer pickStones() {
@@ -44,13 +45,13 @@ public class Hole implements Serializable {
         this.stones++;
     }
 
-    public Integer flushPickedUpStones() {
-        Integer pickedStones = this.pickedUpStones;
+    public int flushPickedUpStones() {
+        int pickedStones = this.pickedUpStones;
         this.pickedUpStones = 0;
         return pickedStones;
     }
 
-    protected void addStones(Integer flushPickedUpStones) {
+    protected void addStones(int flushPickedUpStones) {
         this.stones += flushPickedUpStones;
     }
 }
