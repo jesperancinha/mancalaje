@@ -3,28 +3,28 @@ package com.jofisaes.mancala.services;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jofisaes.mancala.game.BoardManager;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Getter
-@Setter
-@NoArgsConstructor
 @Service
-public class RoomsManager implements Serializable {
+public class RoomsManager {
 
-    private List<BoardManager> boardManagers = new ArrayList<>();
+    private final List<BoardManager> boardManagers;
 
     @JsonIgnore
-    private Map<Long, BoardManager> boardManagerMap = new HashMap<>();
+    private final Map<Long, BoardManager> boardManagerMap;
 
-    public BoardManager removeRoom(Long roomId) {
+    public RoomsManager() {
+        this.boardManagerMap = new HashMap<>();
+        this.boardManagers = new ArrayList<>();
+    }
+
+    BoardManager removeRoom(Long roomId) {
         BoardManager boardManager = boardManagerMap.get(roomId);
         boardManagers.remove(boardManager);
         return boardManagerMap.remove(roomId);

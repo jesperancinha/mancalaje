@@ -35,7 +35,7 @@ public class Board implements Serializable {
     private Player player2;
 
     @JsonProperty("allHoles")
-    private List<Hole> allHoles = new ArrayList<>();
+    private List<Hole> allHoles;
 
     @JsonIgnore
     private List<Hole> allPlayerOneHoles;
@@ -50,10 +50,11 @@ public class Board implements Serializable {
     private Store playerTwoStore;
 
     public Board(String boardName) {
+        this.name = boardName;
+        this.allHoles = new ArrayList<>();
         calculateBoard();
         calculateNextHoles();
         calculateOppositeHoles();
-        this.name = boardName;
     }
 
     /**

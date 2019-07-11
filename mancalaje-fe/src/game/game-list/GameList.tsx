@@ -36,6 +36,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
 
     componentDidMount() {
         this.loadAllBoards();
+        makeDeleteRequest('mancala/rooms', this.state, this.props);
         let refresher = setInterval(() => {
             this.loadAllBoards();
         }, 1000);

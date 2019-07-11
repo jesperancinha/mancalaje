@@ -31,4 +31,12 @@ public class RoomController extends AbstractUserController {
         userManagerService.setSessionUser(player);
     }
 
+    @DeleteMapping
+    @ResponseStatus(value = HttpStatus.OK)
+    public void leaveAllGames() {
+        final Player sessionUser = userManagerService.getSessionUser();
+        gameManagerService.listAllGames().getBoardManagers().forEach(boardManager -> gameManagerService.leaveRoom(boardManager.getBoardManagerId(), sessionUser));
+    }
+
+
 }
