@@ -104,6 +104,9 @@ public class GameManagerService {
     public BoardManager removeRoom(Long roomId, Player sessionUser) {
         Map<Long, BoardManager> boardManagerMap = roomsManager.getBoardManagerMap();
         BoardManager room = boardManagerMap.get(roomId);
+        if(Objects.isNull(room)){
+            roomsManager.forceRemoveRoom(roomId);
+        }
         if (playerMatch(room.getOwner(), sessionUser)) {
             return roomsManager.removeRoom(roomId);
         }

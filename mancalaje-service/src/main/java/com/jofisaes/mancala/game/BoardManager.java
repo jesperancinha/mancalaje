@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jofisaes.mancala.entities.Board;
 import com.jofisaes.mancala.entities.Hole;
 import com.jofisaes.mancala.entities.Player;
+import com.jofisaes.mancala.entities.Store;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -60,24 +61,26 @@ public class BoardManager implements Serializable {
     public void swayStonesFromHole(Player sessionUser, Integer holeId) {
         if (currentPlayer == sessionUser) {
             final Hole hole = board.getAllHoles().get(holeId);
-            if (sessionUser.getAllPlayerHoles().contains(hole)) {
+            if (sessionUser.getAllPlayerHoles().contains(hole) && !(hole instanceof Store)) {
                 Integer stones = hole.pickStones();
                 Hole lastHole = board.swayStonseFromHole(sessionUser, hole.getNextHole(), stones);
                 if (lastHole.getPickedUpStones() > 0) {
                     sessionUser.getPlayerStore().addStones(lastHole.flushPickedUpStones());
                 }
-            }
-            this.gameOver = this.board.isGameOver();
-            if (!this.gameOver) {
-                this.switchCurrentPlayer();
+                this.gameOver = this.board.isGameOver();
+                if (!this.gameOver) {
+                    if(lastHole.getStones() > 1 && lastHole != currentPlayer.getPlayerStore()) {
+                        this.switchCurrentPlayer();
+                    }
+                }
             }
         }
     }
 
     private void switchCurrentPlayer() {
-        if(this.currentPlayer == this.board.getPlayer1()){
+        if (this.currentPlayer == this.board.getPlayer1()) {
             this.currentPlayer = this.board.getPlayer2();
-        } else if(this.currentPlayer == this.board.getPlayer2()){
+        } else if (this.currentPlayer == this.board.getPlayer2()) {
             this.currentPlayer = this.board.getPlayer1();
         }
     }

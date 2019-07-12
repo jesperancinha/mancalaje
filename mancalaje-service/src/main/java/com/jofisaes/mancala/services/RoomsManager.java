@@ -30,4 +30,7 @@ public class RoomsManager {
         return boardManagerMap.remove(roomId);
     }
 
+    void forceRemoveRoom(Long roomId) {
+        boardManagers.removeIf(room -> room.getBoardManagerId().equals(roomId));
+    }
 }
