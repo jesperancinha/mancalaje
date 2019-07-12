@@ -74,7 +74,7 @@ public class Board implements Serializable {
     }
 
     @JsonIgnore
-    public void initializePlayers(Player player1, Player player2){
+    public void initializePlayers(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
         this.allPlayerOneHoles.forEach(hole -> hole.setPlayer(player1));
@@ -92,6 +92,7 @@ public class Board implements Serializable {
         nextHoleArrayList.add(allHoles.get(allHoles.size() - 1));
         nextHoleArrayList.addAll(allHoles.subList(1, allHoles.size()));
         IntStream.range(0, 13).boxed().forEach(index -> allHoles.get(index).setNextHole(nextHoleArrayList.get(index + 1)));
+        allHoles.get(13).setNextHole(allHoles.get(0));
     }
 
     /**
@@ -116,16 +117,21 @@ public class Board implements Serializable {
     }
 
     public Hole swayStonseFromHole(Player currentPlayer, Hole hole, Integer stones) {
-        if (stones == 1 && hole.getStones() == 0 && hole.getPlayer() == currentPlayer) {
-            hole.setPickedUpStones(hole.getOppositeHole().pickStones() + 1);
+        if (stones == 1 && hole.getStones() == 0 && hole.getPlayer() == currentPlayer && !(hole instanceof Store)) {
+            int fetchedStones = 1 + hole.getOppositeHole().getStones();
+            hole.setStones(0);
+            hole.getOppositeHole().setStones(0);
+            hole.setPickedUpStones(fetchedStones);
             return hole;
         }
+
+        if (hole instanceof Store && hole.getPlayer() != currentPlayer) {
+            return swayStonseFromHole(currentPlayer, hole.getNextHole(), stones);
+        }
+
         hole.addOne();
 
-        if ((hole != playerTwoStore && hole != playerOneStore)
-                && hole.getPlayer() == currentPlayer && hole.getStones() == 1) {
-            return swayStonseFromHole(currentPlayer, hole.getOppositeHole(), stones - 1);
-        } else if (stones == 1) {
+        if (stones == 1) {
             return hole;
         } else {
             return swayStonseFromHole(currentPlayer, hole.getNextHole(), stones - 1);

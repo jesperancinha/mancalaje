@@ -54,6 +54,7 @@ public class GameManagerServiceTest {
         assertThat(allHoles.get(5).getStones()).isEqualTo(4);
         assertThat(allHoles.get(6).getStones()).isEqualTo(0);
         assertThat(allHoles.get(7).getStones()).isEqualTo(4);
+        assertThat(boardManager.getCurrentPlayer()).isSameAs(mockPlayer2);
     }
 
     @Test
@@ -78,5 +79,6 @@ public class GameManagerServiceTest {
         assertThat(allHoles.get(8).getStones()).isEqualTo(5);
         assertThat(allHoles.get(9).getStones()).isEqualTo(5);
         assertThat(allHoles.get(10).getStones()).isEqualTo(4);
+        assertThat(boardManager.getCurrentPlayer()).isSameAs(mockPlayer2);
     }
 }

@@ -67,8 +67,19 @@ public class BoardManager implements Serializable {
                     sessionUser.getPlayerStore().addStones(lastHole.flushPickedUpStones());
                 }
             }
+            this.gameOver = this.board.isGameOver();
+            if (!this.gameOver) {
+                this.switchCurrentPlayer();
+            }
         }
-        this.gameOver = this.board.isGameOver();
+    }
+
+    private void switchCurrentPlayer() {
+        if(this.currentPlayer == this.board.getPlayer1()){
+            this.currentPlayer = this.board.getPlayer2();
+        } else if(this.currentPlayer == this.board.getPlayer2()){
+            this.currentPlayer = this.board.getPlayer1();
+        }
     }
 
     public Player refreshSessionUser(Player sessionUser) {
