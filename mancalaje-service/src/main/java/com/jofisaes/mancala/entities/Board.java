@@ -73,6 +73,16 @@ public class Board implements Serializable {
         allHoles.add(playerTwoStore);
     }
 
+    @JsonIgnore
+    public void initializePlayers(Player player1, Player player2){
+        this.player1 = player1;
+        this.player2 = player2;
+        this.allPlayerOneHoles.forEach(hole -> hole.setPlayer(player1));
+        this.allPlayerTwoHoles.forEach(hole -> hole.setPlayer(player2));
+        this.playerOneStore.setPlayer(player1);
+        this.playerTwoStore.setPlayer(player2);
+    }
+
     /**
      * calculates all next holes
      */

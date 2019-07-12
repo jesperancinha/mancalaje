@@ -12,7 +12,6 @@ import mancalaReducer from "../../reducers/reducer";
 import MancalaJeHeader from "../../components/MancalaJeHeader";
 import {MySnackbarContentWrapper} from "../../components/SnackbarContent";
 import {control} from "../../theme";
-import {makeDeleteRequest} from "../../actions/OAuthRouting";
 
 interface GameProps extends State {
     username: string;

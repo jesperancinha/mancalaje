@@ -1,5 +1,6 @@
 package com.jofisaes.mancala.rest;
 
+import com.jofisaes.mancala.entities.Board;
 import com.jofisaes.mancala.entities.Player;
 import com.jofisaes.mancala.game.BoardManager;
 import com.jofisaes.mancala.game.BoardManagerDto;
@@ -25,10 +26,12 @@ public class BoardsController extends AbstractUserController implements Serializ
     public BoardManagerDto getGame(
             @PathVariable("roomId") Long roomId) {
         Player sessionUser = this.userManagerService.getSessionUser();
-        BoardManager boardManagerByRoomnId = gameManagerService.getBoardManagerByRoomnId(roomId);
-        userManagerService.setSessionUser(boardManagerByRoomnId.refreshSessionUser(sessionUser));
-        return BoardManagerDto.builder().boardManager(boardManagerByRoomnId).loggedPlayer(sessionUser).build();
+        BoardManager boardManager = this.gameManagerService.handleBoardManager(roomId);
+        userManagerService.setSessionUser(boardManager.refreshSessionUser(sessionUser));
+        updateBoardManager(boardManager);
+        return BoardManagerDto.builder().boardManager(boardManager).loggedPlayer(sessionUser).build();
     }
+
 
     @DeleteMapping(value = "{roomId}")
     public BoardManager removeRoom(

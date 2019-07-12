@@ -72,6 +72,7 @@ public class GameManagerService {
             player2.setBoardManager(boardManager);
             player1.setOpponent(board.getPlayer2());
             player2.setOpponent(board.getPlayer1());
+            board.initializePlayers(player1, player2);
             calculateFirstPlayer(boardManager, board);
         }
         return boardManager;
@@ -107,5 +108,18 @@ public class GameManagerService {
             return roomsManager.removeRoom(roomId);
         }
         throw new WrongRoomOwnerException();
+    }
+
+    public BoardManager handleBoardManager(Long roomId) {
+        BoardManager boardManager = this.getBoardManagerByRoomnId(roomId);
+        Board board = boardManager.getBoard();
+        board.getAllHoles().forEach(hole -> {
+            if (hole.getPlayer() == boardManager.getCurrentPlayer()) {
+                hole.setEnabled(true);
+            } else {
+                hole.setEnabled(false);
+            }
+        });
+        return boardManager;
     }
 }

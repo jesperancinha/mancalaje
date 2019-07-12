@@ -14,9 +14,6 @@ import static com.jofisaes.mancala.rest.Mappings.MANCALA_ACTIONS;
 @RequestMapping(MANCALA_ACTIONS)
 public class GameActionsController extends AbstractUserController {
 
-    @Autowired
-    private RoomsManager roomsManager;
-
     @PutMapping(value = "nextMove/{holeId}")
     public BoardManager pressHoleId(
             @PathVariable("holeId") Integer holeId) {
@@ -24,7 +21,7 @@ public class GameActionsController extends AbstractUserController {
         BoardManager boardManager = userManagerService.getSessionUser().getBoardManager();
         boardManager.getBoard().getPlayer1().setBoardManager(boardManager);
         boardManager.getBoard().getPlayer2().setBoardManager(boardManager);
-        roomsManager.getBoardManagerMap().put(boardManager.getBoardManagerId(), boardManager);
+        updateBoardManager(boardManager);
         return boardManager;
     }
 }

@@ -107,3 +107,13 @@ export const control = {
     margin: 15,
     backgroundColor: '#8de4e1',
 };
+
+export const holeDisabled ={
+    backgroundColor: '#e40010',
+    borderRadius: 50
+};
+
+export const holeEnabled ={
+    backgroundColor: '#00e41d',
+    borderRadius: 50
+};

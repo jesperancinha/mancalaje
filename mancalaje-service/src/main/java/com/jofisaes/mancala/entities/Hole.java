@@ -2,6 +2,7 @@ package com.jofisaes.mancala.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +13,7 @@ import java.io.Serializable;
 public class Hole implements Serializable {
 
     @JsonProperty("player")
-    private final Player player;
+    private Player player;
     @JsonProperty("id")
     private Integer id;
     @JsonProperty("stones")
@@ -29,7 +30,7 @@ public class Hole implements Serializable {
     @JsonIgnore
     private Hole oppositeHole;
 
-    public Hole(Player player, Integer id) {
+    Hole(Player player, Integer id) {
         this.player = player;
         this.id = id;
         this.stones = 4;
