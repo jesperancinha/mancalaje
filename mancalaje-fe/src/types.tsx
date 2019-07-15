@@ -23,9 +23,10 @@ class Hole {
 }
 
 export class BoardManager {
-    board: Board = new Board();
-    boardManagerId: number = -1;
-    owner: Player = new Player();
+    board?: Board;
+    boardManagerId: number = - 1;
+    owner?: Player;
+    currentPlayer?: Player;
 }
 
 export class Game {

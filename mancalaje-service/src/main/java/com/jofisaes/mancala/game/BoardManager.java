@@ -19,7 +19,7 @@ import static com.jofisaes.mancala.rest.Mappings.playerMatch;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BoardManager implements Serializable {
 
-    @JsonIgnore
+    @JsonProperty("currentPlayer    ")
     private Player currentPlayer;
 
     @JsonProperty("owner")

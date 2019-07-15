@@ -59,7 +59,7 @@ export const theme = createMuiTheme({
                 padding: 0,
             }
         },
-        MuiList:{
+        MuiList: {
             root: {
                 alignItems: "left"
             }
@@ -71,6 +71,28 @@ export const theme = createMuiTheme({
                 padding: 0,
                 margin: 0
             }
+        },
+        MuiTableCell: {
+            root: {
+                fontSize: 50,
+                fontWeight: 900,
+                paddingTop: 14,
+                paddingBottom: 14,
+                paddingLeft: 16,
+                paddingRight: 16,
+                borderColor: "black",
+                borderWidth: 2,
+                alignContent: "center",
+                alignItems: "center",
+                width: 46,
+                height: 71
+            },
+            body: {
+                borderWidth: 0,
+                alignContent: "center",
+                alignItems: "center"
+            },
+
         }
     },
     shape: {
@@ -108,12 +130,12 @@ export const control = {
     backgroundColor: '#8de4e1',
 };
 
-export const holeDisabled ={
+export const holeDisabled = {
     backgroundColor: '#e40010',
     borderRadius: 50
 };
 
-export const holeEnabled ={
+export const holeEnabled = {
     backgroundColor: '#00e41d',
     borderRadius: 50
 };

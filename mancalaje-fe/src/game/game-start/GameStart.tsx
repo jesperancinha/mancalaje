@@ -53,13 +53,19 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
                                 (<Box>
                                     <Typography variant="h2">Hello {this.state.playerState.loggedPlayer.name}</Typography>
                                     {this.state.playerState.loggedPlayer.opponentName ?
-                                        (<Typography variant="h2">You are currently playing mancalaje
+                                        (<Typography variant="h3">You are currently playing mancalaje
                                             with {this.state.playerState.loggedPlayer.opponentName}</Typography>) : (
-                                            <Typography variant="h2">Waiting for player to join room...</Typography>)
+                                            <Typography variant="h3">Waiting for player to join room...</Typography>)
 
                                     }
                                 </Box>) : (<Typography variant="h2">Loading...</Typography>)}
 
+                        </AppBar>
+                        <AppBar title="Game Start Current Player" position="relative">
+                            {this.state.playerState.boardManager && this.state.playerState.boardManager.currentPlayer ? (
+                                    <Typography variant="h3">Current
+                                        player {this.state.playerState.boardManager.currentPlayer.name}</Typography>)
+                                : (<Typography variant="h2">Loading...</Typography>)}
                         </AppBar>
                         <AppBar title="Game Start Board" position="relative">
                             <MancalaBoard data={this.state.playerState.boardManager} state={this.state} props={this.props}/>

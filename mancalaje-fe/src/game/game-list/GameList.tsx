@@ -91,7 +91,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                                             <ListItemIcon>
                                                 <RoomComponentIcon/>
                                             </ListItemIcon>
-                                            {row.board.name}
+                                            {row.board ? row.board.name : ''}
                                         </ListItem>
                                         <ListItemLink onClick={() => this.handleRemoveRoom(row.boardManagerId)}>
                                             <RemoveComponentIcon/>
@@ -100,7 +100,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                                             {this.getCurrentPlayersText(row)}
                                         </ListItem>
                                         <ListItem>
-                                            {"Owner:" + row.owner.name}
+                                            {row.owner? "Owner:" + row.owner.name: ''}
                                         </ListItem>
                                     </ListItem>
                                 ))}
@@ -163,16 +163,18 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     }
 
     private getCurrentPlayersText(row: BoardManager) {
-        const player1 = row.board.player1;
-        const player2 = row.board.player2;
-        if (player1 && player2) {
-            return "Current players: " + player1.name + " and " + player2.name;
-        }
-        if (player1) {
-            return "Current player: " + player1.name;
-        }
-        if (player2) {
-            return "Current player: " + player2.name;
+        if(row.board) {
+            const player1 = row.board.player1;
+            const player2 = row.board.player2;
+            if (player1 && player2) {
+                return "Current players: " + player1.name + " and " + player2.name;
+            }
+            if (player1) {
+                return "Current player: " + player1.name;
+            }
+            if (player2) {
+                return "Current player: " + player2.name;
+            }
         }
         return "No players in the game. Room is free";
 
