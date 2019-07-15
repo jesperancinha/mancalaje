@@ -100,7 +100,7 @@ public class GameManagerService {
 
     public void swayStonesFromHole(Player sessionUser, Integer holeId) throws InterruptedException {
         BoardManager boardManager = sessionUser.getBoardManager();
-        if(Objects.isNull(boardManager)){
+        if (Objects.isNull(boardManager)) {
             throw new StopClickingException();
         }
         boardManager.swayStonesFromHole(sessionUser, holeId);
@@ -110,9 +110,8 @@ public class GameManagerService {
         Map<Long, BoardManager> boardManagerMap = roomsManager.getBoardManagerMap();
         BoardManager room = boardManagerMap.get(roomId);
         if (Objects.isNull(room)) {
-            roomsManager.forceRemoveRoom(roomId);
-        }
-        if (playerMatch(room.getOwner(), sessionUser)) {
+            return roomsManager.forceRemoveRoom(roomId);
+        } else if (playerMatch(room.getOwner(), sessionUser)) {
             return roomsManager.removeRoom(roomId);
         }
         throw new WrongRoomOwnerException();
@@ -122,7 +121,7 @@ public class GameManagerService {
         BoardManager boardManager = this.getBoardManagerByRoomnId(roomId);
         Board board = boardManager.getBoard();
         board.getAllHoles().forEach(hole -> {
-            if (hole.getPlayer() == boardManager.getCurrentPlayer()) {
+            if (Objects.nonNull(hole.getPlayer()) && Objects.nonNull(boardManager.getCurrentPlayer()) && hole.getPlayer() == boardManager.getCurrentPlayer()) {
                 hole.setEnabled(true);
             } else {
                 hole.setEnabled(false);
