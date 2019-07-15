@@ -28,14 +28,15 @@ stay tuned!
 
 **Under development**
 
-## Change Logs and Milestones
+## Milestones
+
+2019-07-15:
+-   First fully playable version
 
 2019-07-02:
-
 -   OAuth2 Login
 
 2019-07-01:
-
 -   OAuth2 Implementation
 -   Basic front end
 
