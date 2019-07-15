@@ -1,5 +1,5 @@
 export class Hole {
-    id?: number;
-    stones?: number;
-    enabled?: boolean;
+    public id?: number;
+    public stones?: number;
+    public enabled?: boolean;
 }

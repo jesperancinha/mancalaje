@@ -1,3 +1,3 @@
 export class ErrorMessage {
-    localizedMessage?: string;
+    public localizedMessage?: string;
 }

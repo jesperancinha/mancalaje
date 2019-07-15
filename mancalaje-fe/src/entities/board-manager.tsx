@@ -2,10 +2,10 @@ import {Board} from "./board";
 import {Player} from "./player";
 
 export class BoardManager {
-    board?: Board;
-    boardManagerId: number = - 1;
-    owner?: Player;
-    currentPlayer?: Player;
-    gameover?: boolean;
-    winner?: Player;
+    public board?: Board;
+    public boardManagerId: number = - 1;
+    public owner?: Player;
+    public currentPlayer?: Player;
+    public gameover?: boolean;
+    public winner?: Player;
 }

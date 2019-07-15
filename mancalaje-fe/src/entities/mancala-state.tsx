@@ -1,3 +1,3 @@
 export class MancalaState {
-    oauth: any = null;
+    public oauth: any = null;
 }

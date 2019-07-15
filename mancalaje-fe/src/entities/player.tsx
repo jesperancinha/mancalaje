@@ -1,5 +1,5 @@
 export class Player {
-    name?: string;
-    opponentName?: string;
-    email?: string
+    public name?: string;
+    public opponentName?: string;
+    public email?: string
 }

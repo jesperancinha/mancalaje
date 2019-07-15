@@ -1,5 +1,4 @@
 import React from "react";
-import MancalaBoard from "../../components/MancalaBoard";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import {control, theme} from "../../theme";
 import {Button, Grid, Typography} from "@material-ui/core";
@@ -12,6 +11,7 @@ import Box from "@material-ui/core/Box";
 import {MySnackbarContentWrapper} from "../../components/SnackbarContent";
 import {PlayerState} from "../../entities/player-state";
 import {MancalaJeHeader} from "../../components/MancalaJeHeader";
+import {MancalaBoard} from "../../components/MancalaBoard";
 
 interface GameStartProps extends State {
     mancalaReducer?: any

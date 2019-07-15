@@ -14,9 +14,9 @@ const App: React.FC = () => {
         <Router>
             <Switch>
                 <Route exact path="/" component={Home}/>
-                <Route path="/login" component={GameLogin}/>
-                <Route path="/gameList" component={GameList}/>
-                <Route path="/gameStart/:id" component={GameStart}/>
+                <Route path="/login" component={GameLoginConnected}/>
+                <Route path="/gameList" component={GameListConnected}/>
+                <Route path="/gameStart/:id" component={GameStartConnected}/>
             </Switch>
         </Router>
     );

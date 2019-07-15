@@ -74,4 +74,5 @@ const MancalaBoard = ({data, state, props}: { data?: BoardManager, state?: any, 
         </div>
     );
 };
-export default MancalaBoard;
+
+export {MancalaBoard};

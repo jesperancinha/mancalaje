@@ -50,7 +50,7 @@ interface Props {
     variant: keyof typeof variantIcon;
 }
 
-export function MySnackbarContentWrapper(props: Props) {
+const MySnackbarContentWrapper = (props: Props) => {
     const classes = useStyles1();
     const {className, message, onClose, variant, ...other} = props;
     const Icon = variantIcon[variant];
@@ -66,11 +66,13 @@ export function MySnackbarContentWrapper(props: Props) {
         </span>
             }
             action={[
-                <IconButton key="close" aria-label="Close" color="inherit" onClick={onClose}>
+                <IconButton href="_blank" key="close" aria-label="Close" color="inherit" onClick={onClose}>
                     <CloseIcon className={classes.icon}/>
                 </IconButton>,
             ]}
             {...other}
         />
     );
-}
+};
+
+export {MySnackbarContentWrapper};
