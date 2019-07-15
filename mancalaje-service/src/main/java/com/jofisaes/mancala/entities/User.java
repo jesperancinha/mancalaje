@@ -10,9 +10,9 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "User")
 @Getter
 @Setter
+@Table(name = "User")
 public class User implements Serializable {
 
     @Id
@@ -27,6 +27,5 @@ public class User implements Serializable {
 
     @Column
     private String role;
-
 
 }

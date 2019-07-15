@@ -1,7 +1,7 @@
 package com.jofisaes.mancala.game;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.jofisaes.mancala.entities.Player;
+import com.jofisaes.mancala.cache.Player;
 import lombok.Builder;
 import lombok.Getter;
 

@@ -1,7 +1,7 @@
 package com.jofisaes.mancala.services;
 
-import com.jofisaes.mancala.entities.Board;
-import com.jofisaes.mancala.entities.Player;
+import com.jofisaes.mancala.cache.Board;
+import com.jofisaes.mancala.cache.Player;
 import com.jofisaes.mancala.exception.*;
 import com.jofisaes.mancala.game.BoardManager;
 import org.apache.logging.log4j.util.Strings;

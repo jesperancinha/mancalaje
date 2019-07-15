@@ -3,10 +3,10 @@ package com.jofisaes.mancala.game;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.jofisaes.mancala.entities.Board;
-import com.jofisaes.mancala.entities.Hole;
-import com.jofisaes.mancala.entities.Player;
-import com.jofisaes.mancala.entities.Store;
+import com.jofisaes.mancala.cache.Board;
+import com.jofisaes.mancala.cache.Hole;
+import com.jofisaes.mancala.cache.Player;
+import com.jofisaes.mancala.cache.Store;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,6 +1,6 @@
 package com.jofisaes.mancala.rest;
 
-import com.jofisaes.mancala.entities.Player;
+import com.jofisaes.mancala.cache.Player;
 
 import java.util.Objects;
 

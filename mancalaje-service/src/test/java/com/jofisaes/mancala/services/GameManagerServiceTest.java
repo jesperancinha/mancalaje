@@ -1,7 +1,7 @@
 package com.jofisaes.mancala.services;
 
-import com.jofisaes.mancala.entities.Hole;
-import com.jofisaes.mancala.entities.Player;
+import com.jofisaes.mancala.cache.Hole;
+import com.jofisaes.mancala.cache.Player;
 import com.jofisaes.mancala.game.BoardManager;
 import org.junit.Test;
 

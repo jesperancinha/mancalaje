@@ -1,6 +1,6 @@
 package com.jofisaes.mancala.rest;
 
-import com.jofisaes.mancala.entities.Player;
+import com.jofisaes.mancala.cache.Player;
 import com.jofisaes.mancala.game.BoardManager;
 import com.jofisaes.mancala.game.BoardManagerDto;
 import org.springframework.web.bind.annotation.*;
