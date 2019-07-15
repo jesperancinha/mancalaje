@@ -22,8 +22,8 @@ class GameLogin extends Component<GameProps, GameProps> {
     constructor({props}: { props: GameProps }) {
         super(props);
         this.state = {
-            username: 'playerOne@mancalaje.com',
-            password: 'admin123',
+            username: "playerOne@mancalaje.com",
+            password: "admin123",
             refreshers: [],
         };
     }
@@ -43,18 +43,18 @@ class GameLogin extends Component<GameProps, GameProps> {
                         <Typography variant="h3" align={"center"}>Please login to start playing!</Typography>
                         <TextField
                             style={control}
-                            label={'Username'}
+                            label={"Username"}
                             error={this.state.username.length === 0}
                             helperText={this.getUserHelperText()}
-                            onChange={(newValue) => this.setState({username: newValue.target.value, statusError: ''})}/>
+                            onChange={(newValue) => this.setState({username: newValue.target.value, statusError: ""})}/>
                         <br/>
                         <TextField
                             style={control}
-                            label={'Password'}
+                            label={"Password"}
                             type="password"
                             error={this.state.password.length === 0}
                             helperText={this.getPassordHelperText()}
-                            onChange={(newValue) => this.setState({password: newValue.target.value, statusError: ''})}/>
+                            onChange={(newValue) => this.setState({password: newValue.target.value, statusError: ""})}/>
                         <br/>
                         <Button
                             style={control}
@@ -75,7 +75,7 @@ class GameLogin extends Component<GameProps, GameProps> {
                             variant="error"
                             message={this.state.statusError}
                             onClose={() => this.setState({
-                                statusError: ''
+                                statusError: "",
                             })}
                         />
                     </Grid>) : <div/>}
@@ -85,15 +85,15 @@ class GameLogin extends Component<GameProps, GameProps> {
 
     private handleClick() {
         let oAuth2 = new OAuth2({
-            grantType: 'password',
-            clientId: 'mancala-client',
-            clientSecret: 'mancala',
+            grantType: "password",
+            clientId: "mancala-client",
+            clientSecret: "mancala",
             userName: this.state.username,
             password: this.state.password,
-            tokenEndpoint: 'http://localhost:3000/oauth/token',
+            tokenEndpoint: "http://localhost:3000/oauth/token",
         });
         oAuth2.getAccessToken().then(() => {
-            this.props.history.push('gameList');
+            this.props.history.push("gameList");
         }).catch(() => this.setState({
             statusError: 'Login failed!'
         }));

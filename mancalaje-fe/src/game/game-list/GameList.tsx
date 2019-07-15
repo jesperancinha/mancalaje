@@ -33,12 +33,12 @@ class GameList extends React.Component<GameListProps, GameListProps> {
 
     constructor({props}: { props: GameListProps }) {
         super(props);
-        this.state = {boardName: '', refreshers: []};
+        this.state = {boardName: "", refreshers: []};
     }
 
     componentDidMount() {
         this.loadAllBoards();
-        makeDeleteRequest('mancala/rooms', this.state, this.props);
+        makeDeleteRequest("mancala/rooms", this.state, this.props);
         let refresher = setInterval(() => {
             this.loadAllBoards();
         }, 1000);
@@ -61,7 +61,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                 <AppBar title={"Game list controls"} position={"relative"}>
                     <TextField
                         style={control}
-                        label={'Room name'}
+                        label={"Room name"}
                         error={this.state.boardName.length === 0}
                         helperText={this.getRoomNameHelperText()}
                         onChange={(newValue) => this.changeState(newValue)}/>
@@ -76,7 +76,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                             variant="error"
                             message={this.state.statusError}
                             onClose={() => this.setState({
-                                statusError: ''
+                                statusError: ""
                             })}
                         />
                     </Grid>) : <div/>}
@@ -88,12 +88,12 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                                         align={"center"}>Listing {this.state.game.boardManagers.length} rooms</Typography>
                             <List component="nav" aria-label="Game room list">
                                 {this.state.game.boardManagers.map(row => (
-                                    <ListItem key={row.boardManagerId} component={'div'}>
+                                    <ListItem key={row.boardManagerId} component={"div"}>
                                         <ListItem component="span" button onClick={() => this.redirectToGamePage(row)}>
                                             <ListItemIcon>
                                                 <RoomComponentIcon/>
                                             </ListItemIcon>
-                                            {row.board ? row.board.name : ''}
+                                            {row.board ? row.board.name : ""}
                                         </ListItem>
                                         <ListItemLink onClick={() => this.handleRemoveRoom(row.boardManagerId)}>
                                             <RemoveComponentIcon/>
@@ -102,7 +102,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                                             {this.getCurrentPlayersText(row)}
                                         </ListItem>
                                         <ListItem>
-                                            {row.owner ? "Owner:" + row.owner.name : ''}
+                                            {row.owner ? "Owner:" + row.owner.name : ""}
                                         </ListItem>
                                     </ListItem>
                                 ))}
@@ -120,7 +120,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     private changeState(newValue: any) {
         this.setState({
             boardName: newValue.target.value,
-            statusError: '',
+            statusError: "",
         });
     }
 

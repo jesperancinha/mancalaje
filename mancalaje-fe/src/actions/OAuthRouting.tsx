@@ -1,14 +1,14 @@
 import {State} from "../reducers/reducerIndex";
 import {ErrorMessage} from "../entities/error-message";
 
-const LOGIN_PATH = '/login';
+const LOGIN_PATH = "/login";
 
 const makeGetRequest = (urlString: string, state: State, props: State, transformData: any) => {
     if (!props.oauth) {
         props.history.push(LOGIN_PATH);
     } else {
         props.oauth.fetch(urlString, {
-            method: 'GET'
+            method: "GET",
         })
             .then((res: any) => res.json())
             .then((data: any) => transformData(data))
@@ -24,7 +24,7 @@ const makePostRequest = (urlString: string, state: State, props: State, transfor
         props.history.push(LOGIN_PATH);
     } else {
         props.oauth.fetch(urlString, {
-            method: 'POST',
+            method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -45,7 +45,8 @@ const makePostRequest = (urlString: string, state: State, props: State, transfor
     }
 };
 
-const makePutRequest = (urlString: string, state: State, props: State, transformData: any, messageBody: any, errorCatch?: any) => {
+const makePutRequest = (urlString: string, state:
+    State, props: State, transformData: any, messageBody: any, errorCatch?: any) => {
     if (!props.oauth) {
         props.history.push(LOGIN_PATH);
     } else {

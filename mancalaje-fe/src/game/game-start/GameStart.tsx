@@ -39,7 +39,7 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
     }
 
     private loadGameData() {
-        makeGetRequest('/mancala/boards/' + this.props.match.params.id, this.state, this.props,
+        makeGetRequest("/mancala/boards/" + this.props.match.params.id, this.state, this.props,
             (data: any) => this.setState({
                 playerState: data
             }));
@@ -52,7 +52,9 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
                         <AppBar title="Game Start Title" position="relative">
                             {this.state.playerState.loggedPlayer ?
                                 (<Box>
-                                    <Typography variant="h2">Hello {this.state.playerState.loggedPlayer.name}</Typography>
+                                    <Typography variant="h2">
+                                        Hello {this.state.playerState.loggedPlayer.name}
+                                    </Typography>
                                     {this.state.playerState.boardManager && !this.state.playerState.boardManager.gameover ?
                                         (this.state.playerState.loggedPlayer.opponentName ?
                                                 (<Typography variant="h3">You are currently playing mancalaje
@@ -81,7 +83,7 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
                                         is {this.state.playerState.boardManager.winner.name}</Typography>
                                 </AppBar>)
                             : (<div/>)}
-                        <AppBar title={'Game Start Controls'} position={"relative"}>
+                        <AppBar title={"Game Start Controls"} position={"relative"}>
                             <Button
                                 style={control}
                                 onClick={() => this.leaveRoom()}>Leave room</Button>
@@ -92,7 +94,7 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
                                     variant="error"
                                     message={this.state.statusError}
                                     onClose={() => this.setState({
-                                        statusError: ''
+                                        statusError: ""
                                     })}
                                 />
                             </Grid>) : <div/>}
@@ -104,7 +106,7 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
 
     private leaveRoom() {
         this.state.refreshers.forEach(clearInterval);
-        makeDeleteRequest('/mancala/rooms/' + this.props.match.params.id, this.state, this.props, () => {
+        makeDeleteRequest("/mancala/rooms/" + this.props.match.params.id, this.state, this.props, () => {
             this.props.history.push(`/gameList`)
         });
     }

@@ -42,11 +42,11 @@ stay tuned!
 
 ## References
 
-*   [Postman](https://www.getpostman.com/)
+-   [Postman](https://www.getpostman.com/)
 
 ## License
 
-```
+```text
 Copyright 2016-2019 João Esperancinha (jesperancinha)
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -65,12 +65,21 @@ limitations under the License.
 ## About me
 
 -   Twitter [@jofisaes](https://twitter.com/jofisaes)
--   GitHub [jesperancinha](https://github.com/jesperancinha)
+
+-   GitHub [jesperancinha](https://github.com/jesperancinha)  
+
 -   Free Code Camp [jofisaes](https://www.freecodecamp.org/jofisaes)
+
 -   Hackerrank [jofisaes](https://www.hackerrank.com/jofisaes)
+
 -   Acclaim Badges [joao-esperancinha](https://www.youracclaim.com/users/joao-esperancinha/badges)
+
 -   Home Page [joaofilipesabinoesperancinha](http://joaofilipesabinoesperancinha.nl)
+
 -   Personal Projects:
+
     -   [Time Disruption Studios](http://tds.joaofilipesabinoesperancinha.nl/)
+    
     -   [Image Train Filters](http://itf.joaofilipesabinoesperancinha.nl/)
+    
     -   Google play apps: [Joao+Filipe+Sabino+Esperancinha](https://play.google.com/store/apps/developer?id=Joao+Filipe+Sabino+Esperancinha)

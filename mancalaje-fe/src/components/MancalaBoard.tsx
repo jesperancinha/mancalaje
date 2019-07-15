@@ -13,18 +13,23 @@ import Button from "@material-ui/core/Button";
 import {Hole} from "../entities/hole";
 import {BoardManager} from "../entities/board-manager";
 
-let swayStones = function (id: any, state: State, props: any) {
-    state.statusError = '';
-    makePutRequest('/mancala/actions/nextMove/' + id, state, props, () => {
+const swayStones = (id: number, state: State, props: any) => {
+    state.statusError = "";
+    makePutRequest("/mancala/actions/nextMove/" + id, state, props, () => {
     }, null);
 };
+const MAX_STONE_INDEX = 13;
+const STORE_ROW_SPAN = 2;
+const SINGLE_SPAN = 1;
+const STORE_INDEX_1 = 6;
+const SECOND_PLAYER_FIRST_ELEMENT = 7;
+const FIRT_PLAYER_FIRST_ELEMENT = 0;
+
 
 let dataBoardManager: any;
 const MancalaBoard = ({data, state, props}: { data?: BoardManager, state?: any, props?: any }) => {
-
-    dataBoardManager = data;
     const classes = useStyles();
-
+    dataBoardManager = data;
     return (
         <div className={classes.root}>
             <Paper>
@@ -33,34 +38,34 @@ const MancalaBoard = ({data, state, props}: { data?: BoardManager, state?: any, 
                         <TableBody>
                             <TableRow>
                                 <TableCell
-                                    style={dataBoardManager.board.allHoles[13].enabled ? holeEnabled : holeDisabled}
-                                    rowSpan={2} colSpan={1}>
+                                    style={dataBoardManager.board.allHoles[MAX_STONE_INDEX].enabled ? holeEnabled : holeDisabled}
+                                    rowSpan={STORE_ROW_SPAN} colSpan={SINGLE_SPAN}>
                                     <Button
-                                        disabled={!dataBoardManager.board.allHoles[13].enabled || dataBoardManager.gameover || dataBoardManager.currentPlayer.email !== state.playerState.loggedPlayer.email}
-                                        onClick={() => swayStones(dataBoardManager.board.allHoles[13].id, state, props)}
-                                        href={"#"}>{data.board.allHoles[13].stones}</Button></TableCell>
-                                {dataBoardManager.board.allHoles.slice(7, 13).reverse().map((hole: Hole) => (
+                                        disabled={!dataBoardManager.board.allHoles[MAX_STONE_INDEX].enabled || dataBoardManager.gameover || dataBoardManager.currentPlayer.email !== state.playerState.loggedPlayer.email}
+                                        onClick={() => swayStones(dataBoardManager.board.allHoles[MAX_STONE_INDEX].id, state, props)}
+                                        href={"#"}>{data.board.allHoles[MAX_STONE_INDEX].stones}</Button></TableCell>
+                                {dataBoardManager.board.allHoles.slice(SECOND_PLAYER_FIRST_ELEMENT, MAX_STONE_INDEX).reverse().map((hole: Hole) => (
                                     <TableCell
                                         style={hole.enabled ? holeEnabled : holeDisabled}
-                                        rowSpan={1} colSpan={1}>
+                                        rowSpan={SINGLE_SPAN} colSpan={SINGLE_SPAN}>
                                         <Button
                                             disabled={!hole.enabled || dataBoardManager.gameover || dataBoardManager.currentPlayer.email !== state.playerState.loggedPlayer.email}
                                             onClick={() => swayStones(hole.id, state, props)}
                                             href={"#"}>{hole.stones}</Button></TableCell>
                                 ))}
                                 <TableCell
-                                    style={dataBoardManager.board.allHoles[6].enabled ? holeEnabled : holeDisabled}
-                                    rowSpan={2} colSpan={1}>
+                                    style={dataBoardManager.board.allHoles[STORE_INDEX_1].enabled ? holeEnabled : holeDisabled}
+                                    rowSpan={STORE_ROW_SPAN} colSpan={SINGLE_SPAN}>
                                     <Button
-                                        disabled={!dataBoardManager.board.allHoles[6].enabled || dataBoardManager.gameover || dataBoardManager.currentPlayer.email !== state.playerState.loggedPlayer.email}
-                                        onClick={() => swayStones(dataBoardManager.board.allHoles[6].id, state, props)}
-                                        href={"#"}>{data.board.allHoles[6].stones}</Button></TableCell>
+                                        disabled={!dataBoardManager.board.allHoles[STORE_INDEX_1].enabled || dataBoardManager.gameover || dataBoardManager.currentPlayer.email !== state.playerState.loggedPlayer.email}
+                                        onClick={() => swayStones(dataBoardManager.board.allHoles[STORE_INDEX_1].id, state, props)}
+                                        href={"#"}>{data.board.allHoles[STORE_INDEX_1].stones}</Button></TableCell>
                             </TableRow>
                             <TableRow>
-                                {dataBoardManager.board.allHoles.slice(0, 6).map((hole: Hole) => (
+                                {dataBoardManager.board.allHoles.slice(FIRT_PLAYER_FIRST_ELEMENT, STORE_INDEX_1).map((hole: Hole) => (
                                     <TableCell
                                         style={hole.enabled ? holeEnabled : holeDisabled}
-                                        rowSpan={1} colSpan={1}>
+                                        rowSpan={SINGLE_SPAN} colSpan={SINGLE_SPAN}>
                                         <Button
                                             disabled={!hole.enabled || dataBoardManager.gameover || dataBoardManager.currentPlayer.email !== state.playerState.loggedPlayer.email}
                                             onClick={() => swayStones(hole.id, state, props)}
