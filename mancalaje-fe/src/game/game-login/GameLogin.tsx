@@ -35,7 +35,7 @@ class GameLogin extends Component<GameProps, GameProps> {
             clearInterval(i);
     }
 
-    render() {
+    render(): any {
         return (
             <MancalaJeHeader>
                 <Grid item xs={12}>
@@ -131,4 +131,5 @@ function mapDispatchToProps(dispatch: Dispatch) {
 // });
 
 // @ts-ignore
-export default connect(mapDispatchToProps)(GameLogin)
+const GameLoginConnected = connect(mapDispatchToProps)(GameLogin);
+export {GameLoginConnected}

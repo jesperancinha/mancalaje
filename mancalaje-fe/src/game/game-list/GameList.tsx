@@ -195,4 +195,5 @@ const mapStateToProps = (state: GameListProps) => {
     }
 };
 // @ts-ignore
-export default connect(mapStateToProps)(GameList);
+const GameListConnected = connect(mapStateToProps)(GameList);
+export {GameListConnected};

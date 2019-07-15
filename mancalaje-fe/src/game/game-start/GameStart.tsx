@@ -119,4 +119,5 @@ const mapStateToProps = (state: GameStartProps) => {
     }
 };
 // @ts-ignore
-export default connect(mapStateToProps)(GameStart);
+const GameStartConnected = connect(mapStateToProps)(GameStart);
+export {GameStartConnected};
