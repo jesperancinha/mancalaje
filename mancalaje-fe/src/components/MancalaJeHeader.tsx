@@ -27,4 +27,4 @@ class MancalaJeHeader extends React.Component {
     }
 }
 
-export default MancalaJeHeader;
+export {MancalaJeHeader};

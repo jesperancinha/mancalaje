@@ -9,9 +9,9 @@ import {connect} from "react-redux";
 import {createOAuth} from "../../index";
 import {State} from "../../reducers/reducerIndex";
 import mancalaReducer from "../../reducers/reducer";
-import MancalaJeHeader from "../../components/MancalaJeHeader";
 import {MySnackbarContentWrapper} from "../../components/SnackbarContent";
 import {control} from "../../theme";
+import {MancalaJeHeader} from "../../components/MancalaJeHeader";
 
 interface GameProps extends State {
     username: string;

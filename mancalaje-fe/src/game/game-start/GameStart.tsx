@@ -6,12 +6,12 @@ import {Button, Grid, Typography} from "@material-ui/core";
 import logo from "../../home/logo.svg";
 import {connect} from "react-redux";
 import {State} from "../../reducers/reducerIndex";
-import MancalaJeHeader from "../../components/MancalaJeHeader";
 import {makeDeleteRequest, makeGetRequest} from "../../actions/OAuthRouting";
 import AppBar from "@material-ui/core/AppBar";
 import Box from "@material-ui/core/Box";
 import {MySnackbarContentWrapper} from "../../components/SnackbarContent";
 import {PlayerState} from "../../entities/player-state";
+import {MancalaJeHeader} from "../../components/MancalaJeHeader";
 
 interface GameStartProps extends State {
     mancalaReducer?: any
@@ -45,7 +45,7 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
             }));
     }
 
-    render() {
+    render(): any {
         return (<MancalaJeHeader>
             {
                 this.state && this.state.playerState ? (<MuiThemeProvider theme={theme}>

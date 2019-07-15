@@ -11,7 +11,6 @@ import './../../index.css';
 import TextField from "@material-ui/core/TextField";
 import {connect} from "react-redux";
 import {State} from "../../reducers/reducerIndex";
-import MancalaJeHeader from "../../components/MancalaJeHeader";
 import {logOut, makeDeleteRequest, makeGetRequest, makePostRequest, makePutRequest} from "../../actions/OAuthRouting";
 import {createOAuth} from "../../index";
 import {MySnackbarContentWrapper} from "../../components/SnackbarContent";
@@ -19,6 +18,7 @@ import Box from "@material-ui/core/Box";
 import {Game} from "../../entities/game";
 import {PlayerState} from "../../entities/player-state";
 import {BoardManager} from "../../entities/board-manager";
+import {MancalaJeHeader} from '../../components/MancalaJeHeader';
 
 
 interface GameListProps extends State {
