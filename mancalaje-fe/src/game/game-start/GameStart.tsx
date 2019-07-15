@@ -20,6 +20,8 @@ interface GameStartProps extends State {
     match?: any
 }
 
+const XS_COL_SPAN = 12;
+
 class GameStart extends React.Component<GameStartProps, GameStartProps> {
 
     constructor({props}: { props: GameStartProps }) {
@@ -89,7 +91,7 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
                                 onClick={() => this.leaveRoom()}>Leave room</Button>
                         </AppBar>
                         {this.state.statusError ? (
-                            <Grid item xs={12}>
+                            <Grid item xs={XS_COL_SPAN}>
                                 <MySnackbarContentWrapper
                                     variant="error"
                                     message={this.state.statusError}
@@ -104,7 +106,7 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
         </MancalaJeHeader>)
     }
 
-    private leaveRoom() {
+    private leaveRoom(): void {
         this.state.refreshers.forEach(clearInterval);
         makeDeleteRequest("/mancala/rooms/" + this.props.match.params.id, this.state, this.props, () => {
             this.props.history.push(`/gameList`)

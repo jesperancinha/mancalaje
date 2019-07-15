@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.sass';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import Home from "./home/Home";
 import {GameLoginConnected} from "./game/game-login/GameLogin";
 import './index.css';
 import {connect} from "react-redux";
 import {State} from "./reducers/reducerIndex";
 import {GameListConnected} from "./game/game-list/GameList";
 import {GameStartConnected} from "./game/game-start/GameStart";
+import {Home} from "./home/Home";
 
 const App: React.FC = () => {
     return (

@@ -7,7 +7,6 @@ import {control} from "../../theme";
 import {ListItemLink, RemoveComponentIcon, RoomComponentIcon} from "../../components/Icons";
 import logo from "../../home/logo.svg";
 import AppBar from "@material-ui/core/AppBar";
-import './../../index.css';
 import TextField from "@material-ui/core/TextField";
 import {connect} from "react-redux";
 import {State} from "../../reducers/reducerIndex";
@@ -117,7 +116,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
         );
     }
 
-    private changeState(newValue: any) {
+    private changeState(newValue: any): void {
         this.setState({
             boardName: newValue.target.value,
             statusError: "",
@@ -141,7 +140,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     }
 
     private handleRemoveRoom(roomId: number) {
-        makeDeleteRequest('mancala/boards/' + roomId, this.state, this.props, () => this.loadAllBoards());
+        makeDeleteRequest("mancala/boards/" + roomId, this.state, this.props, () => this.loadAllBoards());
     }
 
     private logOut() {
@@ -149,17 +148,17 @@ class GameList extends React.Component<GameListProps, GameListProps> {
         logOut(this.props, this.state);
     }
 
-    private getRoomNameHelperText() {
+    private getRoomNameHelperText(): string {
         if (!this.state.boardName) {
-            return 'Room must have a name!';
+            return "Room must have a name!";
         }
-        return '';
+        return "";
     }
 
     private redirectToGamePage(row: BoardManager) {
         this.state.refreshers.map(clearInterval);
-        makePutRequest('/mancala/rooms/' + row.boardManagerId, this.state, this.props,
-            () => this.props.history.push(`gameStart/${row.boardManagerId}`), '{}', (errorMessage: string) => this.setState({
+        makePutRequest("/mancala/rooms/" + row.boardManagerId, this.state, this.props,
+            () => this.props.history.push(`gameStart/${row.boardManagerId}`), "{}", (errorMessage: string) => this.setState({
                 statusError: errorMessage
             }));
     }
