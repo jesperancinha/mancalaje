@@ -5,6 +5,7 @@
 
 # Maven
 target/
+build/
 
 # Bower
 src/main/webapp/resources/bower_components
