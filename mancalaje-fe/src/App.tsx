@@ -7,6 +7,7 @@ import GameList from "./game/game-list/GameList";
 import GameStart from "./game/game-start/GameStart";
 import './index.css';
 import {connect} from "react-redux";
+import {State} from "./reducers/reducerIndex";
 
 const App: React.FC = () => {
     return (
@@ -21,7 +22,7 @@ const App: React.FC = () => {
     );
 };
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: State) => {
     return state;
 };
 export default connect(mapStateToProps)(App);

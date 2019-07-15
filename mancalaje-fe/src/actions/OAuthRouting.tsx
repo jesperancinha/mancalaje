@@ -3,7 +3,7 @@ import {ErrorMessage} from "../types";
 
 const LOGIN_PATH = '/login';
 
-export function makeGetRequest<T>(urlString: string, state: T & State, props: T & State, transformData: any) {
+const makeGetRequest = (urlString: string, state: State, props: State, transformData: any) => {
     if (!props.oauth) {
         props.history.push(LOGIN_PATH);
     } else {
@@ -16,9 +16,10 @@ export function makeGetRequest<T>(urlString: string, state: T & State, props: T 
                 logOut(props, state);
             })
     }
-}
+};
 
-export function makePostRequest<T>(urlString: string, state: T & State, props: T & State, transformData: any, messsageBody: any) {
+
+const makePostRequest = (urlString: string, state: State, props: State, transformData: any, messsageBody: any) => {
     if (!props.oauth) {
         props.history.push(LOGIN_PATH);
     } else {
@@ -42,9 +43,9 @@ export function makePostRequest<T>(urlString: string, state: T & State, props: T
             })
 
     }
-}
+};
 
-export function makePutRequest<T>(urlString: string, state: T & State, props: T & State, transformData: any, messageBody: any, errorCatch?: any) {
+const makePutRequest = (urlString: string, state: State, props: State, transformData: any, messageBody: any, errorCatch?: any) => {
     if (!props.oauth) {
         props.history.push(LOGIN_PATH);
     } else {
@@ -83,8 +84,8 @@ export function makePutRequest<T>(urlString: string, state: T & State, props: T 
     }
 }
 
-export function makeDeleteRequest<T>(urlString: string, state: T & State, props: T & State, transformData: any = () => {
-}, errorCatch?: any) {
+const makeDeleteRequest = (urlString: string, state: State, props: State, transformData: any = () => {
+}, errorCatch?: any) => {
     if (!props.oauth) {
         props.history.push(LOGIN_PATH);
     } else {
@@ -117,11 +118,14 @@ export function makeDeleteRequest<T>(urlString: string, state: T & State, props:
                 logOut(props, state);
             })
     }
-}
+};
 
-export function logOut<T>(props: T & State, state: T & State) {
+const logOut = (props: State, state: State) => {
     if (state.refreshers) {
         state.refreshers.map(clearInterval);
     }
     return props.history.push(LOGIN_PATH);
-}
+};
+
+export {makeGetRequest, makePutRequest, makePostRequest, makeDeleteRequest, logOut}
+
