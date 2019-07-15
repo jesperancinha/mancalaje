@@ -3,10 +3,10 @@ package com.jofisaes.mancala.rest;
 import com.jofisaes.mancala.entities.Player;
 import com.jofisaes.mancala.game.BoardManager;
 import com.jofisaes.mancala.game.BoardManagerDto;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import static com.jofisaes.mancala.rest.Mappings.MANCALA_ROOMS;
+import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController()
@@ -22,7 +22,7 @@ public class RoomController extends AbstractUserController {
     }
 
     @DeleteMapping(value = "{roomId}", produces = APPLICATION_JSON_VALUE)
-    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseStatus(value = OK)
     public void leaveGame(
             @PathVariable("roomId") Long roomId) {
         final Player sessionUser = userManagerService.getSessionUser();
@@ -32,7 +32,7 @@ public class RoomController extends AbstractUserController {
     }
 
     @DeleteMapping
-    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseStatus(value = OK)
     public void leaveAllGames() {
         final Player sessionUser = userManagerService.getSessionUser();
         gameManagerService.listAllGames().getBoardManagers().forEach(boardManager -> gameManagerService.leaveRoom(boardManager.getBoardManagerId(), sessionUser));

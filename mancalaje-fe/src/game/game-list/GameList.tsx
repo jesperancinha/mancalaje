@@ -100,7 +100,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                                             {this.getCurrentPlayersText(row)}
                                         </ListItem>
                                         <ListItem>
-                                            {row.owner? "Owner:" + row.owner.name: ''}
+                                            {row.owner ? "Owner:" + row.owner.name : ''}
                                         </ListItem>
                                     </ListItem>
                                 ))}
@@ -163,7 +163,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     }
 
     private getCurrentPlayersText(row: BoardManager) {
-        if(row.board) {
+        if (row.board) {
             const player1 = row.board.player1;
             const player2 = row.board.player2;
             if (player1 && player2) {

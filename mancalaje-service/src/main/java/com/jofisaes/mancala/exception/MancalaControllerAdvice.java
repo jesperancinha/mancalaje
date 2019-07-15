@@ -24,12 +24,17 @@ public class MancalaControllerAdvice {
     }
 
     @ExceptionHandler(value = AlreadyInGameException.class)
-    public ResponseEntity<Object> aleradyInGame(AlreadyInGameException exception) {
+    public ResponseEntity<Object> aleradyInGameException(AlreadyInGameException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception);
     }
 
     @ExceptionHandler(value = WrongRoomOwnerException.class)
-    public ResponseEntity<Object> wrongRoonOwnerExcpetion(WrongRoomOwnerException exception) {
+    public ResponseEntity<Object> wrongRoonOwnerException(WrongRoomOwnerException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception);
+    }
+
+    @ExceptionHandler(value = StopClickingException.class)
+    public ResponseEntity<Object> stopClickingSoMuchException(StopClickingException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception);
     }
 }

@@ -24,6 +24,7 @@ public class GameManagerService {
     @Autowired
     private RoomsManager roomsManager;
 
+
     public GameManagerService(final @Value("${mancalaje.max-rooms:20}") int maxRooms, final RoomsManager roomsManager) {
         this.maxRooms = maxRooms;
         this.roomsManager = roomsManager;
@@ -97,14 +98,18 @@ public class GameManagerService {
         return board.removePlayer(player);
     }
 
-    public void swayStonesFromHole(Player sessionUser, Integer holeId) {
-        sessionUser.getBoardManager().swayStonesFromHole(sessionUser, holeId);
+    public void swayStonesFromHole(Player sessionUser, Integer holeId) throws InterruptedException {
+        BoardManager boardManager = sessionUser.getBoardManager();
+        if(Objects.isNull(boardManager)){
+            throw new StopClickingException();
+        }
+        boardManager.swayStonesFromHole(sessionUser, holeId);
     }
 
     public BoardManager removeRoom(Long roomId, Player sessionUser) {
         Map<Long, BoardManager> boardManagerMap = roomsManager.getBoardManagerMap();
         BoardManager room = boardManagerMap.get(roomId);
-        if(Objects.isNull(room)){
+        if (Objects.isNull(room)) {
             roomsManager.forceRemoveRoom(roomId);
         }
         if (playerMatch(room.getOwner(), sessionUser)) {

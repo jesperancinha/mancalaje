@@ -36,7 +36,6 @@ public class Player implements Serializable {
     @JsonIgnore
     private Store playerStore;
 
-
     @JsonProperty("opponentName")
     public String getOpponentName() {
         if (Objects.nonNull(this.opponent)) {
@@ -54,4 +53,5 @@ public class Player implements Serializable {
         this.setBoardManager(null);
         this.setHoles(null, null);
     }
+
 }

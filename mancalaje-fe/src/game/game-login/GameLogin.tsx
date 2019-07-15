@@ -28,6 +28,12 @@ class GameLogin extends Component<GameProps, GameProps> {
         };
     }
 
+    componentDidMount(): void {
+        const intervalId = setInterval("", 1);
+        for (let i = 1; i < intervalId; i++)
+            clearInterval(i);
+    }
+
     render() {
         return (
             <MancalaJeHeader>

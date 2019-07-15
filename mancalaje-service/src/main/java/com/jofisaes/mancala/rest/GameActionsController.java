@@ -14,7 +14,7 @@ public class GameActionsController extends AbstractUserController {
 
     @PutMapping(value = "nextMove/{holeId}")
     public BoardManager pressHoleId(
-            @PathVariable("holeId") Integer holeId) {
+            @PathVariable("holeId") Integer holeId) throws InterruptedException {
         gameManagerService.swayStonesFromHole(userManagerService.getSessionUser(), holeId);
         BoardManager boardManager = userManagerService.getSessionUser().getBoardManager();
         boardManager.getBoard().getPlayer1().setBoardManager(boardManager);

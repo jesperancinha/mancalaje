@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.NonNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.validation.constraints.Null;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,18 +22,17 @@ import static com.jofisaes.mancala.rest.Mappings.playerMatch;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Board implements Serializable {
 
+    private static Logger logger = LoggerFactory.getLogger(Board.class);
+
     private static Predicate<Hole> holePredicate = hole -> hole.getStones() == 0;
 
     @JsonProperty("name")
     private String name;
 
     @JsonProperty("player1")
-    @Null
     private Player player1;
 
-
     @JsonProperty("player2")
-    @Null
     private Player player2;
 
     @JsonProperty("allHoles")
@@ -48,6 +49,9 @@ public class Board implements Serializable {
 
     @JsonIgnore
     private Store playerTwoStore;
+
+    @JsonIgnore
+    private Player winner;
 
     public Board(String boardName) {
         this.name = boardName;
@@ -106,17 +110,17 @@ public class Board implements Serializable {
         });
     }
 
-    public void setPlayer1(Player player1) {
+    public void setPlayer1(@NonNull Player player1) {
         player1.setHoles(this.allPlayerOneHoles, this.playerOneStore);
         this.player1 = player1;
     }
 
-    public void setPlayer2(Player player2) {
+    public void setPlayer2(@NonNull Player player2) {
         player2.setHoles(this.allPlayerTwoHoles, this.playerTwoStore);
         this.player2 = player2;
     }
 
-    public Hole swayStonseFromHole(Player currentPlayer, Hole hole, Integer stones) {
+    public synchronized Hole swayStonseFromHole(Player currentPlayer, Hole hole, Integer stones) {
         if (stones == 1 && hole.getStones() == 0 && hole.getPlayer() == currentPlayer && !(hole instanceof Store)) {
             int fetchedStones = 1 + hole.getOppositeHole().getStones();
             hole.setStones(0);
@@ -125,7 +129,7 @@ public class Board implements Serializable {
             return hole;
         }
 
-        if (hole instanceof Store && hole.getPlayer() != currentPlayer) {
+        if (hole instanceof Store && !hole.getPlayer().getEmail().equals(currentPlayer.getEmail())) {
             return swayStonseFromHole(currentPlayer, hole.getNextHole(), stones);
         }
 
@@ -140,8 +144,15 @@ public class Board implements Serializable {
     }
 
     public boolean isGameOver() {
-        return allPlayerOneHoles.stream().allMatch(holePredicate)
-                && allPlayerTwoHoles.stream().allMatch(holePredicate);
+        boolean playerOneWinner = allPlayerOneHoles.stream().allMatch(holePredicate);
+        boolean playerTwoWinner = allPlayerTwoHoles.stream().allMatch(holePredicate);
+        if (playerOneWinner) {
+            this.winner = this.player1;
+        } else if (playerTwoWinner) {
+            this.winner = this.player2;
+        }
+        return playerOneWinner
+                || playerTwoWinner;
     }
 
     public Player removePlayer(Player player) {
@@ -149,15 +160,14 @@ public class Board implements Serializable {
             if (Objects.nonNull(player2)) {
                 player2.setOpponent(null);
             }
-            player1 = null;
-            return getPlayer1();
-        }
-        if (playerMatch(player, getPlayer2())) {
+            this.player1 = null;
+            return player;
+        } else if (playerMatch(player, getPlayer2())) {
             if (Objects.nonNull(player1)) {
                 player1.setOpponent(null);
             }
-            player2 = null;
-            return getPlayer2();
+            this.player2 = null;
+            return player;
         }
         return null;
     }

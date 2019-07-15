@@ -35,7 +35,7 @@ public class GameManagerServiceTest {
     }
 
     @Test
-    public void swayStonesFromHole() {
+    public void swayStonesFromHole() throws InterruptedException {
         Player mockPlayer1 = Player.builder().name("player 1").email("playone@mail.com").build();
         Player mockPlayer2 = Player.builder().name("player 2").email("playtwo@mail.com").build();
         BoardManager boardManager = gameManagerService.createBoard(mockPlayer1, "test");
@@ -58,7 +58,7 @@ public class GameManagerServiceTest {
     }
 
     @Test
-    public void swayStonesFromHoleLastOne() {
+    public void swayStonesFromHoleLastOne() throws InterruptedException {
         Player mockPlayer1 = Player.builder().name("player 1").email("playone@mail.com").build();
         Player mockPlayer2 = Player.builder().name("player 2").email("playtwo@mail.com").build();
         BoardManager boardManager = gameManagerService.createBoard(mockPlayer1, "test");

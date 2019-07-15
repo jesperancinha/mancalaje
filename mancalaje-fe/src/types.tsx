@@ -27,6 +27,8 @@ export class BoardManager {
     boardManagerId: number = - 1;
     owner?: Player;
     currentPlayer?: Player;
+    gameover?: boolean;
+    winner?: Player;
 }
 
 export class Game {
