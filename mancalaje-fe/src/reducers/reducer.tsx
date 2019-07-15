@@ -1,6 +1,5 @@
 import * as actionType from '../actions/ActionType';
-import {MancalaState} from "../types";
-
+import {MancalaState} from "../entities/mancala-state";
 
 const mancalaReducer = (state: any = {}, action: any) => {
     if (!action) {

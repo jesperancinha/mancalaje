@@ -1,7 +1,6 @@
 import {holeDisabled, holeEnabled, useStyles} from "../theme";
 import {Paper} from "@material-ui/core";
 import * as React from "react";
-import {BoardManager, Hole} from "../types";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
@@ -11,6 +10,8 @@ import "./MancalaBoard.css"
 import {makePutRequest} from "../actions/OAuthRouting";
 import {State} from "../reducers/reducerIndex";
 import Button from "@material-ui/core/Button";
+import {Hole} from "../entities/hole";
+import {BoardManager} from "../entities/board-manager";
 
 let swayStones = function (id: any, state: State, props: any) {
     state.statusError = '';

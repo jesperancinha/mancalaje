@@ -5,7 +5,6 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import {control} from "../../theme";
 import {ListItemLink, RemoveComponentIcon, RoomComponentIcon} from "../../components/Icons";
-import {BoardManager, Game, PlayerState} from "../../types";
 import logo from "../../home/logo.svg";
 import AppBar from "@material-ui/core/AppBar";
 import './../../index.css';
@@ -17,6 +16,9 @@ import {logOut, makeDeleteRequest, makeGetRequest, makePostRequest, makePutReque
 import {createOAuth} from "../../index";
 import {MySnackbarContentWrapper} from "../../components/SnackbarContent";
 import Box from "@material-ui/core/Box";
+import {Game} from "../../entities/game";
+import {PlayerState} from "../../entities/player-state";
+import {BoardManager} from "../../entities/board-manager";
 
 
 interface GameListProps extends State {

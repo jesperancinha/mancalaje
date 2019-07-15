@@ -1,5 +1,5 @@
 import {State} from "../reducers/reducerIndex";
-import {ErrorMessage} from "../types";
+import {ErrorMessage} from "../entities/error-message";
 
 const LOGIN_PATH = '/login';
 
@@ -82,7 +82,7 @@ const makePutRequest = (urlString: string, state: State, props: State, transform
             })
 
     }
-}
+};
 
 const makeDeleteRequest = (urlString: string, state: State, props: State, transformData: any = () => {
 }, errorCatch?: any) => {
