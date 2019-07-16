@@ -26,10 +26,10 @@ class GameRegister extends Component<GameRegisterProps, GameRegisterProps> {
     constructor({props}: { props: GameRegisterProps }) {
         super(props);
         this.state = {
-            name: "",
-            email: "",
-            password: "",
             confirmPassword: "",
+            email: "",
+            name: "",
+            password: "",
             refreshers: [],
         };
     }
@@ -70,11 +70,12 @@ class GameRegister extends Component<GameRegisterProps, GameRegisterProps> {
                             style={control}
                             label={"Confirm password"}
                             type="password"
-                            error={invalidateText(this.state.confirmPassword) || this.state.confirmPassword !== this.state.password}
+                            error={invalidateText(this.state.confirmPassword)
+                            || this.state.confirmPassword !== this.state.password}
                             helperText={this.getConfirmPasswordHelperText()}
                             onChange={(newValue) => this.setState({
                                 confirmPassword: newValue.target.value,
-                                statusError: ""
+                                statusError: "",
                             })}/>
                         <br/>
                         <Button
@@ -88,7 +89,13 @@ class GameRegister extends Component<GameRegisterProps, GameRegisterProps> {
                 </Grid>
                 <Grid item xs={XS_COL_SPAN}>
                     <AppBar title={"Login cheat"} position={"relative"}>
-                        <Typography variant="h4" align={"center"}>Remember that your user will be available for 5 hours. Everytime you play, your user registration will be prolonged for an extra 5 hours. While you are playing there is no expiry date and it will be reset to 5 hour later after you played. Should you want more time in registration, remember that this is just a demo version.</Typography>
+                        <Typography variant="h4" align={"center"}>
+                            Remember that your user will be available for 5 hours.
+                            Everytime you play, your user registration will be prolonged for an extra 5 hours. While you
+                            are playing there is no expiry date and it will be reset to 5 hour later after you played.
+                            Should you want more time in registration, remember that this is just a demo
+                            version.
+                        </Typography>
                     </AppBar>
                 </Grid>
                 {this.state.statusError ? (
@@ -105,37 +112,41 @@ class GameRegister extends Component<GameRegisterProps, GameRegisterProps> {
         );
     }
 
-    private handleClick() {
+    private handleClick(): void {
     }
 
-    private getUserHelperText() {
+    private getUserHelperText(): string {
         if (invalidateText(this.state.name)) {
             return "Please enter a username";
         }
+        return '';
     }
 
-    private getEmailHelperText() {
+    private getEmailHelperText(): string {
         if (invalidateText(this.state.email)) {
             return "Please enter an email";
         }
+        return '';
     }
 
-    private getPassordHelperText() {
+    private getPassordHelperText(): string {
         if (invalidateText(this.state.password)) {
             return "Please enter a password";
         }
+        return '';
     }
 
-    private getConfirmPasswordHelperText() {
+    private getConfirmPasswordHelperText(): string {
         if (invalidateText(this.state.confirmPassword)) {
             return "Please confirm your password";
         }
         if (this.state.confirmPassword !== this.state.password) {
             return "Your password must be the same as your password confirmation!";
         }
+        return '';
     }
 
-    private canRegister() {
+    private canRegister(): boolean {
         return invalidateText(this.state.name)
             || invalidateText(this.state.email)
             || invalidateText(this.state.password)

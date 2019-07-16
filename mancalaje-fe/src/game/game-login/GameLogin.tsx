@@ -23,9 +23,9 @@ class GameLogin extends Component<GameProps, GameProps> {
     constructor({props}: { props: GameProps }) {
         super(props);
         this.state = {
-            username: "playerOne@mancalaje.com",
             password: "admin123",
             refreshers: [],
+            username: "playerOne@mancalaje.com",
         };
     }
 
@@ -104,16 +104,18 @@ class GameLogin extends Component<GameProps, GameProps> {
         return oAuth2;
     }
 
-    private getUserHelperText() {
+    private getUserHelperText(): string {
         if (invalidateText(this.state.username)) {
             return "Please enter a username"
         }
+        return '';
     }
 
-    private getPassordHelperText() {
+    private getPassordHelperText(): string {
         if (invalidateText(this.state.password)) {
             return "Please enter a password"
         }
+        return '';
     }
 
 }

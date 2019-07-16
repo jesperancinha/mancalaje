@@ -9,12 +9,6 @@ export const useStyles = makeStyles((theme: Theme) => {
         themeSpacing = theme.spacing(2);
     }
     let newStyles = {
-        root: {
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'flex-end',
-            borderRadius: '10px'
-        },
         icon: {
             margin: themeSpacing,
         },
@@ -23,6 +17,12 @@ export const useStyles = makeStyles((theme: Theme) => {
             '&:hover': {
                 color: red[800],
             },
+        },
+        root: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+            borderRadius: '10px'
         },
         shape: {
             borderRadius: 50

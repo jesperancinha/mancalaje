@@ -166,7 +166,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
             }));
     }
 
-    private static getCurrentPlayersText(row: BoardManager) {
+    private static getCurrentPlayersText(row: BoardManager): string {
         if (row.board) {
             const player1 = row.board.player1;
             const player2 = row.board.player2;

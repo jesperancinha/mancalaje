@@ -39,8 +39,8 @@ const useStyles1 = makeStyles((theme: Theme) => ({
         marginRight: theme.spacing(1),
     },
     message: {
-        display: 'flex',
         alignItems: 'center',
+        display: 'flex',
     },
 }));
 

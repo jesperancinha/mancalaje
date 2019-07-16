@@ -14,7 +14,7 @@ import {Hole} from "../entities/hole";
 import {BoardManager} from "../entities/board-manager";
 import {GameStartProps} from "../game/game-start/GameStart";
 
-const swayStones = (id: number, state: State, props: any) => {
+const swayStones = (id: number, state: State, props: State) => {
     state.statusError = "";
     makePutRequest("/mancala/actions/nextMove/" + id, state, props, () => {
     }, null);

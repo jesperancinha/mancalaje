@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.PackagePrivate;
 
 import java.io.Serializable;
 
@@ -38,17 +39,20 @@ public class Hole implements Serializable {
         this.stones = 4;
     }
 
-    public Integer pickStones() {
+    @PackagePrivate
+    Integer pickStones() {
         Integer pickedStones = this.stones;
         this.stones = 0;
         return pickedStones;
     }
 
+    @PackagePrivate
     void addOne() {
         this.stones++;
     }
 
-    public int flushPickedUpStones() {
+    @PackagePrivate
+    int flushPickedUpStones() {
         int pickedStones = this.pickedUpStones;
         this.pickedUpStones = 0;
         return pickedStones;
