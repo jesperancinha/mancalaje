@@ -18,6 +18,8 @@ interface GameProps extends State {
     password: string;
 }
 
+const MIN_TEXT_LENGTH = 0;
+
 class GameLogin extends Component<GameProps, GameProps> {
     constructor({props}: { props: GameProps }) {
         super(props);
@@ -44,7 +46,7 @@ class GameLogin extends Component<GameProps, GameProps> {
                         <TextField
                             style={control}
                             label={"Username"}
-                            error={this.state.username.length === 0}
+                            error={this.state.username.length === MIN_TEXT_LENGTH}
                             helperText={this.getUserHelperText()}
                             onChange={(newValue) => this.setState({username: newValue.target.value, statusError: ""})}/>
                         <br/>
@@ -52,7 +54,7 @@ class GameLogin extends Component<GameProps, GameProps> {
                             style={control}
                             label={"Password"}
                             type="password"
-                            error={this.state.password.length === 0}
+                            error={this.state.password.length === MIN_TEXT_LENGTH}
                             helperText={this.getPassordHelperText()}
                             onChange={(newValue) => this.setState({password: newValue.target.value, statusError: ""})}/>
                         <br/>
@@ -84,7 +86,7 @@ class GameLogin extends Component<GameProps, GameProps> {
     }
 
     private handleClick() {
-        let oAuth2 = new OAuth2({
+        const oAuth2 = new OAuth2({
             grantType: "password",
             clientId: "mancala-client",
             clientSecret: "mancala",
@@ -114,9 +116,9 @@ class GameLogin extends Component<GameProps, GameProps> {
 
 }
 
-function mapDispatchToProps(dispatch: Dispatch) {
+const mapDispatchToProps = (dispatch: Dispatch) => {
     return {actions: bindActionCreators(mancalaReducer, dispatch)}
-}
+};
 
 
 // const mapStateToProps = (state: GameProps) => ({

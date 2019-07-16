@@ -13,10 +13,13 @@ public class Hole implements Serializable {
 
     @JsonProperty("player")
     private Player player;
+
     @JsonProperty("id")
     private Integer id;
+
     @JsonProperty("stones")
     private Integer stones;
+
     @JsonProperty("enabled")
     private boolean enabled;
 

@@ -144,7 +144,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     }
 
     private logOut() {
-        this.props.dispatch(createOAuth({}));
+        this.props.dispatch(createOAuth());
         logOut(this.props, this.state);
     }
 

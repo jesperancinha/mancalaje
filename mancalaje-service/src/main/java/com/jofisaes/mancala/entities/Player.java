@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Player")
+@Table(name = "player")
 public class Player implements Serializable {
 
     @Id
