@@ -3,15 +3,15 @@ import {ErrorMessage} from "../entities/error-message";
 
 const LOGIN_PATH = "/login";
 
-const makeGetRequest = (urlString: string, state: State, props: State, transformData: any) => {
+const makeGetRequest = <T extends {}>(urlString: string, state: State, props: State, transformData: (t: T) => void): void => {
     if (!props.oauth) {
         props.history.push(LOGIN_PATH);
     } else {
         props.oauth.fetch(urlString, {
             method: "GET",
         })
-            .then((res: any) => res.json())
-            .then((data: any) => transformData(data))
+            .then((res: Response) => res.json())
+            .then((data: T) => transformData(data))
             .catch(() => {
                 logOut(props, state);
             })
@@ -19,7 +19,7 @@ const makeGetRequest = (urlString: string, state: State, props: State, transform
 };
 
 
-const makePostRequest = (urlString: string, state: State, props: State, transformData: any, messsageBody: any) => {
+const makePostRequest = <T extends {}>(urlString: string, state: State, props: State, transformData: (t: T) => void, messsageBody: string): void => {
     if (!props.oauth) {
         props.history.push(LOGIN_PATH);
     } else {
@@ -30,14 +30,14 @@ const makePostRequest = (urlString: string, state: State, props: State, transfor
             },
             body: messsageBody,
         })
-            .then((res: any) => {
+            .then((res: Response) => {
                 if (res.status === 409) {
                     res.json().then((errorMessage: ErrorMessage) => state.statusError = errorMessage.localizedMessage);
                     return null;
                 }
                 return res.json()
             })
-            .then((data: any) => transformData(data))
+            .then((data: T) => transformData(data))
             .catch(() => {
                 logOut(props, state);
             })
@@ -45,8 +45,9 @@ const makePostRequest = (urlString: string, state: State, props: State, transfor
     }
 };
 
-const makePutRequest = (urlString: string, state:
-    State, props: State, transformData: any, messageBody: any, errorCatch?: any) => {
+const makePutRequest = <T extends {}>(urlString: string, state:
+    State, props: State, transformData: (t: T) => void = () => {
+}, messageBody?: string, errorCatch?: (t: string) => void): void => {
     if (!props.oauth) {
         props.history.push(LOGIN_PATH);
     } else {
@@ -60,10 +61,10 @@ const makePutRequest = (urlString: string, state:
             };
         }
         props.oauth.fetch(urlString, config)
-            .then((res: any) => {
+            .then((res: Response) => {
                 if (res.status === 409) {
                     res.json().then((errorMessage: ErrorMessage) => {
-                        if (errorCatch) {
+                        if (errorCatch && errorMessage.localizedMessage) {
                             errorCatch(errorMessage.localizedMessage);
                         } else {
                             state.statusError = errorMessage.localizedMessage
@@ -85,15 +86,18 @@ const makePutRequest = (urlString: string, state:
     }
 };
 
-const makeDeleteRequest = (urlString: string, state: State, props: State, transformData: any = () => {
-}, errorCatch?: any) => {
+const makeDeleteRequest = <T extends {}>
+(urlString: string, state: State, props: State,
+ transformData: (t: T) =>
+     void = () => {
+ }, errorCatch?: any): void => {
     if (!props.oauth) {
         props.history.push(LOGIN_PATH);
     } else {
         props.oauth.fetch(urlString, {
             method: 'DELETE'
         })
-            .then((res: any) => {
+            .then((res: Response) => {
                 if (res.status === 409) {
                     res.json().then((errorMessage: ErrorMessage) => {
                         if (errorCatch) {
@@ -102,11 +106,11 @@ const makeDeleteRequest = (urlString: string, state: State, props: State, transf
                             state.statusError = errorMessage.localizedMessage
                         }
                     });
-                    return null;
+                    return '';
                 }
                 return res.text()
             })
-            .then((text => {
+            .then(((text) => {
                 if (text) {
                     return text;
                 } else {

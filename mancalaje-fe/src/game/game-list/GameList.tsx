@@ -133,7 +133,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
 
 
     private loadAllBoards() {
-        makeGetRequest('mancala/boards/all', this.state, this.props, (data: any) => {
+        makeGetRequest('mancala/boards/all', this.state, this.props, (data: Game) => {
             this.setState({
                 game: data
             });
