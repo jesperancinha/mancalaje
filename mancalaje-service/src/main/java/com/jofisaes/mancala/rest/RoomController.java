@@ -1,11 +1,11 @@
 package com.jofisaes.mancala.rest;
 
+import com.jofisaes.mancala.cache.BoardManager;
 import com.jofisaes.mancala.cache.Player;
-import com.jofisaes.mancala.game.BoardManager;
 import com.jofisaes.mancala.game.BoardManagerDto;
 import org.springframework.web.bind.annotation.*;
 
-import static com.jofisaes.mancala.rest.Mappings.MANCALA_ROOMS;
+import static com.jofisaes.mancala.rest.mappings.Mappings.MANCALA_ROOMS;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 

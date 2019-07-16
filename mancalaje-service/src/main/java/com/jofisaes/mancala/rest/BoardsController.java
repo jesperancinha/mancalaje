@@ -1,15 +1,15 @@
 package com.jofisaes.mancala.rest;
 
+import com.jofisaes.mancala.cache.BoardManager;
 import com.jofisaes.mancala.cache.Player;
-import com.jofisaes.mancala.game.BoardManager;
 import com.jofisaes.mancala.game.BoardManagerDto;
-import com.jofisaes.mancala.services.RoomsManager;
+import com.jofisaes.mancala.services.room.RoomsManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
 import java.util.Map;
 
-import static com.jofisaes.mancala.rest.Mappings.MANCALA_BOARDS;
+import static com.jofisaes.mancala.rest.mappings.Mappings.MANCALA_BOARDS;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController()

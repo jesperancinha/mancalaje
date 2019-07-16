@@ -1,19 +1,15 @@
-package com.jofisaes.mancala.game;
+package com.jofisaes.mancala.cache;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.jofisaes.mancala.cache.Board;
-import com.jofisaes.mancala.cache.Hole;
-import com.jofisaes.mancala.cache.Player;
-import com.jofisaes.mancala.cache.Store;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.concurrent.Semaphore;
 
-import static com.jofisaes.mancala.rest.Mappings.playerMatch;
+import static com.jofisaes.mancala.services.Validator.playerMatch;
 
 @Getter
 @Setter

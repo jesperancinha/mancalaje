@@ -1,9 +1,10 @@
-package com.jofisaes.mancala.services;
+package com.jofisaes.mancala.services.game;
 
 import com.jofisaes.mancala.cache.Board;
+import com.jofisaes.mancala.cache.BoardManager;
 import com.jofisaes.mancala.cache.Player;
 import com.jofisaes.mancala.exception.*;
-import com.jofisaes.mancala.game.BoardManager;
+import com.jofisaes.mancala.services.room.RoomsManager;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +14,7 @@ import org.springframework.web.context.annotation.ApplicationScope;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.jofisaes.mancala.rest.Mappings.playerMatch;
+import static com.jofisaes.mancala.services.Validator.playerMatch;
 
 @Service
 @ApplicationScope

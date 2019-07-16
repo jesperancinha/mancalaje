@@ -1,7 +1,7 @@
 package com.jofisaes.mancala.config;
 
 import com.jofisaes.mancala.repository.UserRepository;
-import com.jofisaes.mancala.services.DefaultUserDetailsService;
+import com.jofisaes.mancala.services.authentication.DefaultUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

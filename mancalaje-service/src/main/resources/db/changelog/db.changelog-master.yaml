@@ -65,6 +65,9 @@ databaseChangeLog:
               - column:
                   name: role
                   type: varchar(256)
+              - column:
+                  name: date
+                  type: date
 
   - changeSet:
       id: insert default players

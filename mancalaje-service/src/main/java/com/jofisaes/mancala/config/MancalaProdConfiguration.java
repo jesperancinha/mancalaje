@@ -33,7 +33,7 @@ public class MancalaProdConfiguration {
         DataSource dataSource = dataSourceBuilder.build();
         try {
             ScriptUtils.executeSqlScript(dataSource.getConnection(), script);
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.trace("Initialization script may have not run correctly. Please check.");
         }
         return dataSource;

@@ -1,8 +1,8 @@
 package com.jofisaes.mancala.rest;
 
 import com.jofisaes.mancala.cache.Player;
-import com.jofisaes.mancala.services.UserManagerService;
-import com.jofisaes.mancala.services.UserService;
+import com.jofisaes.mancala.services.user.UserManagerService;
+import com.jofisaes.mancala.services.user.UserService;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;

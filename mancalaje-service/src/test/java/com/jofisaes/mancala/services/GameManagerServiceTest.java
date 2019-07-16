@@ -2,7 +2,9 @@ package com.jofisaes.mancala.services;
 
 import com.jofisaes.mancala.cache.Hole;
 import com.jofisaes.mancala.cache.Player;
-import com.jofisaes.mancala.game.BoardManager;
+import com.jofisaes.mancala.cache.BoardManager;
+import com.jofisaes.mancala.services.game.GameManagerService;
+import com.jofisaes.mancala.services.room.RoomsManager;
 import org.junit.Test;
 
 import java.util.List;

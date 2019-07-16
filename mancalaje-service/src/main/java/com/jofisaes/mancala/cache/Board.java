@@ -16,7 +16,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static com.jofisaes.mancala.rest.Mappings.playerMatch;
+import static com.jofisaes.mancala.services.Validator.playerMatch;
 
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)

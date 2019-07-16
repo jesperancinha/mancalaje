@@ -1,4 +1,4 @@
-package com.jofisaes.mancala.services;
+package com.jofisaes.mancala.services.user;
 
 import com.jofisaes.mancala.cache.Player;
 import lombok.Getter;

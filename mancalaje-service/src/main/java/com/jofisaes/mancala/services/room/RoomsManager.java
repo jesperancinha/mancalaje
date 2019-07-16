@@ -1,7 +1,7 @@
-package com.jofisaes.mancala.services;
+package com.jofisaes.mancala.services.room;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.jofisaes.mancala.game.BoardManager;
+import com.jofisaes.mancala.cache.BoardManager;
 import lombok.Getter;
 import org.springframework.stereotype.Service;
 
@@ -24,13 +24,13 @@ public class RoomsManager {
         this.boardManagers = new ArrayList<>();
     }
 
-    BoardManager removeRoom(Long roomId) {
+    public BoardManager removeRoom(Long roomId) {
         BoardManager boardManager = boardManagerMap.get(roomId);
         boardManagers.remove(boardManager);
         return boardManagerMap.remove(roomId);
     }
 
-    BoardManager forceRemoveRoom(Long roomId) {
+    public BoardManager forceRemoveRoom(Long roomId) {
         BoardManager boardManager = boardManagerMap.get(roomId);
         boardManagers.removeIf(room -> room.getBoardManagerId().equals(roomId));
         return boardManager;

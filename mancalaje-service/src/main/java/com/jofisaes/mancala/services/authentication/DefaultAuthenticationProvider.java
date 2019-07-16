@@ -1,4 +1,4 @@
-package com.jofisaes.mancala.services;
+package com.jofisaes.mancala.services.authentication;
 
 import com.jofisaes.mancala.entities.User;
 import com.jofisaes.mancala.repository.UserRepository;

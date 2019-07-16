@@ -1,6 +1,6 @@
 package com.jofisaes.mancala.entities;
 
-import com.jofisaes.mancala.game.BoardManager;
+import com.jofisaes.mancala.cache.BoardManager;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,7 +17,7 @@ import java.util.List;
 public class Player implements Serializable {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column

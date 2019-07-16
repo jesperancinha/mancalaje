@@ -1,6 +1,6 @@
 package com.jofisaes.mancala;
 
-import com.jofisaes.mancala.services.UserManagerService;
+import com.jofisaes.mancala.services.user.UserManagerService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -25,7 +25,7 @@ public class MancalaConfiguration
     @Bean
     public EmbeddedDatabase dataSource() {
         return new EmbeddedDatabaseBuilder()
-                 .setType(EmbeddedDatabaseType.H2)
+                .setType(EmbeddedDatabaseType.H2)
                 .addScript("org/springframework/session/jdbc/schema-h2.sql").build();
     }
 
