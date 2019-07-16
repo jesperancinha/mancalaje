@@ -97,7 +97,7 @@ class GameLogin extends Component<GameProps, GameProps> {
         oAuth2.getAccessToken().then(() => {
             this.props.history.push("gameList");
         }).catch(() => this.setState({
-            statusError: 'Login failed!'
+            statusError: 'Login failed!',
         }));
         return oAuth2;
     }

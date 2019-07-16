@@ -6,7 +6,7 @@ import OAuth2 from "fetch-mw-oauth2/dist/fetch-wrapper";
 
 export default (history: History) => combineReducers({
     mancalaReducer: mancalaReducer,
-    router: connectRouter(history)
+    router: connectRouter(history),
 });
 
 export interface State {

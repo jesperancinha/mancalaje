@@ -28,3 +28,4 @@ class MancalaJeHeader extends React.Component {
 }
 
 export {MancalaJeHeader};
+

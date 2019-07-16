@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import {AppConnected} from './App';
 import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux';
 import {CREATE_OAUTH2} from "./actions/ActionType";
@@ -25,7 +25,7 @@ ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
             <MuiThemeProvider theme={theme}>
-                <App/>
+                <AppConnected/>
             </MuiThemeProvider>
         </ConnectedRouter>
     </Provider>,

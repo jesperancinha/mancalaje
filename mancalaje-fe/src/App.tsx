@@ -25,4 +25,6 @@ const App: React.FC = () => {
 const mapStateToProps = (state: State) => {
     return state;
 };
-export default connect(mapStateToProps)(App);
+const AppConnected = connect(mapStateToProps)(App);
+
+export {AppConnected}

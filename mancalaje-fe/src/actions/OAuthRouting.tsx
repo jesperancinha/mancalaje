@@ -28,7 +28,7 @@ const makePostRequest = (urlString: string, state: State, props: State, transfor
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: messsageBody
+            body: messsageBody,
         })
             .then((res: any) => {
                 if (res.status === 409) {
