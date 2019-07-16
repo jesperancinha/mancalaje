@@ -6,12 +6,13 @@ import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import logo from "../home/logo.svg";
-import "./MancalaBoard.css"
+import "./MancalaBoard.sass"
 import {makePutRequest} from "../actions/OAuthRouting";
 import {State} from "../reducers/reducerIndex";
 import Button from "@material-ui/core/Button";
 import {Hole} from "../entities/hole";
 import {BoardManager} from "../entities/board-manager";
+import {GameStartProps} from "../game/game-start/GameStart";
 
 const swayStones = (id: number, state: State, props: any) => {
     state.statusError = "";
@@ -27,13 +28,13 @@ const FIRT_PLAYER_FIRST_ELEMENT = 0;
 
 
 let dataBoardManager: any;
-const MancalaBoard = ({data, state, props}: { data?: BoardManager, state?: any, props?: any }) => {
+const MancalaBoard = ({data, state, props}: { data?: BoardManager, state: GameStartProps, props: GameStartProps }) => {
     const classes = useStyles();
     dataBoardManager = data;
     return (
         <div className={classes.root}>
             <Paper>
-                {data && data.board && data.board.allHoles ? (
+                {data && data.board && data.board.allHoles && state.playerState && state.playerState.loggedPlayer ? (
                     <Table>
                         <TableBody>
                             <TableRow>
@@ -49,7 +50,8 @@ const MancalaBoard = ({data, state, props}: { data?: BoardManager, state?: any, 
                                         style={hole.enabled ? holeEnabled : holeDisabled}
                                         rowSpan={SINGLE_SPAN} colSpan={SINGLE_SPAN}>
                                         <Button
-                                            disabled={!hole.enabled || dataBoardManager.gameover || dataBoardManager.currentPlayer.email !== state.playerState.loggedPlayer.email}
+                                            disabled={!hole.enabled || dataBoardManager.gameover ||
+                                            (state.playerState && state.playerState.loggedPlayer && dataBoardManager.currentPlayer.email !== state.playerState.loggedPlayer.email)}
                                             onClick={() => swayStones(hole.id, state, props)}
                                             href={"#"}>{hole.stones}</Button></TableCell>
                                 ))}
@@ -67,7 +69,8 @@ const MancalaBoard = ({data, state, props}: { data?: BoardManager, state?: any, 
                                         style={hole.enabled ? holeEnabled : holeDisabled}
                                         rowSpan={SINGLE_SPAN} colSpan={SINGLE_SPAN}>
                                         <Button
-                                            disabled={!hole.enabled || dataBoardManager.gameover || dataBoardManager.currentPlayer.email !== state.playerState.loggedPlayer.email}
+                                            disabled={!hole.enabled || dataBoardManager.gameover ||
+                                            (state.playerState && state.playerState.loggedPlayer && dataBoardManager.currentPlayer.email !== state.playerState.loggedPlayer.email)}
                                             onClick={() => swayStones(hole.id, state, props)}
                                             href={"#"}>{hole.stones}</Button></TableCell>
                                 ))}

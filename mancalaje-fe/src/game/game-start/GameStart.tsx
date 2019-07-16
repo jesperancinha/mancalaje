@@ -1,6 +1,6 @@
 import React from "react";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
-import {control, theme} from "../../theme";
+import {control, theme, XS_COL_SPAN} from "../../theme";
 import {Button, Grid, Typography} from "@material-ui/core";
 import logo from "../../home/logo.svg";
 import {connect} from "react-redux";
@@ -13,14 +13,12 @@ import {PlayerState} from "../../entities/player-state";
 import {MancalaJeHeader} from "../../components/MancalaJeHeader";
 import {MancalaBoard} from "../../components/MancalaBoard";
 
-interface GameStartProps extends State {
+export interface GameStartProps extends State {
     mancalaReducer?: any
     playerState?: PlayerState
     id?: number
     match?: any
 }
-
-const XS_COL_SPAN = 12;
 
 class GameStart extends React.Component<GameStartProps, GameStartProps> {
 

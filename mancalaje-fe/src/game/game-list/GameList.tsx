@@ -3,7 +3,7 @@ import {Button, Grid, Typography} from "@material-ui/core";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import {control} from "../../theme";
+import {control, XS_COL_SPAN} from "../../theme";
 import {ListItemLink, RemoveComponentIcon, RoomComponentIcon} from "../../components/Icons";
 import logo from "../../home/logo.svg";
 import AppBar from "@material-ui/core/AppBar";
@@ -63,14 +63,14 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                         label={"Room name"}
                         error={this.state.boardName.length === 0}
                         helperText={this.getRoomNameHelperText()}
-                        onChange={(newValue) => this.changeState(newValue)}/>
+                        onChange={(newValue) => this.changeState(newValue.target.value)}/>
                     <br/>
                     <Button
                         style={control}
                         onClick={() => this.handleClick()}>Submit</Button>
                 </AppBar>
                 {this.state.statusError ? (
-                    <Grid item xs={12}>
+                    <Grid item xs={XS_COL_SPAN}>
                         <MySnackbarContentWrapper
                             variant="error"
                             message={this.state.statusError}
@@ -98,7 +98,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                                             <RemoveComponentIcon/>
                                         </ListItemLink>
                                         <ListItem>
-                                            {this.getCurrentPlayersText(row)}
+                                            {GameList.getCurrentPlayersText(row)}
                                         </ListItem>
                                         <ListItem>
                                             {row.owner ? "Owner:" + row.owner.name : ""}
@@ -116,9 +116,9 @@ class GameList extends React.Component<GameListProps, GameListProps> {
         );
     }
 
-    private changeState(newValue: any): void {
+    private changeState(boardName: string): void {
         this.setState({
-            boardName: newValue.target.value,
+            boardName: boardName,
             statusError: "",
         });
     }
@@ -158,12 +158,14 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     private redirectToGamePage(row: BoardManager) {
         this.state.refreshers.map(clearInterval);
         makePutRequest("/mancala/rooms/" + row.boardManagerId, this.state, this.props,
-            () => this.props.history.push(`gameStart/${row.boardManagerId}`), "{}", (errorMessage: string) => this.setState({
+            () =>
+                this.props.history.push(`gameStart/${row.boardManagerId}`),
+            "{}", (errorMessage: string) => this.setState({
                 statusError: errorMessage
             }));
     }
 
-    private getCurrentPlayersText(row: BoardManager) {
+    private static getCurrentPlayersText(row: BoardManager) {
         if (row.board) {
             const player1 = row.board.player1;
             const player2 = row.board.player2;

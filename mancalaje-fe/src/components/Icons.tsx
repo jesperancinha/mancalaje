@@ -3,15 +3,15 @@ import {useStyles} from "../theme";
 import SvgIcon, {SvgIconProps} from "@material-ui/core/SvgIcon";
 import {ListItem} from "@material-ui/core";
 
-function HomeIcon(props: SvgIconProps): any {
+const HomeIcon = (props: SvgIconProps) => {
     return (
         <SvgIcon {...props}>
             <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
         </SvgIcon>
     );
-}
+};
 
-function RemoveICon(props: SvgIconProps): any {
+const RemoveICon = (props: SvgIconProps) => {
     return (
         <SvgIcon xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" {...props}>
             <path fill="none" d="M0 0h24v24H0V0z"/>
@@ -20,23 +20,25 @@ function RemoveICon(props: SvgIconProps): any {
         </SvgIcon>
     )
 
-}
+};
 
-export function RoomComponentIcon() {
+const RoomComponentIcon = () => {
     const classes = useStyles();
     return (
         <HomeIcon className={classes.icon} color="secondary"/>
     )
-}
+};
 
-export function RemoveComponentIcon() {
+const RemoveComponentIcon = () => {
     const classes = useStyles();
     return (
         <RemoveICon className={classes.icon} color="secondary"/>
     )
-}
+};
 
-export function ListItemLink(props: any) {
+const ListItemLink = (props: any) => {
     return <ListItem button component="a" {...props} />;
-}
+};
+
+export {RoomComponentIcon, RemoveComponentIcon, ListItemLink}
 

@@ -139,3 +139,5 @@ export const holeEnabled = {
     backgroundColor: '#00e41d',
     borderRadius: 50
 };
+
+export const XS_COL_SPAN = 12;
