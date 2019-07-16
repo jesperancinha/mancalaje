@@ -24,6 +24,7 @@
         <h2.version>1.4.199</h2.version>
         <spring-security-oauth2-autoconfigure.version>2.1.6.RELEASE</spring-security-oauth2-autoconfigure.version>
         <liquibase-core.version>3.6.3</liquibase-core.version>
+        <postgresql.version>42.2.6</postgresql.version>
     </properties>
 
     <modules>
@@ -47,6 +48,11 @@
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-core</artifactId>
                 <version>${liquibase-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

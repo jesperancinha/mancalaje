@@ -2,24 +2,32 @@ package com.jofisaes.mancala.entities;
 
 import lombok.*;
 
+import javax.persistence.*;
+
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "Hole")
 public class Hole {
 
+    @Id
+    @Column
+    private Long id;
+
+    @Column
+    private Integer holeId;
+
+    @OneToOne
+    @JoinColumn(name = "id")
     private Player player;
 
-    private Integer id;
-
+    @Column
     private Integer stones;
 
-    private boolean enabled;
-
-    private int pickedUpStones;
-
-    private Hole nextHole;
-
-    private Hole oppositeHole;
+    @OneToOne
+    @JoinColumn(name = "id")
+    private Board board;
 }

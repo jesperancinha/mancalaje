@@ -12,6 +12,8 @@
 
 ## References
 
+-   [PostgreSQL](https://www.postgresql.org/)
+-   [How to connect to H2 database during development/testing using Spring-Boot](https://medium.com/@harittweets/how-to-connect-to-h2-database-during-development-testing-using-spring-boot-44bbb287570)
 -   [Spring Session with JDBC](https://www.baeldung.com/spring-session-jdbc)
 -   [SDK Man!](https://sdkman.io/)
 -   [Spring Boot and OAuth2](https://spring.io/guides/tutorials/spring-boot-oauth2/)

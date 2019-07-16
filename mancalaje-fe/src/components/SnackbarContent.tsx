@@ -66,7 +66,7 @@ const MySnackbarContentWrapper = (props: Props) => {
         </span>
             }
             action={[
-                <IconButton href="_blank" key="close" aria-label="Close" color="inherit" onClick={onClose}>
+                <IconButton href="#" key="close" aria-label="Close" color="inherit" onClick={onClose}>
                     <CloseIcon className={classes.icon}/>
                 </IconButton>,
             ]}
