@@ -19,28 +19,28 @@ const variantIcon = {
 };
 
 const useStyles1 = makeStyles((theme: Theme) => ({
-    success: {
-        backgroundColor: green[GREEN_WEIGHT],
-    },
     error: {
         backgroundColor: theme.palette.error.dark,
-    },
-    info: {
-        backgroundColor: theme.palette.primary.main,
-    },
-    warning: {
-        backgroundColor: amber[AMBER_WEIGHT],
     },
     icon: {
         fontSize: 20,
     },
+    info: {
+        backgroundColor: theme.palette.primary.main,
+    },
     iconVariant: {
-        opacity: 0.9,
         marginRight: theme.spacing(1),
+        opacity: 0.9,
     },
     message: {
         alignItems: 'center',
         display: 'flex',
+    },
+    success: {
+        backgroundColor: green[GREEN_WEIGHT],
+    },
+    warning: {
+        backgroundColor: amber[AMBER_WEIGHT],
     },
 }));
 

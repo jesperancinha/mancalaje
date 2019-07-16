@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux';
 import {CREATE_OAUTH2} from "./actions/ActionType";
 import {ConnectedRouter} from 'connected-react-router'
-import history from "./history/history";
+import {history} from "./history/history";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import {theme} from "./theme";
 import OAuth2 from "fetch-mw-oauth2/dist/fetch-wrapper";

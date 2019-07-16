@@ -7,9 +7,11 @@ export const BLUE_WEIGHT = 500;
 export const GREEN_LIGHT_WEIGHT = 100;
 export const GREEN_WEIGHT = 600;
 export const AMBER_WEIGHT = 700;
-export const XS_COL_SPAN = 12;
-export const GRID_SPACING = 0;
 export const RED_WEIGHT = 800;
+export const XS_COL_SPAN = 12;
+export const BOX_MARGIN = 2;
+export const GRID_SPACING = 0;
+
 
 export const useStyles = makeStyles((theme: Theme) => {
     let themeSpacing = 2;
@@ -126,7 +128,7 @@ export const theme = createMuiTheme({
         background: {default: '#000'},
         error: red,
         contrastThreshold: 3,
-        primary: {main: blue[BLUE_WEIGHT],},
+        primary: {main: blue[BLUE_WEIGHT]},
         secondary: {main: green[GREEN_LIGHT_WEIGHT]},
         tonalOffset: 0.2,
         type: "light",

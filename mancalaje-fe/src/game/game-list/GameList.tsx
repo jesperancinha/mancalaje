@@ -19,6 +19,8 @@ import {PlayerState} from "../../entities/player-state";
 import {BoardManager} from "../../entities/board-manager";
 import {MancalaJeHeader} from '../../components/MancalaJeHeader';
 import {MancalaReducer} from "../../entities/mancala-reducer";
+import {REFRESH_RATE} from "../../actions/Refresher";
+import {invalidateText} from "../../actions/Validators";
 
 
 interface GameListProps extends State {
@@ -41,7 +43,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
         makeDeleteRequest("mancala/rooms", this.state, this.props);
         const refresher = setInterval(() => {
             this.loadAllBoards();
-        }, 1000);
+        }, REFRESH_RATE);
         this.state.refreshers.push(refresher);
         this.setState(this.state);
     }
@@ -62,7 +64,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                     <TextField
                         style={control}
                         label={"Room name"}
-                        error={this.state.boardName.length === 0}
+                        error={invalidateText(this.state.boardName)}
                         helperText={this.getRoomNameHelperText()}
                         onChange={(newValue) => this.changeState(newValue.target.value)}/>
                     <br/>
@@ -124,7 +126,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
         });
     }
 
-    private handleClick() {
+    private handleClick(): void {
         const messageBody = JSON.stringify({
             boardName: this.state.boardName
         });
@@ -132,7 +134,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     }
 
 
-    private loadAllBoards() {
+    private loadAllBoards(): void {
         makeGetRequest('mancala/boards/all', this.state, this.props, (data: Game) => {
             this.setState({
                 game: data
@@ -140,12 +142,14 @@ class GameList extends React.Component<GameListProps, GameListProps> {
         });
     }
 
-    private handleRemoveRoom(roomId: number) {
+    private handleRemoveRoom(roomId: number): void {
         makeDeleteRequest("mancala/boards/" + roomId, this.state, this.props, () => this.loadAllBoards());
     }
 
     private logOut(): void {
-        this.props.dispatch(createOAuth());
+        if (this.props.dispatch) {
+            this.props.dispatch(createOAuth());
+        }
         logOut(this.props, this.state);
     }
 
@@ -156,11 +160,10 @@ class GameList extends React.Component<GameListProps, GameListProps> {
         return "";
     }
 
-    private redirectToGamePage(row: BoardManager) {
+    private redirectToGamePage(row: BoardManager): void {
         this.state.refreshers.map(clearInterval);
         makePutRequest("/mancala/rooms/" + row.boardManagerId, this.state, this.props,
-            () =>
-                this.props.history.push(`gameStart/${row.boardManagerId}`),
+            () => this.props.history ? this.props.history.push(`gameStart/${row.boardManagerId}`) : {},
             "{}", (errorMessage: string) => this.setState({
                 statusError: errorMessage
             }));
@@ -192,8 +195,8 @@ class GameList extends React.Component<GameListProps, GameListProps> {
 const mapStateToProps = (state: GameListProps) => {
     return {
         oauth: state.mancalaReducer ? state.mancalaReducer.oauth : null,
+        refreshers: state.refreshers,
         router: state.router,
-        refreshers: state.refreshers
     }
 };
 // @ts-ignore

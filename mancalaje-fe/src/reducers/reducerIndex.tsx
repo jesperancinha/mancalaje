@@ -1,7 +1,7 @@
-import {combineReducers} from 'redux'
+import {combineReducers, Dispatch} from 'redux'
 import {History} from 'history'
 import {connectRouter, RouterState} from 'connected-react-router'
-import mancalaReducer from "./reducer";
+import {mancalaReducer} from "./reducer";
 import OAuth2 from "fetch-mw-oauth2/dist/fetch-wrapper";
 
 export default (history: History) => combineReducers({
@@ -12,8 +12,8 @@ export default (history: History) => combineReducers({
 export interface State {
     oauth?: OAuth2;
     router?: RouterState;
-    history?: any;
-    dispatch?: any;
+    history?: History;
+    dispatch?: Dispatch;
     statusError?: string;
     refreshers: number[];
 }

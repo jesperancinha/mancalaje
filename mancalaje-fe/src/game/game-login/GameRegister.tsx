@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import {bindActionCreators, Dispatch} from "redux";
 import {connect} from "react-redux";
 import {State} from "../../reducers/reducerIndex";
-import mancalaReducer from "../../reducers/reducer";
+import {mancalaReducer} from "../../reducers/reducer";
 import {MySnackbarContentWrapper} from "../../components/SnackbarContent";
 import {control, XS_COL_SPAN} from "../../theme";
 import {MancalaJeHeader} from "../../components/MancalaJeHeader";
@@ -20,7 +20,6 @@ interface GameRegisterProps extends State {
     password: string;
     confirmPassword: string;
 }
-
 
 class GameRegister extends Component<GameRegisterProps, GameRegisterProps> {
     constructor({props}: { props: GameRegisterProps }) {

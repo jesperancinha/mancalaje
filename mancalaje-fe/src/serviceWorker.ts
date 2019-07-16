@@ -10,6 +10,8 @@
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://bit.ly/CRA-PWA
 
+import {NOT_FOUND} from "http-status-codes";
+
 const isLocalhost = Boolean(
     window.location.hostname === "localhost" ||
     // [::1] is the IPv6 localhost address.
@@ -80,7 +82,7 @@ const checkValidServiceWorker = (swUrl: string, config?: Config) => {
             // Ensure service worker exists, and that we really are getting a JS file.
             const contentType = response.headers.get("content-type");
             if (
-                response.status === 404 ||
+                response.status === NOT_FOUND ||
                 (contentType != null && contentType.indexOf("javascript") === -1)
             ) {
                 // No service worker found. Probably a different app. Reload the page.

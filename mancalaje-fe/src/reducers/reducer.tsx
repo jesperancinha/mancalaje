@@ -15,4 +15,4 @@ const mancalaReducer = (state: any = {}, action: any) => {
     }
 };
 
-export default mancalaReducer;
+export {mancalaReducer};

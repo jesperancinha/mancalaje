@@ -1,3 +1,5 @@
+import OAuth2 from "fetch-mw-oauth2/dist/fetch-wrapper";
+
 export class MancalaState {
-    public oauth: any = null;
+    public oauth?: OAuth2;
 }

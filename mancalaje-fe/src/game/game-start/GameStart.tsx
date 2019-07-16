@@ -13,6 +13,7 @@ import {PlayerState} from "../../entities/player-state";
 import {MancalaJeHeader} from "../../components/MancalaJeHeader";
 import {MancalaBoard} from "../../components/MancalaBoard";
 import {MancalaReducer} from "../../entities/mancala-reducer";
+import {REFRESH_RATE} from "../../actions/Refresher";
 
 export interface GameStartProps extends State {
     mancalaReducer?: MancalaReducer
@@ -34,7 +35,7 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
         this.loadGameData();
         let refresher: number = setInterval(() => {
             this.loadGameData();
-        }, 1000);
+        }, REFRESH_RATE);
         this.state.refreshers.push(refresher);
 
     }
@@ -107,18 +108,17 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
 
     private leaveRoom(): void {
         this.state.refreshers.forEach(clearInterval);
-        makeDeleteRequest("/mancala/rooms/" + this.props.match.params.id, this.state, this.props, () => {
-            this.props.history.push(`/gameList`)
-        });
+        makeDeleteRequest("/mancala/rooms/" + this.props.match.params.id, this.state, this.props,
+            () => this.props.history ? this.props.history.push(`/gameList`) : {});
     }
 }
 
 
 const mapStateToProps = (state: GameStartProps) => {
     return {
-        oauth:  state.mancalaReducer? state.mancalaReducer.oauth: '',
+        oauth: state.mancalaReducer ? state.mancalaReducer.oauth : '',
+        refreshers: state.refreshers,
         router: state.router,
-        refreshers: state.refreshers
     }
 };
 // @ts-ignore

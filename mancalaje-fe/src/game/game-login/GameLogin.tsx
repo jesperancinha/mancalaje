@@ -8,7 +8,7 @@ import {bindActionCreators, Dispatch} from "redux";
 import {connect} from "react-redux";
 import {createOAuth} from "../../index";
 import {State} from "../../reducers/reducerIndex";
-import mancalaReducer from "../../reducers/reducer";
+import {mancalaReducer} from "../../reducers/reducer";
 import {MySnackbarContentWrapper} from "../../components/SnackbarContent";
 import {control, XS_COL_SPAN} from "../../theme";
 import {MancalaJeHeader} from "../../components/MancalaJeHeader";
@@ -59,10 +59,10 @@ class GameLogin extends Component<GameProps, GameProps> {
                         <br/>
                         <Button
                             style={control}
-                            onClick={() => this.props.dispatch(createOAuth(this.handleClick()))}>Submit</Button>
+                            onClick={() => this.props.dispatch ? this.props.dispatch(createOAuth(this.handleClick())) : {}}>Submit</Button>
                         <Button
                             style={control}
-                            onClick={() => this.props.history.push("gameRegister")}>Register</Button>
+                            onClick={() => this.props.history ? this.props.history.push("gameRegister") : {}}>Register</Button>
 
                     </AppBar>
                 </Grid>
@@ -87,18 +87,17 @@ class GameLogin extends Component<GameProps, GameProps> {
         );
     }
 
-    private handleClick() {
+    private handleClick(): OAuth2 {
         const oAuth2 = new OAuth2({
-            grantType: "password",
             clientId: "mancala-client",
             clientSecret: "mancala",
-            userName: this.state.username,
+            grantType: "password",
             password: this.state.password,
             tokenEndpoint: "http://localhost:3000/oauth/token",
+            userName: this.state.username,
         });
-        oAuth2.getAccessToken().then(() => {
-            this.props.history.push("gameList");
-        }).catch(() => this.setState({
+        oAuth2.getAccessToken().then(() => this.props.history ? this.props.history.push("gameList") : {}
+        ).catch(() => this.setState({
             statusError: 'Login failed!',
         }));
         return oAuth2;
