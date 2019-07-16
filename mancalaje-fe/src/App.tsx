@@ -8,6 +8,7 @@ import {State} from "./reducers/reducerIndex";
 import {GameListConnected} from "./game/game-list/GameList";
 import {GameStartConnected} from "./game/game-start/GameStart";
 import {Home} from "./home/Home";
+import {GameRegisterConnected} from "./game/game-login/GameRegister";
 
 const App: React.FC = () => {
     return (
@@ -17,6 +18,7 @@ const App: React.FC = () => {
                 <Route path="/login" component={GameLoginConnected}/>
                 <Route path="/gameList" component={GameListConnected}/>
                 <Route path="/gameStart/:id" component={GameStartConnected}/>
+                <Route path="/gameRegister" component={GameRegisterConnected}/>
             </Switch>
         </Router>
     );

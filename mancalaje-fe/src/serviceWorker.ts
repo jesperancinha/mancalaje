@@ -138,7 +138,6 @@ const register = (config?: Config) => {
     }
 };
 
-
 const unregister = () => {
     if ("serviceWorker" in navigator) {
         navigator.serviceWorker.ready.then((registration) => {

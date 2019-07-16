@@ -9,17 +9,18 @@ import IconButton from '@material-ui/core/IconButton';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import WarningIcon from '@material-ui/icons/Warning';
 import {makeStyles, Theme} from '@material-ui/core/styles';
+import {AMBER_WEIGHT, GREEN_WEIGHT} from "../theme";
 
 const variantIcon = {
-    success: CheckCircleIcon,
-    warning: WarningIcon,
     error: ErrorIcon,
     info: InfoIcon,
+    success: CheckCircleIcon,
+    warning: WarningIcon,
 };
 
 const useStyles1 = makeStyles((theme: Theme) => ({
     success: {
-        backgroundColor: green[600],
+        backgroundColor: green[GREEN_WEIGHT],
     },
     error: {
         backgroundColor: theme.palette.error.dark,
@@ -28,7 +29,7 @@ const useStyles1 = makeStyles((theme: Theme) => ({
         backgroundColor: theme.palette.primary.main,
     },
     warning: {
-        backgroundColor: amber[700],
+        backgroundColor: amber[AMBER_WEIGHT],
     },
     icon: {
         fontSize: 20,

@@ -128,5 +128,9 @@ const logOut = (props: State, state: State) => {
     return props.history.push(LOGIN_PATH);
 };
 
-export {makeGetRequest, makePutRequest, makePostRequest, makeDeleteRequest, logOut}
+const home = (props: State) => {
+    props.history.push(LOGIN_PATH);
+};
+
+export {makeGetRequest, makePutRequest, makePostRequest, makeDeleteRequest, logOut, home}
 

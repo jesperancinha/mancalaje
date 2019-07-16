@@ -43,6 +43,7 @@ stay tuned!
 ## References
 
 -   [Postman](https://www.getpostman.com/)
+-   [Spring Boot OAuth2 Social Login with Google, Facebook, and Github - Part 1](https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/)
 
 ## License
 

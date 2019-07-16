@@ -140,4 +140,7 @@ export const holeEnabled = {
     borderRadius: 50
 };
 
+export const GREEN_WEIGHT = 600;
+export const AMBER_WEIGHT = 700;
+
 export const XS_COL_SPAN = 12;

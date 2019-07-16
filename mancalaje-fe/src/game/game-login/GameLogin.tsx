@@ -10,15 +10,14 @@ import {createOAuth} from "../../index";
 import {State} from "../../reducers/reducerIndex";
 import mancalaReducer from "../../reducers/reducer";
 import {MySnackbarContentWrapper} from "../../components/SnackbarContent";
-import {control} from "../../theme";
+import {control, XS_COL_SPAN} from "../../theme";
 import {MancalaJeHeader} from "../../components/MancalaJeHeader";
+import {invalidateText} from "../../actions/Validators";
 
 interface GameProps extends State {
     username: string;
     password: string;
 }
-
-const MIN_TEXT_LENGTH = 0;
 
 class GameLogin extends Component<GameProps, GameProps> {
     constructor({props}: { props: GameProps }) {
@@ -40,13 +39,13 @@ class GameLogin extends Component<GameProps, GameProps> {
     render(): any {
         return (
             <MancalaJeHeader>
-                <Grid item xs={12}>
+                <Grid item xs={XS_COL_SPAN}>
                     <AppBar title="Login" position="relative">
                         <Typography variant="h3" align={"center"}>Please login to start playing!</Typography>
                         <TextField
                             style={control}
                             label={"Username"}
-                            error={this.state.username.length === MIN_TEXT_LENGTH}
+                            error={invalidateText(this.state.username)}
                             helperText={this.getUserHelperText()}
                             onChange={(newValue) => this.setState({username: newValue.target.value, statusError: ""})}/>
                         <br/>
@@ -54,17 +53,20 @@ class GameLogin extends Component<GameProps, GameProps> {
                             style={control}
                             label={"Password"}
                             type="password"
-                            error={this.state.password.length === MIN_TEXT_LENGTH}
+                            error={invalidateText(this.state.password)}
                             helperText={this.getPassordHelperText()}
                             onChange={(newValue) => this.setState({password: newValue.target.value, statusError: ""})}/>
                         <br/>
                         <Button
                             style={control}
                             onClick={() => this.props.dispatch(createOAuth(this.handleClick()))}>Submit</Button>
+                        <Button
+                            style={control}
+                            onClick={() => this.props.history.push("gameRegister")}>Register</Button>
 
                     </AppBar>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={XS_COL_SPAN}>
                     <AppBar title={"Login cheat"} position={"relative"}>
                         <Typography variant="h4" align={"center"}>Pssst! Don't tell anyone but the username and password
                             is
@@ -72,7 +74,7 @@ class GameLogin extends Component<GameProps, GameProps> {
                     </AppBar>
                 </Grid>
                 {this.state.statusError ? (
-                    <Grid item xs={12}>
+                    <Grid item xs={XS_COL_SPAN}>
                         <MySnackbarContentWrapper
                             variant="error"
                             message={this.state.statusError}
@@ -103,13 +105,13 @@ class GameLogin extends Component<GameProps, GameProps> {
     }
 
     private getUserHelperText() {
-        if (this.state.username.length === 0) {
+        if (invalidateText(this.state.username)) {
             return "Please enter a username"
         }
     }
 
     private getPassordHelperText() {
-        if (this.state.password.length === 0) {
+        if (invalidateText(this.state.password)) {
             return "Please enter a password"
         }
     }

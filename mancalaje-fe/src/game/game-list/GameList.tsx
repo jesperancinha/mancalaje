@@ -18,11 +18,12 @@ import {Game} from "../../entities/game";
 import {PlayerState} from "../../entities/player-state";
 import {BoardManager} from "../../entities/board-manager";
 import {MancalaJeHeader} from '../../components/MancalaJeHeader';
+import {MancalaReducer} from "../../entities/mancala-reducer";
 
 
 interface GameListProps extends State {
     game?: Game;
-    mancalaReducer?: any;
+    mancalaReducer?: MancalaReducer;
     boardName: string;
     playerState?: PlayerState
 }
@@ -38,7 +39,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     componentDidMount() {
         this.loadAllBoards();
         makeDeleteRequest("mancala/rooms", this.state, this.props);
-        let refresher = setInterval(() => {
+        const refresher = setInterval(() => {
             this.loadAllBoards();
         }, 1000);
         this.state.refreshers.push(refresher);
@@ -124,7 +125,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     }
 
     private handleClick() {
-        let messageBody = JSON.stringify({
+        const messageBody = JSON.stringify({
             boardName: this.state.boardName
         });
         makePostRequest('mancala/boards', this.state, this.props, () => this.loadAllBoards(), messageBody);
@@ -143,7 +144,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
         makeDeleteRequest("mancala/boards/" + roomId, this.state, this.props, () => this.loadAllBoards());
     }
 
-    private logOut() {
+    private logOut(): void {
         this.props.dispatch(createOAuth());
         logOut(this.props, this.state);
     }
@@ -190,7 +191,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
 
 const mapStateToProps = (state: GameListProps) => {
     return {
-        oauth: state.mancalaReducer.oauth,
+        oauth: state.mancalaReducer ? state.mancalaReducer.oauth : null,
         router: state.router,
         refreshers: state.refreshers
     }
