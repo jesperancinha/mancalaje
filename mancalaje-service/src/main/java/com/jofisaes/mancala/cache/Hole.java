@@ -2,6 +2,7 @@ package com.jofisaes.mancala.cache;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.annotations.VisibleForTesting;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.PackagePrivate;
@@ -33,6 +34,7 @@ public class Hole implements Serializable {
     @JsonIgnore
     private Hole oppositeHole;
 
+    @VisibleForTesting
     Hole(Player player, Integer id) {
         this.player = player;
         this.id = id;
@@ -40,6 +42,7 @@ public class Hole implements Serializable {
     }
 
     @PackagePrivate
+    @VisibleForTesting
     Integer pickStones() {
         Integer pickedStones = this.stones;
         this.stones = 0;
@@ -47,11 +50,13 @@ public class Hole implements Serializable {
     }
 
     @PackagePrivate
+    @VisibleForTesting
     void addOne() {
         this.stones++;
     }
 
     @PackagePrivate
+    @VisibleForTesting
     int flushPickedUpStones() {
         int pickedStones = this.pickedUpStones;
         this.pickedUpStones = 0;

@@ -5,18 +5,19 @@ import {Link} from "react-router-dom";
 import {Grid, Typography} from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import Box from "@material-ui/core/Box";
+import {GRID_SPACING, XS_COL_SPAN} from "../theme";
 
 class Home extends React.Component {
     render() {
         return (
             <Grid
                 container
-                spacing={0}
+                spacing={GRID_SPACING}
                 direction="column"
                 alignItems="center"
                 justify="center"
                 style={{minHeight: '100vh'}}>
-                <Grid item xs={12}>
+                <Grid item xs={XS_COL_SPAN}>
                     <AppBar title={"Home Mancala Je"} position="relative">
                         <Typography variant="h1" align={"center"}>Welcome to MancalaJe</Typography>
                     </AppBar>

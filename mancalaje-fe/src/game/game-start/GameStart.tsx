@@ -12,9 +12,10 @@ import {MySnackbarContentWrapper} from "../../components/SnackbarContent";
 import {PlayerState} from "../../entities/player-state";
 import {MancalaJeHeader} from "../../components/MancalaJeHeader";
 import {MancalaBoard} from "../../components/MancalaBoard";
+import {MancalaReducer} from "../../entities/mancala-reducer";
 
 export interface GameStartProps extends State {
-    mancalaReducer?: any
+    mancalaReducer?: MancalaReducer
     playerState?: PlayerState
     id?: number
     match?: any
@@ -115,7 +116,7 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
 
 const mapStateToProps = (state: GameStartProps) => {
     return {
-        oauth: state.mancalaReducer.oauth,
+        oauth:  state.mancalaReducer? state.mancalaReducer.oauth: '',
         router: state.router,
         refreshers: state.refreshers
     }

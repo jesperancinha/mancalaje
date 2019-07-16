@@ -3,26 +3,34 @@ import {blue, green, red} from "@material-ui/core/colors";
 import {createStyles} from "@material-ui/styles";
 import makeStyles from "@material-ui/styles/makeStyles";
 
+export const BLUE_WEIGHT = 500;
+export const GREEN_LIGHT_WEIGHT = 100;
+export const GREEN_WEIGHT = 600;
+export const AMBER_WEIGHT = 700;
+export const XS_COL_SPAN = 12;
+export const GRID_SPACING = 0;
+export const RED_WEIGHT = 800;
+
 export const useStyles = makeStyles((theme: Theme) => {
     let themeSpacing = 2;
     if (theme.spacing) {
         themeSpacing = theme.spacing(2);
     }
-    let newStyles = {
+    const newStyles = {
         icon: {
             margin: themeSpacing,
         },
         iconHover: {
             margin: themeSpacing,
             '&:hover': {
-                color: red[800],
+                color: red[RED_WEIGHT],
             },
         },
         root: {
+            alignItems: 'flex-end',
+            borderRadius: '10px',
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'flex-end',
-            borderRadius: '10px'
         },
         shape: {
             borderRadius: 50
@@ -41,17 +49,17 @@ export const theme = createMuiTheme({
         },
         MuiAppBar: {
             root: {
+                alignItems: "center",
                 borderRadius: 5,
                 margin: 10,
                 padding: 10,
-                alignItems: "center",
                 width: 800
             },
         },
         MuiButton: {
             root: {
+                alignItems: "center",
                 minWidth: "100%",
-                alignItems: "center"
             }
         },
         MuiButtonBase: {
@@ -74,23 +82,23 @@ export const theme = createMuiTheme({
         },
         MuiTableCell: {
             root: {
+                alignContent: "center",
+                alignItems: "center",
+                borderColor: "black",
+                borderWidth: 2,
                 fontSize: 50,
                 fontWeight: 900,
-                paddingTop: 14,
+                height: 71,
                 paddingBottom: 14,
                 paddingLeft: 16,
                 paddingRight: 16,
-                borderColor: "black",
-                borderWidth: 2,
-                alignContent: "center",
-                alignItems: "center",
+                paddingTop: 14,
                 width: 46,
-                height: 71
             },
             body: {
-                borderWidth: 0,
                 alignContent: "center",
-                alignItems: "center"
+                alignItems: "center",
+                borderWidth: 0,
             },
 
         }
@@ -115,19 +123,19 @@ export const theme = createMuiTheme({
         fontSize: 10
     },
     palette: {
-        primary: {main: blue[500],},
-        secondary: {main: green[100]},
+        background: {default: '#000'},
         error: red,
         contrastThreshold: 3,
+        primary: {main: blue[BLUE_WEIGHT],},
+        secondary: {main: green[GREEN_LIGHT_WEIGHT]},
         tonalOffset: 0.2,
         type: "light",
-        background: {default: '#000'}
     }
 });
 
 export const control = {
-    margin: 15,
     backgroundColor: '#8de4e1',
+    margin: 15,
 };
 
 export const holeDisabled = {
@@ -140,7 +148,5 @@ export const holeEnabled = {
     borderRadius: 50
 };
 
-export const GREEN_WEIGHT = 600;
-export const AMBER_WEIGHT = 700;
 
-export const XS_COL_SPAN = 12;
+

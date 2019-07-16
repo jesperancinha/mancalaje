@@ -21,8 +21,9 @@ import javax.sql.DataSource;
 public class MancalaProdConfiguration {
 
     private static Logger logger = LoggerFactory.getLogger(MancalaProdConfiguration.class);
+
     @Value("classpath:org/springframework/session/jdbc/schema-postgresql.sql")
-    Resource script;
+    private Resource script;
 
     @Bean
     public DataSource getDataSource() {
