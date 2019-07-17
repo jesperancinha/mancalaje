@@ -24,7 +24,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/mancala/users/**")
                 .permitAll()
-                .antMatchers("/mancala/actions/**", "/mancala/boards/**", "/mancala/rooms/**")
+                .antMatchers("/mancala/actions/**", "/mancala/boards/**", "/mancala/rooms/**","mancala/admin/**")
                 .authenticated()
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }

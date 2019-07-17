@@ -6,9 +6,11 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.context.request.RequestContextListener;
 
 @EnableJpaAuditing
+@EnableScheduling
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class MancalaApplication extends SpringBootServletInitializer {
 

@@ -86,6 +86,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                         onChange={(newValue) => this.changeState(newValue.target.value)}/>
                     <br/>
                     <Button
+                        disabled={invalidateText(this.state.boardName)}
                         style={control}
                         onClick={() => this.handleClick()}>Submit</Button>
                 </AppBar>
