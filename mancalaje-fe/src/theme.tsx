@@ -78,6 +78,11 @@ export const theme = createMuiTheme({
             }
         },
         MuiTableCell: {
+            body: {
+                alignContent: "center",
+                alignItems: "center",
+                borderWidth: 0,
+            },
             root: {
                 alignContent: "center",
                 alignItems: "center",
@@ -91,11 +96,6 @@ export const theme = createMuiTheme({
                 paddingRight: 16,
                 paddingTop: 14,
                 width: 46,
-            },
-            body: {
-                alignContent: "center",
-                alignItems: "center",
-                borderWidth: 0,
             },
 
         },

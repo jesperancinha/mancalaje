@@ -15,7 +15,7 @@ import {configureStore} from "./store";
 export const createOAuth = (payload?: OAuth2) => {
     return ({
         payload,
-        type: CREATE_OAUTH2
+        type: CREATE_OAUTH2,
     });
 };
 

@@ -10,8 +10,8 @@ import "./MancalaBoard.sass"
 import {makePutRequest} from "../actions/OAuthRouting";
 import {State} from "../reducers/reducerIndex";
 import Button from "@material-ui/core/Button";
-import {Hole} from "../entities/hole";
-import {BoardManager} from "../entities/board-manager";
+import {Hole} from "../model/hole";
+import {BoardManager} from "../model/board-manager";
 import {GameStartProps} from "../game/game-start/GameStart";
 
 const swayStones = (id: number, state: State, props: State) => {

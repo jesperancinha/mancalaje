@@ -14,9 +14,9 @@ import {logOut, makeDeleteRequest, makeGetRequest, makePostRequest, makePutReque
 import {createOAuth} from "../../index";
 import {MySnackbarContentWrapper} from "../../components/SnackbarContent";
 import Box from "@material-ui/core/Box";
-import {Game} from "../../entities/game";
+import {Game} from "../../model/game";
 import {PlayerState} from "../../entities/player-state";
-import {BoardManager} from "../../entities/board-manager";
+import {BoardManager} from "../../model/board-manager";
 import {MancalaJeHeader} from '../../components/MancalaJeHeader';
 import {MancalaReducer} from "../../entities/mancala-reducer";
 import {REFRESH_RATE} from "../../actions/Refresher";

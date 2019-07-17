@@ -1,3 +1,3 @@
 export class Params {
-    id = -1;
+    public id = -1;
 }

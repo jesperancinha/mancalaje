@@ -20,5 +20,5 @@ export interface State {
 
 export interface Clickable {
     onClick?: () => void;
-    children: Object;
+    children: {};
 }
