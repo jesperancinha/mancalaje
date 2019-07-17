@@ -14,12 +14,13 @@ import {MancalaJeHeader} from "../../components/MancalaJeHeader";
 import {MancalaBoard} from "../../components/MancalaBoard";
 import {MancalaReducer} from "../../entities/mancala-reducer";
 import {REFRESH_RATE} from "../../actions/Refresher";
+import {Match} from "../../entities/match";
 
 export interface GameStartProps extends State {
     mancalaReducer?: MancalaReducer
     playerState?: PlayerState
     id?: number
-    match?: any
+    match?: Match
 }
 
 class GameStart extends React.Component<GameStartProps, GameStartProps> {
@@ -33,18 +34,20 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
 
     componentDidMount() {
         this.loadGameData();
-        let refresher: number = setInterval(() => {
+        const refresher: number = setInterval(() => {
             this.loadGameData();
         }, REFRESH_RATE);
         this.state.refreshers.push(refresher);
 
     }
 
-    private loadGameData() {
-        makeGetRequest("/mancala/boards/" + this.props.match.params.id, this.state, this.props,
-            (data: any) => this.setState({
-                playerState: data
-            }));
+    private loadGameData(): void {
+        if (this.props.match) {
+            makeGetRequest("/mancala/boards/" + this.props.match.params.id, this.state, this.props,
+                (data: PlayerState) => this.setState({
+                    playerState: data
+                }));
+        }
     }
 
     render(): any {
@@ -79,7 +82,8 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
                         <AppBar title="Game Start Board" position="relative">
                             <MancalaBoard data={this.state.playerState.boardManager} state={this.state} props={this.props}/>
                         </AppBar>
-                        {this.state.playerState.boardManager && this.state.playerState.boardManager.winner && this.state.playerState.boardManager.gameover ? (
+                        {this.state.playerState.boardManager &&
+                        this.state.playerState.boardManager.winner && this.state.playerState.boardManager.gameover ? (
                                 <AppBar title={'Game Over!'} position={"relative"}>
                                     <Typography variant="h3">Game Over! The winner
                                         is {this.state.playerState.boardManager.winner.name}</Typography>
@@ -108,8 +112,10 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
 
     private leaveRoom(): void {
         this.state.refreshers.forEach(clearInterval);
-        makeDeleteRequest("/mancala/rooms/" + this.props.match.params.id, this.state, this.props,
-            () => this.props.history ? this.props.history.push(`/gameList`) : {});
+        if (this.props.match) {
+            makeDeleteRequest("/mancala/rooms/" + this.props.match.params.id, this.state, this.props,
+                () => this.props.history ? this.props.history.push(`/gameList`) : {});
+        }
     }
 }
 

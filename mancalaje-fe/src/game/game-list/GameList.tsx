@@ -38,6 +38,24 @@ class GameList extends React.Component<GameListProps, GameListProps> {
         this.state = {boardName: "", refreshers: []};
     }
 
+    private static getCurrentPlayersText(row: BoardManager): string {
+        if (row.board) {
+            const player1 = row.board.player1;
+            const player2 = row.board.player2;
+            if (player1 && player2) {
+                return "Current players: " + player1.name + " and " + player2.name;
+            }
+            if (player1) {
+                return "Current player: " + player1.name;
+            }
+            if (player2) {
+                return "Current player: " + player2.name;
+            }
+        }
+        return "No players in the game. Room is free";
+
+    }
+
     componentDidMount() {
         this.loadAllBoards();
         makeDeleteRequest("mancala/rooms", this.state, this.props);
@@ -126,13 +144,13 @@ class GameList extends React.Component<GameListProps, GameListProps> {
         });
     }
 
+
     private handleClick(): void {
         const messageBody = JSON.stringify({
             boardName: this.state.boardName
         });
         makePostRequest('mancala/boards', this.state, this.props, () => this.loadAllBoards(), messageBody);
     }
-
 
     private loadAllBoards(): void {
         makeGetRequest('mancala/boards/all', this.state, this.props, (data: Game) => {
@@ -167,24 +185,6 @@ class GameList extends React.Component<GameListProps, GameListProps> {
             "{}", (errorMessage: string) => this.setState({
                 statusError: errorMessage
             }));
-    }
-
-    private static getCurrentPlayersText(row: BoardManager): string {
-        if (row.board) {
-            const player1 = row.board.player1;
-            const player2 = row.board.player2;
-            if (player1 && player2) {
-                return "Current players: " + player1.name + " and " + player2.name;
-            }
-            if (player1) {
-                return "Current player: " + player1.name;
-            }
-            if (player2) {
-                return "Current player: " + player2.name;
-            }
-        }
-        return "No players in the game. Room is free";
-
     }
 }
 

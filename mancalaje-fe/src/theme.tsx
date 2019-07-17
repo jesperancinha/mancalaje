@@ -33,6 +33,7 @@ export const useStyles = makeStyles((theme: Theme) => {
             borderRadius: '10px',
             display: 'flex',
             justifyContent: 'center',
+
         },
         shape: {
             borderRadius: 50
@@ -43,12 +44,6 @@ export const useStyles = makeStyles((theme: Theme) => {
 
 export const theme = createMuiTheme({
     overrides: {
-        MuiTextField: {
-            root: {
-                borderRadius: 5,
-                minWidth: "100%",
-            }
-        },
         MuiAppBar: {
             root: {
                 alignItems: "center",
@@ -78,8 +73,8 @@ export const theme = createMuiTheme({
         MuiListItem: {
             root: {
                 alignItems: "left",
+                margin: 0,
                 padding: 0,
-                margin: 0
             }
         },
         MuiTableCell: {
@@ -103,7 +98,22 @@ export const theme = createMuiTheme({
                 borderWidth: 0,
             },
 
+        },
+        MuiTextField: {
+            root: {
+                borderRadius: 5,
+                minWidth: "100%",
+            }
         }
+    },
+    palette: {
+        background: {default: '#000'},
+        contrastThreshold: 3,
+        error: red,
+        primary: {main: blue[BLUE_WEIGHT]},
+        secondary: {main: green[GREEN_LIGHT_WEIGHT]},
+        tonalOffset: 0.2,
+        type: "light",
     },
     shape: {
         borderRadius: 50
@@ -123,15 +133,6 @@ export const theme = createMuiTheme({
             '"Segoe UI Symbol"',
         ].join(','),
         fontSize: 10
-    },
-    palette: {
-        background: {default: '#000'},
-        error: red,
-        contrastThreshold: 3,
-        primary: {main: blue[BLUE_WEIGHT]},
-        secondary: {main: green[GREEN_LIGHT_WEIGHT]},
-        tonalOffset: 0.2,
-        type: "light",
     }
 });
 

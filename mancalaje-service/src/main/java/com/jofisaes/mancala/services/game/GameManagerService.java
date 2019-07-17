@@ -2,6 +2,7 @@ package com.jofisaes.mancala.services.game;
 
 import com.jofisaes.mancala.cache.Board;
 import com.jofisaes.mancala.cache.BoardManager;
+import com.jofisaes.mancala.cache.Hole;
 import com.jofisaes.mancala.cache.Player;
 import com.jofisaes.mancala.exception.*;
 import com.jofisaes.mancala.services.room.RoomsManager;
@@ -94,6 +95,9 @@ public class GameManagerService {
      */
     public Player leaveRoom(Long roomId, Player player) {
         BoardManager boardManager = roomsManager.getBoardManagerMap().get(roomId);
+        if (Objects.isNull(boardManager)) {
+            throw new GameRemovedException();
+        }
         boardManager.setCurrentPlayer(null);
         Board board = boardManager.getBoard();
         return board.removePlayer(player);
@@ -120,14 +124,20 @@ public class GameManagerService {
 
     public BoardManager handleBoardManager(Long roomId) {
         BoardManager boardManager = this.getBoardManagerByRoomnId(roomId);
+        if (Objects.isNull(boardManager)) {
+            throw new GameRemovedException();
+        }
         Board board = boardManager.getBoard();
-        board.getAllHoles().forEach(hole -> {
-            if (Objects.nonNull(hole.getPlayer()) && Objects.nonNull(boardManager.getCurrentPlayer()) && hole.getPlayer() == boardManager.getCurrentPlayer()) {
-                hole.setEnabled(true);
-            } else {
-                hole.setEnabled(false);
-            }
-        });
+        board.getAllPlayerOneHoles().forEach(hole -> enableRightHoles(boardManager, hole));
+        board.getAllPlayerTwoHoles().forEach(hole -> enableRightHoles(boardManager, hole));
         return boardManager;
+    }
+
+    private void enableRightHoles(BoardManager boardManager, Hole hole) {
+        if (Objects.nonNull(hole.getPlayer()) && Objects.nonNull(boardManager.getCurrentPlayer()) && hole.getPlayer() == boardManager.getCurrentPlayer()) {
+            hole.setEnabled(true);
+        } else {
+            hole.setEnabled(false);
+        }
     }
 }

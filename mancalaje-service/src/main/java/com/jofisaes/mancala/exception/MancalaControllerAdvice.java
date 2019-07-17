@@ -37,4 +37,9 @@ public class MancalaControllerAdvice {
     public ResponseEntity<Object> stopClickingSoMuchException(StopClickingException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception);
     }
+
+    @ExceptionHandler(value = GameRemovedException.class)
+    public ResponseEntity<Object> gameRemovedException(GameRemovedException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception);
+    }
 }

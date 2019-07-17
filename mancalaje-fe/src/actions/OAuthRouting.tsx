@@ -4,7 +4,8 @@ import {CONFLICT} from "http-status-codes"
 
 const LOGIN_PATH = "/login";
 
-const makeGetRequest = <T extends {}>(urlString: string, state: State, props: State, transformData: (t: T) => void): void => {
+const makeGetRequest = <T extends {}>(urlString: string, state: State, props: State,
+                                      transformData: (t: T) => void): void => {
     if (props.history) {
         if (!props.oauth) {
             props.history.push(LOGIN_PATH);
@@ -22,22 +23,25 @@ const makeGetRequest = <T extends {}>(urlString: string, state: State, props: St
 };
 
 
-const makePostRequest = <T extends {}>(urlString: string, state: State, props: State, transformData: (t: T) => void, messsageBody: string): void => {
+const makePostRequest = <T extends {}>(urlString: string, state: State, props: State,
+                                       transformData: (t: T) => void, messsageBody: string): void => {
     if (props.history) {
 
         if (!props.oauth) {
             props.history.push(LOGIN_PATH);
         } else {
             props.oauth.fetch(urlString, {
-                method: "POST",
+                body: messsageBody,
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: messsageBody,
+                method: "POST",
             })
                 .then((res: Response) => {
                     if (res.status === CONFLICT) {
-                        res.json().then((errorMessage: ErrorMessage) => state.statusError = errorMessage.localizedMessage);
+                        res.json().then(
+                            (errorMessage: ErrorMessage) =>
+                                state.statusError = errorMessage.localizedMessage);
                         return null;
                     }
                     return res.json()
@@ -153,5 +157,8 @@ const home = (props: State): void => {
     }
 };
 
-export {makeGetRequest, makePutRequest, makePostRequest, makeDeleteRequest, logOut, home}
+export {
+    makeGetRequest, makePutRequest, makePostRequest,
+    makeDeleteRequest, logOut, home
+}
 

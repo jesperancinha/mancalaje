@@ -2,6 +2,7 @@ import React from "react";
 import {useStyles} from "../theme";
 import SvgIcon, {SvgIconProps} from "@material-ui/core/SvgIcon";
 import {ListItem} from "@material-ui/core";
+import {Clickable} from "../reducers/reducerIndex";
 
 const HomeIcon = (props: SvgIconProps) => {
     return (
@@ -36,7 +37,7 @@ const RemoveComponentIcon = () => {
     )
 };
 
-const ListItemLink = (props: any) => {
+const ListItemLink = (props: Clickable) => {
     return <ListItem button component="a" {...props} />;
 };
 

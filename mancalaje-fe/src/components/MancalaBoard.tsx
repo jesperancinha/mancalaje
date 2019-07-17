@@ -40,8 +40,10 @@ const MancalaBoard = ({data, state, props}: { data?: BoardManager, state: GameSt
                             <TableBody>
                                 <TableRow>
                                     <TableCell
-                                        style={data.board.allHoles[MAX_STONE_INDEX].enabled ? holeEnabled : holeDisabled}
+                                        style={data.board.allHoles[MAX_STONE_INDEX].player.email ===
+                                        state.playerState.loggedPlayer.email ? holeEnabled : holeDisabled}
                                         rowSpan={STORE_ROW_SPAN} colSpan={SINGLE_SPAN}>
+                                        key={MAX_STONE_INDEX}
                                         <Button
                                             disabled={!data.board.allHoles[MAX_STONE_INDEX].enabled ||
                                             data.gameover || data.currentPlayer.email !== state.playerState.loggedPlayer.email}
@@ -50,6 +52,7 @@ const MancalaBoard = ({data, state, props}: { data?: BoardManager, state: GameSt
                                             href={"#"}>{data.board.allHoles[MAX_STONE_INDEX].stones}</Button></TableCell>
                                     {data.board.allHoles.slice(SECOND_PLAYER_FIRST_ELEMENT, MAX_STONE_INDEX).reverse().map((hole: Hole) => (
                                         <TableCell
+                                            key={hole.id}
                                             style={hole.enabled ? holeEnabled : holeDisabled}
                                             rowSpan={SINGLE_SPAN} colSpan={SINGLE_SPAN}>
                                             <Button
@@ -60,7 +63,9 @@ const MancalaBoard = ({data, state, props}: { data?: BoardManager, state: GameSt
                                                 href={"#"}>{hole.stones}</Button></TableCell>
                                     ))}
                                     <TableCell
-                                        style={data.board.allHoles[STORE_INDEX_1].enabled ? holeEnabled : holeDisabled}
+                                        key={STORE_INDEX_1}
+                                        style={data.board.allHoles[STORE_INDEX_1].player.email ===
+                                        state.playerState.loggedPlayer.email ? holeEnabled : holeDisabled}
                                         rowSpan={STORE_ROW_SPAN} colSpan={SINGLE_SPAN}>
                                         <Button
                                             disabled={!data.board.allHoles[STORE_INDEX_1].enabled || data.gameover ||
@@ -72,6 +77,7 @@ const MancalaBoard = ({data, state, props}: { data?: BoardManager, state: GameSt
                                 <TableRow>
                                     {data.board.allHoles.slice(FIRT_PLAYER_FIRST_ELEMENT, STORE_INDEX_1).map((hole: Hole) => (
                                         <TableCell
+                                            key={hole.id}
                                             style={hole.enabled ? holeEnabled : holeDisabled}
                                             rowSpan={SINGLE_SPAN} colSpan={SINGLE_SPAN}>
                                             <Button

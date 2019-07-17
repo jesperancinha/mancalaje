@@ -25,12 +25,12 @@ const useStyles1 = makeStyles((theme: Theme) => ({
     icon: {
         fontSize: 20,
     },
-    info: {
-        backgroundColor: theme.palette.primary.main,
-    },
     iconVariant: {
         marginRight: theme.spacing(1),
         opacity: 0.9,
+    },
+    info: {
+        backgroundColor: theme.palette.primary.main,
     },
     message: {
         alignItems: 'center',

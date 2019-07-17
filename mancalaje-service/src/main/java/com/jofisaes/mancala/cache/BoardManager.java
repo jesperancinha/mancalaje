@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.concurrent.Semaphore;
 
 import static com.jofisaes.mancala.services.Validator.playerMatch;
@@ -62,30 +63,40 @@ public class BoardManager implements Serializable {
     @JsonIgnore
     public synchronized void swayStonesFromHole(Player sessionUser, Integer holeId) throws InterruptedException {
         semaphore.acquire();
+        Hole hole = getPlayHoleIFValid(sessionUser, holeId);
+        if (Objects.nonNull(hole)) {
+            swayStonesFromHole(sessionUser, hole);
+        }
+        semaphore.release();
+    }
+
+    private void swayStonesFromHole(Player sessionUser, Hole hole) {
+        Integer stones = hole.pickStones();
+        Hole lastHole = board.swayStonseFromHole(sessionUser, hole.getNextHole(), stones);
+        if (lastHole.getPickedUpStones() > 0) {
+            sessionUser.getPlayerStore().addStones(lastHole.flushPickedUpStones());
+        }
+        this.gameOver = this.board.isGameOver();
         if (!this.gameOver) {
-            if (currentPlayer.getEmail().equalsIgnoreCase(sessionUser.getEmail())) {
-                final Hole hole = board.getAllHoles().get(holeId);
-                if (hole.getStones() > 0) {
-                    if (sessionUser.getAllPlayerHoles().contains(hole) && !(hole instanceof Store)) {
-                        Integer stones = hole.pickStones();
-                        Hole lastHole = board.swayStonseFromHole(sessionUser, hole.getNextHole(), stones);
-                        if (lastHole.getPickedUpStones() > 0) {
-                            sessionUser.getPlayerStore().addStones(lastHole.flushPickedUpStones());
-                        }
-                        this.gameOver = this.board.isGameOver();
-                        if (!this.gameOver) {
-                            if (lastHole.getStones() > 1 && lastHole != sessionUser.getPlayerStore()) {
-                                this.switchCurrentPlayer();
-                            }
-                        } else {
-                            this.winner = this.board.getWinner();
-                            this.currentPlayer = this.winner;
-                        }
-                    }
+            if (lastHole.getStones() > 1 && lastHole != sessionUser.getPlayerStore()) {
+                this.switchCurrentPlayer();
+            }
+        } else {
+            this.winner = this.board.getWinner();
+            this.currentPlayer = this.winner;
+        }
+    }
+
+    private Hole getPlayHoleIFValid(Player sessionUser, int holeId) {
+        if (!this.gameOver && currentPlayer.getEmail().equalsIgnoreCase(sessionUser.getEmail())) {
+            final Hole hole = board.getAllHoles().get(holeId);
+            if (hole.getStones() > 0) {
+                if (sessionUser.getAllPlayerHoles().contains(hole) && !(hole instanceof Store)) {
+                    return hole;
                 }
             }
         }
-        semaphore.release();
+        return null;
     }
 
     private void switchCurrentPlayer() {
