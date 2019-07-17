@@ -25,10 +25,30 @@ const makeGetRequest = <T extends {}>(urlString: string, state: State, props: St
 
 const makePostRequest = <T extends {}>(urlString: string, state: State, props: State,
                                        transformData: (t: T) => void, messsageBody: string): void => {
+    debugger;
     if (props.history) {
-
         if (!props.oauth) {
-            props.history.push(LOGIN_PATH);
+            fetch(urlString, {
+                body: messsageBody,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+            })
+                .then((res: Response) => {
+                    debugger
+                    if (res.status === CONFLICT) {
+                        res.json().then(
+                            (errorMessage: ErrorMessage) =>
+                                state.statusError = errorMessage.localizedMessage);
+                        return null;
+                    }
+                    return res.json()
+                })
+                .then((data: T) => transformData(data))
+                .catch(() => {
+                    logOut(props, state);
+                });
         } else {
             props.oauth.fetch(urlString, {
                 body: messsageBody,
@@ -38,6 +58,7 @@ const makePostRequest = <T extends {}>(urlString: string, state: State, props: S
                 method: "POST",
             })
                 .then((res: Response) => {
+                    debugger
                     if (res.status === CONFLICT) {
                         res.json().then(
                             (errorMessage: ErrorMessage) =>

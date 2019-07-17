@@ -12,7 +12,8 @@ import {control, XS_COL_SPAN} from "../../theme";
 import {MancalaJeHeader} from "../../components/MancalaJeHeader";
 import {removeAllRefreshers} from "../../actions/Refresher";
 import {invalidateText} from "../../actions/Validators";
-import {home} from "../../actions/OAuthRouting";
+import {home, makePostRequest} from "../../actions/OAuthRouting";
+import {NewUser} from "../../entities/new-user";
 
 interface GameRegisterProps extends State {
     name: string;
@@ -112,6 +113,17 @@ class GameRegister extends Component<GameRegisterProps, GameRegisterProps> {
     }
 
     private handleClick(): void {
+        debugger;
+        const user = new NewUser;
+        user.name = this.state.name;
+        user.email = this.state.email;
+        user.password = this.state.password;
+        makePostRequest('/mancalaje/users', this.state, this.props,
+            () =>
+                // this.props.history && this.props.history.push(`login`),
+            {
+            },
+            JSON.stringify(user));
     }
 
     private getUserHelperText(): string {
