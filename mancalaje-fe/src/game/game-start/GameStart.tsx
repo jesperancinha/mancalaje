@@ -54,8 +54,10 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
                                     {this.state.playerState.boardManager &&
                                     !this.state.playerState.boardManager.gameover ?
                                         (this.state.playerState.loggedPlayer.opponentName ?
-                                                (<Typography variant="h3">You are currently playing mancalaje
-                                                    with {this.state.playerState.loggedPlayer.opponentName}</Typography>) : (
+                                                (<Typography variant="h3">
+                                                    You are currently playing mancalaje
+                                                    with {this.state.playerState.loggedPlayer.opponentName}
+                                                </Typography>) : (
                                                     <Typography variant="h3">Waiting for player to join
                                                         room...</Typography>)
 
@@ -68,7 +70,8 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
                                 {this.state.playerState.boardManager &&
                                 this.state.playerState.boardManager.currentPlayer ? (
                                         <Typography variant="h3">Current
-                                            player {this.state.playerState.boardManager.currentPlayer.name}</Typography>)
+                                            player {this.state.playerState.boardManager.currentPlayer.name}
+                                        </Typography>)
                                     : (this.state.playerState.boardManager &&
                                     this.state.playerState.boardManager.currentPlayer &&
                                     this.state.playerState.boardManager.currentPlayer.opponentName ? (

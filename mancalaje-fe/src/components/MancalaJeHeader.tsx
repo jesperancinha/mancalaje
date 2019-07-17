@@ -5,7 +5,7 @@ import Box from "@material-ui/core/Box";
 import {BOX_MARGIN, GRID_SPACING, XS_COL_SPAN} from "../theme";
 
 class MancalaJeHeader extends React.Component {
-    render() {
+    public render(): {} {
         return (
             <Grid
                 container

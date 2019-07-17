@@ -8,7 +8,7 @@ import Box from "@material-ui/core/Box";
 import {GRID_SPACING, XS_COL_SPAN} from "../theme";
 
 class Home extends React.Component {
-    render() {
+    public render(): {} {
         return (
             <Grid
                 container

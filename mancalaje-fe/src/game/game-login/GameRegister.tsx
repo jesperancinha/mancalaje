@@ -33,11 +33,11 @@ class GameRegister extends Component<GameRegisterProps, GameRegisterProps> {
         };
     }
 
-    componentDidMount(): void {
+    public componentDidMount(): void {
         removeAllRefreshers();
     }
 
-    render(): any {
+    public render(): {} {
         return (
             <MancalaJeHeader>
                 <Grid item xs={XS_COL_SPAN}>

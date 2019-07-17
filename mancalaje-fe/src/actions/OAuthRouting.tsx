@@ -68,7 +68,7 @@ const makePutRequest = <T extends {}>(urlString: string, state:
             if (messageBody) {
                 config.body = messageBody;
                 config.headers = {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 };
             }
             props.oauth.fetch(urlString, config)
@@ -109,7 +109,7 @@ const makeDeleteRequest = <T extends {}>
             props.history.push(LOGIN_PATH);
         } else {
             props.oauth.fetch(urlString, {
-                method: 'DELETE'
+                method: 'DELETE',
             })
                 .then((res: Response) => {
                     if (res.status === CONFLICT) {
@@ -159,6 +159,6 @@ const home = (props: State): void => {
 
 export {
     makeGetRequest, makePutRequest, makePostRequest,
-    makeDeleteRequest, logOut, home
+    makeDeleteRequest, logOut, home,
 }
 

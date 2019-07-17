@@ -97,8 +97,10 @@ const MancalaBoard = ({data, state, props}: { data?: BoardManager, state: GameSt
                                                 <Button
                                                     disabled={!hole.enabled || data.gameover ||
                                                     (state.playerState &&
-                                                        state.playerState.loggedPlayer && data.currentPlayer &&
-                                                        data.currentPlayer.email !== state.playerState.loggedPlayer.email)}
+                                                        state.playerState.loggedPlayer &&
+                                                        data.currentPlayer &&
+                                                        data.currentPlayer.email !==
+                                                        state.playerState.loggedPlayer.email)}
                                                     onClick={() => swayStones(hole.id, state, props)}
                                                     href={"#"}>{hole.stones}</Button></TableCell>
                                         ))}
