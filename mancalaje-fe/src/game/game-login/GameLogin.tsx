@@ -29,14 +29,14 @@ class GameLogin extends Component<GameProps, GameProps> {
         };
     }
 
-    componentDidMount(): void {
+    public componentDidMount(): void {
         const intervalId = setInterval(() => {
         }, 1);
         for (let i = 1; i < intervalId; i++)
             clearInterval(i);
     }
 
-    render(): any {
+    public render(): {} {
         return (
             <MancalaJeHeader>
                 <Grid item xs={XS_COL_SPAN}>
@@ -59,11 +59,19 @@ class GameLogin extends Component<GameProps, GameProps> {
                         <br/>
                         <Button
                             style={control}
-                            onClick={() => this.props.dispatch ? this.props.dispatch(createOAuth(this.handleClick())) : {}}>Submit</Button>
+                            onClick={() =>
+                                this.props.dispatch ?
+                                    this.props.dispatch(createOAuth(this.handleClick())) :
+                                    {}}>
+                            Submit
+                        </Button>
                         <Button
                             style={control}
-                            onClick={() => this.props.history ? this.props.history.push("gameRegister") : {}}>Register</Button>
-
+                            onClick={() =>
+                                this.props.history ?
+                                    this.props.history.push("gameRegister") : {}}>
+                            Register
+                        </Button>
                     </AppBar>
                 </Grid>
                 <Grid item xs={XS_COL_SPAN}>
@@ -96,7 +104,11 @@ class GameLogin extends Component<GameProps, GameProps> {
             tokenEndpoint: "http://localhost:3000/oauth/token",
             userName: this.state.username,
         });
-        oAuth2.getAccessToken().then(() => this.props.history ? this.props.history.push("gameList") : {}
+        oAuth2.getAccessToken().then(
+            () =>
+                this.props.history ?
+                    this.props.history.push("gameList") :
+                    {},
         ).catch(() => this.setState({
             statusError: 'Login failed!',
         }));

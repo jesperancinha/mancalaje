@@ -1,12 +1,6 @@
 # MancalaJe Front End
 
-## Preparing test environment
-
-1.  Deactivate all security protocols and systems
-2.  run > http://localhost:8080/mancala/boards/create/gamename
-3.  run > http://localhost:8080/mancala/boards/list
-
-## References:
+## References
 
 -   [Compass SASS](http://compass-style.org/install/)
 -   [Material-UI](https://material-ui.com/)

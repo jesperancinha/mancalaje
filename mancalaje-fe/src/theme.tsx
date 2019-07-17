@@ -23,10 +23,10 @@ export const useStyles = makeStyles((theme: Theme) => {
             margin: themeSpacing,
         },
         iconHover: {
-            margin: themeSpacing,
             '&:hover': {
                 color: red[RED_WEIGHT],
             },
+            margin: themeSpacing,
         },
         root: {
             alignItems: 'flex-end',
@@ -50,7 +50,7 @@ export const theme = createMuiTheme({
                 borderRadius: 5,
                 margin: 10,
                 padding: 10,
-                width: 800
+                width: 800,
             },
         },
         MuiButton: {
@@ -66,7 +66,7 @@ export const theme = createMuiTheme({
         },
         MuiList: {
             root: {
-                alignItems: "left"
+                alignItems: "left",
             }
 
         },
@@ -103,8 +103,8 @@ export const theme = createMuiTheme({
             root: {
                 borderRadius: 5,
                 minWidth: "100%",
-            }
-        }
+            },
+        },
     },
     palette: {
         background: {default: '#000'},
@@ -132,7 +132,7 @@ export const theme = createMuiTheme({
             '"Segoe UI Emoji"',
             '"Segoe UI Symbol"',
         ].join(','),
-        fontSize: 10
+        fontSize: 10,
     }
 });
 
@@ -148,7 +148,7 @@ export const holeDisabled = {
 
 export const holeEnabled = {
     backgroundColor: '#00e41d',
-    borderRadius: 50
+    borderRadius: 50,
 };
 
 
