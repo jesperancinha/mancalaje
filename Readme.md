@@ -80,6 +80,5 @@ limitations under the License.
 -   Personal Projects:
 
     -   [Time Disruption Studios](http://tds.joaofilipesabinoesperancinha.nl/)
-    
     -   [Image Train Filters](http://itf.joaofilipesabinoesperancinha.nl/)
     -   Google play apps: [Joao+Filipe+Sabino+Esperancinha](https://play.google.com/store/apps/developer?id=Joao+Filipe+Sabino+Esperancinha)

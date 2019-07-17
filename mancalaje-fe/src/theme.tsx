@@ -75,7 +75,7 @@ export const theme = createMuiTheme({
                 alignItems: "left",
                 margin: 0,
                 padding: 0,
-            }
+            },
         },
         MuiTableCell: {
             body: {
@@ -116,7 +116,7 @@ export const theme = createMuiTheme({
         type: "light",
     },
     shape: {
-        borderRadius: 50
+        borderRadius: 50,
     },
     typography: {
         fontFamily: [

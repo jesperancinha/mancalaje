@@ -16,9 +16,11 @@ export interface State {
     dispatch?: Dispatch;
     statusError?: string;
     refreshers: number[];
+
 }
 
 export interface Clickable {
     onClick?: () => void;
     children: {};
+
 }
