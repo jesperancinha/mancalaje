@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.org/jesperancinha/mancalaje.svg?branch=master)](https://travis-ci.org/jesperancinha/mancalaje)
 [![codebeat badge](https://codebeat.co/badges/eaf7a2e0-ed2c-47fb-9323-2051db72c171)](https://codebeat.co/projects/github-com-jesperancinha-mancalaje-master)
     
-```                                                                                               
+```text                                                                                         
 @@@@@@@@@@    @@@@@@   @@@  @@@   @@@@@@@   @@@@@@   @@@        @@@@@@                   @@@  @@@@@@@@  
 @@@@@@@@@@@  @@@@@@@@  @@@@ @@@  @@@@@@@@  @@@@@@@@  @@@       @@@@@@@@                  @@@  @@@@@@@@  
 @@! @@! @@!  @@!  @@@  @@!@!@@@  !@@       @@!  @@@  @@!       @@!  @@@                  @@!  @@!       
@@ -82,5 +82,4 @@ limitations under the License.
     -   [Time Disruption Studios](http://tds.joaofilipesabinoesperancinha.nl/)
     
     -   [Image Train Filters](http://itf.joaofilipesabinoesperancinha.nl/)
-    
     -   Google play apps: [Joao+Filipe+Sabino+Esperancinha](https://play.google.com/store/apps/developer?id=Joao+Filipe+Sabino+Esperancinha)
