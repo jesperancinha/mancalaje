@@ -23,20 +23,27 @@ const makeGetRequest = <T extends {}>(urlString: string, state: State, props: St
 };
 
 
+function extractedFetch(props: State): (urlString: string, config: RequestInit) => Promise<Response> | null{
+    if (props.oauth) {
+        return (urlString: string, config: {}) => props.oauth ? props.oauth.fetch(urlString, config) : null;
+    } else {
+        return (urlString: string, config: {}) => fetch(urlString, config);
+    }
+}
+
 const makePostRequest = <T extends {}>(urlString: string, state: State, props: State,
                                        transformData: (t: T) => void, messsageBody: string): void => {
-    debugger;
     if (props.history) {
-        if (!props.oauth) {
-            fetch(urlString, {
-                body: messsageBody,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                method: "POST",
-            })
+        const requestMethod = extractedFetch(props)(urlString, {
+            body: messsageBody,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+        });
+        if(requestMethod) {
+            requestMethod
                 .then((res: Response) => {
-                    debugger
                     if (res.status === CONFLICT) {
                         res.json().then(
                             (errorMessage: ErrorMessage) =>
@@ -46,34 +53,13 @@ const makePostRequest = <T extends {}>(urlString: string, state: State, props: S
                     return res.json()
                 })
                 .then((data: T) => transformData(data))
-                .catch(() => {
-                    logOut(props, state);
-                });
-        } else {
-            props.oauth.fetch(urlString, {
-                body: messsageBody,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                method: "POST",
-            })
-                .then((res: Response) => {
-                    debugger
-                    if (res.status === CONFLICT) {
-                        res.json().then(
-                            (errorMessage: ErrorMessage) =>
-                                state.statusError = errorMessage.localizedMessage);
-                        return null;
-                    }
-                    return res.json()
-                })
-                .then((data: T) => transformData(data))
-                .catch(() => {
+                .catch((error) => {
                     logOut(props, state);
                 })
 
         }
     }
+
 };
 
 const makePutRequest = <T extends {}>(urlString: string, state:

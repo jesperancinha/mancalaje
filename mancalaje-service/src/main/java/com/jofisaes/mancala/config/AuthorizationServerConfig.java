@@ -1,7 +1,6 @@
 package com.jofisaes.mancala.config;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -14,8 +13,8 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-    public static final String CLIENT_ID = "mancala-client";
-    public static final String CLIENT_SECRET = "{noop}mancala";
+    private static final String CLIENT_ID = "mancala-client";
+    private static final String CLIENT_SECRET = "{noop}mancala";
     private static final String GRANT_TYPE_PASSWORD = "password";
     private static final String AUTHORIZATION_CODE = "authorization_code";
     private static final String REFRESH_TOKEN = "refresh_token";
@@ -23,11 +22,15 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private static final String SCOPE_WRITE = "write";
     private static final String TRUST = "trust";
     private static final int VALID_FOREVER = -1;
-    @Autowired
-    private AuthenticationManager authManager;
 
-    @Autowired
-    private TokenStore tokenStore;
+    private final AuthenticationManager authManager;
+
+    private final TokenStore tokenStore;
+
+    public AuthorizationServerConfig(AuthenticationManager authManager, TokenStore tokenStore) {
+        this.authManager = authManager;
+        this.tokenStore = tokenStore;
+    }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {

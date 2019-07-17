@@ -87,7 +87,7 @@ databaseChangeLog:
                   value: "admin123"
               - column:
                   name: role
-                  value: "ROLE_ADMIN"
+                  value: "ROLE_USER"
         - insert:
             tableName: user
             columns:
@@ -102,4 +102,4 @@ databaseChangeLog:
                   value: "admin123"
               - column:
                   name: role
-                  value: "ROLE_ADMIN"
+                  value: "ROLE_USER"

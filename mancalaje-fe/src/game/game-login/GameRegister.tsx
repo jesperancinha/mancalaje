@@ -113,12 +113,11 @@ class GameRegister extends Component<GameRegisterProps, GameRegisterProps> {
     }
 
     private handleClick(): void {
-        debugger;
-        const user = new NewUser;
+        const user = new NewUser();
         user.name = this.state.name;
         user.email = this.state.email;
         user.password = this.state.password;
-        makePostRequest('/mancalaje/users', this.state, this.props,
+        makePostRequest('/mancala/users', this.state, this.props,
             () =>
                 // this.props.history && this.props.history.push(`login`),
             {
