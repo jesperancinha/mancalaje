@@ -46,7 +46,8 @@ const MancalaBoard = ({data, state, props}: { data?: BoardManager, state: GameSt
                                         key={MAX_STONE_INDEX}
                                         <Button
                                             disabled={!data.board.allHoles[MAX_STONE_INDEX].enabled ||
-                                            data.gameover || data.currentPlayer.email !== state.playerState.loggedPlayer.email}
+                                            data.gameover ||
+                                            data.currentPlayer.email !== state.playerState.loggedPlayer.email}
                                             onClick={() => swayStones(data.board &&
                                             data.board.allHoles ? data.board.allHoles[MAX_STONE_INDEX].id : UNDEFINED_HOLE, state, props)}
                                             href={"#"}>{data.board.allHoles[MAX_STONE_INDEX].stones}</Button></TableCell>
@@ -82,7 +83,8 @@ const MancalaBoard = ({data, state, props}: { data?: BoardManager, state: GameSt
                                             rowSpan={SINGLE_SPAN} colSpan={SINGLE_SPAN}>
                                             <Button
                                                 disabled={!hole.enabled || data.gameover ||
-                                                (state.playerState && state.playerState.loggedPlayer && data.currentPlayer &&
+                                                (state.playerState &&
+                                                    state.playerState.loggedPlayer && data.currentPlayer &&
                                                     data.currentPlayer.email !== state.playerState.loggedPlayer.email)}
                                                 onClick={() => swayStones(hole.id, state, props)}
                                                 href={"#"}>{hole.stones}</Button></TableCell>

@@ -90,10 +90,8 @@ public class BoardManager implements Serializable {
     private Hole getPlayHoleIFValid(Player sessionUser, int holeId) {
         if (!this.gameOver && currentPlayer.getEmail().equalsIgnoreCase(sessionUser.getEmail())) {
             final Hole hole = board.getAllHoles().get(holeId);
-            if (hole.getStones() > 0) {
-                if (sessionUser.getAllPlayerHoles().contains(hole) && !(hole instanceof Store)) {
-                    return hole;
-                }
+            if (hole.getStones() > 0 && sessionUser.getAllPlayerHoles().contains(hole) && !(hole instanceof Store)) {
+                return hole;
             }
         }
         return null;

@@ -53,10 +53,9 @@ class GameList extends React.Component<GameListProps, GameListProps> {
             }
         }
         return "No players in the game. Room is free";
-
     }
 
-    componentDidMount() {
+    public componentDidMount(): void {
         this.loadAllBoards();
         makeDeleteRequest("mancala/rooms", this.state, this.props);
         const refresher = setInterval(() => {
@@ -66,7 +65,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
         this.setState(this.state);
     }
 
-    render() {
+    public render(): {} {
         return (
             <MancalaJeHeader>
                 <AppBar title="Game room center title" position="relative">
@@ -96,7 +95,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                             variant="error"
                             message={this.state.statusError}
                             onClose={() => this.setState({
-                                statusError: ""
+                                statusError: "",
                             })}
                         />
                     </Grid>) : <div/>}
@@ -105,7 +104,9 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                         <Box>
                             <Typography variant="h3"
                                         component="h3"
-                                        align={"center"}>Listing {this.state.game.boardManagers.length} rooms</Typography>
+                                        align={"center"}>
+                                Listing {this.state.game.boardManagers.length} rooms
+                            </Typography>
                             <List component="nav" aria-label="Game room list">
                                 {this.state.game.boardManagers.map(row => (
                                     <ListItem key={row.boardManagerId} component={"div"}>
@@ -147,7 +148,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
 
     private handleClick(): void {
         const messageBody = JSON.stringify({
-            boardName: this.state.boardName
+            boardName: this.state.boardName,
         });
         makePostRequest('mancala/boards', this.state, this.props, () => this.loadAllBoards(), messageBody);
     }
@@ -155,7 +156,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     private loadAllBoards(): void {
         makeGetRequest('mancala/boards/all', this.state, this.props, (data: Game) => {
             this.setState({
-                game: data
+                game: data,
             });
         });
     }
@@ -183,7 +184,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
         makePutRequest("/mancala/rooms/" + row.boardManagerId, this.state, this.props,
             () => this.props.history ? this.props.history.push(`gameStart/${row.boardManagerId}`) : {},
             "{}", (errorMessage: string) => this.setState({
-                statusError: errorMessage
+                statusError: errorMessage,
             }));
     }
 }
@@ -201,4 +202,5 @@ const mapStateToProps = (state: GameListProps) => {
 };
 // @ts-ignore
 const GameListConnected = connect(mapStateToProps)(GameList);
+
 export {GameListConnected};

@@ -28,11 +28,11 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
     constructor({props}: { props: GameStartProps }) {
         super(props);
         this.state = {
-            refreshers: []
+            refreshers: [],
         }
     }
 
-    componentDidMount() {
+    public componentDidMount(): void {
         this.loadGameData();
         const refresher: number = setInterval(() => {
             this.loadGameData();
@@ -41,16 +41,7 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
 
     }
 
-    private loadGameData(): void {
-        if (this.props.match) {
-            makeGetRequest("/mancala/boards/" + this.props.match.params.id, this.state, this.props,
-                (data: PlayerState) => this.setState({
-                    playerState: data
-                }));
-        }
-    }
-
-    render(): any {
+    public render(): {} {
         return (<MancalaJeHeader>
             {
                 this.state && this.state.playerState ? (<MuiThemeProvider theme={theme}>
@@ -60,7 +51,8 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
                                     <Typography variant="h2">
                                         Hello {this.state.playerState.loggedPlayer.name}
                                     </Typography>
-                                    {this.state.playerState.boardManager && !this.state.playerState.boardManager.gameover ?
+                                    {this.state.playerState.boardManager &&
+                                    !this.state.playerState.boardManager.gameover ?
                                         (this.state.playerState.loggedPlayer.opponentName ?
                                                 (<Typography variant="h3">You are currently playing mancalaje
                                                     with {this.state.playerState.loggedPlayer.opponentName}</Typography>) : (
@@ -73,14 +65,19 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
                         </AppBar>
                         {this.state.playerState.boardManager && !this.state.playerState.boardManager.gameover ? (
                             <AppBar title="Game Start Current Player" position="relative">
-                                {this.state.playerState.boardManager && this.state.playerState.boardManager.currentPlayer ? (
+                                {this.state.playerState.boardManager &&
+                                this.state.playerState.boardManager.currentPlayer ? (
                                         <Typography variant="h3">Current
                                             player {this.state.playerState.boardManager.currentPlayer.name}</Typography>)
-                                    : (this.state.playerState.boardManager && this.state.playerState.boardManager.currentPlayer && this.state.playerState.boardManager.currentPlayer.opponentName ? (
+                                    : (this.state.playerState.boardManager &&
+                                    this.state.playerState.boardManager.currentPlayer &&
+                                    this.state.playerState.boardManager.currentPlayer.opponentName ? (
                                         <Typography variant="h2">Loading...</Typography>) : (<div/>))}
                             </AppBar>) : (<div/>)}
                         <AppBar title="Game Start Board" position="relative">
-                            <MancalaBoard data={this.state.playerState.boardManager} state={this.state} props={this.props}/>
+                            <MancalaBoard data={this.state.playerState.boardManager}
+                                          state={this.state}
+                                          props={this.props}/>
                         </AppBar>
                         {this.state.playerState.boardManager &&
                         this.state.playerState.boardManager.winner && this.state.playerState.boardManager.gameover ? (
@@ -100,7 +97,7 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
                                     variant="error"
                                     message={this.state.statusError}
                                     onClose={() => this.setState({
-                                        statusError: ""
+                                        statusError: "",
                                     })}
                                 />
                             </Grid>) : <div/>}
@@ -108,6 +105,16 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
                     : (<h1>Loading data...<img src={logo} className="App-logo-loading" alt="logo"/></h1>)
             }
         </MancalaJeHeader>)
+    }
+
+
+    private loadGameData(): void {
+        if (this.props.match) {
+            makeGetRequest("/mancala/boards/" + this.props.match.params.id, this.state, this.props,
+                (data: PlayerState) => this.setState({
+                    playerState: data,
+                }));
+        }
     }
 
     private leaveRoom(): void {
@@ -119,7 +126,6 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
     }
 }
 
-
 const mapStateToProps = (state: GameStartProps) => {
     return {
         oauth: state.mancalaReducer ? state.mancalaReducer.oauth : '',
@@ -129,4 +135,5 @@ const mapStateToProps = (state: GameStartProps) => {
 };
 // @ts-ignore
 const GameStartConnected = connect(mapStateToProps)(GameStart);
+
 export {GameStartConnected};
