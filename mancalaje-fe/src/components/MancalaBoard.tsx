@@ -14,7 +14,7 @@ import {Hole} from "../model/hole";
 import {BoardManager} from "../model/board-manager";
 import {GameStartProps} from "../game/game-start/GameStart";
 
-const swayStones = (id: number, state: State, props: State) => {
+const swayStones = (id: Number, state: State, props: State) => {
     state.statusError = "";
     makePutRequest("/mancala/actions/nextMove/" + id, state, props);
 };
@@ -39,10 +39,10 @@ const MancalaBoard = ({data, state, props}: { data?: BoardManager, state: GameSt
                             <TableBody>
                                 <TableRow>
                                     <TableCell
+                                        key={MAX_STONE_INDEX}
                                         style={data.board.allHoles[MAX_STONE_INDEX].player.email ===
                                         state.playerState.loggedPlayer.email ? holeEnabled : holeDisabled}
                                         rowSpan={STORE_ROW_SPAN} colSpan={SINGLE_SPAN}>
-                                        key={MAX_STONE_INDEX}
                                         <Button
                                             disabled={!data.board.allHoles[MAX_STONE_INDEX].enabled ||
                                             data.gameover ||
@@ -60,7 +60,7 @@ const MancalaBoard = ({data, state, props}: { data?: BoardManager, state: GameSt
                                         .reverse()
                                         .map((hole: Hole) => (
                                             <TableCell
-                                                key={hole.id}
+                                                key={hole.id.valueOf()}
                                                 style={hole.enabled ? holeEnabled : holeDisabled}
                                                 rowSpan={SINGLE_SPAN} colSpan={SINGLE_SPAN}>
                                                 <Button
@@ -68,7 +68,8 @@ const MancalaBoard = ({data, state, props}: { data?: BoardManager, state: GameSt
                                                     (state.playerState &&
                                                         state.playerState.loggedPlayer &&
                                                         data.currentPlayer &&
-                                                        data.currentPlayer.email !== state.playerState.loggedPlayer.email)}
+                                                        data.currentPlayer.email !==
+                                                        state.playerState.loggedPlayer.email)}
                                                     onClick={() => swayStones(hole.id, state, props)}
                                                     href={"#"}>{hole.stones}</Button></TableCell>
                                         ))}
@@ -91,7 +92,7 @@ const MancalaBoard = ({data, state, props}: { data?: BoardManager, state: GameSt
                                         .slice(FIRT_PLAYER_FIRST_ELEMENT, STORE_INDEX_1)
                                         .map((hole: Hole) => (
                                             <TableCell
-                                                key={hole.id}
+                                                key={hole.id.valueOf()}
                                                 style={hole.enabled ? holeEnabled : holeDisabled}
                                                 rowSpan={SINGLE_SPAN} colSpan={SINGLE_SPAN}>
                                                 <Button
