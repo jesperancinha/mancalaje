@@ -1,3 +1,3 @@
 export class Params {
-    public id = -1;
+    public id: Number = -1;
 }
