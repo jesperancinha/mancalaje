@@ -1,13 +1,20 @@
 package com.jofisaes.mancala.services.game;
 
+import static com.jofisaes.mancala.services.Validator.playerMatch;
+
 import com.jofisaes.mancala.cache.Board;
 import com.jofisaes.mancala.cache.BoardManager;
 import com.jofisaes.mancala.cache.Hole;
 import com.jofisaes.mancala.cache.Player;
-import com.jofisaes.mancala.exception.*;
-import com.jofisaes.mancala.services.room.RoomsManager;
+import com.jofisaes.mancala.exception.AlreadyInGameException;
+import com.jofisaes.mancala.exception.GameRemovedException;
+import com.jofisaes.mancala.exception.NoRoomNameException;
+import com.jofisaes.mancala.exception.RoomFullException;
+import com.jofisaes.mancala.exception.StopClickingException;
+import com.jofisaes.mancala.exception.TooManyRoomsException;
+import com.jofisaes.mancala.exception.WrongRoomOwnerException;
+import com.jofisaes.mancala.services.room.RoomsManagerService;
 import org.apache.logging.log4j.util.Strings;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.ApplicationScope;
@@ -15,34 +22,30 @@ import org.springframework.web.context.annotation.ApplicationScope;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.jofisaes.mancala.services.Validator.playerMatch;
-
 @Service
 @ApplicationScope
 public class GameManagerService {
 
     private int maxRooms;
 
-    @Autowired
-    private RoomsManager roomsManager;
+    private final RoomsManagerService roomsManagerService;
 
-
-    public GameManagerService(final @Value("${mancalaje.max-rooms:20}") int maxRooms, final RoomsManager roomsManager) {
+    public GameManagerService(final @Value("${mancalaje.max-rooms:20}") int maxRooms, final RoomsManagerService roomsManagerService) {
         this.maxRooms = maxRooms;
-        this.roomsManager = roomsManager;
+        this.roomsManagerService = roomsManagerService;
     }
 
     public BoardManager createBoard(Player player, String boardName) {
-        if (roomsManager.getBoardManagers().size() == maxRooms) {
+        if (roomsManagerService.getBoardManagers().size() == maxRooms) {
             throw new TooManyRoomsException(maxRooms);
         }
         if (Strings.isEmpty(boardName)) {
             throw new NoRoomNameException();
         }
-        Long highestId = roomsManager.getBoardManagerMap().keySet().stream().max(Long::compare).orElse(0L) + 1;
+        Long highestId = roomsManagerService.getBoardManagerMap().keySet().stream().max(Long::compare).orElse(0L) + 1;
         BoardManager board = BoardManager.create(player, highestId, boardName);
-        roomsManager.getBoardManagerMap().put(highestId, board);
-        roomsManager.getBoardManagers().add(board);
+        roomsManagerService.getBoardManagerMap().put(highestId, board);
+        roomsManagerService.getBoardManagers().add(board);
         return board;
     }
 
@@ -50,16 +53,16 @@ public class GameManagerService {
         return player.getBoardManager();
     }
 
-    public BoardManager getBoardManagerByRoomnId(Long roomId) {
-        return roomsManager.getBoardManagerMap().get(roomId);
+    private BoardManager getBoardManagerByRoomnId(Long roomId) {
+        return roomsManagerService.getBoardManagerMap().get(roomId);
     }
 
-    public RoomsManager listAllGames() {
-        return roomsManager;
+    public RoomsManagerService listAllGames() {
+        return roomsManagerService;
     }
 
     public BoardManager joinPlayer(Long boardManagerId, Player player) {
-        BoardManager boardManager = roomsManager.getBoardManagerMap().get(boardManagerId);
+        BoardManager boardManager = roomsManagerService.getBoardManagerMap().get(boardManagerId);
         Board board = boardManager.getBoard();
         if (Objects.isNull(board.getPlayer1())) {
             boardManager.setPlayer1(player);
@@ -94,7 +97,7 @@ public class GameManagerService {
      * @return
      */
     public Player leaveRoom(Long roomId, Player player) {
-        BoardManager boardManager = roomsManager.getBoardManagerMap().get(roomId);
+        BoardManager boardManager = roomsManagerService.getBoardManagerMap().get(roomId);
         if (Objects.isNull(boardManager)) {
             throw new GameRemovedException();
         }
@@ -112,12 +115,12 @@ public class GameManagerService {
     }
 
     public BoardManager removeRoom(Long roomId, Player sessionUser) {
-        Map<Long, BoardManager> boardManagerMap = roomsManager.getBoardManagerMap();
+        Map<Long, BoardManager> boardManagerMap = roomsManagerService.getBoardManagerMap();
         BoardManager room = boardManagerMap.get(roomId);
         if (Objects.isNull(room)) {
-            return roomsManager.forceRemoveRoom(roomId);
+            return roomsManagerService.forceRemoveRoom(roomId);
         } else if (playerMatch(room.getOwner(), sessionUser)) {
-            return roomsManager.removeRoom(roomId);
+            return roomsManagerService.removeRoom(roomId);
         }
         throw new WrongRoomOwnerException();
     }

@@ -1,6 +1,11 @@
 package com.jofisaes.mancala.config;
 
 
+import com.jofisaes.mancala.services.admin.UserSweepListener;
+import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.broker.BrokerFactory;
+import org.apache.activemq.broker.BrokerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -13,6 +18,13 @@ import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHtt
 import org.springframework.session.web.context.AbstractHttpSessionApplicationInitializer;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import java.net.URI;
+import javax.jms.Connection;
+import javax.jms.ConnectionFactory;
+import javax.jms.MessageConsumer;
+import javax.jms.MessageProducer;
+import javax.jms.Session;
+import javax.jms.Topic;
 import javax.sql.DataSource;
 
 @Configuration
@@ -33,5 +45,6 @@ public class MancalaConfiguration
     public PlatformTransactionManager transactionManager(DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
+
 }
 

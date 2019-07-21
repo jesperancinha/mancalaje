@@ -33,3 +33,6 @@ output.css
 
 # Webpack
 src/main/webapp/resources/js
+
+# ActiveMQ
+activemq-data

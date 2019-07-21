@@ -4,7 +4,7 @@ import com.jofisaes.mancala.cache.Hole;
 import com.jofisaes.mancala.cache.Player;
 import com.jofisaes.mancala.cache.BoardManager;
 import com.jofisaes.mancala.services.game.GameManagerService;
-import com.jofisaes.mancala.services.room.RoomsManager;
+import com.jofisaes.mancala.services.room.RoomsManagerService;
 import org.junit.Test;
 
 import java.util.List;
@@ -15,16 +15,16 @@ import static org.mockito.Mockito.mock;
 
 public class GameManagerServiceTest {
 
-    private GameManagerService gameManagerService = new GameManagerService(20, new RoomsManager());
+    private GameManagerService gameManagerService = new GameManagerService(20, new RoomsManagerService());
 
     @Test
     public void createBoard() {
         Player mockPlayer = mock(Player.class);
         gameManagerService.createBoard(mockPlayer, "test");
 
-        RoomsManager roomsManager = gameManagerService.listAllGames();
+        RoomsManagerService roomsManagerService = gameManagerService.listAllGames();
 
-        List<BoardManager> boardManagers = roomsManager.getBoardManagers();
+        List<BoardManager> boardManagers = roomsManagerService.getBoardManagers();
         assertThat(boardManagers).hasSize(1);
         Optional<BoardManager> first = boardManagers.stream().findFirst();
         assertThat(first.isPresent()).isTrue();

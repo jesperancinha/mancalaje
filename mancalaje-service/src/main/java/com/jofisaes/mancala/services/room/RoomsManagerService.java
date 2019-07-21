@@ -10,16 +10,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Getter
 @Service
-public class RoomsManager {
+public class RoomsManagerService {
 
     private final List<BoardManager> boardManagers;
 
     @JsonIgnore
     private final Map<Long, BoardManager> boardManagerMap;
 
-    public RoomsManager() {
+    public RoomsManagerService() {
         this.boardManagerMap = new HashMap<>();
         this.boardManagers = new ArrayList<>();
     }
@@ -34,5 +33,13 @@ public class RoomsManager {
         BoardManager boardManager = boardManagerMap.get(roomId);
         boardManagers.removeIf(room -> room.getBoardManagerId().equals(roomId));
         return boardManager;
+    }
+
+    public List<BoardManager> getBoardManagers() {
+        return boardManagers;
+    }
+
+    public Map<Long, BoardManager> getBoardManagerMap() {
+        return boardManagerMap;
     }
 }

@@ -3,7 +3,7 @@ package com.jofisaes.mancala.rest;
 import com.jofisaes.mancala.cache.BoardManager;
 import com.jofisaes.mancala.cache.Player;
 import com.jofisaes.mancala.game.BoardManagerDto;
-import com.jofisaes.mancala.services.room.RoomsManager;
+import com.jofisaes.mancala.services.room.RoomsManagerService;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
@@ -44,7 +44,7 @@ public class BoardsController extends AbstractUserController implements Serializ
     }
 
     @GetMapping(value = "all", produces = APPLICATION_JSON_VALUE)
-    public RoomsManager listAllCurrentGames() {
+    public RoomsManagerService listAllCurrentGames() {
         return gameManagerService.listAllGames();
     }
 

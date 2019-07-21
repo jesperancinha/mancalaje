@@ -16,11 +16,14 @@ import java.util.Objects;
 @Service
 public class RestAspect {
 
-    @Autowired
-    protected UserManagerService userManagerService;
+    private final UserManagerService userManagerService;
 
-    @Autowired
-    protected UserService userService;
+    private final UserService userService;
+
+    public RestAspect(UserManagerService userManagerService, UserService userService) {
+        this.userManagerService = userManagerService;
+        this.userService = userService;
+    }
 
     private void setUpPlayer(User principal) {
         Player sessionUser = userManagerService.getSessionUser();
