@@ -39,12 +39,12 @@ public class DefaultAuthenticationProvider implements AuthenticationProvider {
             final Object providedUserPassword = authentication.getCredentials();
 
             if (providedUserEmail.equalsIgnoreCase(user.getEmail())
-                && providedUserPassword.equals(user.getPassword())) {
+                    && providedUserPassword.equals(user.getPassword())) {
 
                 return new UsernamePasswordAuthenticationToken(
-                    user.getEmail(),
-                    user.getPassword(),
-                    Collections.singleton(new SimpleGrantedAuthority(user.getRole())));
+                        user.getEmail(),
+                        user.getPassword(),
+                        Collections.singleton(new SimpleGrantedAuthority(user.getRole())));
             }
         }
 

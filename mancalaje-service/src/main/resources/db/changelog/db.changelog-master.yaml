@@ -84,7 +84,7 @@ databaseChangeLog:
                   value: "The name of player one!"
               - column:
                   name: password
-                  value: "admin123"
+                  value: "$2a$10$oBmfDrpt1FeTxCCTIQ/DhevRw1OoS9.dF/Aj1aanqYxRLlqDyNIfq"
               - column:
                   name: role
                   value: "ROLE_USER"
@@ -99,7 +99,7 @@ databaseChangeLog:
                   value: "The name of player two!"
               - column:
                   name: password
-                  value: "admin123"
+                  value: "$2a$10$oBmfDrpt1FeTxCCTIQ/DhevRw1OoS9.dF/Aj1aanqYxRLlqDyNIfq"
               - column:
                   name: role
                   value: "ROLE_USER"

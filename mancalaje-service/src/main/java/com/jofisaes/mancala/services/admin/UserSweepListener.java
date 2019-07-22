@@ -5,12 +5,12 @@ import com.jofisaes.mancala.services.room.RoomsManagerService;
 import com.jofisaes.mancala.services.user.UserService;
 import org.springframework.stereotype.Service;
 
+import javax.jms.Message;
+import javax.jms.MessageListener;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
-import javax.jms.Message;
-import javax.jms.MessageListener;
 
 @Service
 public class UserSweepListener implements MessageListener {
@@ -35,17 +35,17 @@ public class UserSweepListener implements MessageListener {
                 userService.remove(user);
             } else {
                 if (ChronoUnit.HOURS.between(user.getDate().toInstant()
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalDateTime(), LocalDateTime.now()) >= 5) {
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDateTime(), LocalDateTime.now()) >= 5) {
                     userService.remove(user);
                 }
             }
             gameManagerService.leaveAllRooms(user.getEmail());
             roomsManagerService
-                .getBoardManagers()
-                .stream()
-                .filter(boardManager -> boardManager.getCurrentPlayer().getEmail().equalsIgnoreCase(user.getEmail()))
-                .forEach(boardManager -> roomsManagerService.removeRoom(boardManager.getBoardManagerId()));
+                    .getBoardManagers()
+                    .stream()
+                    .filter(boardManager -> boardManager.getCurrentPlayer().getEmail().equalsIgnoreCase(user.getEmail()))
+                    .forEach(boardManager -> roomsManagerService.removeRoom(boardManager.getBoardManagerId()));
 
         });
 

@@ -29,4 +29,5 @@ public class TokenStoreConfig {
         defaultTokenServices.setSupportRefreshToken(true);
         return defaultTokenServices;
     }
+
 }
