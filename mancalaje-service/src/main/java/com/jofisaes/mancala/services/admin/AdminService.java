@@ -37,7 +37,7 @@ public class AdminService {
     @Scheduled(cron = "0 */5 * ? * *")
     public void removeExpiredUsers() throws Exception {
         MessageProducer producer = session.createProducer(session.createTopic("UserSweepConsumerTopic"));
-        String payload = "Important Task";
+        String payload = "User Sweep";
         Message msg = session.createTextMessage(payload);
         producer.send(msg);
     }
