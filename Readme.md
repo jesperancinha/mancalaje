@@ -29,6 +29,10 @@ stay tuned!
 **Under development**
 
 ## Milestones
+
+2019-07-22:
+-   Password Encryption
+
 2019-07-21:
 -   JMS Queueing system implemented for maintenance tasks
 

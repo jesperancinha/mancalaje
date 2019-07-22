@@ -38,7 +38,7 @@ public class UserService {
         if (userCount >= maxUsers) {
             throw new TooManyUsersException(userCount);
         }
-        user.setDate(new Date(new java.util.Date().getTime()));
+        user.setDate(getCurrentSqlDateTime());
         user.setRole(ROLE_USER.name());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
@@ -51,5 +51,17 @@ public class UserService {
 
     public void remove(User user) {
         userRepository.deleteById(user.getEmail());
+    }
+
+    public void refreshUser(String email) {
+        Optional<User> optionalUser = userRepository.findById(email);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setDate(getCurrentSqlDateTime());
+        }
+    }
+
+    private static Date getCurrentSqlDateTime() {
+        return new Date(new java.util.Date().getTime());
     }
 }

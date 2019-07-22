@@ -1,6 +1,7 @@
 package com.jofisaes.mancala.rest;
 
 import com.jofisaes.mancala.cache.BoardManager;
+import com.jofisaes.mancala.cache.Player;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,11 +16,13 @@ public class GameActionsController extends AbstractUserController {
     @PutMapping(value = "nextMove/{holeId}")
     public BoardManager pressHoleId(
             @PathVariable("holeId") Integer holeId) throws InterruptedException {
-        gameManagerService.swayStonesFromHole(userManagerService.getSessionUser(), holeId);
-        BoardManager boardManager = userManagerService.getSessionUser().getBoardManager();
+        Player sessionUser = userManagerService.getSessionUser();
+        gameManagerService.swayStonesFromHole(sessionUser, holeId);
+        BoardManager boardManager = sessionUser.getBoardManager();
         boardManager.getBoard().getPlayer1().setBoardManager(boardManager);
         boardManager.getBoard().getPlayer2().setBoardManager(boardManager);
         updateBoardManager(boardManager);
+        userService.refreshUser(sessionUser.getEmail());
         return boardManager;
     }
 }
