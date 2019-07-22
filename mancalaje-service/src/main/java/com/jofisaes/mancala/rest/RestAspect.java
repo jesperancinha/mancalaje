@@ -5,7 +5,6 @@ import com.jofisaes.mancala.services.user.UserManagerService;
 import com.jofisaes.mancala.services.user.UserService;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;

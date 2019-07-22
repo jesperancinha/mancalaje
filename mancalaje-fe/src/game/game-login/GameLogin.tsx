@@ -74,13 +74,6 @@ class GameLogin extends Component<GameProps, GameProps> {
                         </Button>
                     </AppBar>
                 </Grid>
-                <Grid item xs={XS_COL_SPAN}>
-                    <AppBar title={"Login cheat"} position={"relative"}>
-                        <Typography variant="h4" align={"center"}>Pssst! Don't tell anyone but the username and password
-                            is
-                            playerOne@mancalaje.com/admin123</Typography>
-                    </AppBar>
-                </Grid>
                 {this.state.statusError ? (
                     <Grid item xs={XS_COL_SPAN}>
                         <MySnackbarContentWrapper
@@ -134,18 +127,6 @@ class GameLogin extends Component<GameProps, GameProps> {
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {actions: bindActionCreators(mancalaReducer, dispatch)}
 };
-
-
-// const mapStateToProps = (state: GameProps) => ({
-//     username: state.username,
-//     password: state.password,
-//     dispatch: state.dispatch,
-//     pathname: state.router.location.pathname,
-//     search: state.router.location.search,
-//     hash: state.router.location.hash,
-//     oauth: state.oauth,
-//     router: state.router
-// });
 
 // @ts-ignore
 const GameLoginConnected = connect(mapDispatchToProps)(GameLogin);

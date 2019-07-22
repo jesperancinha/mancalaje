@@ -3,4 +3,5 @@ logging:
     root: INFO
 
 mancalaje:
-  max-rooms: 20
+  max-rooms: 50
+  max-users: 100

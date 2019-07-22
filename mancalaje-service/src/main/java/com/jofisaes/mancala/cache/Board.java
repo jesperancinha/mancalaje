@@ -16,8 +16,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static com.jofisaes.mancala.services.Validator.playerMatch;
-
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Board implements Serializable {
@@ -69,7 +67,7 @@ public class Board implements Serializable {
         allPlayerOneHoles = IntStream.range(0, 6).boxed().map(id -> new Hole(player1, id)).collect(Collectors.toList());
         this.playerOneStore = new Store(player1, 6);
         allPlayerTwoHoles = IntStream.range(7, 13).boxed().map(id -> new Hole(player2, id))
-                .collect(Collectors.toList());
+            .collect(Collectors.toList());
         this.playerTwoStore = new Store(player2, 13);
         allHoles.addAll(allPlayerOneHoles);
         allHoles.add(playerOneStore);
@@ -152,22 +150,24 @@ public class Board implements Serializable {
             this.winner = this.player2;
         }
         return playerOneWinner
-                || playerTwoWinner;
+            || playerTwoWinner;
     }
 
-    public Player removePlayer(Player player) {
-        if (playerMatch(player, getPlayer1())) {
+    public Player removePlayer(String email) {
+        if (Objects.nonNull(player1) && email.equalsIgnoreCase(player1.getEmail())) {
             if (Objects.nonNull(player2)) {
                 player2.setOpponent(null);
             }
+            Player player1 = this.player1;
             this.player1 = null;
-            return player;
-        } else if (playerMatch(player, getPlayer2())) {
+            return player1;
+        } else if (Objects.nonNull(player2) && email.equalsIgnoreCase(player2.getEmail())) {
             if (Objects.nonNull(player1)) {
                 player1.setOpponent(null);
             }
+            Player player2 = this.player2;
             this.player2 = null;
-            return player;
+            return player2;
         }
         return null;
     }

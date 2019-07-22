@@ -1,30 +1,39 @@
 package com.jofisaes.mancala.services.user;
 
+import static com.jofisaes.mancala.entities.RoleType.ROLE_USER;
+
 import com.jofisaes.mancala.entities.User;
+import com.jofisaes.mancala.exception.TooManyUsersException;
+import com.jofisaes.mancala.exception.UserRemovedException;
 import com.jofisaes.mancala.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
-import static com.jofisaes.mancala.entities.RoleType.ROLE_USER;
-
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
+    private int maxUsers;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(@Value("${mancalaje.max-users:100}") int maxUsers, UserRepository userRepository) {
+        this.maxUsers = maxUsers;
         this.userRepository = userRepository;
     }
 
     public User getUserByEmail(String email) {
         Optional<User> user = userRepository.findById(email);
-        return user.orElseThrow();
+        return user.orElseThrow(UserRemovedException::new);
     }
 
     public void saveUser(User user) {
+        int userCount = (int) userRepository.count();
+        if (userCount >= maxUsers) {
+            throw new TooManyUsersException(userCount);
+        }
         user.setDate(new Date(new java.util.Date().getTime()));
         user.setRole(ROLE_USER.name());
         userRepository.save(user);

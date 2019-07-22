@@ -2,7 +2,6 @@ package com.jofisaes.mancala.services.room;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jofisaes.mancala.cache.BoardManager;
-import lombok.Getter;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

@@ -13,6 +13,11 @@ public class MancalaControllerAdvice {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception);
     }
 
+    @ExceptionHandler(value = TooManyUsersException.class)
+    public ResponseEntity<Object> tooManyUsersException(TooManyUsersException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception);
+    }
+
     @ExceptionHandler(value = NoRoomNameException.class)
     public ResponseEntity<Object> noRoomNameException(NoRoomNameException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception);
@@ -40,6 +45,11 @@ public class MancalaControllerAdvice {
 
     @ExceptionHandler(value = GameRemovedException.class)
     public ResponseEntity<Object> gameRemovedException(GameRemovedException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception);
+    }
+
+    @ExceptionHandler(value = UserRemovedException.class)
+    public ResponseEntity<Object> userRemovedException(UserRemovedException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception);
     }
 }

@@ -26,9 +26,8 @@ import java.util.Objects;
 @ApplicationScope
 public class GameManagerService {
 
-    private int maxRooms;
-
     private final RoomsManagerService roomsManagerService;
+    private int maxRooms;
 
     public GameManagerService(final @Value("${mancalaje.max-rooms:20}") int maxRooms, final RoomsManagerService roomsManagerService) {
         this.maxRooms = maxRooms;
@@ -93,17 +92,17 @@ public class GameManagerService {
      * Once a new player comes in his player, both players must decide which player starts first to resume the game.
      *
      * @param roomId
-     * @param player
+     * @param email
      * @return
      */
-    public Player leaveRoom(Long roomId, Player player) {
+    public Player leaveRoom(Long roomId, String email) {
         BoardManager boardManager = roomsManagerService.getBoardManagerMap().get(roomId);
         if (Objects.isNull(boardManager)) {
             throw new GameRemovedException();
         }
         boardManager.setCurrentPlayer(null);
         Board board = boardManager.getBoard();
-        return board.removePlayer(player);
+        return board.removePlayer(email);
     }
 
     public void swayStonesFromHole(Player sessionUser, Integer holeId) throws InterruptedException {
@@ -142,5 +141,9 @@ public class GameManagerService {
         } else {
             hole.setEnabled(false);
         }
+    }
+
+    public void leaveAllRooms(String email) {
+        listAllGames().getBoardManagers().forEach(boardManager -> leaveRoom(boardManager.getBoardManagerId(), email));
     }
 }

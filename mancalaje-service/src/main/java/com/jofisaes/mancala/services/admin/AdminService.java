@@ -30,7 +30,7 @@ public class AdminService {
         ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
             "tcp://localhost:61616");
         clientConnection = connectionFactory.createConnection();
-        clientConnection.setClientID("TempTopicTest");
+        clientConnection.setClientID("UseSweepClientId");
         Session session = clientConnection.createSession(false,
             Session.AUTO_ACKNOWLEDGE);
         Topic topic = session.createTopic("UserSweepConsumerTopic");
