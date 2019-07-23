@@ -18,5 +18,3 @@ spring:
     url: jdbc:postgresql://localhost:5432/mancalajedb
     username: postgres
     password: admin
-server:
-  port: 8087

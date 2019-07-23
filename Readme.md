@@ -57,6 +57,7 @@ stay tuned!
 ```text
 $ touch /etc/nginx/sites-available/mancalaje
 $ sudo ln -s /etc/nginx/sites-available/mancalaje /etc/nginx/sites-enabled/
+$ sudo service nginx restart
 $ sudo vim /etc/systemd/system/mancalaje.service  
 $ sudo vim mancalaje-service  
 $ sudo chmod +x mancalaje-service  

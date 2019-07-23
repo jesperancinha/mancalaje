@@ -48,7 +48,7 @@ databaseChangeLog:
       author: João Esperancinha
       changes:
         - createTable:
-            tableName: user
+            tableName: users
             columns:
               - column:
                   name: email
@@ -74,7 +74,7 @@ databaseChangeLog:
       author: João Esperancinha
       changes:
         - insert:
-            tableName: user
+            tableName: users
             columns:
               - column:
                   name: email
@@ -89,7 +89,7 @@ databaseChangeLog:
                   name: role
                   value: "ROLE_USER"
         - insert:
-            tableName: user
+            tableName: users
             columns:
               - column:
                   name: email
