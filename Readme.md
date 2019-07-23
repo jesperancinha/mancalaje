@@ -52,6 +52,25 @@ stay tuned!
 -   [Postman](https://www.getpostman.com/)
 -   [Spring Boot OAuth2 Social Login with Google, Facebook, and Github - Part 1](https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/)
 
+## DevOps References
+
+```text
+$ touch /etc/nginx/sites-available/mancalaje
+$ sudo ln -s /etc/nginx/sites-available/mancalaje /etc/nginx/sites-enabled/
+$ sudo vim /etc/systemd/system/mancalaje.service  
+$ sudo vim mancalaje-service  
+$ sudo chmod +x mancalaje-service  
+$ sudo systemctl daemon-reload  
+$ sudo systemctl enable mancalaje  
+$ sudo systemctl start mancalaje  
+$ sudo systemctl status mancalaje
+$ sudo -u postgres psql
+\password postgres
+create database mancalajedb
+\q
+
+
+```
 ## License
 
 ```text
