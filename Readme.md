@@ -18,6 +18,8 @@
  :      :     :   : :  ::    :    :: :: :   :   : :  : :: : :   :   : :              : :::    : :: ::   
 ```                                                                                                           
 
+[![Generic badge](https://img.shields.io/static/v1.svg?label=Homepage&message=MancalaJE&color=informational)](http://mancalaje.joaofilipesabinoesperancinha.nl/)
+
 This latest version is currently under contruction.
 
 All Front end is being updated.
@@ -51,6 +53,7 @@ stay tuned!
 -   [Trigger a Spring Batch job with a JMS message](https://blog.mimacom.com/trigger-spring-batch-job-with-jms-message/)
 -   [Postman](https://www.getpostman.com/)
 -   [Spring Boot OAuth2 Social Login with Google, Facebook, and Github - Part 1](https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/)
+-   [Shields IO](https://shields.io)
 
 ## DevOps References
 
@@ -92,9 +95,11 @@ limitations under the License.
 
 ## About me
 
--   Twitter [@jofisaes](https://twitter.com/jofisaes)
+-   [![Generic badge](https://img.shields.io/static/v1.svg?label=Homepage&message=joaofilipesabinoesperancinha&color=informational)](http://joaofilipesabinoesperancinha.nl)
 
--   GitHub [jesperancinha](https://github.com/jesperancinha)  
+-   ![Twitter Follow](https://img.shields.io/twitter/follow/jofisaes.svg?label=@jofisaes&style=social)
+
+-   ![GitHub followers](https://img.shields.io/github/followers/jesperancinha.svg?label=jesperancinha&style=social)
 
 -   Free Code Camp [jofisaes](https://www.freecodecamp.org/jofisaes)
 
@@ -102,10 +107,9 @@ limitations under the License.
 
 -   Acclaim Badges [joao-esperancinha](https://www.youracclaim.com/users/joao-esperancinha/badges)
 
--   Home Page [joaofilipesabinoesperancinha](http://joaofilipesabinoesperancinha.nl)
-
 -   Personal Projects:
 
-    -   [Time Disruption Studios](http://tds.joaofilipesabinoesperancinha.nl/)
-    -   [Image Train Filters](http://itf.joaofilipesabinoesperancinha.nl/)
+    -   [![Generic badge](https://img.shields.io/static/v1.svg?label=Homepage&message=Time%20Disruption%20Studios&color=informational)](http://tds.joaofilipesabinoesperancinha.nl/)
+    -   [![Generic badge](https://img.shields.io/static/v1.svg?label=Homepage&message=Image%20Train%20Filters&color=informational)](http://itf.joaofilipesabinoesperancinha.nl/)
+    -   [![Generic badge](https://img.shields.io/static/v1.svg?label=Homepage&message=MancalaJE&color=informational)](http://mancalaje.joaofilipesabinoesperancinha.nl/)
     -   Google play apps: [Joao+Filipe+Sabino+Esperancinha](https://play.google.com/store/apps/developer?id=Joao+Filipe+Sabino+Esperancinha)
