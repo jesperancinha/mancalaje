@@ -1,5 +1,5 @@
 [Unit]
-Description=Image Train Filters
+Description=Mancala JE
 [Service]
 User=root
 # The configuration file application.properties should be here:
