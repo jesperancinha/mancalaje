@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Getter
@@ -32,6 +32,6 @@ public class User implements Serializable {
 
     @Column
     @Nullable
-    private Date date;
+    private Timestamp date;
 
 }
