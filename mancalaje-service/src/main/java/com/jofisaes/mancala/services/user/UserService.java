@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,7 +61,7 @@ public class UserService {
         }
     }
 
-    private static Date getCurrentSqlDateTime() {
-        return new Date(new java.util.Date().getTime());
+    private static Timestamp getCurrentSqlDateTime() {
+        return new Timestamp(new java.util.Date().getTime());
     }
 }
