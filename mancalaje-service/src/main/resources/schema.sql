@@ -1,4 +1,4 @@
-CREATE TABLE oauth_access_token
+CREATE TABLE IF NOT EXISTS oauth_access_token
 (
     authentication_id VARCHAR(256),
     token_id          VARCHAR(256),
@@ -9,14 +9,14 @@ CREATE TABLE oauth_access_token
     refresh_token     VARCHAR(256)
 );
 
-CREATE TABLE oauth_refresh_token
+CREATE TABLE IF NOT EXISTS oauth_refresh_token
 (
     token_id       VARCHAR(256),
     token          bytea,
     authentication bytea
 );
 
-CREATE TABLE users
+CREATE TABLE IF NOT EXISTS users
 (
     email    VARCHAR(256),
     name     VARCHAR(256),

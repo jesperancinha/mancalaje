@@ -2,6 +2,11 @@ databaseChangeLog:
   - changeSet:
       id: oauth2 token store
       author: João Esperancinha
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+          - tableExists:
+              tableName: oauth_access_token
       changes:
         - createTable:
             tableName: oauth_access_token
@@ -46,6 +51,11 @@ databaseChangeLog:
   - changeSet:
       id: players store
       author: João Esperancinha
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: users
       changes:
         - createTable:
             tableName: users
