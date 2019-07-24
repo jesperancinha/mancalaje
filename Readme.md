@@ -5,6 +5,7 @@
 [![CircleCI](https://circleci.com/gh/jesperancinha/mancalaje.svg?style=svg)](https://circleci.com/gh/jesperancinha/mancalaje)
 [![Build Status](https://travis-ci.org/jesperancinha/mancalaje.svg?branch=master)](https://travis-ci.org/jesperancinha/mancalaje)
 [![codebeat badge](https://codebeat.co/badges/eaf7a2e0-ed2c-47fb-9323-2051db72c171)](https://codebeat.co/projects/github-com-jesperancinha-mancalaje-master)
+[![BCH compliance](https://bettercodehub.com/edge/badge/jesperancinha/mancalaje?branch=master)](https://bettercodehub.com/)
 
 [![GitHub language count](https://img.shields.io/github/languages/count/jesperancinha/mancalaje.svg)](#)
 [![GitHub top language](https://img.shields.io/github/languages/top/jesperancinha/mancalaje.svg)](#)
