@@ -1,5 +1,7 @@
 package com.jofisaes.mancala.services.user;
 
+import static com.jofisaes.mancala.entities.RoleType.ROLE_USER;
+
 import com.jofisaes.mancala.entities.User;
 import com.jofisaes.mancala.exception.TooManyUsersException;
 import com.jofisaes.mancala.exception.UserRemovedException;
@@ -11,8 +13,6 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
-
-import static com.jofisaes.mancala.entities.RoleType.ROLE_USER;
 
 @Service
 public class UserService {
@@ -26,6 +26,10 @@ public class UserService {
         this.maxUsers = maxUsers;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+    }
+
+    private static Timestamp getCurrentSqlDateTime() {
+        return new Timestamp(new java.util.Date().getTime());
     }
 
     public User getUserByEmail(String email) {
@@ -59,9 +63,5 @@ public class UserService {
             User user = optionalUser.get();
             user.setDate(getCurrentSqlDateTime());
         }
-    }
-
-    private static Timestamp getCurrentSqlDateTime() {
-        return new Timestamp(new java.util.Date().getTime());
     }
 }

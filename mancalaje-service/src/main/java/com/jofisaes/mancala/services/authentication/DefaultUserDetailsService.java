@@ -35,8 +35,8 @@ public class DefaultUserDetailsService implements UserDetailsService {
 
     private org.springframework.security.core.userdetails.User createUserDetails(User user) {
         return new org.springframework.security.core.userdetails.User(user.getEmail(),
-                user.getPassword(),
-                Collections.singletonList(new SimpleGrantedAuthority(user.getRole())));
+            user.getPassword(),
+            Collections.singletonList(new SimpleGrantedAuthority(user.getRole())));
     }
 
 }

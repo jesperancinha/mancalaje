@@ -6,8 +6,14 @@ import org.apache.activemq.broker.BrokerService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import javax.jms.*;
 import java.net.URI;
+import javax.jms.Connection;
+import javax.jms.ConnectionFactory;
+import javax.jms.Message;
+import javax.jms.MessageConsumer;
+import javax.jms.MessageProducer;
+import javax.jms.Session;
+import javax.jms.Topic;
 
 @Service
 public class AdminService {
@@ -17,16 +23,16 @@ public class AdminService {
     public AdminService(UserSweepListener userSweepListener) throws Exception {
 
         BrokerService broker = BrokerFactory.createBroker(new URI(
-                "broker:(tcp://localhost:61616)"));
+            "broker:(tcp://localhost:61616)"));
         broker.start();
         Connection clientConnection = null;
         // Producer
         ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
-                "tcp://localhost:61616");
+            "tcp://localhost:61616");
         clientConnection = connectionFactory.createConnection();
         clientConnection.setClientID("UseSweepClientId");
         Session session = clientConnection.createSession(false,
-                Session.AUTO_ACKNOWLEDGE);
+            Session.AUTO_ACKNOWLEDGE);
         Topic topic = session.createTopic("UserSweepConsumerTopic");
         MessageConsumer consumer1 = session.createConsumer(topic);
         consumer1.setMessageListener(userSweepListener);

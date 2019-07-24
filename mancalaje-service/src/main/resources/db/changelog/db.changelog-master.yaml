@@ -5,8 +5,8 @@ databaseChangeLog:
       preConditions:
         - onFail: MARK_RAN
         - not:
-          - tableExists:
-              tableName: oauth_access_token
+            - tableExists:
+                tableName: oauth_access_token
       changes:
         - createTable:
             tableName: oauth_access_token

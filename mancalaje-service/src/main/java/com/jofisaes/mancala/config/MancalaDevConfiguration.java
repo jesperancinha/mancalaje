@@ -18,15 +18,15 @@ import javax.sql.DataSource;
 @Configuration
 @EnableJdbcHttpSession
 @EnableAspectJAutoProxy
-@Profile("test")
+@Profile("dev")
 public class MancalaDevConfiguration
-        extends AbstractHttpSessionApplicationInitializer {
+    extends AbstractHttpSessionApplicationInitializer {
 
     @Bean
     public EmbeddedDatabase dataSource() {
         return new EmbeddedDatabaseBuilder()
-                .setType(EmbeddedDatabaseType.H2)
-                .addScript("org/springframework/session/jdbc/schema-h2.sql").build();
+            .setType(EmbeddedDatabaseType.H2)
+            .addScript("org/springframework/session/jdbc/schema-h2.sql").build();
     }
 
     @Bean

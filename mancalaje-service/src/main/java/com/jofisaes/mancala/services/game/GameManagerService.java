@@ -1,10 +1,18 @@
 package com.jofisaes.mancala.services.game;
 
+import static com.jofisaes.mancala.services.Validator.playerMatch;
+
 import com.jofisaes.mancala.cache.Board;
 import com.jofisaes.mancala.cache.BoardManager;
 import com.jofisaes.mancala.cache.Hole;
 import com.jofisaes.mancala.cache.Player;
-import com.jofisaes.mancala.exception.*;
+import com.jofisaes.mancala.exception.AlreadyInGameException;
+import com.jofisaes.mancala.exception.GameRemovedException;
+import com.jofisaes.mancala.exception.NoRoomNameException;
+import com.jofisaes.mancala.exception.RoomFullException;
+import com.jofisaes.mancala.exception.StopClickingException;
+import com.jofisaes.mancala.exception.TooManyRoomsException;
+import com.jofisaes.mancala.exception.WrongRoomOwnerException;
 import com.jofisaes.mancala.services.room.RoomsManagerService;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,8 +21,6 @@ import org.springframework.web.context.annotation.ApplicationScope;
 
 import java.util.Map;
 import java.util.Objects;
-
-import static com.jofisaes.mancala.services.Validator.playerMatch;
 
 @Service
 @ApplicationScope
