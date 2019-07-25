@@ -21,7 +21,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.jofisaes.mancala.rest.mappings.Mappings.MANCALA_BOARDS;
@@ -179,6 +181,30 @@ public class BoardsControllerTest {
     }
 
     @Test
-    public void listAllCurrentGames() {
+    public void listAllCurrentGames() throws Exception {
+        final Player testPlayer = new Player();
+        testPlayer.setEmail("fakeEmail");
+        final BoardManager testBoardManager = BoardManager.create(testPlayer, 1L, TEST_GAME_1);
+        testBoardManager.getBoard().setPlayer1(testPlayer);
+        final List<BoardManager> allGames = Collections.singletonList(testBoardManager);
+        when(userManagerService.getSessionUser()).thenReturn(testPlayer);
+        when(gameManagerService.listAllGames()).thenReturn(allGames);
+
+        mvc.perform(get(MANCALA_BOARDS.concat("/all"))
+                .with(csrf())
+                .accept(MediaType.ALL_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers
+                        .jsonPath("$[0].boardManager.board.name").value(TEST_GAME_1));
+
+        verify(userManagerService, only()).getSessionUser();
+        verify(gameManagerService, only()).listAllGames();
+        verifyZeroInteractions(passwordEncoder);
+        verifyZeroInteractions(userDetailsService);
+        verifyZeroInteractions(authenticationProvider);
+        verifyZeroInteractions(passwordEncoder);
+        verifyZeroInteractions(userRepository);
+        verifyZeroInteractions(userService);
+        verifyZeroInteractions(roomsManagerService);
     }
 }

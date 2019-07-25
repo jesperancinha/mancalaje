@@ -3,11 +3,12 @@ package com.jofisaes.mancala.rest;
 import com.jofisaes.mancala.cache.BoardManager;
 import com.jofisaes.mancala.cache.Player;
 import com.jofisaes.mancala.game.BoardManagerDto;
-import com.jofisaes.mancala.services.room.RoomsManagerService;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.jofisaes.mancala.rest.mappings.Mappings.MANCALA_BOARDS;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -19,8 +20,7 @@ public class BoardsController extends AbstractUserController implements Serializ
     @PostMapping(produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public BoardManagerDto createGame(@RequestBody Map<String, Object> payload) {
         final Player sessionUser = userManagerService.getSessionUser();
-        return BoardManagerDto.builder()
-                .boardManager(gameManagerService.createBoard(sessionUser, payload.get("boardName").toString())).loggedPlayer(sessionUser).build();
+        return toDto(sessionUser, gameManagerService.createBoard(sessionUser, payload.get("boardName").toString()));
     }
 
     @GetMapping(value = "{roomId}", produces = APPLICATION_JSON_VALUE)
@@ -30,7 +30,7 @@ public class BoardsController extends AbstractUserController implements Serializ
         final BoardManager boardManager = this.gameManagerService.handleBoardManager(roomId);
         userManagerService.setSessionUser(boardManager.refreshSessionUser(sessionUser));
         updateBoardManager(boardManager);
-        return BoardManagerDto.builder().boardManager(boardManager).loggedPlayer(sessionUser).build();
+        return toDto(sessionUser, boardManager);
     }
 
     @DeleteMapping(value = "{roomId}")
@@ -38,19 +38,26 @@ public class BoardsController extends AbstractUserController implements Serializ
             @PathVariable("roomId") Long roomId) {
         final Player sessionUser = userManagerService.getSessionUser();
         final BoardManager boardManager = gameManagerService.removeRoom(roomId, sessionUser);
-        return BoardManagerDto.builder().boardManager(boardManager).loggedPlayer(sessionUser).build();
+        return toDto(sessionUser, boardManager);
     }
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
     public BoardManagerDto listCurrentGame() {
         final Player sessionUser = userManagerService.getSessionUser();
         final BoardManager boardManager = gameManagerService.listPlayerGame(sessionUser);
-        return BoardManagerDto.builder().boardManager(boardManager).loggedPlayer(sessionUser).build();
+        return toDto(sessionUser, boardManager);
     }
 
     @GetMapping(value = "all", produces = APPLICATION_JSON_VALUE)
-    public RoomsManagerService listAllCurrentGames() {
-        return gameManagerService.listAllGames();
+    public List<BoardManagerDto> listAllCurrentGames() {
+        final Player sessionUser = userManagerService.getSessionUser();
+        return gameManagerService.listAllGames()
+                .parallelStream()
+                .map(boardManager -> toDto(sessionUser, boardManager))
+                .collect(Collectors.toList());
     }
 
+    private BoardManagerDto toDto(Player sessionUser, BoardManager boardManager) {
+        return BoardManagerDto.builder().boardManager(boardManager).loggedPlayer(sessionUser).build();
+    }
 }

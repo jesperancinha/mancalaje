@@ -1,8 +1,5 @@
 package com.jofisaes.mancala.services;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-
 import com.jofisaes.mancala.cache.BoardManager;
 import com.jofisaes.mancala.cache.Hole;
 import com.jofisaes.mancala.cache.Player;
@@ -13,6 +10,9 @@ import org.junit.Test;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+
 public class GameManagerServiceTest {
 
     private GameManagerService gameManagerService = new GameManagerService(20, new RoomsManagerService());
@@ -22,9 +22,8 @@ public class GameManagerServiceTest {
         Player mockPlayer = mock(Player.class);
         gameManagerService.createBoard(mockPlayer, "dev");
 
-        RoomsManagerService roomsManagerService = gameManagerService.listAllGames();
+        List<BoardManager> boardManagers = gameManagerService.listAllGames();
 
-        List<BoardManager> boardManagers = roomsManagerService.getBoardManagers();
         assertThat(boardManagers).hasSize(1);
         Optional<BoardManager> first = boardManagers.stream().findFirst();
         assertThat(first.isPresent()).isTrue();
