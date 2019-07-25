@@ -27,7 +27,7 @@ public class BoardsController extends AbstractUserController implements Serializ
     public BoardManagerDto getGame(
             @PathVariable("roomId") Long roomId) {
         final Player sessionUser = this.userManagerService.getSessionUser();
-        BoardManager boardManager = this.gameManagerService.handleBoardManager(roomId);
+        final BoardManager boardManager = this.gameManagerService.handleBoardManager(roomId);
         userManagerService.setSessionUser(boardManager.refreshSessionUser(sessionUser));
         updateBoardManager(boardManager);
         return BoardManagerDto.builder().boardManager(boardManager).loggedPlayer(sessionUser).build();
@@ -36,14 +36,16 @@ public class BoardsController extends AbstractUserController implements Serializ
     @DeleteMapping(value = "{roomId}")
     public BoardManagerDto removeRoom(
             @PathVariable("roomId") Long roomId) {
-        Player sessionUser = userManagerService.getSessionUser();
-        BoardManager boardManager = gameManagerService.removeRoom(roomId, sessionUser);
+        final Player sessionUser = userManagerService.getSessionUser();
+        final BoardManager boardManager = gameManagerService.removeRoom(roomId, sessionUser);
         return BoardManagerDto.builder().boardManager(boardManager).loggedPlayer(sessionUser).build();
     }
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
-    public BoardManager listCurrentGame() {
-        return gameManagerService.listPlayerGame(userManagerService.getSessionUser());
+    public BoardManagerDto listCurrentGame() {
+        final Player sessionUser = userManagerService.getSessionUser();
+        final BoardManager boardManager = gameManagerService.listPlayerGame(sessionUser);
+        return BoardManagerDto.builder().boardManager(boardManager).loggedPlayer(sessionUser).build();
     }
 
     @GetMapping(value = "all", produces = APPLICATION_JSON_VALUE)

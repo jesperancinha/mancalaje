@@ -151,7 +151,31 @@ public class BoardsControllerTest {
     }
 
     @Test
-    public void listCurrentGame() {
+    public void listCurrentGame() throws Exception {
+        final Player testPlayer = new Player();
+        testPlayer.setEmail("fakeEmail");
+        final BoardManager testBoardManager = BoardManager.create(testPlayer, 1L, TEST_GAME_1);
+        testBoardManager.getBoard().setPlayer1(testPlayer);
+        when(userManagerService.getSessionUser()).thenReturn(testPlayer);
+        when(gameManagerService.listPlayerGame(testPlayer)).thenReturn(testBoardManager);
+
+        mvc.perform(get(MANCALA_BOARDS)
+                .with(csrf())
+                .accept(MediaType.ALL_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers
+                        .jsonPath("$.boardManager.board.name").value(TEST_GAME_1));
+
+
+        verify(gameManagerService, only()).listPlayerGame(testPlayer);
+        verify(userManagerService, only()).getSessionUser();
+        verifyZeroInteractions(passwordEncoder);
+        verifyZeroInteractions(userDetailsService);
+        verifyZeroInteractions(authenticationProvider);
+        verifyZeroInteractions(passwordEncoder);
+        verifyZeroInteractions(userRepository);
+        verifyZeroInteractions(userService);
+        verifyZeroInteractions(roomsManagerService);
     }
 
     @Test
