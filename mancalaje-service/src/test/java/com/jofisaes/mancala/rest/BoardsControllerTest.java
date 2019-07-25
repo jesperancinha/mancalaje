@@ -27,8 +27,7 @@ import java.util.Map;
 import static com.jofisaes.mancala.rest.mappings.Mappings.MANCALA_BOARDS;
 import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -81,6 +80,8 @@ public class BoardsControllerTest {
                 .andExpect(MockMvcResultMatchers
                         .jsonPath("$.boardManager.board.name").value(TEST_GAME_1));
 
+        verify(userManagerService, only()).getSessionUser();
+        verify(gameManagerService, only()).createBoard(testPlayer, TEST_GAME_1);
         verifyZeroInteractions(passwordEncoder);
         verifyZeroInteractions(userDetailsService);
         verifyZeroInteractions(authenticationProvider);
@@ -88,8 +89,6 @@ public class BoardsControllerTest {
         verifyZeroInteractions(roomsManagerService);
         verifyZeroInteractions(userRepository);
         verifyZeroInteractions(userService);
-        verify(userManagerService, only()).getSessionUser();
-        verify(gameManagerService, only()).createBoard(testPlayer, TEST_GAME_1);
     }
 
     @Test
@@ -111,21 +110,44 @@ public class BoardsControllerTest {
                 .andExpect(MockMvcResultMatchers
                         .jsonPath("$.boardManager.board.name").value(TEST_GAME_1));
 
-
+        verify(gameManagerService, only()).handleBoardManager(1L);
+        verify(userManagerService, times(1)).getSessionUser();
+        verify(userManagerService, times(1)).setSessionUser(testPlayer);
+        verify(roomsManagerService, only()).getBoardManagerMap();
         verifyZeroInteractions(passwordEncoder);
         verifyZeroInteractions(userDetailsService);
         verifyZeroInteractions(authenticationProvider);
         verifyZeroInteractions(passwordEncoder);
         verifyZeroInteractions(userRepository);
         verifyZeroInteractions(userService);
-        verify(gameManagerService, only()).handleBoardManager(1L);
-        verify(userManagerService, times(1)).getSessionUser();
-        verify(userManagerService, times(1)).setSessionUser(testPlayer);
-        verify(roomsManagerService, only()).getBoardManagerMap();
     }
 
     @Test
-    public void removeRoom() {
+    public void removeRoom() throws Exception {
+        final Player testPlayer = new Player();
+        testPlayer.setEmail("fakeEmail");
+        final BoardManager testBoardManager = BoardManager.create(testPlayer, 1L, TEST_GAME_1);
+        testBoardManager.getBoard().setPlayer1(testPlayer);
+        when(userManagerService.getSessionUser()).thenReturn(testPlayer);
+        when(gameManagerService.removeRoom(1L, testPlayer)).thenReturn(testBoardManager);
+
+        mvc.perform(delete(MANCALA_BOARDS.concat("/1"))
+                .with(csrf())
+                .accept(MediaType.ALL_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers
+                        .jsonPath("$.boardManager.board.name").value(TEST_GAME_1));
+
+
+        verify(gameManagerService, only()).removeRoom(1L, testPlayer);
+        verify(userManagerService, only()).getSessionUser();
+        verifyZeroInteractions(passwordEncoder);
+        verifyZeroInteractions(userDetailsService);
+        verifyZeroInteractions(authenticationProvider);
+        verifyZeroInteractions(passwordEncoder);
+        verifyZeroInteractions(userRepository);
+        verifyZeroInteractions(userService);
+        verifyZeroInteractions(roomsManagerService);
     }
 
     @Test
