@@ -1,10 +1,5 @@
 package com.jofisaes.mancala.rest;
 
-import static com.jofisaes.mancala.rest.mappings.Mappings.MANCALA_BOARDS;
-import static org.mockito.Mockito.when;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import com.jofisaes.mancala.cache.BoardManager;
 import com.jofisaes.mancala.cache.Player;
 import com.jofisaes.mancala.repository.UserRepository;
@@ -27,10 +22,17 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static com.jofisaes.mancala.rest.mappings.Mappings.MANCALA_BOARDS;
+import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @RunWith(SpringRunner.class)
 @WebMvcTest(BoardsController.class)
 @WithMockUser
 public class BoardsControllerTest {
+
+    private static final String TEST_GAME_1 = "game1";
 
     @Autowired
     private MockMvc mvc;
@@ -62,18 +64,29 @@ public class BoardsControllerTest {
     @Test
     public void createGame() throws Exception {
         final Player mockPlayer = new Player();
-        final BoardManager boardManager = BoardManager.create(mockPlayer, 1L, "game1");
+        final BoardManager boardManager = BoardManager.create(mockPlayer, 1L, TEST_GAME_1);
         when(userManagerService.getSessionUser()).thenReturn(mockPlayer);
-        when(gameManagerService.createBoard(mockPlayer, "game1")).thenReturn(boardManager);
+        when(gameManagerService.createBoard(mockPlayer, TEST_GAME_1)).thenReturn(boardManager);
+
         mvc.perform(MockMvcRequestBuilders
-            .post(MANCALA_BOARDS)
-            .with(csrf())
-            .content("{\"boardName\":\"game1\"}")
-            .contentType(MediaType.APPLICATION_JSON)
-            .accept(MediaType.APPLICATION_JSON))
-            .andExpect(status().isOk())
-            .andExpect(MockMvcResultMatchers
-                .jsonPath("$.boardManager.board.name").value("game1"));
+                .post(MANCALA_BOARDS)
+                .with(csrf())
+                .content("{\"boardName\":\"game1\"}")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers
+                        .jsonPath("$.boardManager.board.name").value(TEST_GAME_1));
+
+        verifyZeroInteractions(passwordEncoder);
+        verifyZeroInteractions(userDetailsService);
+        verifyZeroInteractions(authenticationProvider);
+        verifyZeroInteractions(passwordEncoder);
+        verifyZeroInteractions(roomsManagerService);
+        verifyZeroInteractions(userRepository);
+        verifyZeroInteractions(userService);
+        verify(userManagerService, only()).getSessionUser();
+        verify(gameManagerService, only()).createBoard(mockPlayer, TEST_GAME_1);
     }
 
     @Test
