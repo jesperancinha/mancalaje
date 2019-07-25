@@ -19,12 +19,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.jofisaes.mancala.rest.mappings.Mappings.MANCALA_BOARDS;
 import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -63,13 +67,12 @@ public class BoardsControllerTest {
 
     @Test
     public void createGame() throws Exception {
-        final Player mockPlayer = new Player();
-        final BoardManager boardManager = BoardManager.create(mockPlayer, 1L, TEST_GAME_1);
-        when(userManagerService.getSessionUser()).thenReturn(mockPlayer);
-        when(gameManagerService.createBoard(mockPlayer, TEST_GAME_1)).thenReturn(boardManager);
+        final Player testPlayer = new Player();
+        final BoardManager testBoardManager = BoardManager.create(testPlayer, 1L, TEST_GAME_1);
+        when(userManagerService.getSessionUser()).thenReturn(testPlayer);
+        when(gameManagerService.createBoard(testPlayer, TEST_GAME_1)).thenReturn(testBoardManager);
 
-        mvc.perform(MockMvcRequestBuilders
-                .post(MANCALA_BOARDS)
+        mvc.perform(post(MANCALA_BOARDS)
                 .with(csrf())
                 .content("{\"boardName\":\"game1\"}")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -86,11 +89,39 @@ public class BoardsControllerTest {
         verifyZeroInteractions(userRepository);
         verifyZeroInteractions(userService);
         verify(userManagerService, only()).getSessionUser();
-        verify(gameManagerService, only()).createBoard(mockPlayer, TEST_GAME_1);
+        verify(gameManagerService, only()).createBoard(testPlayer, TEST_GAME_1);
     }
 
     @Test
-    public void getGame() {
+    public void getGame() throws Exception {
+        final Player testPlayer = new Player();
+        testPlayer.setEmail("fakeEmail");
+        final BoardManager testBoardManager = BoardManager.create(testPlayer, 1L, TEST_GAME_1);
+        final Map<Long, BoardManager> boardManagerMap = new HashMap<>();
+        testBoardManager.getBoard().setPlayer1(testPlayer);
+        doNothing().when(userManagerService).setSessionUser(testPlayer);
+        when(userManagerService.getSessionUser()).thenReturn(testPlayer);
+        when(gameManagerService.handleBoardManager(1L)).thenReturn(testBoardManager);
+        when(roomsManagerService.getBoardManagerMap()).thenReturn(boardManagerMap);
+
+        mvc.perform(get(MANCALA_BOARDS.concat("/1"))
+                .with(csrf())
+                .accept(MediaType.ALL_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers
+                        .jsonPath("$.boardManager.board.name").value(TEST_GAME_1));
+
+
+        verifyZeroInteractions(passwordEncoder);
+        verifyZeroInteractions(userDetailsService);
+        verifyZeroInteractions(authenticationProvider);
+        verifyZeroInteractions(passwordEncoder);
+        verifyZeroInteractions(userRepository);
+        verifyZeroInteractions(userService);
+        verify(gameManagerService, only()).handleBoardManager(1L);
+        verify(userManagerService, times(1)).getSessionUser();
+        verify(userManagerService, times(1)).setSessionUser(testPlayer);
+        verify(roomsManagerService, only()).getBoardManagerMap();
     }
 
     @Test
