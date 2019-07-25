@@ -2,14 +2,10 @@ package com.jofisaes.mancala.rest;
 
 import com.jofisaes.mancala.cache.BoardManager;
 import com.jofisaes.mancala.cache.Player;
-import com.jofisaes.mancala.services.game.GameManagerService;
-import com.jofisaes.mancala.services.room.RoomsManagerService;
-import com.jofisaes.mancala.services.user.UserManagerService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -30,15 +26,6 @@ public class RoomControllerTest extends AbstractControllerTest {
 
     @Autowired
     private MockMvc mvc;
-
-    @MockBean
-    private UserManagerService userManagerService;
-
-    @MockBean
-    private GameManagerService gameManagerService;
-
-    @MockBean
-    private RoomsManagerService roomsManagerService;
 
     @Test
     public void joinGame() throws Exception {

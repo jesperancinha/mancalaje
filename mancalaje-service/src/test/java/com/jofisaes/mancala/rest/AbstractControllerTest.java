@@ -1,7 +1,11 @@
 package com.jofisaes.mancala.rest;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.jofisaes.mancala.repository.UserRepository;
 import com.jofisaes.mancala.services.authentication.DefaultUserDetailsService;
+import com.jofisaes.mancala.services.game.GameManagerService;
+import com.jofisaes.mancala.services.room.RoomsManagerService;
+import com.jofisaes.mancala.services.user.UserManagerService;
 import com.jofisaes.mancala.services.user.UserService;
 import org.junit.After;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -12,9 +16,11 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 
 public class AbstractControllerTest {
 
-    protected static final String TEST_GAME_1 = "game1";
+    @VisibleForTesting
+    static final String TEST_GAME_1 = "game1";
 
-    protected static final String TEST_FAKE_EMAIL = "fakeEmail";
+    @VisibleForTesting
+    static final String TEST_FAKE_EMAIL = "fakeEmail";
 
     @MockBean
     protected UserService userService;
@@ -31,6 +37,15 @@ public class AbstractControllerTest {
     @MockBean
     protected PasswordEncoder passwordEncoder;
 
+    @MockBean
+    protected UserManagerService userManagerService;
+
+    @MockBean
+    protected GameManagerService gameManagerService;
+
+    @MockBean
+    protected RoomsManagerService roomsManagerService;
+
     @After
     public void tearDown() {
         verifyZeroInteractions(passwordEncoder);
@@ -38,6 +53,5 @@ public class AbstractControllerTest {
         verifyZeroInteractions(authenticationProvider);
         verifyZeroInteractions(passwordEncoder);
         verifyZeroInteractions(userRepository);
-        verifyZeroInteractions(userService);
     }
 }
