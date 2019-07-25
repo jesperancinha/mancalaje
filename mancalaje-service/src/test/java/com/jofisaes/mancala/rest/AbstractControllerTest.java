@@ -12,6 +12,10 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 
 public class AbstractControllerTest {
 
+    protected static final String TEST_GAME_1 = "game1";
+
+    protected static final String TEST_FAKE_EMAIL = "fakeEmail";
+
     @MockBean
     protected UserService userService;
 
@@ -28,7 +32,7 @@ public class AbstractControllerTest {
     protected PasswordEncoder passwordEncoder;
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         verifyZeroInteractions(passwordEncoder);
         verifyZeroInteractions(userDetailsService);
         verifyZeroInteractions(authenticationProvider);

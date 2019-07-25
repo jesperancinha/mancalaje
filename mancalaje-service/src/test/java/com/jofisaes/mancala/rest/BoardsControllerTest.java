@@ -32,10 +32,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class BoardsControllerTest extends AbstractControllerTest {
 
-    private static final String TEST_GAME_1 = "game1";
-
-    private static final String TEST_FAKE_EMAIL = "fakeEmail";
-
     @Autowired
     private MockMvc mvc;
 
