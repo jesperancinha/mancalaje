@@ -110,13 +110,18 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                             <List component="nav" aria-label="Game room list">
                                 {this.state.games.map(row => (
                                     <ListItem key={row.boardManager.boardManagerId.valueOf()} component={"div"}>
-                                        <ListItem component="span" button onClick={() => this.redirectToGamePage(row.boardManager)}>
+                                        <ListItem component="span"
+                                                  button
+                                                  onClick={() =>
+                                                      this.redirectToGamePage(row.boardManager)}>
                                             <ListItemIcon>
                                                 <RoomComponentIcon/>
                                             </ListItemIcon>
                                             {row.boardManager.board ? row.boardManager.board.name : ""}
                                         </ListItem>
-                                        <ListItemLink onClick={() => this.handleRemoveRoom(row.boardManager.boardManagerId.valueOf())}>
+                                        <ListItemLink
+                                            onClick={() =>
+                                                this.handleRemoveRoom(row.boardManager.boardManagerId.valueOf())}>
                                             <RemoveComponentIcon/>
                                         </ListItemLink>
                                         <ListItem>

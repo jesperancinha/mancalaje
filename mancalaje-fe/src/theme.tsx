@@ -67,7 +67,7 @@ export const theme = createMuiTheme({
         MuiList: {
             root: {
                 alignItems: "left",
-            }
+            },
 
         },
         MuiListItem: {
@@ -143,7 +143,7 @@ export const control = {
 
 export const holeDisabled = {
     backgroundColor: '#e40010',
-    borderRadius: 50
+    borderRadius: 50,
 };
 
 export const holeEnabled = {
