@@ -14,7 +14,6 @@ import {logOut, makeDeleteRequest, makeGetRequest, makePostRequest, makePutReque
 import {createOAuth} from "../../index";
 import {MySnackbarContentWrapper} from "../../components/SnackbarContent";
 import Box from "@material-ui/core/Box";
-import {Game} from "../../model/game";
 import {PlayerState} from "../../entities/player-state";
 import {BoardManager} from "../../model/board-manager";
 import {MancalaJeHeader} from '../../components/MancalaJeHeader';
@@ -24,7 +23,7 @@ import {invalidateText} from "../../actions/Validators";
 
 
 interface GameListProps extends State {
-    game?: Game;
+    games?: PlayerState[];
     mancalaReducer?: MancalaReducer;
     boardName: string;
     playerState?: PlayerState
@@ -101,30 +100,30 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                         />
                     </Grid>) : <div/>}
                 <AppBar title="Game room center options" position="relative">
-                    {this.state && this.state.game && this.state.game.boardManagers ? (
+                    {this.state && this.state.games ? (
                         <Box>
                             <Typography variant="h3"
                                         component="h3"
                                         align={"center"}>
-                                Listing {this.state.game.boardManagers.length} rooms
+                                Listing {this.state.games.length} rooms
                             </Typography>
                             <List component="nav" aria-label="Game room list">
-                                {this.state.game.boardManagers.map(row => (
-                                    <ListItem key={row.boardManagerId.valueOf()} component={"div"}>
-                                        <ListItem component="span" button onClick={() => this.redirectToGamePage(row)}>
+                                {this.state.games.map(row => (
+                                    <ListItem key={row.boardManager.boardManagerId.valueOf()} component={"div"}>
+                                        <ListItem component="span" button onClick={() => this.redirectToGamePage(row.boardManager)}>
                                             <ListItemIcon>
                                                 <RoomComponentIcon/>
                                             </ListItemIcon>
-                                            {row.board ? row.board.name : ""}
+                                            {row.boardManager.board ? row.boardManager.board.name : ""}
                                         </ListItem>
-                                        <ListItemLink onClick={() => this.handleRemoveRoom(row.boardManagerId.valueOf())}>
+                                        <ListItemLink onClick={() => this.handleRemoveRoom(row.boardManager.boardManagerId.valueOf())}>
                                             <RemoveComponentIcon/>
                                         </ListItemLink>
                                         <ListItem>
-                                            {GameList.getCurrentPlayersText(row)}
+                                            {GameList.getCurrentPlayersText(row.boardManager)}
                                         </ListItem>
                                         <ListItem>
-                                            {row.owner ? "Owner:" + row.owner.name : ""}
+                                            {row.boardManager.owner ? "Owner:" + row.boardManager.owner.name : ""}
                                         </ListItem>
                                     </ListItem>
                                 ))}
@@ -155,9 +154,9 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     }
 
     private loadAllBoards(): void {
-        makeGetRequest('mancala/boards/all', this.state, this.props, (data: Game) => {
+        makeGetRequest('mancala/boards/all', this.state, this.props, (data: PlayerState[]) => {
             this.setState({
-                game: data,
+                games: data,
             });
         });
     }

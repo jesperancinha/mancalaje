@@ -33,7 +33,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class BoardsControllerTest extends AbstractControllerTest {
 
     private static final String TEST_GAME_1 = "game1";
-    public static final String TEST_FAKE_EMAIL = "fakeEmail";
+
+    private static final String TEST_FAKE_EMAIL = "fakeEmail";
 
     @Autowired
     private MockMvc mvc;
