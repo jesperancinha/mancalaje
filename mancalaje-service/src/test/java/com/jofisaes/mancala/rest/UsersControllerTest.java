@@ -28,6 +28,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureJsonTesters
 public class UsersControllerTest extends AbstractControllerTest {
 
+    private static final String USER_TEST_EMAIL = "jofisaes@gmail.com";
+    private static final String USER_TEST_NAME = "João Esperancinha";
+    private static final String USER_TEST_PASSWORD = "admin";
+    private static final String USER_TEST_ROLE = "USER_ROLE";
+
     @Autowired
     private MockMvc mvc;
 
@@ -40,12 +45,12 @@ public class UsersControllerTest extends AbstractControllerTest {
     public void createUser() throws Exception {
 
         final UserDto userDto = UserDto.builder()
-                .name("João Esperancinha")
-                .email("jofisaes@gmail.com")
-                .password("admin")
-                .role("USER_ROLE")
+                .name(USER_TEST_NAME)
+                .email(USER_TEST_EMAIL)
+                .password(USER_TEST_PASSWORD)
+                .role(USER_TEST_ROLE)
                 .build();
-        JsonContent<UserDto> userDtoContent = userDtoJacksonTester.write(userDto);
+        final JsonContent<UserDto> userDtoContent = userDtoJacksonTester.write(userDto);
 
         mvc.perform(post(MANCALA_USERS)
                 .with(csrf())
@@ -60,8 +65,9 @@ public class UsersControllerTest extends AbstractControllerTest {
         verify(userService, only()).saveUser(userArgumentCaptor.capture());
         final User user = userArgumentCaptor.getValue();
         assertThat(user).isNotNull();
-        final String email = user.getEmail();
-        assertThat(email).isNotNull();
-        assertThat(email).isEqualTo(userDto.getEmail());
+        assertThat(user.getName()).isEqualTo(USER_TEST_NAME);
+        assertThat(user.getEmail()).isEqualTo(USER_TEST_EMAIL);
+        assertThat(user.getPassword()).isEqualTo(USER_TEST_PASSWORD);
+        assertThat(user.getRole()).isEqualTo(USER_TEST_ROLE);
     }
 }
