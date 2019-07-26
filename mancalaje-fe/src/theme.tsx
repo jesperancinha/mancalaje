@@ -48,12 +48,18 @@ export const theme = createMuiTheme({
             root: {
                 alignItems: "center",
                 borderRadius: 5,
-                margin: 10,
+                marginTop: 10,
+                marginLeft: 0,
+                marginRight: 0,
+                marginBottom: 10,
                 padding: 10,
-                width: 800,
+                maxWidth: 800,
             },
         },
         MuiButton: {
+            label:{
+              fontSize: 15,
+            },
             root: {
                 alignItems: "center",
                 minWidth: "100%",
@@ -88,13 +94,13 @@ export const theme = createMuiTheme({
                 alignItems: "center",
                 borderColor: "black",
                 borderWidth: 2,
-                fontSize: 50,
+                fontSize: 20,
                 fontWeight: 900,
                 height: 71,
-                paddingBottom: 14,
-                paddingLeft: 16,
-                paddingRight: 16,
-                paddingTop: 14,
+                paddingBottom: 0,
+                paddingLeft: 0,
+                paddingRight: 0,
+                paddingTop: 0,
                 width: 46,
             },
 
@@ -144,12 +150,15 @@ export const control = {
 export const holeDisabled = {
     backgroundColor: '#e40010',
     borderRadius: 50,
+    padding: 0,
 };
 
 export const holeEnabled = {
     backgroundColor: '#00e41d',
     borderRadius: 50,
+    padding: 0,
 };
 
-
-
+export const buttonCell = {
+    fontSize: 10,
+};
