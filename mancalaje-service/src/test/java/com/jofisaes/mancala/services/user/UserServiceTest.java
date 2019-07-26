@@ -14,7 +14,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
@@ -95,13 +97,39 @@ public class UserServiceTest {
 
     @Test
     public void getAllUsers() {
+        final List<User> allUserList = new ArrayList<>();
+        when(userRepository.findAll()).thenReturn(allUserList);
+
+        final List<User> allUsersResult = userService.getAllUsers();
+
+        verify(userRepository, only()).findAll();
+        assertThat(allUserList).isSameAs(allUsersResult);
     }
+
 
     @Test
     public void remove() {
+        User testUser = new User();
+        testUser.setEmail(TEST_USER_EMAIL);
+        doNothing().when(userRepository).deleteById(TEST_USER_EMAIL);
+
+        userService.remove(testUser);
+
+        verify(userRepository, only()).deleteById(TEST_USER_EMAIL);
     }
 
     @Test
     public void refreshUser() {
+        User testUser = new User();
+        testUser.setEmail(TEST_USER_EMAIL);
+        Optional<User> optionalUser = Optional.of(testUser);
+        when(userRepository.findById(TEST_USER_EMAIL)).thenReturn(optionalUser);
+        when(userRepository.save(testUser)).thenReturn(testUser);
+
+        userService.refreshUser(testUser.getEmail());
+
+        verify(userRepository, times(1)).findById(TEST_USER_EMAIL);
+        verify(userRepository, times(1)).save(testUser);
+        assertThat(testUser.getDate()).isNotNull();
     }
 }
