@@ -38,8 +38,7 @@ public class GameManagerService {
         }
         Long highestId = roomsManagerService.getBoardManagerMap().keySet().stream().max(Long::compare).orElse(0L) + 1;
         BoardManager board = BoardManager.create(player, highestId, boardName);
-        roomsManagerService.getBoardManagerMap().put(highestId, board);
-        roomsManagerService.getBoardManagers().add(board);
+        roomsManagerService.addBoard(highestId, board);
         return board;
     }
 

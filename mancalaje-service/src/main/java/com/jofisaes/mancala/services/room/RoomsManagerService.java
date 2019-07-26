@@ -31,6 +31,7 @@ public class RoomsManagerService {
     public BoardManager forceRemoveRoom(Long roomId) {
         BoardManager boardManager = boardManagerMap.get(roomId);
         boardManagers.removeIf(room -> room.getBoardManagerId().equals(roomId));
+        boardManagerMap.remove(roomId);
         return boardManager;
     }
 
@@ -40,5 +41,10 @@ public class RoomsManagerService {
 
     public Map<Long, BoardManager> getBoardManagerMap() {
         return boardManagerMap;
+    }
+
+    public void addBoard(Long highestId, BoardManager board) {
+        getBoardManagerMap().put(highestId, board);
+        getBoardManagers().add(board);
     }
 }
