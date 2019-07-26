@@ -1,11 +1,13 @@
 package com.jofisaes.mancala.game;
 
 import com.jofisaes.mancala.entities.User;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class UserDto {
 
     private String name;

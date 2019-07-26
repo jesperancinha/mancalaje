@@ -78,8 +78,6 @@ $ sudo -u postgres psql
 \password postgres
 create database mancalajedb
 \q
-
-
 ```
 ## License
 
