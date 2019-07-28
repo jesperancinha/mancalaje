@@ -100,7 +100,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                         />
                     </Grid>) : <div/>}
                 <AppBar title="Game room center options" position="relative">
-                    {this.state && this.state.games ? (
+                    {this.state && this.state.games && this.state.games.map ? (
                         <Box>
                             <Typography variant="h3"
                                         component="h3"

@@ -1,5 +1,6 @@
 package com.jofisaes.mancala.services.admin;
 
+import com.jofisaes.mancala.entities.User;
 import com.jofisaes.mancala.services.game.GameManagerService;
 import com.jofisaes.mancala.services.room.RoomsManagerService;
 import com.jofisaes.mancala.services.user.UserService;
@@ -30,25 +31,25 @@ public class UserSweepListener implements MessageListener {
     }
 
     public void onMessage(Message message) {
-        userService.getAllUsers().forEach(user -> {
-            if (Objects.isNull(user.getDate())) {
-                userService.remove(user);
-            } else {
-                if (ChronoUnit.HOURS.between(user.getDate().toInstant()
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalDateTime(), LocalDateTime.now()) >= 5) {
-                    userService.remove(user);
-                }
-            }
-            gameManagerService.leaveAllRooms(user.getEmail());
-            roomsManagerService
-                .getBoardManagers()
-                .stream()
-                .filter(boardManager -> boardManager.getCurrentPlayer().getEmail().equalsIgnoreCase(user.getEmail()))
-                .forEach(boardManager -> roomsManagerService.removeRoom(boardManager.getBoardManagerId()));
+        userService.getAllUsers().stream().filter(this::isRemovable).forEach(this::doRemoveUser);
+    }
 
-        });
+    private boolean isRemovable(User user) {
+        return Objects.isNull(
+            user.getDate()) ||
+            ChronoUnit.HOURS.between(user.getDate().toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime(), LocalDateTime.now()) >= 5;
+    }
 
+    private void doRemoveUser(User user) {
+        gameManagerService.leaveAllRooms(user.getEmail());
+        roomsManagerService
+            .getBoardManagers()
+            .stream()
+            .filter(boardManager -> boardManager.getCurrentPlayer().getEmail().equalsIgnoreCase(user.getEmail()))
+            .forEach(boardManager -> roomsManagerService.removeRoom(boardManager.getBoardManagerId()));
+        userService.remove(user);
     }
 
 }

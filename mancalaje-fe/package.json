@@ -1,6 +1,6 @@
 {
-  "name": "mancala-ts-fe",
-  "version": "0.1.0",
+  "name": "mancalaje-fe",
+  "version": "1.0.0-SNAPSHOT",
   "private": true,
   "proxy": "http://localhost:8087",
   "dependencies": {

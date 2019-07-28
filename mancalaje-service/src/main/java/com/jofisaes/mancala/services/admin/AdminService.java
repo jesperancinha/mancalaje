@@ -4,9 +4,11 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.broker.BrokerFactory;
 import org.apache.activemq.broker.BrokerService;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
+import javax.annotation.Resource;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Message;
@@ -19,6 +21,9 @@ import javax.jms.Topic;
 public class AdminService {
 
     private final Session session;
+
+    @Resource(name = "tokenServices")
+    ConsumerTokenServices tokenServices;
 
     public AdminService(UserSweepListener userSweepListener) throws Exception {
 
@@ -48,4 +53,7 @@ public class AdminService {
         producer.send(msg);
     }
 
+    public void revokeToken(String tokenId) {
+        tokenServices.revokeToken(tokenId);
+    }
 }

@@ -146,6 +146,12 @@ const makeDeleteRequest = <T extends {}>
         }
     }
 };
+const home = (props: State): void => {
+    if (props.history) {
+        props.history.push(LOGIN_PATH);
+    }
+};
+
 
 const logOut = (props: State, state: State): void => {
     if (props.history) {
@@ -153,14 +159,7 @@ const logOut = (props: State, state: State): void => {
         if (state.refreshers) {
             state.refreshers.map(clearInterval);
         }
-        props.history.push(LOGIN_PATH);
-
-    }
-};
-
-const home = (props: State): void => {
-    if (props.history) {
-        props.history.push(LOGIN_PATH);
+        makeDeleteRequest("/mancala/open/oauth/token", state, props, () => home(props));
     }
 };
 
