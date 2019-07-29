@@ -9,10 +9,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.jms.ConnectionFactory;
 import java.net.URI;
@@ -56,5 +58,10 @@ public class MancalaConfiguration {
     public ConnectionFactory connectionFactory() {
         return new ActiveMQConnectionFactory(
                 "tcp://localhost:61616");
+    }
+
+    @Bean(name = "mancalaJeTransactionManager")
+    public PlatformTransactionManager transactionManager() {
+        return new JpaTransactionManager();
     }
 }

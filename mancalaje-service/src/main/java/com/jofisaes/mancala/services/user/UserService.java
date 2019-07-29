@@ -4,9 +4,11 @@ import com.jofisaes.mancala.entities.User;
 import com.jofisaes.mancala.exception.TooManyUsersException;
 import com.jofisaes.mancala.exception.UserRemovedException;
 import com.jofisaes.mancala.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -15,9 +17,12 @@ import java.util.Optional;
 import static com.jofisaes.mancala.entities.RoleType.ROLE_USER;
 
 @Service
+@Transactional
 public class UserService {
 
+    @Autowired
     private final UserRepository userRepository;
+
     private final PasswordEncoder passwordEncoder;
     private int maxUsers;
 

@@ -9,11 +9,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.springframework.transaction.annotation.Propagation.REQUIRES_NEW;
+
 @Repository
+@Transactional(readOnly =  false, propagation = REQUIRES_NEW)
 public interface UserRepository extends JpaRepository<User, String> {
 
-    @Transactional
-    @Modifying
+    @Transactional(propagation = REQUIRES_NEW)
+    @Modifying(clearAutomatically = true)
     @Query("DELETE FROM User u WHERE u.email = :email")
     void deleteByEmail(@Param("email") String email);
 }

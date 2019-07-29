@@ -6,12 +6,13 @@ import com.jofisaes.mancala.services.room.RoomsManagerService;
 import com.jofisaes.mancala.services.user.UserService;
 import org.springframework.stereotype.Service;
 
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageListener;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
-import javax.jms.Message;
-import javax.jms.MessageListener;
 
 @Service
 public class UserSweepListener implements MessageListener {
@@ -31,6 +32,11 @@ public class UserSweepListener implements MessageListener {
     }
 
     public void onMessage(Message message) {
+        try {
+            message.acknowledge();
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
         userService.getAllUsers().stream().filter(this::isRemovable).forEach(this::doRemoveUser);
     }
 
