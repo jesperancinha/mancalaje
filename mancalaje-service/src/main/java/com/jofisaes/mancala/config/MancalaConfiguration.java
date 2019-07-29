@@ -28,8 +28,11 @@ public class MancalaConfiguration {
 
     private DefaultUserDetailsService userDetailsService;
 
-    public MancalaConfiguration(DefaultUserDetailsService userDetailsService) {
+    public MancalaConfiguration(DefaultUserDetailsService userDetailsService) throws Exception {
         this.userDetailsService = userDetailsService;
+        BrokerService broker = BrokerFactory.createBroker(new URI(
+                "broker:(tcp://localhost:61616)"));
+        broker.start();
     }
 
     @Bean
@@ -47,14 +50,6 @@ public class MancalaConfiguration {
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(getPasswordEncoder());
         return authProvider;
-    }
-
-    @Bean
-    public BrokerService broker() throws Exception {
-        BrokerService broker = BrokerFactory.createBroker(new URI(
-                "broker:(tcp://localhost:61616)"));
-        broker.start();
-        return broker;
     }
 
     @Bean
