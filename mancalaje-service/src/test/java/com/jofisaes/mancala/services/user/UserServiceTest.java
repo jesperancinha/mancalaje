@@ -111,11 +111,11 @@ public class UserServiceTest {
     public void remove() {
         User testUser = new User();
         testUser.setEmail(TEST_USER_EMAIL);
-        doNothing().when(userRepository).deleteById(TEST_USER_EMAIL);
+        doNothing().when(userRepository).deleteByEmail(TEST_USER_EMAIL);
 
         userService.remove(testUser);
 
-        verify(userRepository, only()).deleteById(TEST_USER_EMAIL);
+        verify(userRepository, only()).deleteByEmail(TEST_USER_EMAIL);
     }
 
     @Test
