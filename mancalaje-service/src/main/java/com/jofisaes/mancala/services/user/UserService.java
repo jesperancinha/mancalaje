@@ -54,7 +54,7 @@ public class UserService {
     }
 
     public void remove(User user) {
-        userRepository.deleteById(user.getEmail());
+        userRepository.deleteByEmail(user.getEmail());
     }
 
     public void refreshUser(String email) {

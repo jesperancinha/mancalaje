@@ -1,16 +1,24 @@
 package com.jofisaes.mancala.config;
 
 import com.jofisaes.mancala.services.authentication.DefaultUserDetailsService;
+import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.broker.BrokerFactory;
+import org.apache.activemq.broker.BrokerService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.net.URI;
+import javax.jms.ConnectionFactory;
+
 @EnableJpaAuditing
 @EnableScheduling
+@EnableJpaRepositories(basePackages = "com.jofisaes.mancala.repository", transactionManagerRef = "mancalaJeTransactionManager")
 @Configuration
 public class MancalaConfiguration {
 
@@ -37,5 +45,19 @@ public class MancalaConfiguration {
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(getPasswordEncoder());
         return authProvider;
+    }
+
+    @Bean
+    public BrokerService broker() throws Exception {
+        BrokerService broker = BrokerFactory.createBroker(new URI(
+            "broker:(tcp://localhost:61616)"));
+        broker.start();
+        return broker;
+    }
+
+    @Bean
+    public ConnectionFactory connectionFactory() {
+        return new ActiveMQConnectionFactory(
+            "tcp://localhost:61616");
     }
 }

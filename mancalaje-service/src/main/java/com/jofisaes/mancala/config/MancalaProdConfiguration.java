@@ -40,7 +40,7 @@ public class MancalaProdConfiguration {
         return dataSource;
     }
 
-    @Bean
+    @Bean(name ="mancalaJeTransactionManager")
     public PlatformTransactionManager transactionManager(DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }

@@ -1,13 +1,9 @@
 package com.jofisaes.mancala.services.admin;
 
-import org.apache.activemq.ActiveMQConnectionFactory;
-import org.apache.activemq.broker.BrokerFactory;
-import org.apache.activemq.broker.BrokerService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.stereotype.Service;
 
-import java.net.URI;
 import javax.annotation.Resource;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
@@ -25,16 +21,10 @@ public class AdminService {
     @Resource(name = "tokenServices")
     ConsumerTokenServices tokenServices;
 
-    public AdminService(UserSweepListener userSweepListener) throws Exception {
-
-        BrokerService broker = BrokerFactory.createBroker(new URI(
-            "broker:(tcp://localhost:61616)"));
-        broker.start();
-        Connection clientConnection = null;
-        // Producer
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
-            "tcp://localhost:61616");
-        clientConnection = connectionFactory.createConnection();
+    public AdminService(
+        UserSweepListener userSweepListener,
+        ConnectionFactory connectionFactory) throws Exception {
+        Connection clientConnection = connectionFactory.createConnection();
         clientConnection.setClientID("UseSweepClientId");
         Session session = clientConnection.createSession(false,
             Session.AUTO_ACKNOWLEDGE);
@@ -45,7 +35,7 @@ public class AdminService {
         this.session = session;
     }
 
-    @Scheduled(cron = "0 */5 * ? * *")
+    @Scheduled(cron = "0 */1 * ? * *")
     public void removeExpiredUsers() throws Exception {
         MessageProducer producer = session.createProducer(session.createTopic("UserSweepConsumerTopic"));
         String payload = "User Sweep";
