@@ -22,5 +22,5 @@ CREATE TABLE IF NOT EXISTS users
     name     VARCHAR(256),
     password VARCHAR(256),
     role     VARCHAR(256),
-    date     date
+    date     TIMESTAMP
 );
