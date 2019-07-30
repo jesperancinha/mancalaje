@@ -42,19 +42,19 @@ public class UserSweepListener implements MessageListener {
 
     private boolean isRemovable(User user) {
         return Objects.isNull(
-            user.getDate()) ||
-            ChronoUnit.HOURS.between(user.getDate().toInstant()
-                .atZone(ZoneId.systemDefault())
-                .toLocalDateTime(), LocalDateTime.now()) >= 5;
+                user.getDate()) ||
+                ChronoUnit.HOURS.between(user.getDate().toInstant()
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDateTime(), LocalDateTime.now()) >= 5;
     }
 
     private void doRemoveUser(User user) {
         gameManagerService.leaveAllRooms(user.getEmail());
         roomsManagerService
-            .getBoardManagers()
-            .stream()
-            .filter(boardManager -> boardManager.getCurrentPlayer().getEmail().equalsIgnoreCase(user.getEmail()))
-            .forEach(boardManager -> roomsManagerService.removeRoom(boardManager.getBoardManagerId()));
+                .getBoardManagers()
+                .stream()
+                .filter(boardManager -> boardManager.getCurrentPlayer().getEmail().equalsIgnoreCase(user.getEmail()))
+                .forEach(boardManager -> roomsManagerService.removeRoom(boardManager.getBoardManagerId()));
         userService.remove(user);
     }
 

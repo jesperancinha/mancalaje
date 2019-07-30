@@ -2,6 +2,7 @@ package com.jofisaes.mancala.rest;
 
 import com.jofisaes.mancala.entities.User;
 import com.jofisaes.mancala.game.UserDto;
+import com.jofisaes.mancala.services.mail.MancalaJeMailService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -10,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.json.AutoConfigureJsonTesters
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.json.JsonContent;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -36,10 +38,15 @@ public class UsersControllerTest extends AbstractControllerTest {
     @Autowired
     private MockMvc mvc;
 
+    @MockBean
+    private MancalaJeMailService mancalaJeMailService;
+
     @Autowired
     private JacksonTester<UserDto> userDtoJacksonTester;
 
     private ArgumentCaptor<User> userArgumentCaptor = ArgumentCaptor.forClass(User.class);
+
+    private ArgumentCaptor<UserDto> userDtoArgumentCaptor = ArgumentCaptor.forClass(UserDto.class);
 
     @Test
     public void createUser() throws Exception {
@@ -62,12 +69,21 @@ public class UsersControllerTest extends AbstractControllerTest {
         verifyZeroInteractions(roomsManagerService);
         verifyZeroInteractions(userManagerService);
         verifyZeroInteractions(gameManagerService);
+
         verify(userService, only()).saveUser(userArgumentCaptor.capture());
+        verify(mancalaJeMailService, only()).sendEmail(userDtoArgumentCaptor.capture());
+
         final User user = userArgumentCaptor.getValue();
         assertThat(user).isNotNull();
         assertThat(user.getName()).isEqualTo(USER_TEST_NAME);
         assertThat(user.getEmail()).isEqualTo(USER_TEST_EMAIL);
         assertThat(user.getPassword()).isEqualTo(USER_TEST_PASSWORD);
         assertThat(user.getRole()).isEqualTo(USER_TEST_ROLE);
+        final UserDto sentUserDto = userDtoArgumentCaptor.getValue();
+        assertThat(sentUserDto).isNotNull();
+        assertThat(sentUserDto.getName()).isEqualTo(userDto.getName());
+        assertThat(sentUserDto.getEmail()).isEqualTo(userDto.getEmail());
+        assertThat(sentUserDto.getPassword()).isEqualTo(userDto.getPassword());
+        assertThat(sentUserDto.getRole()).isEqualTo(userDto.getRole());
     }
 }

@@ -8,6 +8,8 @@ logging:
 mancalaje:
   max-rooms: 50
   max-users: 100
+  mail:
+    no-reply: mancalaje.no.reply@joaofilipesabinoesperancinha.nl
 
 spring:
   jpa:
@@ -17,3 +19,13 @@ spring:
         event:
           merge:
             entity_copy_observer: allow
+  mail:
+    host: localhost
+    port: 25
+    properties:
+      mail:
+        smtp:
+          auth: false
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeou: 5000

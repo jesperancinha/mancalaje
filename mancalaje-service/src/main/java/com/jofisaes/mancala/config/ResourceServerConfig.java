@@ -21,12 +21,12 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests()
-            .antMatchers("/mancala/users/**")
-            .permitAll()
-            .antMatchers("/mancala/actions/**", "/mancala/boards/**", "/mancala/rooms/**", "mancala/admin/**")
-            .authenticated()
-            .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
+                .authorizeRequests()
+                .antMatchers("/mancala/users/**")
+                .permitAll()
+                .antMatchers("/mancala/actions/**", "/mancala/boards/**", "/mancala/rooms/**", "mancala/admin/**")
+                .authenticated()
+                .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }
 
 }

@@ -18,6 +18,8 @@
 
 ## References
 
+-   [MailSlurper](https://mailslurper.com/)
+-   [How to send emails from localhost (MAC OS X El Capitan)](https://www.developerfiles.com/how-to-send-emails-from-localhost-mac-os-x-el-capitan/)
 -   [PostgreSQL](https://www.postgresql.org/)
 -   [How to connect to H2 database during development/testing using Spring-Boot](https://medium.com/@harittweets/how-to-connect-to-h2-database-during-development-testing-using-spring-boot-44bbb287570)
 -   [Spring Session with JDBC](https://www.baeldung.com/spring-session-jdbc)

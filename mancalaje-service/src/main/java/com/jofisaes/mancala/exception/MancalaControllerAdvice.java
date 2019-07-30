@@ -52,4 +52,9 @@ public class MancalaControllerAdvice {
     public ResponseEntity<Object> userRemovedException(UserRemovedException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception);
     }
+
+    @ExceptionHandler(value = MailNotSentException.class)
+    public ResponseEntity<Object> mailNotSentException(MailNotSentException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception);
+    }
 }

@@ -23,41 +23,46 @@ const makeGetRequest = <T extends {}>(urlString: string, state: State, props: St
 };
 
 
-const extractedFetch = (props: State): (urlString: string, config: RequestInit) => Promise<Response> | null => {
+const extractedFetch = (props: State): (urlString: string, config: RequestInit) => Promise<Response> => {
     if (props.oauth) {
-        return (urlString: string, config: {}) => props.oauth ? props.oauth.fetch(urlString, config) : null;
+        return (urlString: string, config: {}) => props.oauth ? props.oauth.fetch(urlString, config) : new Promise<Response>(() => {
+        });
     } else {
         return (urlString: string, config: {}) => fetch(urlString, config);
     }
 };
 
-const makePostRequest = <T extends {}>(urlString: string, state: State, props: State,
-                                       transformData: (t: T) => void, messsageBody: string): void => {
+const makePostRequest = <T extends {}>(
+    urlString: string, state: State, props: State,
+    transformData: (t: T) => void, messsageBody: string,
+    errorCatch?: (t: string) => void): void => {
     if (props.history) {
-        const requestMethod = extractedFetch(props)(urlString, {
+        extractedFetch(props)(urlString, {
             body: messsageBody,
             headers: {
                 'Content-Type': 'application/json',
             },
             method: "POST",
-        });
-        if (requestMethod) {
-            requestMethod
-                .then((res: Response) => {
-                    if (res.status === CONFLICT) {
-                        res.json().then(
-                            (errorMessage: ErrorMessage) =>
-                                state.statusError = errorMessage.localizedMessage);
-                        return null;
+        }).then((res: Response) => {
+            if (res.status === CONFLICT) {
+                res.json().then((errorMessage: ErrorMessage) => {
+                    if (errorCatch && errorMessage.localizedMessage) {
+                        errorCatch(errorMessage.localizedMessage);
+                    } else {
+                        state.statusError = errorMessage.localizedMessage
                     }
-                    return res.json()
-                })
-                .then((data: T) => transformData(data))
-                .catch(() => {
-                    logOut(props, state);
-                })
+                });
+                return null;
+            }
+            return res.json()
+        }).then((data: T) => {
+            if (data) {
+                transformData(data)
+            }
+        }).catch(() => {
+            logOut(props, state);
+        })
 
-        }
     }
 
 };

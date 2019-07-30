@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.springframework.transaction.annotation.Propagation.REQUIRES_NEW;
 
 @Repository
-@Transactional(readOnly =  false, propagation = REQUIRES_NEW)
+@Transactional(readOnly = false, propagation = REQUIRES_NEW)
 public interface UserRepository extends JpaRepository<User, String> {
 
     @Transactional(propagation = REQUIRES_NEW)

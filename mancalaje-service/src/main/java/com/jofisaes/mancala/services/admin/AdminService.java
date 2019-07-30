@@ -5,13 +5,7 @@ import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.jms.Connection;
-import javax.jms.ConnectionFactory;
-import javax.jms.Message;
-import javax.jms.MessageConsumer;
-import javax.jms.MessageProducer;
-import javax.jms.Session;
-import javax.jms.Topic;
+import javax.jms.*;
 
 @Service
 public class AdminService {
@@ -22,12 +16,12 @@ public class AdminService {
     ConsumerTokenServices tokenServices;
 
     public AdminService(
-        UserSweepListener userSweepListener,
-        ConnectionFactory connectionFactory) throws Exception {
+            UserSweepListener userSweepListener,
+            ConnectionFactory connectionFactory) throws Exception {
         Connection clientConnection = connectionFactory.createConnection();
         clientConnection.setClientID("UseSweepClientId");
         Session session = clientConnection.createSession(false,
-            Session.AUTO_ACKNOWLEDGE);
+                Session.AUTO_ACKNOWLEDGE);
         Topic topic = session.createTopic("UserSweepConsumerTopic");
         MessageConsumer consumer1 = session.createConsumer(topic);
         consumer1.setMessageListener(userSweepListener);

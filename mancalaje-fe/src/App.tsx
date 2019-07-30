@@ -29,4 +29,4 @@ const mapStateToProps = (state: State) => {
 };
 const AppConnected = connect(mapStateToProps)(App);
 
-export {AppConnected}
+export {AppConnected, App}

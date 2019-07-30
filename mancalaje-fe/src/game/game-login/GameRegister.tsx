@@ -43,7 +43,7 @@ class GameRegister extends Component<GameRegisterProps, GameRegisterProps> {
             <MancalaJeHeader>
                 <Grid item xs={XS_COL_SPAN}>
                     <AppBar title="Login" position="relative">
-                        <Typography variant="h3" align={"center"}>Please login to start playing!</Typography>
+                        <Typography variant="h3" align={"center"}>Please register to start playing!</Typography>
                         <TextField
                             style={control}
                             label={"Name"}
@@ -87,17 +87,6 @@ class GameRegister extends Component<GameRegisterProps, GameRegisterProps> {
                             onClick={() => home(this.props)}>Back to home</Button>
                     </AppBar>
                 </Grid>
-                <Grid item xs={XS_COL_SPAN}>
-                    <AppBar title={"Login cheat"} position={"relative"}>
-                        <Typography variant="h4" align={"center"}>
-                            Remember that your user will be available for 5 hours.
-                            Everytime you play, your user registration will be prolonged for an extra 5 hours. While you
-                            are playing there is no expiry date and it will be reset to 5 hour later after you played.
-                            Should you want more time in registration, remember that this is just a demo
-                            version.
-                        </Typography>
-                    </AppBar>
-                </Grid>
                 {this.state.statusError ? (
                     <Grid item xs={XS_COL_SPAN}>
                         <MySnackbarContentWrapper
@@ -108,6 +97,17 @@ class GameRegister extends Component<GameRegisterProps, GameRegisterProps> {
                             })}
                         />
                     </Grid>) : <div/>}
+                <Grid item xs={XS_COL_SPAN}>
+                    <AppBar title={"Login cheat"} position={"relative"}>
+                        <Typography variant="h6" align={"center"}>
+                            Remember that your user will be available for 5 hours.
+                            Everytime you play, your user registration will be prolonged for an extra 5 hours. While you
+                            are playing there is no expiry date and it will be reset to 5 hour later after you played.
+                            Should you want more time in registration, remember that this is just a demo
+                            version.
+                        </Typography>
+                    </AppBar>
+                </Grid>
             </MancalaJeHeader>
         );
     }
@@ -117,12 +117,12 @@ class GameRegister extends Component<GameRegisterProps, GameRegisterProps> {
         user.name = this.state.name;
         user.email = this.state.email;
         user.password = this.state.password;
+        console.log(user);
         makePostRequest('/mancala/users', this.state, this.props,
-            () =>
-                // this.props.history && this.props.history.push(`login`),
-            {
-            },
-            JSON.stringify(user));
+            () => this.props.history && this.props.history.push(`login`),
+            JSON.stringify(user), (errorMessage: string) => this.setState({
+                statusError: errorMessage,
+            }));
     }
 
     private getUserHelperText(): string {

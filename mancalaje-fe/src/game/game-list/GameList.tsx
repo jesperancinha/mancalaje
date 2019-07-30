@@ -34,7 +34,10 @@ class GameList extends React.Component<GameListProps, GameListProps> {
 
     constructor({props}: { props: GameListProps }) {
         super(props);
-        this.state = {boardName: "", refreshers: []};
+        this.state = {
+            boardName: "",
+            refreshers: [],
+        };
     }
 
     private static getCurrentPlayersText(row: BoardManager): string {
