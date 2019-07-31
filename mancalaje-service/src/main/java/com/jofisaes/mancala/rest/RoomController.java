@@ -13,7 +13,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping(MANCALA_ROOMS)
 public class RoomController extends AbstractUserController {
 
-
     @PutMapping(value = "{roomId}", produces = APPLICATION_JSON_VALUE)
     public BoardManagerDto joinGame(
             @PathVariable("roomId") Long roomId) {

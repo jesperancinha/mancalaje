@@ -3,6 +3,8 @@ package com.jofisaes.mancala.game;
 import com.jofisaes.mancala.entities.User;
 import lombok.*;
 
+import javax.validation.constraints.Pattern;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -12,6 +14,7 @@ public class UserDto {
 
     private String name;
 
+    @Pattern(regexp = "^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$", message = "Please insert a valid email!")
     private String email;
 
     private String password;

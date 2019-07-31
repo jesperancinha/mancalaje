@@ -7,7 +7,6 @@ import {connect} from "react-redux";
 import {State} from "../../reducers/reducerIndex";
 import {makeDeleteRequest, makeGetRequest} from "../../actions/OAuthRouting";
 import AppBar from "@material-ui/core/AppBar";
-import Box from "@material-ui/core/Box";
 import {MySnackbarContentWrapper} from "../../components/SnackbarContent";
 import {PlayerState} from "../../entities/player-state";
 import {MancalaJeHeader} from "../../components/MancalaJeHeader";
@@ -45,43 +44,48 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
         return (<MancalaJeHeader>
             {
                 this.state && this.state.playerState ? (<MuiThemeProvider theme={theme}>
-                        <AppBar title="Game Start Title" position="relative">
-                            {this.state.playerState.loggedPlayer ?
-                                (<Box>
+                        {this.state.playerState.loggedPlayer && this.state.playerState.boardManager && this.state.playerState.boardManager.board ?
+                            (<div>
+                                <AppBar title="Game Start Title" position="relative">
                                     <Typography variant="h2">
                                         Hello {this.state.playerState.loggedPlayer.name}
                                     </Typography>
-                                    {this.state.playerState.boardManager &&
-                                    !this.state.playerState.boardManager.gameover ?
-                                        (this.state.playerState.loggedPlayer.opponentName ?
-                                                (<Typography variant="h3">
+                                </AppBar>
+                                <AppBar position={"relative"}>
+                                    <Typography variant="h2">
+                                        You are in room {this.state.playerState.boardManager.board.name}
+                                    </Typography>
+                                </AppBar>
+                                {!this.state.playerState.boardManager.gameover ?
+                                    (this.state.playerState.loggedPlayer.opponentName ?
+                                            (<AppBar position={"relative"}>
+                                                <Typography variant="h3">
                                                     You are currently playing mancalaje
                                                     with {this.state.playerState.loggedPlayer.opponentName}
-                                                </Typography>) : (
-                                                    <Typography variant="h3">Waiting for player to join
-                                                        room...</Typography>)
+                                                </Typography>
+                                            </AppBar>) : (
+                                                <AppBar position={"relative"}>
+                                                    <Typography variant="h3">Waiting for player to join room...</Typography>
+                                                </AppBar>)
 
-                                        ) : (<div/>)}
-                                </Box>) : (<Typography variant="h2">Loading...</Typography>)}
-
-                        </AppBar>
-                        {this.state.playerState.boardManager && !this.state.playerState.boardManager.gameover ? (
-                            <AppBar title="Game Start Current Player" position="relative">
-                                {this.state.playerState.boardManager &&
-                                this.state.playerState.boardManager.currentPlayer ? (
-                                        <Typography variant="h3">Current
-                                            player {this.state.playerState.boardManager.currentPlayer.name}
-                                        </Typography>)
-                                    : (this.state.playerState.boardManager &&
-                                    this.state.playerState.boardManager.currentPlayer &&
-                                    this.state.playerState.boardManager.currentPlayer.opponentName ? (
-                                        <Typography variant="h2">Loading...</Typography>) : (<div/>))}
-                            </AppBar>) : (<div/>)}
-                        <AppBar title="Game Start Board" position="relative">
-                            <MancalaBoard data={this.state.playerState.boardManager}
-                                          state={this.state}
-                                          props={this.props}/>
-                        </AppBar>
+                                    ) : (<div/>)}
+                            </div>) : (<AppBar title="Game Start Loading Title" position="relative">
+                                <Typography variant="h2">Loading...</Typography></AppBar>)}
+                        {this.state.playerState.boardManager
+                        && !this.state.playerState.boardManager.gameover
+                        && this.state.playerState.boardManager.currentPlayer ? (
+                            <div>
+                                <AppBar title="Game Start Current Player" position="relative">
+                                    <Typography variant="h3">Current
+                                        player {this.state.playerState.boardManager.currentPlayer.name}
+                                    </Typography>
+                                </AppBar>
+                                <AppBar title="Game Start Board" position="relative">
+                                    <MancalaBoard data={this.state.playerState.boardManager}
+                                                  state={this.state}
+                                                  props={this.props}/>
+                                </AppBar>
+                            </div>) : (<div/>)}
                         {this.state.playerState.boardManager &&
                         this.state.playerState.boardManager.winner && this.state.playerState.boardManager.gameover ? (
                                 <AppBar title={'Game Over!'} position={"relative"}>
@@ -89,6 +93,8 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
                                         is {this.state.playerState.boardManager.winner.name}</Typography>
                                 </AppBar>)
                             : (<div/>)}
+
+
                         <AppBar title={"Game Start Controls"} position={"relative"}>
                             <Button
                                 style={control}

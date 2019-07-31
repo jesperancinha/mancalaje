@@ -4,4 +4,8 @@ const invalidateText = (text: string) => {
     return text.length === MIN_TEXT_LENGTH;
 };
 
-export {invalidateText, MIN_TEXT_LENGTH};
+const invalidateEmail = (text: string) => {
+    return !/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(text);
+};
+
+export {invalidateText, invalidateEmail, MIN_TEXT_LENGTH};

@@ -47,13 +47,16 @@ const makePostRequest = <T extends {}>(
             method: "POST",
         }).then((res: Response) => {
             if (res.status === CONFLICT) {
-                res.json().then((errorMessage: ErrorMessage) => {
-                    if (errorCatch && errorMessage.localizedMessage) {
-                        errorCatch(errorMessage.localizedMessage);
-                    } else {
-                        state.statusError = errorMessage.localizedMessage
-                    }
-                });
+                res.json()
+                    .then((errorMessage: ErrorMessage) => {
+                        if (errorCatch && errorMessage.localizedMessage) {
+                            errorCatch(errorMessage.localizedMessage);
+                        } else {
+                            state.statusError = errorMessage.localizedMessage
+                        }
+                    })
+                    .catch(error => errorCatch && errorCatch(error));
+
                 return null;
             }
             return res.json()
@@ -88,13 +91,15 @@ const makePutRequest = <T extends {}>(urlString: string, state:
             props.oauth.fetch(urlString, config)
                 .then((res: Response) => {
                     if (res.status === CONFLICT) {
-                        res.json().then((errorMessage: ErrorMessage) => {
-                            if (errorCatch && errorMessage.localizedMessage) {
-                                errorCatch(errorMessage.localizedMessage);
-                            } else {
-                                state.statusError = errorMessage.localizedMessage
-                            }
-                        });
+                        res.json()
+                            .then((errorMessage: ErrorMessage) => {
+                                if (errorCatch && errorMessage.localizedMessage) {
+                                    errorCatch(errorMessage.localizedMessage);
+                                } else {
+                                    state.statusError = errorMessage.localizedMessage
+                                }
+                            })
+                            .catch(error => errorCatch && errorCatch(error));
                         return null;
                     }
                     return res.json()
@@ -127,13 +132,14 @@ const makeDeleteRequest = <T extends {}>
             })
                 .then((res: Response) => {
                     if (res.status === CONFLICT) {
-                        res.json().then((errorMessage: ErrorMessage) => {
-                            if (errorCatch && errorMessage.localizedMessage) {
-                                errorCatch(errorMessage.localizedMessage);
-                            } else {
-                                state.statusError = errorMessage.localizedMessage
-                            }
-                        });
+                        res.json()
+                            .then((errorMessage: ErrorMessage) => {
+                                if (errorCatch && errorMessage.localizedMessage) {
+                                    errorCatch(errorMessage.localizedMessage);
+                                } else {
+                                    state.statusError = errorMessage.localizedMessage
+                                }
+                            });
                         return '';
                     }
                     return res.text()

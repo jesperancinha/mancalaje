@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS oauth_access_token;
 CREATE TABLE IF NOT EXISTS oauth_access_token
 (
     authentication_id VARCHAR(256),
@@ -9,6 +10,7 @@ CREATE TABLE IF NOT EXISTS oauth_access_token
     refresh_token     VARCHAR(256)
 );
 
+DROP TABLE IF EXISTS oauth_refresh_token;
 CREATE TABLE IF NOT EXISTS oauth_refresh_token
 (
     token_id       VARCHAR(256),
@@ -16,6 +18,7 @@ CREATE TABLE IF NOT EXISTS oauth_refresh_token
     authentication bytea
 );
 
+DROP TABLE IF EXISTS users;
 CREATE TABLE IF NOT EXISTS users
 (
     email    VARCHAR(256),

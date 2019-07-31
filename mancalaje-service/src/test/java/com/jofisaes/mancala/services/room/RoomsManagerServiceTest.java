@@ -33,12 +33,11 @@ public class RoomsManagerServiceTest {
     @Test
     public void forceRemoveRoom() {
         final BoardManager testBoardManager = mock(BoardManager.class);
-        when(testBoardManager.getBoardManagerId()).thenReturn(1L);
         roomsManagerService.addBoard(1L, testBoardManager);
 
         final BoardManager boardManager = roomsManagerService.forceRemoveRoom(1L);
 
-        verify(testBoardManager, only()).getBoardManagerId();
+        verify(testBoardManager, never()).getBoardManagerId();
         assertThat(boardManager).isSameAs(testBoardManager);
         assertThat(roomsManagerService.getBoardManagerMap()).isEmpty();
         assertThat(roomsManagerService.getBoardManagers()).isEmpty();

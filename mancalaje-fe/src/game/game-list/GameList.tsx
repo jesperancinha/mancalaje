@@ -20,13 +20,15 @@ import {MancalaJeHeader} from '../../components/MancalaJeHeader';
 import {MancalaReducer} from "../../entities/mancala-reducer";
 import {REFRESH_RATE} from "../../actions/Refresher";
 import {invalidateText} from "../../actions/Validators";
+import {Player} from "../../model/player";
 
 
 interface GameListProps extends State {
     games?: PlayerState[];
     mancalaReducer?: MancalaReducer;
     boardName: string;
-    playerState?: PlayerState
+    playerState?: PlayerState;
+    loggedInPlayer?: string;
 }
 
 class GameList extends React.Component<GameListProps, GameListProps> {
@@ -58,6 +60,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     }
 
     public componentDidMount(): void {
+        this.loadCurrentPlayer();
         this.loadAllBoards();
         makeDeleteRequest("mancala/rooms", this.state, this.props);
         const refresher = setInterval(() => {
@@ -70,14 +73,11 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     public render(): {} {
         return (
             <MancalaJeHeader>
-                <AppBar title="Game room center title" position="relative">
-                    <Typography variant="h3">Select a room or create one</Typography>
-                </AppBar>
                 <AppBar title="Game room center warning" position="relative">
-
-                    <Typography component="h4" variant="h4">We're sorry, but MancalaJe isn't ready yet. Please try
-                        again
-                        later!</Typography>
+                    <Typography component="h3" variant="h3">Welcome player {this.state.loggedInPlayer}</Typography>
+                </AppBar>
+                <AppBar title="Game room center title" position="relative">
+                    <Typography variant="h5">Select a room or create one</Typography>
                 </AppBar>
                 <AppBar title={"Game list controls"} position={"relative"}>
                     <TextField
@@ -133,6 +133,9 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                                         <ListItem>
                                             {row.boardManager.owner ? "Owner:" + row.boardManager.owner.name : ""}
                                         </ListItem>
+                                        <ListItem>
+                                            {row.boardManager.winner ? "Winner:" + row.boardManager.winner.name : "It's not over"}
+                                        </ListItem>
                                     </ListItem>
                                 ))}
                             </List>
@@ -167,6 +170,14 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                 games: data,
             });
         });
+    }
+
+    private loadCurrentPlayer(): void {
+        makeGetRequest('mancala/users', this.state, this.props, (data: Player) => {
+            this.setState({
+                loggedInPlayer: data.name,
+            })
+        })
     }
 
     private handleRemoveRoom(roomId: number): void {

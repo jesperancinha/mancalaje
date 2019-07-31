@@ -2,6 +2,7 @@
 
 ## References
 
+-   [Email Address Regular Expression That 99.99% Works](https://emailregex.com/)
 -   [Compass SASS](http://compass-style.org/install/)
 -   [Material-UI](https://material-ui.com/)
 -   [Adding TypeScript](https://facebook.github.io/create-react-app/docs/adding-typescript)

@@ -35,12 +35,14 @@ public class BoardManager implements Serializable {
     @JsonProperty("gameover")
     private boolean gameOver;
 
+    @JsonIgnore
     private Semaphore semaphore = new Semaphore(1);
 
     private BoardManager(Long boardManagerId) {
         this.boardManagerId = boardManagerId;
     }
 
+    @JsonIgnore
     public static BoardManager create(Player player, Long boardManagerId, String boardName) {
         BoardManager boardManager = new BoardManager(boardManagerId);
         Board board = new Board(boardName);
@@ -70,6 +72,7 @@ public class BoardManager implements Serializable {
         semaphore.release();
     }
 
+    @JsonIgnore
     private void swayStonesFromHole(Player sessionUser, Hole hole) {
         Integer stones = hole.pickStones();
         Hole lastHole = board.swayStonseFromHole(sessionUser, hole.getNextHole(), stones);
@@ -87,6 +90,7 @@ public class BoardManager implements Serializable {
         }
     }
 
+    @JsonIgnore
     private Hole getPlayHoleIFValid(Player sessionUser, int holeId) {
         if (!this.gameOver && currentPlayer.getEmail().equalsIgnoreCase(sessionUser.getEmail())) {
             final Hole hole = board.getAllHoles().get(holeId);
@@ -97,6 +101,7 @@ public class BoardManager implements Serializable {
         return null;
     }
 
+    @JsonIgnore
     private void switchCurrentPlayer() {
         if (this.currentPlayer == this.board.getPlayer1()) {
             this.currentPlayer = this.board.getPlayer2();
@@ -105,6 +110,7 @@ public class BoardManager implements Serializable {
         }
     }
 
+    @JsonIgnore
     public Player refreshSessionUser(Player sessionUser) {
         if (playerMatch(sessionUser, getBoard().getPlayer1())) {
             return getBoard().getPlayer1();

@@ -48,7 +48,6 @@ public class Board implements Serializable {
     @JsonIgnore
     private Store playerTwoStore;
 
-    @JsonIgnore
     private Player winner;
 
     public Board(String boardName) {

@@ -6,4 +6,5 @@ export class Board {
     public allHoles?: Hole[];
     public player1?: Player;
     public player2?: Player;
+    public winner?: Player;
 }

@@ -5,7 +5,6 @@ import com.jofisaes.mancala.game.UserDto;
 import com.jofisaes.mancala.services.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -20,14 +19,20 @@ public class MancalaJeMailService {
 
     private static Logger logger = LoggerFactory.getLogger(MancalaJeMailService.class);
 
-    @Autowired
-    private JavaMailSender sender;
+    private final JavaMailSender sender;
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @Value("${mancalaje.mail.no-reply:#{null}}")
     private String noReplyEmail;
+
+    public MancalaJeMailService(JavaMailSender sender,
+                                UserService userService,
+                                @Value("${mancalaje.mail.no-reply:#{null}}")
+            String noReplyEmail) {
+        this.sender = sender;
+        this.userService = userService;
+        this.noReplyEmail = noReplyEmail;
+    }
 
     public void sendEmail(UserDto userDto) {
         MimeMessage message = sender.createMimeMessage();

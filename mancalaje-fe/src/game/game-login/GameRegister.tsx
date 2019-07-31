@@ -11,7 +11,7 @@ import {MySnackbarContentWrapper} from "../../components/SnackbarContent";
 import {control, XS_COL_SPAN} from "../../theme";
 import {MancalaJeHeader} from "../../components/MancalaJeHeader";
 import {removeAllRefreshers} from "../../actions/Refresher";
-import {invalidateText} from "../../actions/Validators";
+import {invalidateEmail, invalidateText} from "../../actions/Validators";
 import {home, makePostRequest} from "../../actions/OAuthRouting";
 import {NewUser} from "../../entities/new-user";
 
@@ -54,7 +54,7 @@ class GameRegister extends Component<GameRegisterProps, GameRegisterProps> {
                         <TextField
                             style={control}
                             label={"Email"}
-                            error={invalidateText(this.state.email)}
+                            error={invalidateText(this.state.email) || invalidateEmail(this.state.email)}
                             helperText={this.getEmailHelperText()}
                             onChange={(newValue) => this.setState({email: newValue.target.value, statusError: ""})}/>
                         <br/>
@@ -133,8 +133,12 @@ class GameRegister extends Component<GameRegisterProps, GameRegisterProps> {
     }
 
     private getEmailHelperText(): string {
-        if (invalidateText(this.state.email)) {
+        const email = this.state.email;
+        if (invalidateText(email)) {
             return "Please enter an email";
+        }
+        if(invalidateEmail(email)) {
+            return "Please enter a valid email"
         }
         return '';
     }
@@ -157,8 +161,10 @@ class GameRegister extends Component<GameRegisterProps, GameRegisterProps> {
     }
 
     private canRegister(): boolean {
+        const mail = this.state.email;
         return invalidateText(this.state.name)
-            || invalidateText(this.state.email)
+            || invalidateText(mail)
+            || invalidateEmail(mail)
             || invalidateText(this.state.password)
             || invalidateText(this.state.confirmPassword)
             || this.state.password !== this.state.confirmPassword;

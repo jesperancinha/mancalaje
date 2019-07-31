@@ -12,31 +12,26 @@ import java.util.Map;
 @Service
 public class RoomsManagerService {
 
-    private final List<BoardManager> boardManagers;
-
     @JsonIgnore
     private final Map<Long, BoardManager> boardManagerMap;
 
     public RoomsManagerService() {
         this.boardManagerMap = new HashMap<>();
-        this.boardManagers = new ArrayList<>();
     }
 
     public BoardManager removeRoom(Long roomId) {
         BoardManager boardManager = boardManagerMap.get(roomId);
-        boardManagers.remove(boardManager);
         return boardManagerMap.remove(roomId);
     }
 
     public BoardManager forceRemoveRoom(Long roomId) {
         BoardManager boardManager = boardManagerMap.get(roomId);
-        boardManagers.removeIf(room -> room.getBoardManagerId().equals(roomId));
         boardManagerMap.remove(roomId);
         return boardManager;
     }
 
     public List<BoardManager> getBoardManagers() {
-        return boardManagers;
+        return new ArrayList<>(boardManagerMap.values());
     }
 
     public Map<Long, BoardManager> getBoardManagerMap() {
