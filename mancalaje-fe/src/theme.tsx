@@ -36,7 +36,7 @@ export const useStyles = makeStyles((theme: Theme) => {
 
         },
         shape: {
-            borderRadius: 50
+            borderRadius: 50,
         }
     };
     return createStyles(newStyles)
@@ -68,7 +68,7 @@ export const theme = createMuiTheme({
         MuiButtonBase: {
             root: {
                 padding: 0,
-            }
+            },
         },
         MuiList: {
             root: {

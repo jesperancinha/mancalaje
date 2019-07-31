@@ -44,7 +44,8 @@ public class MancalaJeMailService {
                             "you have registered with user/password %s/%s\n\n" +
                             "Looking forward to be hearing from you soon\n\n" +
                             "The Mancala JE (TM) (... It's just me)\n" +
-                            "João Esperancinha\n\n\n" +
+                            "João Esperancinha\n" +
+                            "http://joaofilipesabinoesperancinha.nl/\n\n\n" +
                             "-----------------------------\n\n\n" +
                             "Demo version: Please note that this app will be updated with no warning on needed occasions on periods from 19h to 23h CET/CEST depending on current DST. Your current game in progress will be removed, but your user will not. This means that you can login again, create rooms and play online again once the services are back online. In this current version you cannot change password. You will in future versions. Remember that your user will be available for a maximum idle period of 5 hours and that there is a current limitation of 100 users and 50 rooms. Expect bugs, conflicts and issues given that this is only an alfa version. Remember to use passwords you don't use for anything critical. I don't keep actual passwords anywaya. Only their ciphered version but remember to use something unique and specific to this application just in case.",
                     userDto.getName(), userDto.getEmail(), userDto.getPassword())

@@ -87,7 +87,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void saveUser_tooManyUsers_exceptiom() {
+    public void saveUserTooManyUsersExceptiom() {
         final long highestId = 20L;
         final User testUser = User.builder().email(TEST_USER_EMAIL).build();
         when(userRepository.count()).thenReturn(highestId);

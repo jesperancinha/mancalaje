@@ -25,8 +25,10 @@ const makeGetRequest = <T extends {}>(urlString: string, state: State, props: St
 
 const extractedFetch = (props: State): (urlString: string, config: RequestInit) => Promise<Response> => {
     if (props.oauth) {
-        return (urlString: string, config: {}) => props.oauth ? props.oauth.fetch(urlString, config) : new Promise<Response>(() => {
-        });
+        return (urlString: string, config: {}) => props.oauth ?
+            props.oauth.fetch(urlString, config) :
+            new Promise<Response>(() => {
+            });
     } else {
         return (urlString: string, config: {}) => fetch(urlString, config);
     }
