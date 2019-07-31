@@ -14,10 +14,18 @@
 >$ http -a mancala-client:mancala --form POST http://localhost:8080/oauth/token username='playerOne@mancalaje.com' password='admin123' grant_type='password'
 
 >$ curl -X POST -u "mancala-client:mancala" -d "grant_type=password&username=playerOne@mancalaje.com&password=admin123" http://localhost:8080/oauth/token
+
+```
+
+> If your liquibase get's locked:
+>
+```text
+UPDATE DATABASECHANGELOGLOCK SET LOCKED=FALSE, LOCKGRANTED=null, LOCKEDBY=null where ID=1;
 ```
 
 ## References
 
+-   [How To Install and Configure Postfix as a Send-Only SMTP Server on Debian 9](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-postfix-as-a-send-only-smtp-server-on-debian-9)
 -   [MailSlurper](https://mailslurper.com/)
 -   [How to send emails from localhost (MAC OS X El Capitan)](https://www.developerfiles.com/how-to-send-emails-from-localhost-mac-os-x-el-capitan/)
 -   [PostgreSQL](https://www.postgresql.org/)
