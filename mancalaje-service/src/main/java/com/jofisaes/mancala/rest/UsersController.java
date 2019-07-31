@@ -30,7 +30,7 @@ public class UsersController {
     @PostMapping
     public void createUser(@Valid @RequestBody UserDto userDto) {
         userService.saveUser(userDto.toUser());
-        mancalaJeMailService.sendEmail(userDto);
+        mancalaJeMailService.sendRegistrationMail(userDto);
     }
 
     @GetMapping

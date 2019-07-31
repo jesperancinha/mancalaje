@@ -54,8 +54,8 @@ public class MancalaControllerAdvice {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorMessage(exception.getMessage()));
     }
 
-    @ExceptionHandler(value = MailNotSentException.class)
-    public ResponseEntity<Object> mailNotSentException(MailNotSentException exception) {
+    @ExceptionHandler(value = RegistrationMailNotSentException.class)
+    public ResponseEntity<Object> mailNotSentException(RegistrationMailNotSentException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorMessage(exception.getMessage()));
     }
 

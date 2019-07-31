@@ -71,7 +71,7 @@ public class UsersControllerTest extends AbstractControllerTest {
         verifyZeroInteractions(gameManagerService);
 
         verify(userService, only()).saveUser(userArgumentCaptor.capture());
-        verify(mancalaJeMailService, only()).sendEmail(userDtoArgumentCaptor.capture());
+        verify(mancalaJeMailService, only()).sendRegistrationMail(userDtoArgumentCaptor.capture());
 
         final User user = userArgumentCaptor.getValue();
         assertThat(user).isNotNull();

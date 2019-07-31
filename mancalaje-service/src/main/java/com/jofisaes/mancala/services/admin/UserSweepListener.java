@@ -2,6 +2,7 @@ package com.jofisaes.mancala.services.admin;
 
 import com.jofisaes.mancala.entities.User;
 import com.jofisaes.mancala.services.game.GameManagerService;
+import com.jofisaes.mancala.services.mail.MancalaJeMailService;
 import com.jofisaes.mancala.services.room.RoomsManagerService;
 import com.jofisaes.mancala.services.user.UserService;
 import org.springframework.stereotype.Service;
@@ -23,12 +24,15 @@ public class UserSweepListener implements MessageListener {
 
     private final RoomsManagerService roomsManagerService;
 
+    private final MancalaJeMailService mancalaJeMailService;
+
     public UserSweepListener(UserService userService,
                              GameManagerService gameManagerService,
-                             RoomsManagerService roomsManagerService) {
+                             RoomsManagerService roomsManagerService, MancalaJeMailService mancalaJeMailService) {
         this.userService = userService;
         this.gameManagerService = gameManagerService;
         this.roomsManagerService = roomsManagerService;
+        this.mancalaJeMailService = mancalaJeMailService;
     }
 
     public void onMessage(Message message) {
@@ -55,7 +59,9 @@ public class UserSweepListener implements MessageListener {
                 .stream()
                 .filter(boardManager -> boardManager.getCurrentPlayer().getEmail().equalsIgnoreCase(user.getEmail()))
                 .forEach(boardManager -> roomsManagerService.removeRoom(boardManager.getBoardManagerId()));
+        mancalaJeMailService.sendUnregistrationMail(user);
         userService.remove(user);
+
     }
 
 }

@@ -29,7 +29,7 @@ public class AdminService {
         this.session = session;
     }
 
-    @Scheduled(cron = "0 */5 * ? * *")
+    @Scheduled(cron = "0 */1 * ? * *")
     public void removeExpiredUsers() throws Exception {
         MessageProducer producer = session.createProducer(session.createTopic("UserSweepConsumerTopic"));
         String payload = "User Sweep";

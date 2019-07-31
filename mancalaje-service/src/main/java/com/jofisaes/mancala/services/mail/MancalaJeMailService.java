@@ -1,6 +1,8 @@
 package com.jofisaes.mancala.services.mail;
 
-import com.jofisaes.mancala.exception.MailNotSentException;
+import com.jofisaes.mancala.entities.User;
+import com.jofisaes.mancala.exception.RegistrationMailNotSentException;
+import com.jofisaes.mancala.exception.UnregistrationMailNotSentException;
 import com.jofisaes.mancala.game.UserDto;
 import com.jofisaes.mancala.services.user.UserService;
 import org.slf4j.Logger;
@@ -28,13 +30,13 @@ public class MancalaJeMailService {
     public MancalaJeMailService(JavaMailSender sender,
                                 UserService userService,
                                 @Value("${mancalaje.mail.no-reply:#{null}}")
-            String noReplyEmail) {
+                                        String noReplyEmail) {
         this.sender = sender;
         this.userService = userService;
         this.noReplyEmail = noReplyEmail;
     }
 
-    public void sendEmail(UserDto userDto) {
+    public void sendRegistrationMail(UserDto userDto) {
         MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
@@ -45,7 +47,7 @@ public class MancalaJeMailService {
             helper.setText(String.format(
                     "Hello there %s!\n\n" +
                             "Thank you for trying this demo version of Mancala JE. As you may have noticed, there are still lots of improvements to be made.\n\n" +
-                            "I hope you can enjoy this version and I would love to hear from you. Tweet me at @jofisaes or mail me at jofisaes@gmail.com\n\n" +
+                            "I hope you can enjoy this version and I would love to hear from you. Please tweet me at @jofisaes or mail me at jofisaes@gmail.com\n\n" +
                             "you have registered with user/password %s/%s\n\n" +
                             "Looking forward to be hearing from you soon\n\n" +
                             "The Mancala JE (TM) (... It's just me)\n" +
@@ -59,7 +61,34 @@ public class MancalaJeMailService {
         } catch (MailException | MessagingException e) {
             logger.error("Failed to send email", e);
             userService.remove(userDto.toUser());
-            throw new MailNotSentException();
+            throw new RegistrationMailNotSentException();
+        }
+    }
+
+    public void sendUnregistrationMail(User user) {
+        MimeMessage message = sender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+        try {
+            helper.setFrom(noReplyEmail);
+            helper.setTo(user.getEmail());
+            helper.setSubject("Mancala JE - Unregistration");
+            helper.setText(String.format(
+                    "Hello there %s!\n\n" +
+                            "It looks like you haven't been playing this game for 5 hours straight! This means we say goodbye for now...\n\n " +
+                            "Thank you for bravely trying my MancalaJE game application. You may have noticed quite a few improvement points.\n\n" +
+                            "I hope you enjoyed this demo and I would love to hear from you. Please tweet me at @jofisaes or mail me at jofisaes@gmail.com\n\n" +
+                            "You were registered with user %s\n\n" +
+                            "Your details have been removed. If you'd like to play again please re-register\n\n" +
+                            "Looking forward to be hearing from you soon\n\n" +
+                            "The Mancala JE (TM) (... It's just me)\n" +
+                            "João Esperancinha\n" +
+                            "http://joaofilipesabinoesperancinha.nl/\n\n\n",
+                    user.getName(), user.getEmail())
+            );
+            sender.send(message);
+        } catch (MailException | MessagingException e) {
+            logger.error(String.format("Failed to send email! User %s not remobed", user.getEmail()), e);
+            throw new UnregistrationMailNotSentException();
         }
     }
 }

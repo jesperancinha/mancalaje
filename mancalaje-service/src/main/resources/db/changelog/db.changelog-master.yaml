@@ -88,7 +88,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: email
-                  value: "playerOne@mancalaje.com"
+                  value: "jofisaes@gmail.com"
               - column:
                   name: name
                   value: "The name of player one!"
@@ -103,7 +103,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: email
-                  value: "playerTwo@mancalaje.com"
+                  value: "jofisaes@hotmail.com"
               - column:
                   name: name
                   value: "The name of player two!"
