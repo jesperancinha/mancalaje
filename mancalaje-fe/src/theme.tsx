@@ -48,12 +48,12 @@ export const theme = createMuiTheme({
             root: {
                 alignItems: "center",
                 borderRadius: 5,
-                marginTop: 10,
+                marginBottom: 10,
                 marginLeft: 0,
                 marginRight: 0,
-                marginBottom: 10,
-                padding: 10,
+                marginTop: 10,
                 maxWidth: 800,
+                padding: 10,
             },
         },
         MuiButton: {
@@ -63,7 +63,7 @@ export const theme = createMuiTheme({
             root: {
                 alignItems: "center",
                 minWidth: "100%",
-            }
+            },
         },
         MuiButtonBase: {
             root: {

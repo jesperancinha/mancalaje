@@ -20,7 +20,6 @@ public class RoomsManagerService {
     }
 
     public BoardManager removeRoom(Long roomId) {
-        BoardManager boardManager = boardManagerMap.get(roomId);
         return boardManagerMap.remove(roomId);
     }
 

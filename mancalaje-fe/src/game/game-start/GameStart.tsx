@@ -44,7 +44,9 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
         return (<MancalaJeHeader>
             {
                 this.state && this.state.playerState ? (<MuiThemeProvider theme={theme}>
-                        {this.state.playerState.loggedPlayer && this.state.playerState.boardManager && this.state.playerState.boardManager.board ?
+                        {this.state.playerState.loggedPlayer
+                        && this.state.playerState.boardManager
+                        && this.state.playerState.boardManager.board ?
                             (<div>
                                 <AppBar title="Game Start Title" position="relative">
                                     <Typography variant="h2">
@@ -65,7 +67,9 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
                                                 </Typography>
                                             </AppBar>) : (
                                                 <AppBar position={"relative"}>
-                                                    <Typography variant="h3">Waiting for player to join room...</Typography>
+                                                    <Typography variant="h3">
+                                                        Waiting for player to join room...
+                                                    </Typography>
                                                 </AppBar>)
 
                                     ) : (<div/>)}

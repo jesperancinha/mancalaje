@@ -13,7 +13,7 @@ public class AdminService {
     private final Session session;
 
     @Resource(name = "tokenServices")
-    ConsumerTokenServices tokenServices;
+    private ConsumerTokenServices tokenServices;
 
     public AdminService(
             UserSweepListener userSweepListener,

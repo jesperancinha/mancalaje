@@ -12,7 +12,7 @@ const mancalaReducer = (state: MancalaState = {}, action: MancalaAction) => {
             newState.oauth = action.payload;
             return newState;
         default:
-            return state
+            return state;
     }
 };
 

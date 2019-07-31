@@ -61,7 +61,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void getUserByEmail_userNotFound_exception() {
+    public void getUserByEmailUserNotFoundException() {
         when(userRepository.findById(TEST_USER_EMAIL)).thenReturn(Optional.empty());
 
         assertThatExceptionOfType(UserRemovedException.class).isThrownBy(() -> userService.getUserByEmail(TEST_USER_EMAIL));
