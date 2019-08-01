@@ -21,7 +21,6 @@ const configureStore = (preloadedState?: {}) => {
 };
 
 const createOAuth = (payload?: OAuth2) => {
-    debugger;
     return ({
         payload,
         type: CREATE_OAUTH2,

@@ -62,11 +62,8 @@ class GameLogin extends Component<GameProps, GameProps> {
                         <br/>
                         <Button
                             style={control}
-                            onClick={() =>{
-                                debugger;
-                                this.props.dispatch ?
-                                    this.props.dispatch(createOAuth(this.handleClick())) :
-                                    {}}}>
+                            onClick={() => this.props.dispatch &&
+                                    this.props.dispatch(createOAuth(this.handleClick()))}>
                             Submit
                         </Button>
                         <Button
@@ -106,7 +103,6 @@ class GameLogin extends Component<GameProps, GameProps> {
     }
 
     private handleClick(): OAuth2 {
-        debugger;
         const oAuth2 = new OAuth2({
             clientId: "mancala-client",
             clientSecret: "mancala",
@@ -143,12 +139,10 @@ class GameLogin extends Component<GameProps, GameProps> {
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
-    debugger;
     return {actions: bindActionCreators(mancalaReducer, dispatch)}
 };
 
 const mapStateToProps = (state: GameProps) => {
-    debugger;
     return {
         prevAction: state.mancalaReducer && state.mancalaReducer.prevAction,
     }
