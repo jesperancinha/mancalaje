@@ -2,9 +2,12 @@ package com.jofisaes.mancala.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import java.util.Objects;
 
 @ControllerAdvice
 public class MancalaControllerAdvice {
@@ -61,6 +64,20 @@ public class MancalaControllerAdvice {
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity<Object> methodArgumentNotValid(MethodArgumentNotValidException exception) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorMessage(exception.getBindingResult().getFieldError().getDefaultMessage()));
+        final FieldError fieldError = exception.getBindingResult().getFieldError();
+        final String message = getMessage(fieldError);
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorMessage(message));
+    }
+
+    private String getMessage(FieldError fieldError) {
+        if (Objects.isNull(fieldError)) {
+            return "Invalid value!";
+        }
+        return fieldError.getDefaultMessage();
+    }
+
+    @ExceptionHandler(value = UserAlreadyExistsException.class)
+    public ResponseEntity<Object> methodArgumentNotValid(UserAlreadyExistsException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorMessage(exception.getMessage()));
     }
 }

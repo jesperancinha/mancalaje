@@ -2,6 +2,7 @@ package com.jofisaes.mancala.services.user;
 
 import com.jofisaes.mancala.entities.User;
 import com.jofisaes.mancala.exception.TooManyUsersException;
+import com.jofisaes.mancala.exception.UserAlreadyExistsException;
 import com.jofisaes.mancala.exception.UserRemovedException;
 import com.jofisaes.mancala.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,9 @@ public class UserService {
     }
 
     public User saveUser(User user) {
+        if(userRepository.findById(user.getEmail()).isPresent()){
+            throw new UserAlreadyExistsException();
+        }
         int userCount = (int) userRepository.count();
         if (userCount >= maxUsers) {
             throw new TooManyUsersException(userCount);
