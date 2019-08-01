@@ -57,6 +57,8 @@ public class UsersControllerTest extends AbstractControllerTest {
                 .password(USER_TEST_PASSWORD)
                 .role(USER_TEST_ROLE)
                 .build();
+        when(userService.saveUser(any(User.class))).thenReturn(userDto.toUser());
+
         final JsonContent<UserDto> userDtoContent = userDtoJacksonTester.write(userDto);
 
         mvc.perform(post(MANCALA_USERS)
