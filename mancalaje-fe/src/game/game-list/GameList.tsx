@@ -134,7 +134,10 @@ class GameList extends React.Component<GameListProps, GameListProps> {
                                             {row.boardManager.owner ? "Owner:" + row.boardManager.owner.name : ""}
                                         </ListItem>
                                         <ListItem>
-                                            {row.boardManager.winner ? "Winner:" + row.boardManager.winner.name : "It's not over"}
+                                            {row.boardManager.winner
+                                                ? "Winner:"
+                                                + row.boardManager.winner.name :
+                                                "It's not over"}
                                         </ListItem>
                                     </ListItem>
                                 ))}
