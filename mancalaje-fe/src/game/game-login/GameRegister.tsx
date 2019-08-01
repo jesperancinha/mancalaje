@@ -120,7 +120,10 @@ class GameRegister extends Component<GameRegisterProps, GameRegisterProps> {
         user.password = this.state.password;
         makePostRequest('/mancala/users', this.state, this.props,
             () => {
-                this.props.dispatch && this.props.dispatch(createPrevMessage("Registration mail sent to " + this.state.email));
+                this.props.dispatch
+                && this.props.dispatch(
+                    createPrevMessage("Registration mail sent to "
+                        + this.state.email));
                 this.props.history && this.props.history.push(`login`);
             },
             JSON.stringify(user), (errorMessage: string) => this.setState({
