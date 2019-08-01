@@ -44,7 +44,7 @@ public class UserService {
     }
 
     public User saveUser(User user) {
-        if(userRepository.findById(user.getEmail()).isPresent()){
+        if (userRepository.findById(user.getEmail()).isPresent()) {
             throw new UserAlreadyExistsException();
         }
         int userCount = (int) userRepository.count();
