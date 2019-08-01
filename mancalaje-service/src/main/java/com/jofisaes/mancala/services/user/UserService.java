@@ -42,7 +42,7 @@ public class UserService {
         return user.orElseThrow(UserRemovedException::new);
     }
 
-    public void saveUser(User user) {
+    public User saveUser(User user) {
         int userCount = (int) userRepository.count();
         if (userCount >= maxUsers) {
             throw new TooManyUsersException(userCount);
@@ -51,7 +51,7 @@ public class UserService {
         user.setRole(ROLE_USER.name());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     public List<User> getAllUsers() {

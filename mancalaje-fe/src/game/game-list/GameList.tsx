@@ -11,7 +11,6 @@ import TextField from "@material-ui/core/TextField";
 import {connect} from "react-redux";
 import {State} from "../../reducers/reducerIndex";
 import {logOut, makeDeleteRequest, makeGetRequest, makePostRequest, makePutRequest} from "../../actions/OAuthRouting";
-import {createOAuth} from "../../index";
 import {MySnackbarContentWrapper} from "../../components/SnackbarContent";
 import Box from "@material-ui/core/Box";
 import {PlayerState} from "../../entities/player-state";
@@ -21,6 +20,7 @@ import {MancalaReducer} from "../../entities/mancala-reducer";
 import {REFRESH_RATE} from "../../actions/Refresher";
 import {invalidateText} from "../../actions/Validators";
 import {Player} from "../../model/player";
+import {createOAuth} from "../../store";
 
 
 interface GameListProps extends State {

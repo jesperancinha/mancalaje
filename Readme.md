@@ -38,6 +38,12 @@ stay tuned!
 
 ## Milestones
 
+2019-08-01:
+-   5 hour long inactivity registration via email
+-   Mail notification
+-   Responsive web app
+-   Refactoring and re-using Redux
+
 2019-07-22:
 -   Password Encryption
 

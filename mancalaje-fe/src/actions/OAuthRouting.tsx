@@ -56,7 +56,6 @@ const makePostRequest = <T extends {}>(
                         }
                     })
                     .catch(error => errorCatch && errorCatch(error));
-
                 return null;
             }
             return res.json()

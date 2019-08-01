@@ -14,6 +14,7 @@ import {removeAllRefreshers} from "../../actions/Refresher";
 import {invalidateEmail, invalidateText} from "../../actions/Validators";
 import {home, makePostRequest} from "../../actions/OAuthRouting";
 import {NewUser} from "../../entities/new-user";
+import {createPrevMessage} from "../../store";
 
 interface GameRegisterProps extends State {
     name: string;
@@ -117,9 +118,11 @@ class GameRegister extends Component<GameRegisterProps, GameRegisterProps> {
         user.name = this.state.name;
         user.email = this.state.email;
         user.password = this.state.password;
-        console.log(user);
         makePostRequest('/mancala/users', this.state, this.props,
-            () => this.props.history && this.props.history.push(`login`),
+            () => {
+                this.props.dispatch && this.props.dispatch(createPrevMessage("Registration mail sent to " + this.state.email));
+                this.props.history && this.props.history.push(`login`);
+            },
             JSON.stringify(user), (errorMessage: string) => this.setState({
                 statusError: errorMessage,
             }));
@@ -137,7 +140,7 @@ class GameRegister extends Component<GameRegisterProps, GameRegisterProps> {
         if (invalidateText(email)) {
             return "Please enter an email";
         }
-        if(invalidateEmail(email)) {
+        if (invalidateEmail(email)) {
             return "Please enter a valid email"
         }
         return '';

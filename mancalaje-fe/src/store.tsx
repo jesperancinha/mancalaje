@@ -2,6 +2,8 @@ import {createBrowserHistory} from 'history'
 import {applyMiddleware, compose, createStore} from 'redux'
 import {routerMiddleware} from 'connected-react-router'
 import {createRootReducer} from './reducers/reducerIndex'
+import OAuth2 from "fetch-mw-oauth2/dist/fetch-wrapper";
+import {CREATE_OAUTH2, PREV_STATE} from "./actions/ActionType";
 
 const history = createBrowserHistory();
 
@@ -18,4 +20,22 @@ const configureStore = (preloadedState?: {}) => {
     )
 };
 
-export {history, configureStore};
+const createOAuth = (payload?: OAuth2) => {
+    debugger;
+    return ({
+        payload,
+        type: CREATE_OAUTH2,
+    });
+};
+
+
+const createPrevMessage = (prevAction?: string) => {
+    return ({
+        prevAction,
+        type: PREV_STATE,
+    });
+};
+
+const store = configureStore({});
+
+export {configureStore, createOAuth, createPrevMessage, store};

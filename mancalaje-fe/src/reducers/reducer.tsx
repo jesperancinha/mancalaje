@@ -6,14 +6,17 @@ const mancalaReducer = (state: MancalaState = {}, action: MancalaAction) => {
     if (!action) {
         return state;
     }
+    const newState = new MancalaState();
     switch (action.type) {
         case actionType.CREATE_OAUTH2:
-            const newState = new MancalaState();
             newState.oauth = action.payload;
             return newState;
-        default:
-            return state;
+        case actionType.PREV_STATE:
+            newState.prevAction = action.prevAction;
+            return newState;
     }
+    return state;
+
 };
 
 export {mancalaReducer};

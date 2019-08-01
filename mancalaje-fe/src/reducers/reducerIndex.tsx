@@ -16,6 +16,7 @@ export interface State {
     dispatch?: Dispatch;
     statusError?: string;
     refreshers: number[];
+    prevAction?: string;
 
 }
 

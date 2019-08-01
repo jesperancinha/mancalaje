@@ -6,17 +6,19 @@ import Typography from "@material-ui/core/Typography";
 import OAuth2 from 'fetch-mw-oauth2';
 import {bindActionCreators, Dispatch} from "redux";
 import {connect} from "react-redux";
-import {createOAuth} from "../../index";
 import {State} from "../../reducers/reducerIndex";
 import {mancalaReducer} from "../../reducers/reducer";
 import {MySnackbarContentWrapper} from "../../components/SnackbarContent";
 import {control, XS_COL_SPAN} from "../../theme";
 import {MancalaJeHeader} from "../../components/MancalaJeHeader";
 import {invalidateText} from "../../actions/Validators";
+import {createOAuth, createPrevMessage} from "../../store";
+import {MancalaReducer} from "../../entities/mancala-reducer";
 
 interface GameProps extends State {
     username: string;
     password: string;
+    mancalaReducer?: MancalaReducer;
 }
 
 class GameLogin extends Component<GameProps, GameProps> {
@@ -32,8 +34,9 @@ class GameLogin extends Component<GameProps, GameProps> {
     public componentDidMount(): void {
         const intervalId = setInterval(() => {
         }, 1);
-        for (let i = 1; i < intervalId; i++)
+        for (let i = 1; i < intervalId; i++) {
             clearInterval(i);
+        }
     }
 
     public render(): {} {
@@ -59,10 +62,11 @@ class GameLogin extends Component<GameProps, GameProps> {
                         <br/>
                         <Button
                             style={control}
-                            onClick={() =>
+                            onClick={() =>{
+                                debugger;
                                 this.props.dispatch ?
                                     this.props.dispatch(createOAuth(this.handleClick())) :
-                                    {}}>
+                                    {}}}>
                             Submit
                         </Button>
                         <Button
@@ -74,6 +78,19 @@ class GameLogin extends Component<GameProps, GameProps> {
                         </Button>
                     </AppBar>
                 </Grid>
+                {this.props.prevAction ? (
+                    <Grid item xs={XS_COL_SPAN}>
+                        <MySnackbarContentWrapper
+                            variant="info"
+                            message={this.props.prevAction}
+                            onClose={() => {
+                                this.props.dispatch && this.props.dispatch(createPrevMessage());
+                                this.setState({
+                                    prevAction: "",
+                                });
+                            }}
+                        />
+                    </Grid>) : <div/>}
                 {this.state.statusError ? (
                     <Grid item xs={XS_COL_SPAN}>
                         <MySnackbarContentWrapper
@@ -89,6 +106,7 @@ class GameLogin extends Component<GameProps, GameProps> {
     }
 
     private handleClick(): OAuth2 {
+        debugger;
         const oAuth2 = new OAuth2({
             clientId: "mancala-client",
             clientSecret: "mancala",
@@ -125,9 +143,16 @@ class GameLogin extends Component<GameProps, GameProps> {
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
+    debugger;
     return {actions: bindActionCreators(mancalaReducer, dispatch)}
 };
 
+const mapStateToProps = (state: GameProps) => {
+    debugger;
+    return {
+        prevAction: state.mancalaReducer && state.mancalaReducer.prevAction,
+    }
+};
 // @ts-ignore
-const GameLoginConnected = connect(mapDispatchToProps)(GameLogin);
+const GameLoginConnected = connect(mapDispatchToProps)(connect(mapStateToProps)(GameLogin));
 export {GameLoginConnected}

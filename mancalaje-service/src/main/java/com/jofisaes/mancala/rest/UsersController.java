@@ -1,6 +1,7 @@
 package com.jofisaes.mancala.rest;
 
 import com.jofisaes.mancala.cache.Player;
+import com.jofisaes.mancala.entities.User;
 import com.jofisaes.mancala.game.UserDto;
 import com.jofisaes.mancala.services.mail.MancalaJeMailService;
 import com.jofisaes.mancala.services.user.UserManagerService;
@@ -28,9 +29,10 @@ public class UsersController {
     }
 
     @PostMapping
-    public void createUser(@Valid @RequestBody UserDto userDto) {
-        userService.saveUser(userDto.toUser());
+    public UserDto createUser(@Valid @RequestBody UserDto userDto) {
+        User user = userService.saveUser(userDto.toUser());
         mancalaJeMailService.sendRegistrationMail(userDto);
+        return UserDto.builder().name(user.getName()).email(user.getEmail()).build();
     }
 
     @GetMapping
