@@ -5,8 +5,7 @@ import com.jofisaes.mancala.exception.RegistrationMailNotSentException;
 import com.jofisaes.mancala.exception.UnregistrationMailNotSentException;
 import com.jofisaes.mancala.game.UserDto;
 import com.jofisaes.mancala.services.user.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,9 +16,8 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 @Service
+@Slf4j
 public class MancalaJeMailService {
-
-    private static Logger logger = LoggerFactory.getLogger(MancalaJeMailService.class);
 
     private final JavaMailSender sender;
 
@@ -59,7 +57,7 @@ public class MancalaJeMailService {
             );
             sender.send(message);
         } catch (MailException | MessagingException e) {
-            logger.error("Failed to send email", e);
+            log.error("Failed to send email", e);
             userService.remove(userDto.toUser());
             throw new RegistrationMailNotSentException();
         }
@@ -87,7 +85,7 @@ public class MancalaJeMailService {
             );
             sender.send(message);
         } catch (MailException | MessagingException e) {
-            logger.error(String.format("Failed to send email! User %s not remobed", user.getEmail()), e);
+            log.error(String.format("Failed to send email! User %s not remobed", user.getEmail()), e);
             throw new UnregistrationMailNotSentException();
         }
     }

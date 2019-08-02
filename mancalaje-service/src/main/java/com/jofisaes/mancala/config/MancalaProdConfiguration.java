@@ -1,7 +1,6 @@
 package com.jofisaes.mancala.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -14,9 +13,8 @@ import javax.sql.DataSource;
 @Configuration
 @EnableAspectJAutoProxy
 @Profile("prod")
+@Slf4j
 public class MancalaProdConfiguration {
-
-    private static Logger logger = LoggerFactory.getLogger(MancalaProdConfiguration.class);
 
 
     public MancalaProdConfiguration(DataSource dataSource, @Value("classpath:org/springframework/session/jdbc/schema-postgresql.sql")
@@ -24,7 +22,7 @@ public class MancalaProdConfiguration {
         try {
             ScriptUtils.executeSqlScript(dataSource.getConnection(), script);
         } catch (Exception e) {
-            logger.trace("Initialization script may have not run correctly. Please check.");
+            log.trace("Initialization script may have not run correctly. Please check.");
         }
     }
 

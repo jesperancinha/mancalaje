@@ -3,10 +3,10 @@ package com.jofisaes.mancala.cache;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.annotations.VisibleForTesting;
 import lombok.Getter;
 import lombok.NonNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,9 +18,8 @@ import java.util.stream.IntStream;
 
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Slf4j
 public class Board implements Serializable {
-
-    private static Logger logger = LoggerFactory.getLogger(Board.class);
 
     private static Predicate<Hole> holePredicate = hole -> hole.getStones() == 0;
 
@@ -117,7 +116,8 @@ public class Board implements Serializable {
         this.player2 = player2;
     }
 
-    public synchronized Hole swayStonseFromHole(Player currentPlayer, Hole hole, Integer stones) {
+    @VisibleForTesting
+    synchronized Hole swayStonseFromHole(Player currentPlayer, Hole hole, Integer stones) {
         if (stones == 1 && hole.getStones() == 0 && hole.getPlayer() == currentPlayer && !(hole instanceof Store)) {
             int fetchedStones = 1 + hole.getOppositeHole().getStones();
             hole.setStones(0);
