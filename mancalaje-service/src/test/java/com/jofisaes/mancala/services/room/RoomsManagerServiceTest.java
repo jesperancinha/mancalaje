@@ -44,7 +44,7 @@ public class RoomsManagerServiceTest {
     }
 
     @Test
-    public void forceRemoveRoom_notExists_null() {
+    public void forceRemoveRoomNotExistsNull() {
         final BoardManager boardManager = roomsManagerService.removeRoom(1L);
 
         assertThat(boardManager).isNull();

@@ -139,7 +139,7 @@ export const theme = createMuiTheme({
             '"Segoe UI Symbol"',
         ].join(','),
         fontSize: 10,
-    }
+    },
 });
 
 export const control = {
