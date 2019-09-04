@@ -46,7 +46,7 @@ class Home extends React.Component {
                             there is a current limitation of 100 users and 50 rooms.
                             Expect bugs, conflicts and issues given that this is only an alfa version.
                             Remember to use passwords you don't use for anything critical. I don't keep actual passwords
-                            anywaya. Only their ciphered version but remember to use something unique and specific to
+                            anyways. Only their ciphered version but remember to use something unique and specific to
                             this application just in case.
                         </Typography>
                     </AppBar>

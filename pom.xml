@@ -27,6 +27,7 @@
         <postgresql.version>42.2.6</postgresql.version>
         <guava.version>27.0-jre</guava.version>
         <jmock-junit4.version>2.12.0</jmock-junit4.version>
+        <activemq-all.version>5.12.0</activemq-all.version>
     </properties>
 
     <modules>
@@ -65,6 +66,11 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-all</artifactId>
+                <version>${activemq-all.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
