@@ -1,7 +1,11 @@
 package com.jofisaes.mancala.game;
 
 import com.jofisaes.mancala.entities.User;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.validation.constraints.Pattern;
 

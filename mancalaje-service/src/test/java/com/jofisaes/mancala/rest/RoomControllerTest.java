@@ -11,8 +11,13 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static com.jofisaes.mancala.rest.mappings.Mappings.MANCALA_ROOMS;
-import static org.mockito.Mockito.*;
+import static com.jofisaes.mancala.rest.mappings.MappingsUtils.MANCALA_ROOMS;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.only;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;

@@ -14,8 +14,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.jofisaes.mancala.rest.mappings.Mappings.MANCALA_ACTIONS;
-import static org.mockito.Mockito.*;
+import static com.jofisaes.mancala.rest.mappings.MappingsUtils.MANCALA_ACTIONS;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.only;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;

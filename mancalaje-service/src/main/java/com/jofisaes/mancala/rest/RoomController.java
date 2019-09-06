@@ -3,9 +3,14 @@ package com.jofisaes.mancala.rest;
 import com.jofisaes.mancala.cache.BoardManager;
 import com.jofisaes.mancala.cache.Player;
 import com.jofisaes.mancala.game.BoardManagerDto;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
-import static com.jofisaes.mancala.rest.mappings.Mappings.MANCALA_ROOMS;
+import static com.jofisaes.mancala.rest.mappings.MappingsUtils.MANCALA_ROOMS;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 

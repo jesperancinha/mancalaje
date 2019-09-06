@@ -16,10 +16,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.jofisaes.mancala.rest.mappings.Mappings.MANCALA_BOARDS;
-import static org.mockito.Mockito.*;
+import static com.jofisaes.mancala.rest.mappings.MappingsUtils.MANCALA_BOARDS;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.only;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

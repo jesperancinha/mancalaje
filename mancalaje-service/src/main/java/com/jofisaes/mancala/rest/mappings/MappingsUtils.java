@@ -1,6 +1,6 @@
 package com.jofisaes.mancala.rest.mappings;
 
-public class Mappings {
+public class MappingsUtils {
     private static final String MANCALA = "/mancala/";
     public static final String MANCALA_ACTIONS = MANCALA + "actions";
     public static final String MANCALA_BOARDS = MANCALA + "boards";
