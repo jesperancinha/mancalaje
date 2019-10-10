@@ -7,13 +7,14 @@
 [![Build Status](https://travis-ci.org/jesperancinha/mancalaje.svg?branch=master)](https://travis-ci.org/jesperancinha/mancalaje)
 [![codebeat badge](https://codebeat.co/badges/eaf7a2e0-ed2c-47fb-9323-2051db72c171)](https://codebeat.co/projects/github-com-jesperancinha-mancalaje-master)
 [![BCH compliance](https://bettercodehub.com/edge/badge/jesperancinha/mancalaje?branch=master)](https://bettercodehub.com/)
+[![Known Vulnerabilities](https://snyk.io/test/github/jesperancinha/mancalaje/badge.svg)](https://snyk.io/test/github/jesperancinha/mancalaje)
 
 [![GitHub language count](https://img.shields.io/github/languages/count/jesperancinha/mancalaje.svg)](#)
 [![GitHub top language](https://img.shields.io/github/languages/top/jesperancinha/mancalaje.svg)](#)
 [![GitHub top language](https://img.shields.io/github/languages/code-size/jesperancinha/mancalaje.svg)](#)
   
 [![Generic badge](https://img.shields.io/static/v1.svg?label=Homepage&message=MancalaJE&color=informational)](http://mancalaje.joaofilipesabinoesperancinha.nl/)
-  
+
 ```text                                                                                         
 @@@@@@@@@@    @@@@@@   @@@  @@@   @@@@@@@   @@@@@@   @@@        @@@@@@                   @@@  @@@@@@@@  
 @@@@@@@@@@@  @@@@@@@@  @@@@ @@@  @@@@@@@@  @@@@@@@@  @@@       @@@@@@@@                  @@@  @@@@@@@@  
