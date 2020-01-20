@@ -108,7 +108,7 @@ class GameLogin extends Component<GameProps, GameProps> {
             clientSecret: "mancala",
             grantType: "password",
             password: this.state.password,
-            tokenEndpoint: "/oauth/token",
+            tokenEndpoint: "/api/oauth/token",
             userName: this.state.username,
         });
         oAuth2.getAccessToken().then(

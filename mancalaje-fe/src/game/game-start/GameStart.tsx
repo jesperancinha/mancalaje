@@ -123,7 +123,7 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
 
     private loadGameData(): void {
         if (this.props.match) {
-            makeGetRequest("/mancala/boards/" + this.props.match.params.id, this.state, this.props,
+            makeGetRequest("/boards/" + this.props.match.params.id, this.state, this.props,
                 (data: PlayerState) => this.setState({
                     playerState: data,
                 }));
@@ -133,7 +133,7 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
     private leaveRoom(): void {
         this.state.refreshers.forEach(clearInterval);
         if (this.props.match) {
-            makeDeleteRequest("/mancala/rooms/" + this.props.match.params.id, this.state, this.props,
+            makeDeleteRequest("/rooms/" + this.props.match.params.id, this.state, this.props,
                 () => this.props.history ? this.props.history.push(`/gameList`) : {});
         }
     }

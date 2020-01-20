@@ -10,7 +10,7 @@ const makeGetRequest = <T extends {}>(urlString: string, state: State, props: St
         if (!props.oauth) {
             props.history.push(LOGIN_PATH);
         } else {
-            props.oauth.fetch(urlString, {
+            props.oauth.fetch(buildUrl(urlString), {
                 method: "GET",
             })
                 .then((res: Response) => res.json())
@@ -39,7 +39,7 @@ const makePostRequest = <T extends {}>(
     transformData: (t: T) => void, messsageBody: string,
     errorCatch?: (t: string) => void): void => {
     if (props.history) {
-        extractedFetch(props)(urlString, {
+        extractedFetch(props)(buildUrl(urlString), {
             body: messsageBody,
             headers: {
                 'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ const makePutRequest = <T extends {}>(urlString: string, state:
                     'Content-Type': 'application/json',
                 };
             }
-            props.oauth.fetch(urlString, config)
+            props.oauth.fetch(buildUrl(urlString), config)
                 .then((res: Response) => {
                     if (res.status === CONFLICT) {
                         res.json()
@@ -115,7 +115,6 @@ const makePutRequest = <T extends {}>(urlString: string, state:
         }
     }
 };
-
 const makeDeleteRequest = <T extends {}>
 (urlString: string, state: State, props: State,
  transformData: (t: string) => void = () => {
@@ -126,7 +125,7 @@ const makeDeleteRequest = <T extends {}>
         if (!props.oauth) {
             props.history.push(LOGIN_PATH);
         } else {
-            props.oauth.fetch(urlString, {
+            props.oauth.fetch(buildUrl(urlString), {
                 method: 'DELETE',
             })
                 .then((res: Response) => {
@@ -158,25 +157,27 @@ const makeDeleteRequest = <T extends {}>
         }
     }
 };
+
 const home = (props: State): void => {
     if (props.history) {
         props.history.push(LOGIN_PATH);
     }
 };
-
-
 const logOut = (props: State, state: State): void => {
     if (props.history) {
 
         if (state.refreshers) {
             state.refreshers.map(clearInterval);
         }
-        makeDeleteRequest("/mancala/open/oauth/token", state, props, () => home(props));
+        makeDeleteRequest("/open/oauth/token", state, props, () => home(props));
     }
 };
+
+function buildUrl(urlString: string) {
+    return "/api/mancala" + urlString;
+}
 
 export {
     makeGetRequest, makePutRequest, makePostRequest,
     makeDeleteRequest, logOut, home,
 }
-

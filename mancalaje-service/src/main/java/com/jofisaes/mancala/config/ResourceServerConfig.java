@@ -22,9 +22,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/mancala/users/**")
+                .antMatchers("/api/mancala/users/**")
                 .permitAll()
-                .antMatchers("/mancala/actions/**", "/mancala/boards/**", "/mancala/rooms/**", "mancala/admin/**")
+                .antMatchers("/api/mancala/actions/**", "/mancala/boards/**", "/mancala/rooms/**", "mancala/admin/**")
                 .authenticated()
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }

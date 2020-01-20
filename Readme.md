@@ -28,15 +28,21 @@
  :      :     :   : :  ::    :    :: :: :   :   : :  : :: : :   :   : :              : :::    : :: ::   
 ```                                                                                                           
 
-This latest version is currently under contruction.
+## Docker Image
 
-All Front end is being updated.
+I have provided a docker image that will run this application in your docker-machine addess.
 
-stay tuned!
+Make sure that the docker-machine is correctly installed and that you set your environment to your machine.
 
-## Status
+All that needs top be done is to call the build.sh script with the name of the target docker-machine. In my case its 'dev'.
 
-**Under development**
+Example:
+
+```bash
+./build.sh dev
+```
+
+Be sure to wait at least a couple of minutes. The Spring boot process needs to start queues and all the connectivity with PostgreSQL.
 
 ## Milestones
 

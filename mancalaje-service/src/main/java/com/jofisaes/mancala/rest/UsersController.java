@@ -16,7 +16,7 @@ import javax.validation.Valid;
 
 import static com.jofisaes.mancala.rest.mappings.MappingsUtils.MANCALA_USERS;
 
-@RestController()
+@RestController
 @RequestMapping(MANCALA_USERS)
 public class UsersController {
 

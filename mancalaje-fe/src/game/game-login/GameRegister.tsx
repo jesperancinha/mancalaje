@@ -118,7 +118,7 @@ class GameRegister extends Component<GameRegisterProps, GameRegisterProps> {
         user.name = this.state.name;
         user.email = this.state.email;
         user.password = this.state.password;
-        makePostRequest('/mancala/users', this.state, this.props,
+        makePostRequest('/users', this.state, this.props,
             () => {
                 this.props.dispatch
                 && this.props.dispatch(

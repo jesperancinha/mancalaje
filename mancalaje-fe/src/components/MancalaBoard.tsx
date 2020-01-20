@@ -16,7 +16,7 @@ import {GameStartProps} from "../game/game-start/GameStart";
 
 const swayStones = (id: Number, state: State, props: State) => {
     state.statusError = "";
-    makePutRequest("/mancala/actions/nextMove/" + id, state, props);
+    makePutRequest("/actions/nextMove/" + id, state, props);
 };
 const MAX_STONE_INDEX = 13;
 const STORE_ROW_SPAN = 2;

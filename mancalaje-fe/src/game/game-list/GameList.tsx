@@ -62,7 +62,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     public componentDidMount(): void {
         this.loadCurrentPlayer();
         this.loadAllBoards();
-        makeDeleteRequest("mancala/rooms", this.state, this.props);
+        makeDeleteRequest("/rooms", this.state, this.props);
         const refresher = setInterval(() => {
             this.loadAllBoards();
         }, REFRESH_RATE);
@@ -164,11 +164,11 @@ class GameList extends React.Component<GameListProps, GameListProps> {
         const messageBody = JSON.stringify({
             boardName: this.state.boardName,
         });
-        makePostRequest('mancala/boards', this.state, this.props, () => this.loadAllBoards(), messageBody);
+        makePostRequest('/boards', this.state, this.props, () => this.loadAllBoards(), messageBody);
     }
 
     private loadAllBoards(): void {
-        makeGetRequest('mancala/boards/all', this.state, this.props, (data: PlayerState[]) => {
+        makeGetRequest('/boards/all', this.state, this.props, (data: PlayerState[]) => {
             this.setState({
                 games: data,
             });
@@ -176,7 +176,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     }
 
     private loadCurrentPlayer(): void {
-        makeGetRequest('mancala/users', this.state, this.props, (data: Player) => {
+        makeGetRequest('/users', this.state, this.props, (data: Player) => {
             this.setState({
                 loggedInPlayer: data.name,
             })
@@ -184,7 +184,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
     }
 
     private handleRemoveRoom(roomId: number): void {
-        makeDeleteRequest("mancala/boards/" + roomId, this.state, this.props, () => this.loadAllBoards());
+        makeDeleteRequest("/boards/" + roomId, this.state, this.props, () => this.loadAllBoards());
     }
 
     private logOut(): void {
@@ -203,7 +203,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
 
     private redirectToGamePage(row: BoardManager): void {
         this.state.refreshers.map(clearInterval);
-        makePutRequest("/mancala/rooms/" + row.boardManagerId, this.state, this.props,
+        makePutRequest("/rooms/" + row.boardManagerId, this.state, this.props,
             () => this.props.history ? this.props.history.push(`gameStart/${row.boardManagerId}`) : {},
             "{}", (errorMessage: string) => this.setState({
                 statusError: errorMessage,
