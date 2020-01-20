@@ -44,6 +44,10 @@ Example:
 
 Be sure to wait at least a couple of minutes. The Spring boot process needs to start queues and all the connectivity with PostgreSQL.
 
+This Docker Image starts off with a docker image I've created on [DockerHub](https://hub.docker.com/)
+
+[![dockeri.co](https://dockeri.co/image/jesperancinha/je-postgres-all)](https://hub.docker.com/r/jesperancinha/je-postgres-all)
+
 ## Milestones
 
 2019-08-01:
