@@ -1,10 +1,18 @@
-FROM jesperancinha/je-postgres-all:0.0.2
+FROM jesperancinha/je-all-build:0.0.1
 
 ENV runningFolder /usr/local/bin/
 
 WORKDIR ${runningFolder}
 
-RUN pg_createcluster 12 main --start
+RUN apt-get update
+
+RUN ["/bin/bash", "-c", "debconf-set-selections <<< \"postfix postfix/mailname string test\""]
+
+RUN ["/bin/bash", "-c", "debconf-set-selections <<< \"postfix postfix/main_mailer_type string 'No configuration'\""]
+
+RUN apt-get install -y --assume-yes postfix
+
+RUN touch /etc/postfix/main.cf
 
 COPY docker-files/default.conf /etc/nginx/conf.d/default.conf
 
@@ -21,5 +29,7 @@ RUN nginx -t
 EXPOSE 8087
 
 EXPOSE 8080
+
+EXPOSE 5432
 
 ENTRYPOINT ["entrypoint.sh"]

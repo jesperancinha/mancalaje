@@ -39,14 +39,10 @@ All that needs top be done is to call the build.sh script with the name of the t
 Example:
 
 ```bash
-./build.sh dev
+./build-standalone.sh dev
 ```
 
 Be sure to wait at least a couple of minutes. The Spring boot process needs to start queues and all the connectivity with PostgreSQL.
-
-This Docker Image starts off with a docker image I've created on [DockerHub](https://hub.docker.com/)
-
-[![dockeri.co](https://dockeri.co/image/jesperancinha/je-postgres-all)](https://hub.docker.com/r/jesperancinha/je-postgres-all)
 
 ## Milestones
 
@@ -72,12 +68,12 @@ This Docker Image starts off with a docker image I've created on [DockerHub](htt
 -   OAuth2 Implementation
 -   Basic front end
 
-## References
+## Docker images
 
--   [Trigger a Spring Batch job with a JMS message](https://blog.mimacom.com/trigger-spring-batch-job-with-jms-message/)
--   [Postman](https://www.getpostman.com/)
--   [Spring Boot OAuth2 Social Login with Google, Facebook, and Github - Part 1](https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/)
--   [Shields IO](https://shields.io)
+This tutorial makes use of the following docker images:
+
+[![dockeri.co](https://dockeri.co/image/jesperancinha/je-postgres-all)](https://hub.docker.com/r/jesperancinha/je-postgres-all)
+[![dockeri.co](https://dockeri.co/image/library/postgres)](https://hub.docker.com/r/library/postgres)
 
 ## DevOps References
 
@@ -97,6 +93,14 @@ $ sudo -u postgres psql
 create database mancalajedb
 \q
 ```
+
+## References
+
+-   [Trigger a Spring Batch job with a JMS message](https://blog.mimacom.com/trigger-spring-batch-job-with-jms-message/)
+-   [Postman](https://www.getpostman.com/)
+-   [Spring Boot OAuth2 Social Login with Google, Facebook, and Github - Part 1](https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/)
+-   [Shields IO](https://shields.io)
+
 
 ## About me
 

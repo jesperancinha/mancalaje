@@ -5,7 +5,6 @@ import com.jofisaes.mancala.exception.TooManyUsersException;
 import com.jofisaes.mancala.exception.UserAlreadyExistsException;
 import com.jofisaes.mancala.exception.UserRemovedException;
 import com.jofisaes.mancala.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,12 +20,11 @@ import static com.jofisaes.mancala.entities.RoleType.ROLE_USER;
 @Transactional
 public class UserService {
 
-    @Autowired
     private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;
-    private int maxUsers;
 
+    private int maxUsers;
 
     public UserService(@Value("${mancalaje.max-users:100}") int maxUsers, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.maxUsers = maxUsers;

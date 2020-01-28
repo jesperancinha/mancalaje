@@ -2,16 +2,20 @@ package com.jofisaes.mancala.services.authentication;
 
 import com.jofisaes.mancala.entities.User;
 import com.jofisaes.mancala.repository.UserRepository;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.Optional;
 
+@Component
+@Primary
 public class DefaultAuthenticationProvider implements AuthenticationProvider {
 
     private final UserRepository userRepository;

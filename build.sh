@@ -1,27 +1,31 @@
 #!/usr/bin/env bash
 
-mvn clean install -DskipTests
+machine='dev'
 
-cd mancalaje-fe
+if [[ ! -z "$1" ]]
+then
+      let machine=$1
+fi
 
-npm install -g npm
+docker-machine start ${machine}
 
-npm install
+docker-machine env ${machine}
 
-npm run build
+eval $(docker-machine env  ${machine})
 
-cd ..
+docker-compose down
 
-docker-machine start $1
+docker stop mancalaje_mancala_1
+docker stop  mancalaje_postgres_1
 
-docker-machine env $1
+docker rm mancalaje_mancala_1
+docker rm mancalaje_postgres_1
 
-eval $(docker-machine env $1)
+#mvn clean install
+#
+#cd mancalaje-fe
+#yarn autoclean --init --force
+#yarn build
+#cd ..
 
-docker stop mancalaje
-
-docker rm mancalaje
-
-docker build . --no-cache -t mancalaje-image
-
-docker run --name mancalaje -p 8080:80 -e POSTGRES_PASSWORD=admin -d mancalaje-image
+docker-compose up -d --build --remove-orphans
