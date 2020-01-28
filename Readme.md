@@ -28,9 +28,9 @@
  :      :     :   : :  ::    :    :: :: :   :   : :  : :: : :   :   : :              : :::    : :: ::   
 ```                                                                                                           
 
-## Docker Image
+## Docker Compose
 
-I have provided a docker image that will run this application in your docker-machine addess.
+I have provided a docker-compose environment that will run this application in your docker-machine addess.
 
 Make sure that the docker-machine is correctly installed and that you set your environment to your machine.
 
@@ -39,7 +39,7 @@ All that needs top be done is to call the build.sh script with the name of the t
 Example:
 
 ```bash
-./build-standalone.sh dev
+./build.sh dev
 ```
 
 Be sure to wait at least a couple of minutes. The Spring boot process needs to start queues and all the connectivity with PostgreSQL.
@@ -72,8 +72,11 @@ Be sure to wait at least a couple of minutes. The Spring boot process needs to s
 
 This tutorial makes use of the following docker images:
 
-[![dockeri.co](https://dockeri.co/image/jesperancinha/je-postgres-all)](https://hub.docker.com/r/jesperancinha/je-postgres-all)
+[![dockeri.co](https://dockeri.co/image/jesperancinha/je-all-build)](https://hub.docker.com/r/jesperancinha/je-all-build)
+
 [![dockeri.co](https://dockeri.co/image/library/postgres)](https://hub.docker.com/r/library/postgres)
+
+All [JE](https://bitbucket.org/jesperancinha/docker-images) images reside in repo [Docker images](https://bitbucket.org/jesperancinha/docker-images).
 
 ## DevOps References
 
