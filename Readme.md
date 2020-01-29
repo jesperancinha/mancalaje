@@ -70,13 +70,13 @@ Be sure to wait at least a couple of minutes. The Spring boot process needs to s
 
 ## Docker images
 
-This tutorial makes use of the following docker images:
+This project makes use of the following docker images:
 
 [![dockeri.co](https://dockeri.co/image/jesperancinha/je-all-build)](https://hub.docker.com/r/jesperancinha/je-all-build)
 
 [![dockeri.co](https://dockeri.co/image/library/postgres)](https://hub.docker.com/r/library/postgres)
 
-All [JE](https://bitbucket.org/jesperancinha/docker-images) images reside in repo [Docker images](https://bitbucket.org/jesperancinha/docker-images).
+All source code for the [JE](https://bitbucket.org/jesperancinha/docker-images) images reside in repo [Docker images](https://bitbucket.org/jesperancinha/docker-images).
 
 ## DevOps References
 
