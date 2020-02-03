@@ -21,11 +21,11 @@ docker stop  mancalaje_postgres_1
 docker rm mancalaje_mancala_1
 docker rm mancalaje_postgres_1
 
-#mvn clean install
-#
-#cd mancalaje-fe
-#yarn autoclean --init --force
-#yarn build
-#cd ..
+mvn clean install
+
+cd mancalaje-fe
+yarn autoclean --init --force
+yarn build
+cd ..
 
 docker-compose up -d --build --remove-orphans
