@@ -24,13 +24,13 @@ public class AdminService {
     public AdminService(
             UserSweepListener userSweepListener,
             ConnectionFactory connectionFactory) throws Exception {
-        Connection clientConnection = connectionFactory.createConnection();
+        final Connection clientConnection = connectionFactory.createConnection();
         clientConnection.setClientID("UseSweepClientId");
-        Session session = clientConnection.createSession(false,
+        final Session session = clientConnection.createSession(false,
                 Session.AUTO_ACKNOWLEDGE);
-        Topic topic = session.createTopic("UserSweepConsumerTopic");
-        MessageConsumer consumer1 = session.createConsumer(topic);
-        consumer1.setMessageListener(userSweepListener);
+        final Topic topic = session.createTopic("UserSweepConsumerTopic");
+        final MessageConsumer consumer = session.createConsumer(topic);
+        consumer.setMessageListener(userSweepListener);
         clientConnection.start();
         this.session = session;
     }

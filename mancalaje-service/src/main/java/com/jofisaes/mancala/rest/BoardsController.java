@@ -2,7 +2,7 @@ package com.jofisaes.mancala.rest;
 
 import com.jofisaes.mancala.cache.BoardManager;
 import com.jofisaes.mancala.cache.Player;
-import com.jofisaes.mancala.game.BoardManagerDto;
+import com.jofisaes.mancala.data.BoardManagerDto;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

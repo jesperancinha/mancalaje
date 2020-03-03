@@ -1,4 +1,4 @@
-package com.jofisaes.mancala.entities;
+package com.jofisaes.mancala.model;
 
 public enum RoleType {
     ROLE_USER,

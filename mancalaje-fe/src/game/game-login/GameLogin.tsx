@@ -63,7 +63,7 @@ class GameLogin extends Component<GameProps, GameProps> {
                         <Button
                             style={control}
                             onClick={() => this.props.dispatch &&
-                                    this.props.dispatch(createOAuth(this.handleClick()))}>
+                                this.props.dispatch(createOAuth(this.handleClick()))}>
                             Submit
                         </Button>
                         <Button

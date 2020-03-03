@@ -37,7 +37,7 @@ public class RestAspect {
             sessionUser = new Player();
             userManagerService.setSessionUser(sessionUser);
         }
-        com.jofisaes.mancala.entities.User userByEmail = userService.getUserByEmail(principal.getUsername());
+        com.jofisaes.mancala.model.User userByEmail = userService.getUserByEmail(principal.getUsername());
         if (Objects.isNull(userByEmail)) {
             String tokenValue = ((OAuth2AuthenticationDetails) oAuth2Authentication.getDetails()).getTokenValue();
             adminService.revokeToken(tokenValue);

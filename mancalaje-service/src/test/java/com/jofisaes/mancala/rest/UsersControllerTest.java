@@ -1,7 +1,7 @@
 package com.jofisaes.mancala.rest;
 
-import com.jofisaes.mancala.entities.User;
-import com.jofisaes.mancala.game.UserDto;
+import com.jofisaes.mancala.data.UserDto;
+import com.jofisaes.mancala.model.User;
 import com.jofisaes.mancala.services.mail.MancalaJeMailService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

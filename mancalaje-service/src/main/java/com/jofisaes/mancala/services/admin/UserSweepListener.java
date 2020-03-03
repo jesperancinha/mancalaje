@@ -1,6 +1,6 @@
 package com.jofisaes.mancala.services.admin;
 
-import com.jofisaes.mancala.entities.User;
+import com.jofisaes.mancala.model.User;
 import com.jofisaes.mancala.services.game.GameManagerService;
 import com.jofisaes.mancala.services.mail.MancalaJeMailService;
 import com.jofisaes.mancala.services.room.RoomsManagerService;

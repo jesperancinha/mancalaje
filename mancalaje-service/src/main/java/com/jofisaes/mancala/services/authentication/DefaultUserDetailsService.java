@@ -1,6 +1,6 @@
 package com.jofisaes.mancala.services.authentication;
 
-import com.jofisaes.mancala.entities.User;
+import com.jofisaes.mancala.model.User;
 import com.jofisaes.mancala.repository.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

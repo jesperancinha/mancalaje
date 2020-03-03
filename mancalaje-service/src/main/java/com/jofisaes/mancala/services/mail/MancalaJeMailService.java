@@ -1,9 +1,9 @@
 package com.jofisaes.mancala.services.mail;
 
-import com.jofisaes.mancala.entities.User;
+import com.jofisaes.mancala.data.UserDto;
 import com.jofisaes.mancala.exception.RegistrationMailNotSentException;
 import com.jofisaes.mancala.exception.UnregistrationMailNotSentException;
-import com.jofisaes.mancala.game.UserDto;
+import com.jofisaes.mancala.model.User;
 import com.jofisaes.mancala.services.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

@@ -57,8 +57,8 @@ export const theme = createMuiTheme({
             },
         },
         MuiButton: {
-            label:{
-              fontSize: 15,
+            label: {
+                fontSize: 15,
             },
             root: {
                 alignItems: "center",

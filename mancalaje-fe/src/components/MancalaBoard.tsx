@@ -44,14 +44,14 @@ const MancalaBoard = ({data, state, props}: { data?: BoardManager, state: GameSt
                                         state.playerState.loggedPlayer.email ? holeEnabled : holeDisabled}
                                         rowSpan={STORE_ROW_SPAN} colSpan={SINGLE_SPAN}>
                                         <Button style={buttonCell}
-                                            disabled={!data.board.allHoles[MAX_STONE_INDEX].enabled ||
-                                            data.gameover ||
-                                            data.currentPlayer.email !== state.playerState.loggedPlayer.email}
-                                            onClick={() => swayStones(data.board &&
-                                            data.board.allHoles ?
-                                                data.board.allHoles[MAX_STONE_INDEX].id :
-                                                UNDEFINED_HOLE, state, props)}
-                                            href={"#"}>
+                                                disabled={!data.board.allHoles[MAX_STONE_INDEX].enabled ||
+                                                data.gameover ||
+                                                data.currentPlayer.email !== state.playerState.loggedPlayer.email}
+                                                onClick={() => swayStones(data.board &&
+                                                data.board.allHoles ?
+                                                    data.board.allHoles[MAX_STONE_INDEX].id :
+                                                    UNDEFINED_HOLE, state, props)}
+                                                href={"#"}>
                                             {data.board.allHoles[MAX_STONE_INDEX].stones}
                                         </Button>
                                     </TableCell>
@@ -64,14 +64,14 @@ const MancalaBoard = ({data, state, props}: { data?: BoardManager, state: GameSt
                                                 style={hole.enabled ? holeEnabled : holeDisabled}
                                                 rowSpan={SINGLE_SPAN} colSpan={SINGLE_SPAN}>
                                                 <Button style={buttonCell}
-                                                    disabled={!hole.enabled || data.gameover ||
-                                                    (state.playerState &&
-                                                        state.playerState.loggedPlayer &&
-                                                        data.currentPlayer &&
-                                                        data.currentPlayer.email !==
-                                                        state.playerState.loggedPlayer.email)}
-                                                    onClick={() => swayStones(hole.id, state, props)}
-                                                    href={"#"}>{hole.stones}</Button></TableCell>
+                                                        disabled={!hole.enabled || data.gameover ||
+                                                        (state.playerState &&
+                                                            state.playerState.loggedPlayer &&
+                                                            data.currentPlayer &&
+                                                            data.currentPlayer.email !==
+                                                            state.playerState.loggedPlayer.email)}
+                                                        onClick={() => swayStones(hole.id, state, props)}
+                                                        href={"#"}>{hole.stones}</Button></TableCell>
                                         ))}
                                     <TableCell
                                         key={STORE_INDEX_1}
@@ -79,13 +79,13 @@ const MancalaBoard = ({data, state, props}: { data?: BoardManager, state: GameSt
                                         state.playerState.loggedPlayer.email ? holeEnabled : holeDisabled}
                                         rowSpan={STORE_ROW_SPAN} colSpan={SINGLE_SPAN}>
                                         <Button style={buttonCell}
-                                            disabled={!data.board.allHoles[STORE_INDEX_1].enabled || data.gameover ||
-                                            data.currentPlayer.email !== state.playerState.loggedPlayer.email}
-                                            onClick={() => swayStones(data.board &&
-                                            data.board.allHoles ?
-                                                data.board.allHoles[STORE_INDEX_1].id :
-                                                UNDEFINED_HOLE, state, props)}
-                                            href={"#"}>{data.board.allHoles[STORE_INDEX_1].stones}</Button></TableCell>
+                                                disabled={!data.board.allHoles[STORE_INDEX_1].enabled || data.gameover ||
+                                                data.currentPlayer.email !== state.playerState.loggedPlayer.email}
+                                                onClick={() => swayStones(data.board &&
+                                                data.board.allHoles ?
+                                                    data.board.allHoles[STORE_INDEX_1].id :
+                                                    UNDEFINED_HOLE, state, props)}
+                                                href={"#"}>{data.board.allHoles[STORE_INDEX_1].stones}</Button></TableCell>
                                 </TableRow>
                                 <TableRow>
                                     {data.board.allHoles
@@ -96,14 +96,14 @@ const MancalaBoard = ({data, state, props}: { data?: BoardManager, state: GameSt
                                                 style={hole.enabled ? holeEnabled : holeDisabled}
                                                 rowSpan={SINGLE_SPAN} colSpan={SINGLE_SPAN}>
                                                 <Button style={buttonCell}
-                                                    disabled={!hole.enabled || data.gameover ||
-                                                    (state.playerState &&
-                                                        state.playerState.loggedPlayer &&
-                                                        data.currentPlayer &&
-                                                        data.currentPlayer.email !==
-                                                        state.playerState.loggedPlayer.email)}
-                                                    onClick={() => swayStones(hole.id, state, props)}
-                                                    href={"#"}>{hole.stones}</Button></TableCell>
+                                                        disabled={!hole.enabled || data.gameover ||
+                                                        (state.playerState &&
+                                                            state.playerState.loggedPlayer &&
+                                                            data.currentPlayer &&
+                                                            data.currentPlayer.email !==
+                                                            state.playerState.loggedPlayer.email)}
+                                                        onClick={() => swayStones(hole.id, state, props)}
+                                                        href={"#"}>{hole.stones}</Button></TableCell>
                                         ))}
                                 </TableRow>
                             </TableBody>

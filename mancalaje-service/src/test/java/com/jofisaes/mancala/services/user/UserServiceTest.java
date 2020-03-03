@@ -1,8 +1,8 @@
 package com.jofisaes.mancala.services.user;
 
-import com.jofisaes.mancala.entities.User;
 import com.jofisaes.mancala.exception.TooManyUsersException;
 import com.jofisaes.mancala.exception.UserRemovedException;
+import com.jofisaes.mancala.model.User;
 import com.jofisaes.mancala.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-import static com.jofisaes.mancala.entities.RoleType.ROLE_USER;
+import static com.jofisaes.mancala.model.RoleType.ROLE_USER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.Mockito.doNothing;

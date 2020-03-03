@@ -1,4 +1,4 @@
-package com.jofisaes.mancala.entities;
+package com.jofisaes.mancala.model;
 
 import com.jofisaes.mancala.cache.BoardManager;
 import lombok.AllArgsConstructor;

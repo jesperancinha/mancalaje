@@ -1,4 +1,4 @@
-package com.jofisaes.mancala.game;
+package com.jofisaes.mancala.data;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jofisaes.mancala.cache.BoardManager;

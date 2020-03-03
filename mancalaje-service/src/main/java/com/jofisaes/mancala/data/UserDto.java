@@ -1,6 +1,6 @@
-package com.jofisaes.mancala.game;
+package com.jofisaes.mancala.data;
 
-import com.jofisaes.mancala.entities.User;
+import com.jofisaes.mancala.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

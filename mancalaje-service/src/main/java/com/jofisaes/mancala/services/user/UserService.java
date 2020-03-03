@@ -1,9 +1,9 @@
 package com.jofisaes.mancala.services.user;
 
-import com.jofisaes.mancala.entities.User;
 import com.jofisaes.mancala.exception.TooManyUsersException;
 import com.jofisaes.mancala.exception.UserAlreadyExistsException;
 import com.jofisaes.mancala.exception.UserRemovedException;
+import com.jofisaes.mancala.model.User;
 import com.jofisaes.mancala.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
-import static com.jofisaes.mancala.entities.RoleType.ROLE_USER;
+import static com.jofisaes.mancala.model.RoleType.ROLE_USER;
 
 @Service
 @Transactional

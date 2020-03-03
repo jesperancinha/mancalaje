@@ -1,7 +1,7 @@
 package com.jofisaes.mancala.repository;
 
 
-import com.jofisaes.mancala.entities.User;
+import com.jofisaes.mancala.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.springframework.transaction.annotation.Propagation.REQUIRES_NEW;
 
 @Repository
-@Transactional(readOnly = false, propagation = REQUIRES_NEW)
+@Transactional(propagation = REQUIRES_NEW)
 public interface UserRepository extends JpaRepository<User, String> {
 
     @Transactional(propagation = REQUIRES_NEW)
