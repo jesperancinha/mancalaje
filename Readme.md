@@ -106,6 +106,60 @@ create database mancalajedb
 brew install minikube 
 ```
 
+-   Install java versions without [SDKMan](https://sdkman.io/) for [ubuntu prompt for windows](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6?activetab=pivot:overviewtab).
+
+```bash
+apt-get -y update
+apt-get -y upgrade
+apt -y install apt-transport-https ca-certificates wget dirmngr gnupg software-properties-common
+wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add -
+add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
+apt -y update
+apt -y install adoptopenjdk-8-hotspot
+apt install openjdk-11-jdk
+```
+
+- .bashrc file to get Gradle, GitPrompt, [SDKMAN](https://sdkman.io/) and some handy aliases in a Windows environment with [MinGW](http://www.mingw.org/).
+
+```bash
+export GRADLE_HOME=/opt/gradle/gradle-6.1.1
+export PATH=${GRADLE_HOME}/bin:${PATH}
+alias ll='ls -l -a --color=auto'
+if [ -f "/root/.bash-git-prompt/gitprompt.sh" ]; then
+    GIT_PROMPT_ONLY_IN_REPO=1
+    source /root/.bash-git-prompt/gitprompt.sh
+fi
+
+alias java13="sdk use java 13.0.2.hs-adpt"
+alias java12="sdk use java 12.0.2.hs-adpt"
+alias java8="sdk use java 8.0.242.hs-adpt"
+alias m2disable="rm ~/.m2/settings.xml"
+alias m2enable="cp /your_repo_folder/settings.xml ~/.m2/"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/root/.sdkman"
+[[ -s "/root/.sdkman/bin/sdkman-init.sh" ]] && source "/root/.sdkman/bin/sdkman-init.sh"
+```
+
+- .bashrc file to get Gradle, GitPrompt and some handy aliases in a Windows environment with [ubuntu prompt for windows](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6?activetab=pivot:overviewtab).
+
+```bash
+export GRADLE_HOME=/opt/gradle/gradle-6.1.1
+export PATH=${GRADLE_HOME}/bin:${PATH}
+alias ll='ls -l -a --color=auto'
+if [ -f "/root/.bash-git-prompt/gitprompt.sh" ]; then
+    GIT_PROMPT_ONLY_IN_REPO=1
+    source /root/.bash-git-prompt/gitprompt.sh
+fi
+
+alias java8="export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 && update-java-alternatives -s java-1.8.0-openjdk-amd64"
+alias java11="export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64 && update-java-alternatives -s java-1.11.0-openjdk-amd64"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/root/.sdkman"
+[[ -s "/root/.sdkman/bin/sdkman-init.sh" ]] && source "/root/.sdkman/bin/sdkman-init.sh"
+```
+
 ## References
 
 ### Generic
@@ -116,6 +170,7 @@ brew install minikube
 -   [Postman](https://www.getpostman.com/)
 -   [Spring Boot OAuth2 Social Login with Google, Facebook, and Github - Part 1](https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/)
 -   [Shields IO](https://shields.io)
+-   [How To Install Oracle Java 8 and OpenJDK 11 on Ubuntu 18.04, 19.04](https://www.linuxbabe.com/ubuntu/install-oracle-java-8-openjdk-11-ubuntu-18-04-18-10)
 
 ### Implementation related
 
