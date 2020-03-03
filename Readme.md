@@ -116,7 +116,7 @@ wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-k
 add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
 apt -y update
 apt -y install adoptopenjdk-8-hotspot
-apt install openjdk-11-jdk
+apt -y install openjdk-11-jdk
 ```
 
 - .bashrc file to get Gradle, GitPrompt, [SDKMAN](https://sdkman.io/) and some handy aliases in a Windows environment with [MinGW](http://www.mingw.org/).
