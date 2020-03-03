@@ -97,8 +97,18 @@ create database mancalajedb
 \q
 ```
 
+
+## Hints & Tricks
+
+-   Install minikube
+
+```bash
+brew install minikube 
+```
+
 ## References
 
+-   [Installing Kubernetes with Minikube](https://kubernetes.io/docs/setup/learning-environment/minikube/)
 -   [Trigger a Spring Batch job with a JMS message](https://blog.mimacom.com/trigger-spring-batch-job-with-jms-message/)
 -   [Postman](https://www.getpostman.com/)
 -   [Spring Boot OAuth2 Social Login with Google, Facebook, and Github - Part 1](https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/)
