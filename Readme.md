@@ -168,6 +168,13 @@ export SDKMAN_DIR="/root/.sdkman"
 ```bash
  update-java-alternatives -l
 ```
+
+-   Running jar with minikube
+```bash
+kubectl config use-context minikube
+kubectl cluster-info
+```
+
 ## References
 
 ### Generic
@@ -179,6 +186,7 @@ export SDKMAN_DIR="/root/.sdkman"
 -   [Spring Boot OAuth2 Social Login with Google, Facebook, and Github - Part 1](https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/)
 -   [Shields IO](https://shields.io)
 -   [How To Install Oracle Java 8 and OpenJDK 11 on Ubuntu 18.04, 19.04](https://www.linuxbabe.com/ubuntu/install-oracle-java-8-openjdk-11-ubuntu-18-04-18-10)
+-   [Running Spring Boot Applications With Minikube by Baeldung](https://www.baeldung.com/spring-boot-minikube)
 
 ### Implementation related
 
