@@ -114,11 +114,25 @@ docker build --file=Dockerfile --tag=mancalaje-service:latest --rm=true .
 
 ## Hints & Tricks
 
--   Install minikube
+-   Install minikube for MAC-OS
 
 ```bash
 brew install minikube
-minikube mount . /mancalaje
+```
+
+-   Install minikube for linux
+
+```bash
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
+  && chmod +x minikube
+mkdir -p /usr/local/bin
+install minikube /usr/local/bin/
+```
+
+-   Use and mount minikube
+
+```bash
+minikube mount .:/mancalaje
 minikube ssh
 ```
 
@@ -196,6 +210,7 @@ kubectl cluster-info
 ### Generic
 
 -   [What is minikube, kubectl and kubelet by Andreth Salazar](https://www.quora.com/What-is-minikube-kubectl-and-kubelet)
+-   [Install Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
 -   [Installing Kubernetes with Minikube](https://kubernetes.io/docs/setup/learning-environment/minikube/)
 -   [Trigger a Spring Batch job with a JMS message](https://blog.mimacom.com/trigger-spring-batch-job-with-jms-message/)
 -   [Postman](https://www.getpostman.com/)
