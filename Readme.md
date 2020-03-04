@@ -134,6 +134,15 @@ install minikube /usr/local/bin/
 ```bash
 minikube mount .:/mancalaje
 minikube ssh
+cd /mancalaje
+docker build --file=Dockerfile --tag=mancalaje:latest --rm=true .
+```
+
+-   Running jar with minikube
+```bash
+kubectl config use-context minikube
+kubectl cluster-info
+kubectl run demo-backend --image=demo-backend:latest --port=8080 --image-pull-policy Never
 ```
 
 -   Install java versions without [SDKMan](https://sdkman.io/) for [ubuntu prompt for windows](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6?activetab=pivot:overviewtab).
@@ -197,12 +206,6 @@ export SDKMAN_DIR="/root/.sdkman"
 
 ```bash
  update-java-alternatives -l
-```
-
--   Running jar with minikube
-```bash
-kubectl config use-context minikube
-kubectl cluster-info
 ```
 
 ## References
