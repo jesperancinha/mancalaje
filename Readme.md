@@ -1,4 +1,9 @@
 # MancalaJe
+
+[![alt text](Documentation/mje-docker.png "Docker")](https://www.docker.com/)
+[![alt text](Documentation/mje-kubernetes.png "Kubernetes")](https://kubernetes.io/)
+[![alt text](Documentation/mje-minikube.png "Minikube")](https://github.com/kubernetes/minikube)
+
 [![Generic badge](https://img.shields.io/static/v1.svg?label=Homepage&message=MancalaJE&color=informational)](http://mancalaje.joaofilipesabinoesperancinha.nl/) 
 [![GitHub release](https://img.shields.io/github/release-pre/jesperancinha/mancalaje.svg)](#)
   
@@ -97,13 +102,24 @@ create database mancalajedb
 \q
 ```
 
+## Setting up minikube
+
+```bash
+minikube mount . /mancalaje
+minikube ssh
+cd /mancalaje
+cd mancalaje-service
+docker build --file=Dockerfile --tag=mancalaje-service:latest --rm=true .
+```
 
 ## Hints & Tricks
 
 -   Install minikube
 
 ```bash
-brew install minikube 
+brew install minikube
+minikube mount . /mancalaje
+minikube ssh
 ```
 
 -   Install java versions without [SDKMan](https://sdkman.io/) for [ubuntu prompt for windows](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6?activetab=pivot:overviewtab).

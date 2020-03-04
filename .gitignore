@@ -36,3 +36,6 @@ src/main/webapp/resources/js
 
 # ActiveMQ
 activemq-data
+
+# OS
+.DS_Store
