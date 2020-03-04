@@ -234,6 +234,9 @@ kubectl cluster-info
 -   [How to add Custom Fonts to Command Prompt in Windows 10](https://www.thewindowsclub.com/add-custom-fonts-to-command-prompt)
 -   [How can I add additional fonts to the Windows console?](https://superuser.com/questions/1347724/how-can-i-add-additional-fonts-to-the-windows-console)
 -   [Powerline fonts](https://github.com/powerline/fonts.git)
+-   [Microsoft Terminal](https://github.com/Microsoft/Terminal)
+
+NOTE: remember to use the powershell script if trying to install the Meslo fonts in windows ([.ps1 file](https://github.com/powerline/fonts/blob/master/install.ps1)). It's located in the [fonts repo](https://github.com/powerline/fonts.git).
 
 ## About me
 
