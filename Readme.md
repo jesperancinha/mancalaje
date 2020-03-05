@@ -106,7 +106,7 @@ create database mancalajedb
 
 ```bash
 minkube start
-minikube mount . /mancalaje
+minikube mount .:/mancalaje
 minikube ssh
 cd /mancalaje
 cd mancalaje-service
@@ -133,6 +133,7 @@ install minikube /usr/local/bin/
 -   Use and mount minikube
 
 ```bash
+minikube start
 minikube mount .:/mancalaje
 minikube ssh
 cd /mancalaje
