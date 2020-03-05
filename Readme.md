@@ -105,12 +105,13 @@ create database mancalajedb
 ## Setting up minikube
 
 ```bash
-minkube start
+minikube config set vm-driver virtualbox
+minikube start
+kubectl config use-context minikube
 minikube mount .:/mancalaje
 minikube ssh
-cd /mancalaje
-cd mancalaje-service
-docker build --file=Dockerfile --tag=mancalaje-service:latest --rm=true .
+cd /mancalaje/mancalaje-service
+docker build --file=Dockerfile --tag=mancalaje:latest --rm=true .
 ```
 
 ## Hints & Tricks
@@ -119,6 +120,8 @@ docker build --file=Dockerfile --tag=mancalaje-service:latest --rm=true .
 
 ```bash
 brew install minikube
+brew link kubernetes-cli
+brew link --overwrite kubernetes-cli
 ```
 
 -   Install minikube for linux
@@ -133,10 +136,12 @@ install minikube /usr/local/bin/
 -   Use and mount minikube
 
 ```bash
+minikube config set vm-driver virtualbox
 minikube start
+kubectl config use-context minikube
 minikube mount .:/mancalaje
 minikube ssh
-cd /mancalaje
+cd /mancalaje/mancalaje-service
 docker build --file=Dockerfile --tag=mancalaje:latest --rm=true .
 ```
 
@@ -210,6 +215,16 @@ export SDKMAN_DIR="/root/.sdkman"
  update-java-alternatives -l
 ```
 
+-   Remove minikube
+
+```bash
+minikube stop
+minikube delete
+rm -rf ~/.minikube
+rm -rf ~/.kube
+brew uninstall minikube
+```
+
 ## References
 
 ### Generic
@@ -223,6 +238,7 @@ export SDKMAN_DIR="/root/.sdkman"
 -   [Shields IO](https://shields.io)
 -   [How To Install Oracle Java 8 and OpenJDK 11 on Ubuntu 18.04, 19.04](https://www.linuxbabe.com/ubuntu/install-oracle-java-8-openjdk-11-ubuntu-18-04-18-10)
 -   [Running Spring Boot Applications With Minikube by Baeldung](https://www.baeldung.com/spring-boot-minikube)
+-   [Build and Deploy a Spring Boot App on Kubernetes (Minikube)](https://gorillalogic.com/blog/build-and-deploy-a-spring-boot-app-on-kubernetes-minikube/)
 
 ### Implementation related
 

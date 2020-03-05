@@ -1,0 +1,33 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: mancalaje-fe
+spec:
+  selector:
+    app: mancalaje-fe
+  ports:
+    - protocol: TCP
+      port: 8081
+      nodePort: 30001
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mancalaje-fe
+spec:
+  selector:
+    matchLabels:
+      app: mancalaje-fe
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: mancalaje-fe
+    spec:
+      containers:
+        - name: mancalaje-fe
+          image: mancalaje-fe:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8081

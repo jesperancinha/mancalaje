@@ -6,17 +6,17 @@ WORKDIR ${runningFolder}
 
 RUN apt-get update
 
+RUN ["/bin/bash", "-c", "debconf-set-selections <<< \"postfix postfix/mailname string test\""]
+
+RUN ["/bin/bash", "-c", "debconf-set-selections <<< \"postfix postfix/main_mailer_type string 'No configuration'\""]
+
 RUN apt-get install -y --assume-yes postfix
 
 RUN touch /etc/postfix/main.cf
 
-COPY target/mancalaje-service-1.1.1-SNAPSHOT.jar ${runningFolder}
-
-COPY mancalaje-fe/build /usr/share/nginx/html
+COPY target/mancalaje-service*.jar ${runningFolder}
 
 COPY entrypoint.sh ${runningFolder}
-
-RUN nginx -t
 
 EXPOSE 8087
 
