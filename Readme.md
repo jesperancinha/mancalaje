@@ -110,8 +110,12 @@ minikube start
 kubectl config use-context minikube
 minikube mount .:/mancalaje
 minikube ssh
+cd /mancalaje/docker-psql
+docker build --file=Dockerfile --tag=postgresql-service:latest --rm=true .
 cd /mancalaje/mancalaje-service
 docker build --file=Dockerfile --tag=mancalaje:latest --rm=true .
+cd /mancalaje/mancalaje-fe
+docker build --file=Dockerfile --tag=mancalaje-fe:latest --rm=true .
 ```
 
 ## Hints & Tricks
