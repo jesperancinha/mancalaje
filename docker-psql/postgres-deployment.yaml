@@ -1,33 +1,35 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: postgres
+  name: mancalaje-postgresql
 spec:
   selector:
-    app: postgres
+    app: mancalaje-postgresql
+    tier: backend
   ports:
     - protocol: TCP
-      port: 8081
-      nodePort: 30001
-  type: NodePort
+      port: 8080
+  type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres
+  name: mancalaje-postgresql
 spec:
   selector:
     matchLabels:
-      app: postgres
+      app: mancalaje-postgresql
+      tier: backend
   replicas: 3
   template:
     metadata:
       labels:
-        app: postgres
+        app: mancalaje-postgresql
+        tier: backend
     spec:
       containers:
-        - name: postgres
-          image: postgres:latest
+        - name: mancalaje-postgresql
+          image: mancalaje-postgresql:latest
           imagePullPolicy: Never
           ports:
-            - containerPort: 5432
+            - containerPort: 8080

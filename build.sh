@@ -15,12 +15,6 @@ eval $(docker-machine env  ${machine})
 
 docker-compose down
 
-docker stop mancalaje_mancala_1
-docker stop  mancalaje_postgres_1
-
-docker rm mancalaje_mancala_1
-docker rm mancalaje_postgres_1
-
 mvn clean install
 
 cd mancalaje-fe

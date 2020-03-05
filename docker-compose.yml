@@ -1,14 +1,14 @@
 version: "3.7"
 services:
-  mancala:
-    hostname: mancala
+  mancalaje:
+    hostname: mancalaje
     build:
       context: .
     ports:
       - "8080:80"
 
-  postgres:
-    hostname: postgres
+  mancalaje-postgres:
+    hostname: mancalaje-postgres
     image: library/postgres:12
     env_file:
       - docker-psql/.env

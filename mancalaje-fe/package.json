@@ -32,7 +32,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "snyk test && react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postbuild": "rm -r docker-files/build && mv build docker-files/"
   },
   "eslintConfig": {
     "extends": "react-app"

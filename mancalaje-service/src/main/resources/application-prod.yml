@@ -15,6 +15,6 @@ spring:
       ddl-auto: update
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://postgres:5432/mancalajedb
+    url: jdbc:postgresql://mancalaje-postgres:5432/mancalajedb
     username: postgres
     password: admin
