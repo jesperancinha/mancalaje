@@ -116,6 +116,22 @@ cd /mancalaje/mancalaje-service
 docker build --file=Dockerfile --tag=mancalaje:latest --rm=true .
 cd /mancalaje/mancalaje-fe/docker-files
 docker build --file=Dockerfile --tag=mancalaje-fe:latest --rm=true .
+kubectl create -f docker-psql/postgres-deployment.yaml
+kubectl create -f mancalaje-service/mancalaje-deployment.yaml
+kubectl create -f mancalaje-fe/mancalaje-fe-deployment.yaml
+
+kubectl delete service mancalaje-service 
+kubectl delete deployment mancalaje-service 
+
+kubectl delete service mancalaje-fe
+kubectl delete deployment mancalaje-fe
+
+minikube service mancalaje-service 
+minikube service mancalaje-fe
+
+kubectl get deployments
+kubectl get services
+kubectl get pods
 ```
 
 ## Hints & Tricks

@@ -8,7 +8,7 @@ spec:
     tier: backend
   ports:
     - protocol: TCP
-      port: 8080
+      port: 8087
   type: ClusterIP
 ---
 apiVersion: apps/v1
@@ -20,7 +20,7 @@ spec:
     matchLabels:
       app: mancalaje-service
       tier: backend
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       labels:
