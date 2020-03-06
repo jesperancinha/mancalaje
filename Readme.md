@@ -3,6 +3,7 @@
 [![alt text](Documentation/mje-docker.png "Docker")](https://www.docker.com/)
 [![alt text](Documentation/mje-kubernetes.png "Kubernetes")](https://kubernetes.io/)
 [![alt text](Documentation/mje-minikube.png "Minikube")](https://github.com/kubernetes/minikube)
+[![alt text](Documentation/mje-vmware.png "VMWare")](https://www.vmware.com/)
 
 [![Generic badge](https://img.shields.io/static/v1.svg?label=Homepage&message=MancalaJE&color=informational)](http://mancalaje.joaofilipesabinoesperancinha.nl/) 
 [![GitHub release](https://img.shields.io/github/release-pre/jesperancinha/mancalaje.svg)](#)
