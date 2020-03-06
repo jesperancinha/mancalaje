@@ -157,6 +157,25 @@ mkdir -p /usr/local/bin
 install minikube /usr/local/bin/
 ```
 
+-   Install minikube for Windows
+
+    -   Please install:
+        -   [VMWare Workstation Player](https://www.vmware.com/products/workstation-player.html)
+        -   [VMWare Workstation](https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html)
+        -   [VMware VIX 1.15.7](https://my.vmware.com/web/vmware/details?productId=640&downloadGroup=PLAYER-1253-VIX1157) (This may be optional. Check your VMWare folder for the presence of vmrun.exe)
+    -   Add this to your $PATH: C:\Program Files (x86)\VMware\VMware VIX
+
+```bash
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
+choco install -y docker-machine-vmware -pre
+```
+
+```bash
+bcdedit /set hypervisorlaunchtype off
+minikube start --alsologtostderr -v=7 --vm-driver vmware
+minikube start --vm-driver=vmware
+```
+
 -   Use and mount minikube
 
 ```bash
@@ -248,6 +267,11 @@ rm -rf ~/.minikube
 rm -rf ~/.kube
 brew uninstall minikube
 ```
+-   Fix Apt
+
+```bash
+dpkg --configure -a
+```
 
 ## References
 
@@ -280,6 +304,13 @@ brew uninstall minikube
 -   [How can I add additional fonts to the Windows console?](https://superuser.com/questions/1347724/how-can-i-add-additional-fonts-to-the-windows-console)
 -   [Powerline fonts](https://github.com/powerline/fonts.git)
 -   [Microsoft Terminal](https://github.com/Microsoft/Terminal)
+-   [How To Install Minikube on Ubuntu 18.04 / Debian 10 Linux](https://computingforgeeks.com/how-to-install-minikube-on-ubuntu-18-04/)
+-   [Install KVM on CentOS / RHEL / Ubuntu / Debian / SLES / Arch Linux](https://computingforgeeks.com/install-kvm-centos-rhel-ubuntu-debian-sles-arch/)
+-   [choco package? #9](https://github.com/machine-drivers/docker-machine-driver-vmware/issues/9)
+-   [Workstation Player](https://www.vmware.com/products/workstation-player.html)
+-   [Try VMware Workstation Pro](https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html)
+-   [Download VMware VIX 1.15.7](https://my.vmware.com/web/vmware/details?productId=640&downloadGroup=PLAYER-1253-VIX1157)
+-   [Automation Tools and SDK(s)](https://my.vmware.com/web/vmware/free#desktop_end_user_computing/vmware_player/6_0|PLAYER-602|drivers_tools)
 
 NOTE: remember to use the powershell script if trying to install the Meslo fonts in windows ([.ps1 file](https://github.com/powerline/fonts/blob/master/install.ps1)). It's located in the [fonts repo](https://github.com/powerline/fonts.git).
 
