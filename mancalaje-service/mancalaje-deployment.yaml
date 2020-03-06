@@ -1,10 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: mancalaje-service
+  name: mancalaje
 spec:
   selector:
-    app: mancalaje-service
+    app: mancalaje
     tier: backend
   ports:
     - protocol: TCP
@@ -14,22 +14,22 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mancalaje-service
+  name: mancalaje
 spec:
   selector:
     matchLabels:
-      app: mancalaje-service
+      app: mancalaje
       tier: backend
   replicas: 1
   template:
     metadata:
       labels:
-        app: mancalaje-service
+        app: mancalaje
         tier: backend
     spec:
       containers:
-        - name: mancalaje-service
-          image: mancalaje-service:latest
+        - name: mancalaje
+          image: mancalaje:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 8080

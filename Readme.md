@@ -120,12 +120,16 @@ kubectl create -f docker-psql/postgres-deployment.yaml
 kubectl create -f mancalaje-service/mancalaje-deployment.yaml
 kubectl create -f mancalaje-fe/mancalaje-fe-deployment.yaml
 
-kubectl delete service mancalaje-service 
-kubectl delete deployment mancalaje-service 
+kubectl delete service mancalaje-postgresql
+kubectl delete deployment mancalaje-postgresql
+
+kubectl delete service mancalaje
+kubectl delete deployment mancalaje
 
 kubectl delete service mancalaje-fe
 kubectl delete deployment mancalaje-fe
 
+minikube service mancalaje-postgresql
 minikube service mancalaje-service 
 minikube service mancalaje-fe
 
