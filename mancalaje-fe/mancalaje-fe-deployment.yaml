@@ -3,13 +3,16 @@ apiVersion: v1
 metadata:
   name: mancalaje-fe
 spec:
+  type: LoadBalancer
   selector:
     app: mancalaje-fe
+    tier: frontend
   ports:
-  - protocol: "TCP"
-    port: 80
-    targetPort: 80
-  type: LoadBalancer
+    - name: http
+      port: 80
+      targetPort: 32767
+      protocol: TCP
+      nodePort: 32767
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -19,15 +22,19 @@ spec:
   selector:
     matchLabels:
       app: mancalaje-fe
+      tier: frontend
+      track: stable
   replicas: 1
   template:
     metadata:
       labels:
         app: mancalaje-fe
+        tier: frontend
+        track: stable
     spec:
       containers:
         - name: mancalaje-fe
           image: mancalaje-fe:latest
-          imagePullPolicy: Never
           ports:
-            - containerPort: 80
+            - name: http
+              containerPort: 80

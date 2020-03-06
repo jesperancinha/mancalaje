@@ -131,7 +131,7 @@ kubectl delete service mancalaje-fe
 kubectl delete deployment mancalaje-fe
 
 minikube service mancalaje-postgresql
-minikube service mancalaje-service 
+minikube service mancalaje
 minikube service mancalaje-fe
 
 kubectl get deployments
