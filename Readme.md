@@ -4,6 +4,7 @@
 [![alt text](Documentation/mje-kubernetes-s.png "Kubernetes")](https://kubernetes.io/)
 [![alt text](Documentation/mje-minikube-s.png "Minikube")](https://github.com/kubernetes/minikube)
 [![alt text](Documentation/mje-vmware-s.png "VMWare")](https://www.vmware.com/)
+[![alt text](Documentation/mje-virtualbox-s.png "Virtual Box")](https://www.virtualbox.org/)
 
 [![Generic badge](https://img.shields.io/static/v1.svg?label=Homepage&message=MancalaJE&color=informational)](http://mancalaje.joaofilipesabinoesperancinha.nl/) 
 [![GitHub release](https://img.shields.io/github/release-pre/jesperancinha/mancalaje.svg)](#)
@@ -50,7 +51,7 @@ Example:
 
 Be sure to wait at least a couple of minutes. The Spring boot process needs to start queues and all the connectivity with PostgreSQL.
 
-## Milestones
+## Milestones 🖲
 
 2019-08-01:
 -   5 hour long inactivity registration via email
@@ -103,12 +104,15 @@ create database mancalajedb
 \q
 ```
 
-## Setting up minikube
+## Setting up minikube 💻
+
+NOTE: If you want to run this with vmware please install [VMWare Fusion](https://www.vmware.com/products/fusion/fusion-evaluation.html). You will need this to use the vmrun command. 📝
 
 ```bash
+minikube delete # Just in case 😉
 minikube config set vm-driver virtualbox
 minikube start --vm-driver=virtualbox --extra-config=apiserver.service-node-port-range=1-30000
-minikube addons enable ingress
+minikube addons enable ingress # Not mandatory for now 🙂
 kubectl config use-context minikube
 minikube mount .:/mancalaje
 minikube ssh
@@ -118,6 +122,9 @@ cd /mancalaje/mancalaje-service
 docker build --file=Dockerfile --tag=mancalaje:latest --rm=true .
 cd /mancalaje/mancalaje-fe/docker-files
 docker build --file=Dockerfile --tag=mancalaje-fe:latest --rm=true .
+exit
+```
+```bash
 kubectl create -f docker-psql/postgres-deployment.yaml
 kubectl create -f mancalaje-service/mancalaje-deployment.yaml
 kubectl create -f mancalaje-fe/mancalaje-fe-deployment.yaml
@@ -140,20 +147,21 @@ kubectl get services
 kubectl get pods
 ```
 
-## Hints & Tricks
+🚀 and we are redy to go!
 
+## Hints & Tricks
 -   Install minikube for MAC-OS
 
 ```bash
 brew install minikube
 brew link kubernetes-cli
 brew link --overwrite kubernetes-cli
-brew install docker-machine-driver-vmware
+brew install docker-machine-driver-virtualbox
 brew link --overwrite --dry-run docker-machine
-minikube config set driver vmware
+minikube config set driver virtualbox
 ```
 
--   Install minikube for linux
+-   Install minikube for linux (not fully tested)
 
 ```bash
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
@@ -162,7 +170,7 @@ mkdir -p /usr/local/bin
 install minikube /usr/local/bin/
 ```
 
--   Install minikube for Windows
+-   Install minikube for Windows (not fully tested)
 
     -   Please install:
         -   [VMWare Workstation Player](https://www.vmware.com/products/workstation-player.html)
@@ -181,10 +189,10 @@ minikube start --alsologtostderr -v=7 --vm-driver vmware
 minikube start --vm-driver=vmware
 ```
 
--   Use and mount minikube
+-   Use and mount minikube 
 
 ```bash
-minikube config set vm-driver virtualbox
+minikube config set vm-driver vmware
 minikube start
 kubectl config use-context minikube
 minikube mount .:/mancalaje
@@ -193,7 +201,7 @@ cd /mancalaje/mancalaje-service
 docker build --file=Dockerfile --tag=mancalaje:latest --rm=true .
 ```
 
--   Running jar with minikube
+-   Running jar with minikube (not fully tested)
 ```bash
 kubectl config use-context minikube
 kubectl cluster-info
@@ -278,7 +286,7 @@ brew uninstall minikube
 dpkg --configure -a
 ```
 
-## References
+## References 📚
 
 ### Generic
 
