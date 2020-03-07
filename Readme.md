@@ -107,7 +107,8 @@ create database mancalajedb
 
 ```bash
 minikube config set vm-driver virtualbox
-minikube start
+minikube start --vm-driver=virtualbox --extra-config=apiserver.service-node-port-range=1-30000
+minikube addons enable ingress
 kubectl config use-context minikube
 minikube mount .:/mancalaje
 minikube ssh
@@ -147,6 +148,9 @@ kubectl get pods
 brew install minikube
 brew link kubernetes-cli
 brew link --overwrite kubernetes-cli
+brew install docker-machine-driver-vmware
+brew link --overwrite --dry-run docker-machine
+minikube config set driver vmware
 ```
 
 -   Install minikube for linux

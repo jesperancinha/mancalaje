@@ -12,12 +12,10 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 COPY build /usr/share/nginx/html
 
-RUN nginx -t
-
 EXPOSE 8087
 
 EXPOSE 8080
 
 EXPOSE 5432
 
-CMD tail -f /dev/null
+CMD nginx -t && nginx && tail -f /dev/null
