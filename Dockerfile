@@ -20,7 +20,7 @@ COPY docker-files/nginx.conf /etc/nginx/nginx.conf
 
 COPY mancalaje-service/target/mancalaje-service-1.1.1-SNAPSHOT.jar ${runningFolder}
 
-COPY mancalaje-fe/build /usr/share/nginx/html
+COPY mancalaje-fe/docker-files/build /usr/share/nginx/html
 
 COPY entrypoint.sh ${runningFolder}
 

@@ -7,8 +7,8 @@ services:
     ports:
       - "8080:80"
 
-  mancalaje-postgres:
-    hostname: mancalaje-postgres
+  mancalaje-postgresql:
+    hostname: mancalaje-postgresql
     image: library/postgres:12
     env_file:
       - docker-psql/.env
