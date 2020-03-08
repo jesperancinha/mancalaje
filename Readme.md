@@ -108,7 +108,7 @@ create database mancalajedb
 
 NOTE: If you want to run this with vmware please install [VMWare Fusion](https://www.vmware.com/products/fusion/fusion-evaluation.html). You will need this to use the vmrun command. 📝
 
-### Configure minikube
+### Configure minikube ⌨️
 ```bash
 minikube delete # Just in case 😉
 minikube config set vm-driver virtualbox
@@ -125,7 +125,7 @@ cd /mancalaje/mancalaje-fe/docker-files
 docker build --file=Dockerfile --tag=mancalaje-fe:latest --rm=true .
 exit
 ```
-### Configure deployment
+### Configure deployment ⌨️
 
 ```bash
 kubectl create -f docker-psql/postgres-deployment.yaml
