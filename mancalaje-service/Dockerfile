@@ -18,10 +18,4 @@ COPY target/mancalaje-service*.jar ${runningFolder}
 
 COPY entrypoint.sh ${runningFolder}
 
-EXPOSE 8087
-
-EXPOSE 8080
-
-EXPOSE 5432
-
 ENTRYPOINT ["entrypoint.sh"]

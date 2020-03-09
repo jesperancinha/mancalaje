@@ -39,4 +39,4 @@ spec:
             value: "mancalajedb"
           imagePullPolicy: Never
           ports:
-            - containerPort: 8080
+            - containerPort: 5432
