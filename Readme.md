@@ -289,6 +289,15 @@ brew uninstall minikube
 dpkg --configure -a
 ```
 
+-   Git tag change
+```bash
+git tag new-tag old-tag
+git tag -d old-tag
+git push origin :refs/tags/old-tag
+git push --tags
+git pull --prune --tags
+```
+
 ## References 📚
 
 ### Generic
