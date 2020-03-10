@@ -1,11 +1,5 @@
 # MancalaJe
 
-[![alt text](Documentation/mje-docker-s.png "Docker")](https://www.docker.com/)
-[![alt text](Documentation/mje-kubernetes-s.png "Kubernetes")](https://kubernetes.io/)
-[![alt text](Documentation/mje-minikube-s.png "Minikube")](https://github.com/kubernetes/minikube)
-[![alt text](Documentation/mje-vmware-s.png "VMWare")](https://www.vmware.com/)
-[![alt text](Documentation/mje-virtualbox-s.png "Virtual Box")](https://www.virtualbox.org/)
-
 [![Generic badge](https://img.shields.io/static/v1.svg?label=Homepage&message=MancalaJE&color=informational)](http://mancalaje.joaofilipesabinoesperancinha.nl/) 
 [![GitHub release](https://img.shields.io/github/release-pre/jesperancinha/mancalaje.svg)](#)
   
@@ -112,7 +106,19 @@ create database mancalajedb
 \q
 ```
 
+## Setting up Openshift 💻
+
+### Openshift online
+
+-   [Openshift online](https://manage.openshift.com/)
+
 ## Setting up minikube 💻
+
+[![alt text](Documentation/mje-docker-s.png "Docker")](https://www.docker.com/)
+[![alt text](Documentation/mje-kubernetes-s.png "Kubernetes")](https://kubernetes.io/)
+[![alt text](Documentation/mje-minikube-s.png "Minikube")](https://github.com/kubernetes/minikube)
+[![alt text](Documentation/mje-vmware-s.png "VMWare")](https://www.vmware.com/)
+[![alt text](Documentation/mje-virtualbox-s.png "Virtual Box")](https://www.virtualbox.org/)
 
 NOTE: If you want to run this with vmware please install [VMWare Fusion](https://www.vmware.com/products/fusion/fusion-evaluation.html). You will need this to use the vmrun command. 📝
 
@@ -160,7 +166,8 @@ kubectl get pods
 
 🚀 and we are redy to go!
 
-## Hints & Tricks
+### Minikube Hints & Tricks
+
 -   Install minikube for MAC-OS
 
 ```bash
@@ -193,7 +200,7 @@ install minikube /usr/local/bin/
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
 choco install -y docker-machine-vmware -pre
 ```
-
+-   VMWare runs
 ```bash
 bcdedit /set hypervisorlaunchtype off
 minikube start --alsologtostderr -v=7 --vm-driver vmware
@@ -218,6 +225,18 @@ kubectl config use-context minikube
 kubectl cluster-info
 kubectl run demo-backend --image=demo-backend:latest --port=8080 --image-pull-policy Never
 ```
+
+-   Remove minikube
+
+```bash
+minikube stop
+minikube delete
+rm -rf ~/.minikube
+rm -rf ~/.kube
+brew uninstall minikube
+```
+
+## Hints & Tricks
 
 -   Install java versions without [SDKMan](https://sdkman.io/) for [ubuntu prompt for windows](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6?activetab=pivot:overviewtab).
 
@@ -282,15 +301,6 @@ export SDKMAN_DIR="/root/.sdkman"
  update-java-alternatives -l
 ```
 
--   Remove minikube
-
-```bash
-minikube stop
-minikube delete
-rm -rf ~/.minikube
-rm -rf ~/.kube
-brew uninstall minikube
-```
 -   Fix Apt
 
 ```bash
