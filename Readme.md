@@ -106,18 +106,32 @@ create database mancalajedb
 \q
 ```
 
-## Setting up Openshift 💻
+## Setting up Virtual Machines 💻
 
-### Openshift online
+### Setting up OpenShift
 [![alt text](Documentation/mje-openshift-s.png)](https://manage.openshift.com/)
 
--  Open an account
+-   Open an account
 
     -   [Openshift online](https://manage.openshift.com/)
 
-- Setup OKD (Original Community Distribution of Kubernetes)
+-   Setup OKD (Original Community Distribution of Kubernetes)
 
     -   [OKD](https://www.okd.io/index.html)
+
+-   Install Minishift
+
+```bash
+brew cask install minishift
+brew cask install --force minishift
+minishift addons install --defaults
+minishift addons enable admin-user
+minishift start --vm-driver=virtualbox
+brew install openshift-cli
+oc adm policy --as system:admin add-cluster-role-to-user cluster-admin developer
+minishift console
+oc create rolebinding default-view --clusterrole=view --serviceaccount=baeldung-demo:default --namespace=baeldung-demo
+```
 
 ## Setting up minikube 💻
 
@@ -325,12 +339,15 @@ git pull --prune --tags
 
 ## References 📚
 
-### Openshift
+###  [![alt text](Documentation/mje-openshift-s.png "Openshift")](https://www.openshift.com/) Openshift
 
 -   [OpenShift by Tutorials Point](https://www.tutorialspoint.com/openshift/index.htm)
 -   [Learn Open Shift](https://learn.openshift.com/)
+-   [Deploy a Spring Boot Application to OpenShift](https://www.baeldung.com/spring-boot-deploy-openshift)
+-   [Minishift](https://docs.okd.io/latest/minishift/index.html)
+-   [Minishif Installation](https://docs.okd.io/latest/minishift/getting-started/installing.html)
 
-### Minikube
+### [![alt text](Documentation/mje-minikube-s.png "Minikube")](https://github.com/kubernetes/minikube) Minikube
 
 -   [What is minikube, kubectl and kubelet by Andreth Salazar](https://www.quora.com/What-is-minikube-kubectl-and-kubelet)
 -   [Install Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
