@@ -111,7 +111,13 @@ create database mancalajedb
 ### Openshift online
 [![alt text](Documentation/mje-openshift-s.png)](https://manage.openshift.com/)
 
--   [Openshift online](https://manage.openshift.com/)
+-  Open an account
+
+    -   [Openshift online](https://manage.openshift.com/)
+
+- Setup OKD (Original Community Distribution of Kubernetes)
+
+    -   [OKD](https://www.okd.io/index.html)
 
 ## Setting up minikube 💻
 
