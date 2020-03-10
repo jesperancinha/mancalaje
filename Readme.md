@@ -130,7 +130,7 @@ minishift start --vm-driver=virtualbox
 brew install openshift-cli
 oc adm policy --as system:admin add-cluster-role-to-user cluster-admin developer
 minishift console
-oc create rolebinding default-view --clusterrole=view --serviceaccount=baeldung-demo:default --namespace=baeldung-demo
+oc create rolebinding default-view --clusterrole=view --serviceaccount=mancalaje:default --namespace=mancalaje
 ```
 
 ## Setting up minikube 💻
