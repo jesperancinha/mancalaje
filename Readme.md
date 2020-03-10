@@ -35,6 +35,14 @@
  :      :     :   : :  ::    :    :: :: :   :   : :  : :: : :   :   : :              : :::    : :: ::   
 ```                                                                                                           
 
+## Introduction
+
+According to [Ultraboard Games](https://www.ultraboardgames.com/mancala/history.php) the mancala game has existed for about 7000 years. This means that since the middle neolithic phase of History, mankind has been playing this game.
+
+This project is also the official support project of my article on medium:
+
+[The Mancala Saga — Episode I — A minikube box](https://medium.com/@jofisaes/the-mancala-saga-episode-i-64118716b40a)
+
 ## Docker Compose
 
 I have provided a docker-compose environment that will run this application in your docker-machine addess.
