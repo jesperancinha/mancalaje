@@ -325,7 +325,11 @@ git pull --prune --tags
 
 ## References 📚
 
-### Generic
+### Openshift
+
+-   [OpenShift by Tutorials Point](https://www.tut:orialspoint.com/openshift/index.htm)
+
+### Minikube
 
 -   [What is minikube, kubectl and kubelet by Andreth Salazar](https://www.quora.com/What-is-minikube-kubectl-and-kubelet)
 -   [Install Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
