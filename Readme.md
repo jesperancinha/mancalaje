@@ -109,6 +109,7 @@ create database mancalajedb
 ## Setting up Openshift 💻
 
 ### Openshift online
+[![alt text](Documentation/mje-openshift-s.png)](https://manage.openshift.com/)
 
 -   [Openshift online](https://manage.openshift.com/)
 
