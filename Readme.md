@@ -327,7 +327,8 @@ git pull --prune --tags
 
 ### Openshift
 
--   [OpenShift by Tutorials Point](https://www.tut:orialspoint.com/openshift/index.htm)
+-   [OpenShift by Tutorials Point](https://www.tutorialspoint.com/openshift/index.htm)
+-   [Learn Open Shift](https://learn.openshift.com/)
 
 ### Minikube
 
