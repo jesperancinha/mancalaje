@@ -346,6 +346,7 @@ git pull --prune --tags
 -   [Deploy a Spring Boot Application to OpenShift](https://www.baeldung.com/spring-boot-deploy-openshift)
 -   [Minishift](https://docs.okd.io/latest/minishift/index.html)
 -   [Minishif Installation](https://docs.okd.io/latest/minishift/getting-started/installing.html)
+-   [Fabric 8 maven plugin](https://github.com/fabric8io/fabric8-maven-plugin)
 
 ### [![alt text](Documentation/mje-minikube-s.png "Minikube")](https://github.com/kubernetes/minikube) Minikube
 
