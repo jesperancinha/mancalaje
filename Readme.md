@@ -347,6 +347,7 @@ git pull --prune --tags
 -   [Minishift](https://docs.okd.io/latest/minishift/index.html)
 -   [Minishif Installation](https://docs.okd.io/latest/minishift/getting-started/installing.html)
 -   [Fabric 8 maven plugin](https://github.com/fabric8io/fabric8-maven-plugin)
+-   [Fabric 8](Fabric 8 maven plugin)
 
 ### [![alt text](Documentation/mje-minikube-s.png "Minikube")](https://github.com/kubernetes/minikube) Minikube
 
