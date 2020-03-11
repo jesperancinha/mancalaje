@@ -139,6 +139,10 @@ oc create rolebinding default-view --clusterrole=view --serviceaccount=mancalaje
 apt install virtualbox-dkms
 ```
 
+```bash
+Error starting the VM: Error creating the VM. Error with pre-create check: "This computer doesn't have VT-X/AMD-v enabled. Enabling it in the BIOS is mandatory"
+```
+
 ## Setting up minikube 💻
 
 [![alt text](Documentation/mje-docker-s.png "Docker")](https://www.docker.com/)
