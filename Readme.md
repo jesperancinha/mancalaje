@@ -133,6 +133,12 @@ minishift console
 oc create rolebinding default-view --clusterrole=view --serviceaccount=mancalaje:default --namespace=mancalaje
 ```
 
+-   Install for systems running Ubuntu on a Windows machine
+
+```bash
+apt install virtualbox-dkms
+```
+
 ## Setting up minikube 💻
 
 [![alt text](Documentation/mje-docker-s.png "Docker")](https://www.docker.com/)
