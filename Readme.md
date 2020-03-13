@@ -35,7 +35,7 @@ According to [Ultraboard Games](https://www.ultraboardgames.com/mancala/history.
 
 This project is also the official support project of my article on medium:
 
-[The Mancala Saga — Episode I — A minikube box](https://medium.com/@jofisaes/the-mancala-saga-episode-i-64118716b40a)
+[Deploying Mancala with Minikube](https://medium.com/swlh/deploying-mancala-with-minikube-4bc09a15a405)
 
 ## Docker Compose
 
