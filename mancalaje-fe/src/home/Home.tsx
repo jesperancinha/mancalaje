@@ -6,6 +6,8 @@ import {Grid, Typography} from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import Box from "@material-ui/core/Box";
 import {GRID_SPACING, XS_COL_SPAN} from "../theme";
+import {TwitterTimelineEmbed} from "react-twitter-embed";
+import {MancalaJeHeader} from "../components/MancalaJeHeader";
 
 class Home extends React.Component {
     public render(): {} {
@@ -26,6 +28,11 @@ class Home extends React.Component {
                         <Link to={`/login`}>
                             <img src={logo} className="App-logo" alt="logo"/>
                         </Link>
+                        <TwitterTimelineEmbed
+                            sourceType="profile"
+                            screenName="joaofse"
+                            options={{height: 200, width:400}}
+                        />
                         <Box>
                             <a
                                 className="App-link"

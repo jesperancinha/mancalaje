@@ -23,6 +23,27 @@
     color: #61dafb;
 }
 
+.top {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.top.right {
+    display: inline-flex;
+    flex-direction: row;
+}
+
+.top.rating-words {
+    text-transform: uppercase;
+    margin-right: 10px;
+}
+
+.top.overall-stars {
+    margin-top: -2px;
+}
+
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);
@@ -31,3 +52,4 @@
         transform: rotate(360deg);
     }
 }
+
