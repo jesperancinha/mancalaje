@@ -353,7 +353,6 @@ git pull --prune --tags
 
 -   [OpenShift by Tutorials Point](https://www.tutorialspoint.com/openshift/index.htm)
 -   [Learn Open Shift](https://learn.openshift.com/)
--   [Deploy a Spring Boot Application to OpenShift](https://www.baeldung.com/spring-boot-deploy-openshift)
 -   [Minishift](https://docs.okd.io/latest/minishift/index.html)
 -   [Minishif Installation](https://docs.okd.io/latest/minishift/getting-started/installing.html)
 -   [Fabric 8 maven plugin](https://github.com/fabric8io/fabric8-maven-plugin)
@@ -369,7 +368,6 @@ git pull --prune --tags
 -   [Spring Boot OAuth2 Social Login with Google, Facebook, and Github - Part 1](https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/)
 -   [Shields IO](https://shields.io)
 -   [How To Install Oracle Java 8 and OpenJDK 11 on Ubuntu 18.04, 19.04](https://www.linuxbabe.com/ubuntu/install-oracle-java-8-openjdk-11-ubuntu-18-04-18-10)
--   [Running Spring Boot Applications With Minikube by Baeldung](https://www.baeldung.com/spring-boot-minikube)
 -   [Build and Deploy a Spring Boot App on Kubernetes (Minikube)](https://gorillalogic.com/blog/build-and-deploy-a-spring-boot-app-on-kubernetes-minikube/)
 
 ### Implementation related

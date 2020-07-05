@@ -31,10 +31,8 @@ UPDATE DATABASECHANGELOGLOCK SET LOCKED=FALSE, LOCKGRANTED=null, LOCKEDBY=null w
 -   [How to send emails from localhost (MAC OS X El Capitan)](https://www.developerfiles.com/how-to-send-emails-from-localhost-mac-os-x-el-capitan/)
 -   [PostgreSQL](https://www.postgresql.org/)
 -   [How to connect to H2 database during development/testing using Spring-Boot](https://medium.com/@harittweets/how-to-connect-to-h2-database-during-development-testing-using-spring-boot-44bbb287570)
--   [Spring Session with JDBC](https://www.baeldung.com/spring-session-jdbc)
 -   [SDK Man!](https://sdkman.io/)
 -   [Spring Boot and OAuth2](https://spring.io/guides/tutorials/spring-boot-oauth2/)
--   [Simple Single Sign-On with Spring Security OAuth2](https://www.baeldung.com/sso-spring-security-oauth2)
 -   [Spring Boot 2 And OAuth 2 - A Complete Guide](https://pattern-match.com/blog/2018/10/17/springboot2-with-oauth2-integration/)
 -   [An OAuth 2.0 introduction for beginners](https://itnext.io/an-oauth-2-0-introduction-for-beginners-6e386b19f7a9)
 
