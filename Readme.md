@@ -396,7 +396,7 @@ git pull --prune --tags
 
 NOTE: remember to use the powershell script if trying to install the Meslo fonts in windows ([.ps1 file](https://github.com/powerline/fonts/blob/master/install.ps1)). It's located in the [fonts repo](https://github.com/powerline/fonts.git).
 
-## About me 👨🏽‍💻🚀
+## About me 👨🏽‍💻🚀🏳️‍🌈
 
 [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-20/JEOrgLogo-20.png "João Esperancinha Homepage")](http://joaofilipesabinoesperancinha.nl)
 [![Twitter Follow](https://img.shields.io/twitter/follow/joaofse?label=João%20Esperancinha&style=social "Twitter")](https://twitter.com/joaofse)
