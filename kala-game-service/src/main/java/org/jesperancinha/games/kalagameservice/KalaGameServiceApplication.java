@@ -1,7 +1,7 @@
 package org.jesperancinha.games.kalagameservice;
 
 import org.jesperancinha.games.kalagameservice.model.Stone;
-import org.jesperancinha.games.kalagameservice.service.KalaStoneRepository;
+import org.jesperancinha.games.kalagameservice.repository.KalaStoneRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;

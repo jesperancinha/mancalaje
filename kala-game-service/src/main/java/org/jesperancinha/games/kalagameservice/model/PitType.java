@@ -1,4 +1,6 @@
 package org.jesperancinha.games.kalagameservice.model;
 
-public class LargePit extends Pit {
+public enum PitType {
+    LARGE,
+    SMALL
 }
