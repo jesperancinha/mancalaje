@@ -122,13 +122,19 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public Board joinPlayer(Player player, Board board) {
+    public Board joinPlayer(Player playerTwo, Board board) {
         var pitTwo = board.getPitTwo();
         while (Objects.isNull(pitTwo.getPlayer())) {
-            pitTwo.setPlayer(player);
+            pitTwo.setPlayer(playerTwo);
             pitTwo = pitTwo.getNextPit();
         }
         board.getPits().forEach(pitRepository::save);
+        board.setPlayerTwo(playerTwo);
+        playerTwo.setOpponent(board.getPlayerOne());
+        final Player playerOne = board.getPlayerOne();
+        playerOne.setOpponent(playerTwo);
+        playerRepository.save(playerOne);
+        playerRepository.save(playerTwo);
         return boardRepository.save(board);
     }
 }

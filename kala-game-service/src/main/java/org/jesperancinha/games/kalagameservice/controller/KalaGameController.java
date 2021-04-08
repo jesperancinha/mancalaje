@@ -60,7 +60,7 @@ public class KalaGameController {
         return BoardConverter.toDto(boardUpdated);
     }
 
-    @PutMapping("join/{boardId}}")
+    @PutMapping("join/{boardId}")
     public BoardDto join(Principal principal,
                          @PathVariable
                                  Long boardId) {
