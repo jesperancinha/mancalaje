@@ -30,8 +30,8 @@ public class Pit {
     @Column
     private PitType pitType;
 
-    @OneToMany
-    private List<Stone> stones;
+    @Column
+    private Integer stones;
 
     @OneToOne
     private Pit nextPit;
