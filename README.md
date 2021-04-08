@@ -34,6 +34,9 @@ curl -i -b cookies.txt http://localhost:8081/user
 curl -i -b cookies.txt -X POST http://localhost:8081/api/
 curl -i -b cookies.txt -X POST http://localhost:8081/api/create
 curl -i -b cookies.txt -X PUT http://localhost:8081/api/move/1/1
+
+curl -i -H "Content-Type: application/x-www-form-urlencoded" -c cookies.txt  -d "username=player2&password=admin" -X POST http://localhost:8081/login
+curl -i -b cookies.txt -X PUT http://localhost:8081/api/join/1
 ```
 
 ## Bibliography

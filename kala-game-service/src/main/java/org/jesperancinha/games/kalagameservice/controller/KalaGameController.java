@@ -60,6 +60,16 @@ public class KalaGameController {
         return BoardConverter.toDto(boardUpdated);
     }
 
+    @PutMapping("join/{boardId}}")
+    public BoardDto join(Principal principal,
+                         @PathVariable
+                                 Long boardId) {
+        var player = playerService.createOrFindPlayerByName(principal.getName());
+        final Board board = boardService.findBoardById(boardId);
+        final Board boardUpdated = gameService.joinPlayer(player, board);
+        return BoardConverter.toDto(boardUpdated);
+    }
+
     @GetMapping
     public List<BoardDto> getAllBoardsPerPlayer(Principal principal) {
         final Player player = playerService.createOrFindPlayerByName(principal.getName());
