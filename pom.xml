@@ -27,7 +27,7 @@
         <postgresql.version>42.2.13</postgresql.version>
         <guava.version>30.0-android</guava.version>
         <jmock-junit4.version>2.12.0</jmock-junit4.version>
-        <activemq-all.version>5.12.0</activemq-all.version>
+        <activemq-all.version>5.16.1</activemq-all.version>
     </properties>
 
     <modules>
