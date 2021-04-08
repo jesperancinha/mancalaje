@@ -11,6 +11,7 @@ public class BoardConverter {
                 .id(board.getId())
                 .currentPlayerDto(PlayerConverter.toDto(board.getCurrentPlayer()))
                 .pitDtos((board.getPits().stream().map(PitConverter::toDto).collect(Collectors.toList())))
+                .winnerDto(PlayerConverter.toDto(board.getWinner()))
                 .build();
     }
 }

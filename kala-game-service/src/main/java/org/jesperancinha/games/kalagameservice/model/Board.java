@@ -54,5 +54,6 @@ public class Board {
     @OneToOne
     private Player currentPlayer;
 
-
+    @OneToOne
+    private Player winner;
 }

@@ -1,5 +1,8 @@
 package org.jesperancinha.games.kalagameservice.service;
 
+import org.jesperancinha.games.kalagameservice.exception.InvalidPitException;
+import org.jesperancinha.games.kalagameservice.exception.NotOwnedPitException;
+import org.jesperancinha.games.kalagameservice.exception.WrongTurnException;
 import org.jesperancinha.games.kalagameservice.model.Board;
 import org.jesperancinha.games.kalagameservice.model.Pit;
 import org.jesperancinha.games.kalagameservice.model.Player;
@@ -78,6 +81,8 @@ public class GameServiceImpl implements GameService {
         if (Objects.isNull(player.getBoards())) {
             player.setBoards(new ArrayList<>());
         }
+        board.setKalahOne(kalahPit);
+        board.setKalahTwo(kalahPit2);
         final Board registeredBoard = boardRepository.save(board);
         player.getBoards().add(board);
         playerRepository.save(player);
@@ -86,6 +91,15 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public Board sowStonesFromPit(Player player, Pit pit, Board board) {
+        if (pit.getPitType() == LARGE) {
+            throw new InvalidPitException();
+        }
+        if (!pit.getPlayer().getUsername().equals(player.getUsername())) {
+            throw new NotOwnedPitException();
+        }
+        if (!player.getUsername().equals(board.getCurrentPlayer().getUsername())) {
+            throw new WrongTurnException();
+        }
         var stones = pit.getStones();
         pit.setStones(0);
         var currentPit = pit.getNextPit();
@@ -106,6 +120,7 @@ public class GameServiceImpl implements GameService {
                     } else if (player.getUsername().equals(board.getPlayerTwo().getUsername())) {
                         board.getKalahTwo().setStones(board.getKalahOne().getStones() + total);
                     }
+                    checkWinner(board);
                     board.getPits().forEach(pitRepository::save);
                     return board;
                 }
@@ -118,7 +133,28 @@ public class GameServiceImpl implements GameService {
         }
         board.setCurrentPlayer(player.getOpponent());
         board.getPits().forEach(pitRepository::save);
+        checkWinner(board);
         return boardRepository.save(board);
+    }
+
+    private void checkWinner(Board board) {
+        if (isWinner(board.getPitOne())) {
+            board.setWinner(board.getPlayerOne());
+        } else if (isWinner(board.getPitTwo())) {
+            board.setWinner(board.getPlayerTwo());
+        }
+    }
+
+    private boolean isWinner(Pit pit) {
+        boolean winnerone = true;
+        while (pit.getPitType() != LARGE) {
+            if (pit.getStones() > 0) {
+                winnerone = false;
+                break;
+            }
+            pit = pit.getNextPit();
+        }
+        return winnerone;
     }
 
     @Override

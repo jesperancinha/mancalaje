@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.jesperancinha.games.kalagameservice.model.Player;
 
 import java.util.List;
 
@@ -33,4 +34,7 @@ public class BoardDto {
     private PlayerDto playerDtoTwo;
 
     private PlayerDto currentPlayerDto;
+
+    private PlayerDto winnerDto;
+
 }

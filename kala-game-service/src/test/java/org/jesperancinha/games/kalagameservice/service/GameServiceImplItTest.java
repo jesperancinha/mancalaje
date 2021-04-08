@@ -24,10 +24,6 @@ class GameServiceImplItTest {
 
     @Autowired
     private KalaPlayerRepository kalaPlayerRepository;
-    @Autowired
-    private KalaPitRepository kalaPitRepository;
-    @Autowired
-    private KalaBoardRepository kalaBoardRepository;
 
     @Test
     void testCreateNewBoard_whenCreateNewBoard_creationSuccessful() {
