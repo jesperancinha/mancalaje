@@ -1,26 +1,14 @@
 drop table if exists authorities;
 drop table if exists users;
-drop sequence if exists hibernate_sequence;
-drop table if exists oauth_access_token;
-
-drop table if exists oauth_refresh_token;
-
-create sequence hibernate_sequence;
-
-create table oauth_refresh_token
+create table users
 (
-    token_id       VARCHAR(256),
-    token          bytea,
-    authentication bytea
+    username varchar(50)  not null primary key,
+    password varchar(255) not null,
+    enabled  boolean      not null
 );
-
-create table oauth_access_token
+create table authorities
 (
-    authentication_id VARCHAR(256),
-    token_id          VARCHAR(256),
-    token             bytea,
-    user_name         VARCHAR(256),
-    client_id         VARCHAR(256),
-    authentication    bytea,
-    refresh_token     VARCHAR(256)
+    username  varchar(50) not null,
+    authority varchar(50) not null,
+    foreign key (username) references users (username)
 );
