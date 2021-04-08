@@ -5,6 +5,7 @@ import org.jesperancinha.games.kalagameservice.model.Pit;
 import org.jesperancinha.games.kalagameservice.model.Player;
 import org.jesperancinha.games.kalagameservice.repository.KalaBoardRepository;
 import org.jesperancinha.games.kalagameservice.repository.KalaPitRepository;
+import org.jesperancinha.games.kalagameservice.repository.KalaPlayerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,9 +21,12 @@ public class GameServiceImpl implements GameService {
 
     private final KalaPitRepository pitRepository;
 
-    public GameServiceImpl(KalaBoardRepository boardRepository, KalaPitRepository pitRepository) {
+    private final KalaPlayerRepository playerRepository;
+
+    public GameServiceImpl(KalaBoardRepository boardRepository, KalaPitRepository pitRepository, KalaPlayerRepository playerRepository) {
         this.boardRepository = boardRepository;
         this.pitRepository = pitRepository;
+        this.playerRepository = playerRepository;
     }
 
     @Override
@@ -70,7 +74,13 @@ public class GameServiceImpl implements GameService {
         board.setPits(pits);
         pits.forEach(pitRepository::save);
         board.setCurrentPlayer(player);
-        return boardRepository.save(board);
+        if (Objects.isNull(player.getBoards())) {
+            player.setBoards(new ArrayList<>());
+        }
+        final Board registeredBoard = boardRepository.save(board);
+        player.getBoards().add(board);
+        playerRepository.save(player);
+        return registeredBoard;
     }
 
     @Override
@@ -113,7 +123,7 @@ public class GameServiceImpl implements GameService {
     @Override
     public Board joinPlayer(Player player, Board board) {
         var pitTwo = board.getPitTwo();
-        while (Objects.isNull(pitTwo.getPlayer())){
+        while (Objects.isNull(pitTwo.getPlayer())) {
             pitTwo.setPlayer(player);
             pitTwo = pitTwo.getNextPit();
         }

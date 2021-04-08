@@ -5,6 +5,7 @@ import org.jesperancinha.games.kalagameservice.model.Pit;
 import org.jesperancinha.games.kalagameservice.model.Player;
 import org.jesperancinha.games.kalagameservice.repository.KalaBoardRepository;
 import org.jesperancinha.games.kalagameservice.repository.KalaPitRepository;
+import org.jesperancinha.games.kalagameservice.repository.KalaPlayerRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -30,6 +31,9 @@ class GameServiceImplTest {
 
     @Mock
     private KalaBoardRepository boardRepository;
+
+    @Mock
+    private KalaPlayerRepository playerRepository;
 
     @Test
     void testCreateNewBoard_whenCreateNewBoard_creationSuccessful() {
@@ -63,7 +67,8 @@ class GameServiceImplTest {
         }
         assertThat(currentPit.getStones()).isEqualTo(0);
 
-        verify(pitRepository, times(14)).save(any());
+        verify(pitRepository, times(28)).save(any());
         verify(boardRepository, times(1)).save(any());
+        verify(playerRepository, times(1)).save(any());
     }
 }

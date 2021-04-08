@@ -17,7 +17,7 @@ public class KalaGameController {
     }
 
     @GetMapping
-    public BoardDto getCurrentBoard(Principal principal){
+    public BoardDto getCurrentBoard(Principal principal) {
         return null;
     }
 }

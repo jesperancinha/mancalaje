@@ -2,7 +2,6 @@ package org.jesperancinha.games.kalagameservice.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,7 +29,7 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public JdbcUserDetailsManager userDetailsManager(){
+    public JdbcUserDetailsManager userDetailsManager() {
         return new JdbcUserDetailsManager(dataSource);
     }
 

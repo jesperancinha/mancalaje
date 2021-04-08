@@ -1,10 +1,14 @@
 package org.jesperancinha.games.kalagameservice.service;
 
 import org.jesperancinha.games.kalagameservice.model.Player;
+import org.jesperancinha.games.kalagameservice.repository.KalaBoardRepository;
+import org.jesperancinha.games.kalagameservice.repository.KalaPitRepository;
 import org.jesperancinha.games.kalagameservice.repository.KalaPlayerRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.jesperancinha.games.kalagameservice.model.PitType.LARGE;
@@ -12,12 +16,18 @@ import static org.jesperancinha.games.kalagameservice.model.PitType.SMALL;
 
 
 @SpringBootTest
+@Transactional
 class GameServiceImplItTest {
 
     @Autowired
     private GameServiceImpl gameService;
+
     @Autowired
     private KalaPlayerRepository kalaPlayerRepository;
+    @Autowired
+    private KalaPitRepository kalaPitRepository;
+    @Autowired
+    private KalaBoardRepository kalaBoardRepository;
 
     @Test
     void testCreateNewBoard_whenCreateNewBoard_creationSuccessful() {
