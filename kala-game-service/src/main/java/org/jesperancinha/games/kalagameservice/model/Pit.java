@@ -18,7 +18,6 @@ import javax.persistence.Table;
 @Setter
 @Getter
 @Builder
-@EqualsAndHashCode
 @Entity
 @Table
 @NoArgsConstructor
