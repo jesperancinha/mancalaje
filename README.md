@@ -40,6 +40,8 @@ curl -i -H "Content-Type: application/x-www-form-urlencoded" -c cookies2.txt  -d
 curl -i -b cookies2.txt -X PUT http://localhost:8081/api/join/16
 ```
 
+Have a look at [game.sh](./game.sh) for a practical example.
+
 ## Bibliography
 
 - https://www.devglan.com/spring-security/spring-webflux-rest-authentication
