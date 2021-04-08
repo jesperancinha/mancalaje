@@ -33,6 +33,7 @@ curl -i -H "Content-Type: application/x-www-form-urlencoded" -c cookies.txt  -d 
 curl -i -b cookies.txt http://localhost:8081/user
 curl -i -b cookies.txt -X POST http://localhost:8081/api/
 curl -i -b cookies.txt -X POST http://localhost:8081/api/create
+curl -i -b cookies.txt -X PUT http://localhost:8081/api/move/1/1
 ```
 
 ## Bibliography
