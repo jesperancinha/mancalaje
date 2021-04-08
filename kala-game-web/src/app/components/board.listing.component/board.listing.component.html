@@ -1,3 +1,17 @@
 <mat-card>
-
+  <mat-card *ngIf="allPlayerBoards && allPlayerBoards.length>0">
+    <mat-card-title>Player Boards</mat-card-title>
+    <mat-list>
+      <mat-list-item *ngFor="let board of allPlayerBoards">{{board.id}}</mat-list-item>
+    </mat-list>
+  </mat-card>
+  <mat-card *ngIf="allAvailableBoars && allAvailableBoars.length>0">
+    <mat-card-title>Available Boards</mat-card-title>
+    <mat-list>
+      <mat-list-item *ngFor="let board of allAvailableBoars">{{board.id}}</mat-list-item>
+    </mat-list>
+  </mat-card>
+  <mat-card>
+    <input type="button" value="Create new board" (click)="createNewBoard()"/>
+  </mat-card>
 </mat-card>

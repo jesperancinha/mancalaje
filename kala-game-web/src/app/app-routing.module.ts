@@ -4,13 +4,13 @@ import {BoardListingComponent} from "./components/board.listing.component/board.
 
 const routes: Routes = [
   {path: 'boards', component: BoardListingComponent},
+  {path: '', component: BoardListingComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: false})],
   exports: [RouterModule]
 })
 
 export class AppRoutingModule {
-
 }

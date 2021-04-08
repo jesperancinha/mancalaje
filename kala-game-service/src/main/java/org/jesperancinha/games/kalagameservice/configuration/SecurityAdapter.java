@@ -32,6 +32,7 @@ public class SecurityAdapter extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .formLogin()
+                .defaultSuccessUrl("http://localhost:4200")
                 .and().csrf().disable();
     }
 

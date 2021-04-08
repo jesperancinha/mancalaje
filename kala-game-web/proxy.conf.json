@@ -1,20 +1,21 @@
 {
   "/logout": {
-    "target": "http://localhost:8081/logout",
+    "target": "http://localhost:8081",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/login": {
-    "target": "http://localhost:8081/login",
+    "target": "http://localhost:8081",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/api": {
-    "target": "http://localhost:8081/api",
+    "target": "http://localhost:8081",
     "secure": false,
-    "logLevel": "debug",
-    "changeOrigin": true
+    "pathRewrite": {"^/api/" : "/api/"},
+    "changeOrigin": true,
+    "logLevel": "debug"
   }
 }

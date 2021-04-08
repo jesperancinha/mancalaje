@@ -74,6 +74,7 @@ public class GameServiceImpl implements GameService {
         board.setPits(pits);
         pits.forEach(pitRepository::save);
         board.setCurrentPlayer(player);
+        board.setPlayerOne(player);
         if (Objects.isNull(player.getBoards())) {
             player.setBoards(new ArrayList<>());
         }

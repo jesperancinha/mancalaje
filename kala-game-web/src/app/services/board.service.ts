@@ -17,7 +17,7 @@ export class BoardService {
   }
 
   public createBoard() {
-    return this.http.post(createBoardUrl, {}).pipe(
+    return this.http.post(createBoardUrl, "").pipe(
       retry(3), catchError(this.handleError()));
   }
 
