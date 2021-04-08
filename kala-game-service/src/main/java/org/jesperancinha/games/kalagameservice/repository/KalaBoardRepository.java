@@ -9,4 +9,6 @@ import java.util.List;
 public interface KalaBoardRepository extends JpaRepository<Board, Long> {
 
     List<Board> findBoardsByPlayerOneEquals(Player player);
+
+    List<Board> findBoardsByPlayerTwoIsNull();
 }

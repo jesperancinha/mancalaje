@@ -16,11 +16,6 @@ public class KalaGameRegistrationController {
         this.playerService = playerService;
     }
 
-    @GetMapping("/")
-    public String welcome() {
-        return "Welcome !";
-    }
-
     @PostMapping("/")
     public void createPlayer(Principal principal) {
         playerService.createPlayer(principal.getName());
@@ -28,11 +23,6 @@ public class KalaGameRegistrationController {
 
     @GetMapping("/user")
     public String greetUser(Principal principal) {
-        return String.format("Hello, %s", principal.getName());
-    }
-
-    @GetMapping("/admin")
-    public String greetAdmin(Principal principal) {
         return String.format("Hello, %s", principal.getName());
     }
 }
