@@ -1,8 +1,6 @@
 package org.jesperancinha.games.kalagameservice.service;
 
 import org.jesperancinha.games.kalagameservice.model.Player;
-import org.jesperancinha.games.kalagameservice.repository.KalaBoardRepository;
-import org.jesperancinha.games.kalagameservice.repository.KalaPitRepository;
 import org.jesperancinha.games.kalagameservice.repository.KalaPlayerRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,5 +150,87 @@ class GameServiceImplItTest {
         }
         assertThat(currentPit.getStones()).isEqualTo(0);
         assertThat(board.getCurrentPlayer().getUsername()).isEqualTo(user2.getUsername());
+    }
+
+
+    @Test
+    void testSowStonesFromPit_whenLandingOnOwnedPit_thenPickAllAndAddToKalah() {
+        final var user1 = Player.builder().username("user1").build();
+        final var user2 = Player.builder().username("user2").build();
+        kalaPlayerRepository.save(user1);
+        kalaPlayerRepository.save(user2);
+        user1.setOpponent(user2);
+        user2.setOpponent(user1);
+        kalaPlayerRepository.save(user1);
+        kalaPlayerRepository.save(user2);
+        var board = gameService.createNewBoard(user1);
+        board = gameService.joinPlayer(user2, board);
+        board = gameService.sowStonesFromPit(user1, board.getPitOne(), board);
+        board = gameService.sowStonesFromPit(user1, board.getPitOne().getNextPit(), board);
+        board = gameService.sowStonesFromPit(user2, board.getPitTwo(), board);
+        board = gameService.sowStonesFromPit(user1, board.getPitOne().getNextPit().getNextPit().getNextPit().getNextPit().getNextPit(), board);
+        assertThat(board).isNotNull();
+        assertThat(board.getPits()).isNotNull();
+        assertThat(board.getPits()).hasSize(14);
+        assertThat(board.getPits().get(6).getPitType()).isEqualTo(LARGE);
+        assertThat(board.getPits().get(13).getPitType()).isEqualTo(LARGE);
+        assertThat(board.getPits().get(0)).isSameAs(board.getPits().get(13).getNextPit());
+
+        var currentPit = board.getPits().get(0);
+        assertThat(currentPit.getStones()).isEqualTo(0);
+        assertThat(currentPit.getPlayer()).isSameAs(user1);
+        assertThat(currentPit.getPitType()).isEqualTo(SMALL);
+        currentPit = currentPit.getNextPit();
+        assertThat(currentPit.getStones()).isEqualTo(0);
+        assertThat(currentPit.getPlayer()).isSameAs(user1);
+        assertThat(currentPit.getPitType()).isEqualTo(SMALL);
+        currentPit = currentPit.getNextPit();
+        assertThat(currentPit.getStones()).isEqualTo(8);
+        assertThat(currentPit.getPlayer()).isSameAs(user1);
+        assertThat(currentPit.getPitType()).isEqualTo(SMALL);
+        currentPit = currentPit.getNextPit();
+        assertThat(currentPit.getStones()).isEqualTo(8);
+        assertThat(currentPit.getPlayer()).isSameAs(user1);
+        assertThat(currentPit.getPitType()).isEqualTo(SMALL);
+        currentPit = currentPit.getNextPit();
+        assertThat(currentPit.getStones()).isEqualTo(8);
+        assertThat(currentPit.getPlayer()).isSameAs(user1);
+        assertThat(currentPit.getPitType()).isEqualTo(SMALL);
+        currentPit = currentPit.getNextPit();
+        assertThat(currentPit.getStones()).isEqualTo(0);
+        assertThat(currentPit.getPlayer()).isSameAs(user1);
+        assertThat(currentPit.getPitType()).isEqualTo(SMALL);
+        currentPit = currentPit.getNextPit();
+        assertThat(currentPit.getStones()).isEqualTo(6);
+        assertThat(currentPit.getPlayer()).isSameAs(user1);
+        assertThat(currentPit.getPitType()).isEqualTo(LARGE);
+        currentPit = currentPit.getNextPit();
+        assertThat(currentPit.getStones()).isEqualTo(0);
+        assertThat(currentPit.getPlayer()).isSameAs(user2);
+        assertThat(currentPit.getPitType()).isEqualTo(SMALL);
+        currentPit = currentPit.getNextPit();
+        assertThat(currentPit.getStones()).isEqualTo(9);
+        assertThat(currentPit.getPlayer()).isSameAs(user2);
+        assertThat(currentPit.getPitType()).isEqualTo(SMALL);
+        currentPit = currentPit.getNextPit();
+        assertThat(currentPit.getStones()).isEqualTo(8);
+        assertThat(currentPit.getPlayer()).isSameAs(user2);
+        assertThat(currentPit.getPitType()).isEqualTo(SMALL);
+        currentPit = currentPit.getNextPit();
+        assertThat(currentPit.getStones()).isEqualTo(8);
+        assertThat(currentPit.getPlayer()).isSameAs(user2);
+        assertThat(currentPit.getPitType()).isEqualTo(SMALL);
+        currentPit = currentPit.getNextPit();
+        assertThat(currentPit.getStones()).isEqualTo(8);
+        assertThat(currentPit.getPlayer()).isSameAs(user2);
+        assertThat(currentPit.getPitType()).isEqualTo(SMALL);
+        currentPit = currentPit.getNextPit();
+        assertThat(currentPit.getStones()).isEqualTo(8);
+        assertThat(currentPit.getPlayer()).isSameAs(user2);
+        assertThat(currentPit.getPitType()).isEqualTo(SMALL);
+        currentPit = currentPit.getNextPit();
+        assertThat(currentPit.getStones()).isEqualTo(1);
+        assertThat(currentPit.getPlayer()).isSameAs(user2);
+        assertThat(currentPit.getPitType()).isEqualTo(LARGE);
     }
 }

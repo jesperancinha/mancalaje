@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Setter
 @Getter
 @Builder
@@ -17,8 +15,4 @@ public class PlayerDto {
     private Long id;
 
     private String username;
-
-    private List<BoardDto> boardDtos;
-
-    private PlayerDto opponent;
 }

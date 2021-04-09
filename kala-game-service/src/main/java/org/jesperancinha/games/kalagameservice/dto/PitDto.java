@@ -21,9 +21,5 @@ public class PitDto {
 
     private Integer stones;
 
-    private PitDto nextPitDto;
-
-    private PitDto oppositePitDto;
-
     private PlayerDto playerDto;
 }

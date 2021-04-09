@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class PlayerConverter {
     public static PlayerDto toDto(Player currentPlayer) {
-        if(Objects.isNull(currentPlayer)){
+        if (Objects.isNull(currentPlayer)) {
             return null;
         }
         return PlayerDto.builder()

@@ -10,6 +10,7 @@ public class PitConverter {
                 .id(pit.getId())
                 .pitType(pit.getPitType())
                 .stones(pit.getStones())
+                .playerDto(PlayerConverter.toDto(pit.getPlayer()))
                 .build();
     }
 }

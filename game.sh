@@ -12,3 +12,7 @@ curl -i -b cookies.txt -X PUT http://localhost:8081/api/move/16/5
 curl -i -b cookies2.txt -X PUT http://localhost:8081/api/move/16/10
 curl -i -b cookies.txt -X PUT http://localhost:8081/api/move/16/2
 curl -i -b cookies.txt -X PUT http://localhost:8081/api/move/16/3
+curl -i -b cookies.txt -X PUT http://localhost:8081/api/move/16/4
+curl -i -b cookies.txt -X PUT http://localhost:8081/api/move/16/6
+curl -i -b cookies.txt -X PUT http://localhost:8081/api/move/16/7
+curl -i -b cookies.txt -X PUT http://localhost:8081/api/move/16/2

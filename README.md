@@ -26,7 +26,16 @@ cd kala-game-web
 npm start
 ```
 
-## cUrl
+### Available users
+
+Users are currently hardcoded and there are only two:
+
+|Username|Password|
+|---|---|
+|player1|admin|
+|player2|admin|
+
+### cUrl
 
 ```bash
 curl -i -H "Content-Type: application/x-www-form-urlencoded" -c cookies.txt  -d "username=player1&password=admin" -X POST http://localhost:8081/login
@@ -40,7 +49,12 @@ curl -i -H "Content-Type: application/x-www-form-urlencoded" -c cookies2.txt  -d
 curl -i -b cookies2.txt -X PUT http://localhost:8081/api/join/16
 ```
 
-Have a look at [game.sh](./game.sh) for a practical example.
+### Practical Example
+
+Have a look at [game.sh](./game.sh) for a practical example, where player 1 wins.
+
+This example relies on static Id's so you can only run it once after a restart.
+
 
 ## Bibliography
 
