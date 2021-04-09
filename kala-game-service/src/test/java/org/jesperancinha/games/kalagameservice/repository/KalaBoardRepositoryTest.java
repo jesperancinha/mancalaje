@@ -1,34 +1,69 @@
 package org.jesperancinha.games.kalagameservice.repository;
 
+import org.jesperancinha.games.kalagameservice.model.Board;
 import org.jesperancinha.games.kalagameservice.model.Player;
-import org.jesperancinha.games.kalagameservice.service.GameServiceImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import javax.transaction.Transactional;
-import java.util.Optional;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
-@Transactional
+@DataJpaTest
 class KalaBoardRepositoryTest {
+
+    @Autowired
+    private KalaBoardRepository kalaBoardRepository;
+
     @Autowired
     private KalaPlayerRepository kalaPlayerRepository;
 
-    @Autowired
-    private GameServiceImpl gameService;
+    private Player player1;
+
+    private Player player3;
+
+    @BeforeEach
+    @Transactional
+    public void setUp() {
+        player1 = kalaPlayerRepository.save(Player.builder().username("player1").build());
+        final Player player2 = kalaPlayerRepository.save(Player.builder().username("player2").build());
+        player3 = kalaPlayerRepository.save(Player.builder().username("player3").build());
+        final Board boardPlayerOne = new Board();
+        final Board boardPlayerTwo = new Board();
+        final Board boardPlayerThree = new Board();
+        boardPlayerOne.setPlayerOne(player1);
+        boardPlayerTwo.setPlayerOne(player2);
+        boardPlayerThree.setPlayerOne(player3);
+        boardPlayerThree.setPlayerTwo(player2);
+        kalaBoardRepository.save(boardPlayerOne);
+        kalaBoardRepository.save(boardPlayerTwo);
+        kalaBoardRepository.save(boardPlayerThree);
+    }
 
     @Test
-    void testFindBoardByPlayerOne_Username_whenSearchUserName() {
-        var user1 = Player.builder().username("user1").build();
-        user1 = kalaPlayerRepository.save(user1);
-        gameService.createNewBoard(user1);
+    void testFindBoardsByPlayerOneEquals_whenPlayerOne_thenShowPlayerOneBoards() {
+        final List<Board> boardsByPlayerOneEquals = kalaBoardRepository.findBoardsByPlayerOneEquals(player1);
 
-        final Optional<Player> byId = kalaPlayerRepository.findById(user1.getId());
+        assertThat(boardsByPlayerOneEquals).hasSize(1);
+        assertThat(boardsByPlayerOneEquals.get(0).getPlayerOne().getUsername()).isEqualTo("player1");
+    }
 
-        assertThat(byId.isPresent()).isTrue();
-        assertThat(byId.get().getBoards()).hasSize(1);
+    @Test
+    void testFindBoardsByPlayerOneEquals_whenPlayerThree_thenShowPlayerThreeBoards() {
+        final List<Board> boardsByPlayerOneEquals = kalaBoardRepository.findBoardsByPlayerOneEquals(player3);
+
+        assertThat(boardsByPlayerOneEquals).hasSize(1);
+        assertThat(boardsByPlayerOneEquals.get(0).getPlayerOne().getUsername()).isEqualTo("player3");
+    }
+
+    @Test
+    void findBoardsByPlayerTwoIsNull_whenCalled_thenShowAllBoards() {
+        final List<Board> boardsByPlayerTwoIsNull = kalaBoardRepository.findBoardsByPlayerTwoIsNull();
+        assertThat(boardsByPlayerTwoIsNull).hasSize(2);
+        assertThat(boardsByPlayerTwoIsNull.get(0).getPlayerOne().getUsername()).isEqualTo("player1");
+        assertThat(boardsByPlayerTwoIsNull.get(1).getPlayerOne().getUsername()).isEqualTo("player2");
     }
 }
