@@ -19,6 +19,8 @@ cd kala-game-service
 mvn spring-boot:run
 ```
 
+Note that I attempted to create this project with reactive programming and it is possible and it would be more efficient, however I had to rollback because of the amount of time it would take to complete it.
+
 ### Frontend
 
 ```bash
@@ -55,6 +57,14 @@ Have a look at [game.sh](./game.sh) for a practical example, where player 1 wins
 
 This example relies on static Id's so you can only run it once after a restart.
 
+1. [cookies.txt](./cookies.txt) holds the session for player1
+2. [cookies2.txt](./cookies2.txt) holds the session for player2
+
+### Front - End
+
+The front end is far from complete, but the foundations and the login capabilities are already there with Basic Authentication:
+
+[kala-game-web](./kala-game-web)
 
 ## Bibliography
 
