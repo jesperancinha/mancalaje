@@ -65,6 +65,7 @@ class GameServiceImplItTest {
         kalaPlayerRepository.save(user1);
         kalaPlayerRepository.save(user2);
         var board = gameService.createNewBoard(user1);
+        board = gameService.joinPlayer(user2, board);
 
         board = gameService.sowStonesFromPit(user1, board.getPitOne(), board);
         assertThat(board).isNotNull();
@@ -90,7 +91,7 @@ class GameServiceImplItTest {
         currentPit = currentPit.getNextPit();
         for (int i = 0; i < 6; i++) {
             assertThat(currentPit.getStones()).isEqualTo(6);
-            assertThat(currentPit.getPlayer()).isNull();
+            assertThat(currentPit.getPlayer()).isSameAs(user2);
             currentPit = currentPit.getNextPit();
         }
         assertThat(currentPit.getStones()).isEqualTo(0);
