@@ -4,6 +4,7 @@ import org.jesperancinha.games.kalagameservice.exception.BoardDoesNotExistExcept
 import org.jesperancinha.games.kalagameservice.exception.GameOverException;
 import org.jesperancinha.games.kalagameservice.exception.InvalidPitException;
 import org.jesperancinha.games.kalagameservice.exception.NotOwnedPitException;
+import org.jesperancinha.games.kalagameservice.exception.PitDoesNotExistException;
 import org.jesperancinha.games.kalagameservice.exception.PlayerNotJoinedYetException;
 import org.jesperancinha.games.kalagameservice.exception.WrongTurnException;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,9 @@ import static org.jesperancinha.games.kalagameservice.exception.KalahErrorCode.G
 import static org.jesperancinha.games.kalagameservice.exception.KalahErrorCode.INVALID_PIT;
 import static org.jesperancinha.games.kalagameservice.exception.KalahErrorCode.NOT_JOINED;
 import static org.jesperancinha.games.kalagameservice.exception.KalahErrorCode.NOT_OWNED;
+import static org.jesperancinha.games.kalagameservice.exception.KalahErrorCode.PIT_NOT_FOUND;
 import static org.jesperancinha.games.kalagameservice.exception.KalahErrorCode.WRONG_TURN;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @ControllerAdvice
 public class KalaExceptionHandlingController {
@@ -81,7 +84,7 @@ public class KalaExceptionHandlingController {
      */
     @ExceptionHandler(PlayerNotJoinedYetException.class)
     public final ResponseEntity<String> handleErrorPlayerNotJoined(HttpServletRequest req, Exception ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(NOT_JOINED.toString());
+        return ResponseEntity.status(NOT_FOUND).body(NOT_JOINED.toString());
     }
 
     /**
@@ -93,6 +96,18 @@ public class KalaExceptionHandlingController {
      */
     @ExceptionHandler(BoardDoesNotExistException.class)
     public final ResponseEntity<String> handleErrorBoardDoesNotExist(HttpServletRequest req, Exception ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(BOARD_NOT_FOUND.toString());
+        return ResponseEntity.status(NOT_FOUND).body(BOARD_NOT_FOUND.toString());
+    }
+
+    /**
+     * The Pit does not exist
+     *
+     * @param req
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler(PitDoesNotExistException.class)
+    public final ResponseEntity<String> handleErrorPitDoesNotExist(HttpServletRequest req, Exception ex) {
+        return ResponseEntity.status(NOT_FOUND).body(PIT_NOT_FOUND.toString());
     }
 }

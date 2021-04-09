@@ -6,5 +6,6 @@ public enum KalahErrorCode {
     NOT_OWNED,
     WRONG_TURN,
     NOT_JOINED,
-    BOARD_NOT_FOUND
+    BOARD_NOT_FOUND,
+    PIT_NOT_FOUND
 }

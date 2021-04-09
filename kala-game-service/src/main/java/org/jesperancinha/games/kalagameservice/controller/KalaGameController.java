@@ -2,6 +2,7 @@ package org.jesperancinha.games.kalagameservice.controller;
 
 import org.jesperancinha.games.kalagameservice.dto.BoardDto;
 import org.jesperancinha.games.kalagameservice.dto.converters.BoardConverter;
+import org.jesperancinha.games.kalagameservice.exception.PitDoesNotExistException;
 import org.jesperancinha.games.kalagameservice.model.Board;
 import org.jesperancinha.games.kalagameservice.model.Pit;
 import org.jesperancinha.games.kalagameservice.model.Player;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.function.Supplier;
 
 @RestController
 @RequestMapping("api")
@@ -55,7 +57,7 @@ public class KalaGameController {
                                  Long pitId) throws Throwable {
         var player = playerService.createOrFindPlayerByName(principal.getName());
         final Board board = boardService.findBoardById(boardId);
-        final Pit startPit = board.getPits().stream().filter(pit -> pit.getId().equals(pitId)).findAny().orElse(null);
+        final Pit startPit = board.getPits().stream().filter(pit -> pit.getId().equals(pitId)).findAny().orElseThrow((Supplier<Throwable>) PitDoesNotExistException::new);
         final Board boardUpdated = gameService.sowStonesFromPit(player, startPit, board);
         return BoardConverter.toDto(boardUpdated);
     }
