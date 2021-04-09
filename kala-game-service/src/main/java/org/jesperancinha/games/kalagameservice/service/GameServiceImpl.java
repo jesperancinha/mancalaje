@@ -3,6 +3,7 @@ package org.jesperancinha.games.kalagameservice.service;
 import org.jesperancinha.games.kalagameservice.exception.GameOverException;
 import org.jesperancinha.games.kalagameservice.exception.InvalidPitException;
 import org.jesperancinha.games.kalagameservice.exception.NotOwnedPitException;
+import org.jesperancinha.games.kalagameservice.exception.PlayerNotJoinedYetException;
 import org.jesperancinha.games.kalagameservice.exception.WrongTurnException;
 import org.jesperancinha.games.kalagameservice.model.Board;
 import org.jesperancinha.games.kalagameservice.model.Pit;
@@ -92,6 +93,9 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public Board sowStonesFromPit(Player player, Pit pit, Board board) {
+        if(Objects.isNull(board.getPlayerTwo())){
+            throw new PlayerNotJoinedYetException();
+        }
         if(Objects.nonNull(board.getWinner())){
             throw new GameOverException();
         }

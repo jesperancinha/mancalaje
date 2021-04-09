@@ -7,7 +7,7 @@ import org.jesperancinha.games.kalagameservice.model.Player;
 import java.util.List;
 
 public interface BoardService {
-    Board findBoardById(final Long id);
+    Board findBoardById(final Long id) throws Throwable;
 
     List<BoardDto> findBoardsByPlayer(final Player player);
 

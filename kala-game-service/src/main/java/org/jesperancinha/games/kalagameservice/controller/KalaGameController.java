@@ -36,7 +36,7 @@ public class KalaGameController {
     @GetMapping("{id}")
     public BoardDto getCurrentBoard(Principal principal,
                                     @PathVariable
-                                            Long id) {
+                                            Long id) throws Throwable {
         return BoardConverter.toDto(boardService.findBoardById(id));
     }
 
@@ -52,7 +52,7 @@ public class KalaGameController {
                          @PathVariable
                                  Long boardId,
                          @PathVariable
-                                 Long pitId) {
+                                 Long pitId) throws Throwable {
         var player = playerService.createOrFindPlayerByName(principal.getName());
         final Board board = boardService.findBoardById(boardId);
         final Pit startPit = board.getPits().stream().filter(pit -> pit.getId().equals(pitId)).findAny().orElse(null);
@@ -63,7 +63,7 @@ public class KalaGameController {
     @PutMapping("join/{boardId}")
     public BoardDto join(Principal principal,
                          @PathVariable
-                                 Long boardId) {
+                                 Long boardId) throws Throwable {
         var player = playerService.createOrFindPlayerByName(principal.getName());
         final Board board = boardService.findBoardById(boardId);
         final Board boardUpdated = gameService.joinPlayer(player, board);
