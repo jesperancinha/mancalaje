@@ -7,19 +7,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
-import javax.sql.DataSource;
-
 @Configuration
 public class SecurityAdapter extends WebSecurityConfigurerAdapter {
-
-    private final DataSource dataSource;
 
     private final JdbcUserDetailsManager jdbcUserDetailsManager;
 
     private final PasswordEncoder passwordEncoder;
 
-    public SecurityAdapter(DataSource dataSource, JdbcUserDetailsManager jdbcUserDetailsManager, PasswordEncoder passwordEncoder) {
-        this.dataSource = dataSource;
+    public SecurityAdapter(JdbcUserDetailsManager jdbcUserDetailsManager, PasswordEncoder passwordEncoder) {
         this.jdbcUserDetailsManager = jdbcUserDetailsManager;
         this.passwordEncoder = passwordEncoder;
     }

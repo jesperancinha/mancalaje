@@ -1,5 +1,6 @@
 package org.jesperancinha.games.kalagameservice.service;
 
+import org.jesperancinha.games.kalagameservice.exception.GameOverException;
 import org.jesperancinha.games.kalagameservice.exception.InvalidPitException;
 import org.jesperancinha.games.kalagameservice.exception.NotOwnedPitException;
 import org.jesperancinha.games.kalagameservice.exception.WrongTurnException;
@@ -64,5 +65,19 @@ class GameServiceImplExceptionItTest {
         final var boardFinal = gameService.joinPlayer(userFinal2, board);
 
         assertThrows(InvalidPitException.class, () -> gameService.sowStonesFromPit(userFinal1, board.getKalahOne(), boardFinal));
+    }
+
+    @Test
+    void testSowStonesFromPit_whenGameOver_thenFail() {
+        final var user1 = kalaPlayerRepository.save(Player.builder().username("user1").build());
+        final var user2 = kalaPlayerRepository.save(Player.builder().username("user2").build());
+        user1.setOpponent(user2);
+        user2.setOpponent(user1);
+        final var userFinal1 = kalaPlayerRepository.save(user1);
+        final var userFinal2 = kalaPlayerRepository.save(user2);
+        final var board = gameService.createNewBoard(userFinal1);
+        final var boardFinal = gameService.joinPlayer(userFinal2, board);
+        boardFinal.setWinner(user1);
+        assertThrows(GameOverException.class, () -> gameService.sowStonesFromPit(userFinal1, board.getPitOne(), boardFinal));
     }
 }
