@@ -60,12 +60,18 @@ This example relies on static Id's so you can only run it once after a restart.
 1. [cookies.txt](./cookies.txt) holds the session for player1
 2. [cookies2.txt](./cookies2.txt) holds the session for player2
 
-### Front - End
+### Front - End - Web application
 
-The front end is far from complete, but the foundations and the login capabilities are already there with Basic Authentication:
+In order to start the FE, you need to have NODE.JS installed.
 
-[kala-game-web](./kala-game-web)
+Preferably try to install everything using Yarn.
 
-## Bibliography
+```bash
+yarn install
+```
 
-- https://www.devglan.com/spring-security/spring-webflux-rest-authentication
+To start, go to [kala-game-web](./kala-game-web) and run:
+
+```bash
+npm start
+```
