@@ -10,6 +10,10 @@ public class BoardConverter {
         return BoardDto.builder()
                 .id(board.getId())
                 .currentPlayerDto(PlayerConverter.toDto(board.getCurrentPlayer()))
+                .playerDtoOne(PlayerConverter.toDto(board.getPlayerOne()))
+                .playerDtoTwo(PlayerConverter.toDto(board.getPlayerTwo()))
+                .pitDtoOne(PitConverter.toDto(board.getPitOne()))
+                .pitDtoTwo(PitConverter.toDto(board.getPitTwo()))
                 .pitDtos((board.getPits().stream().map(PitConverter::toDto).collect(Collectors.toList())))
                 .winnerDto(PlayerConverter.toDto(board.getWinner()))
                 .build();

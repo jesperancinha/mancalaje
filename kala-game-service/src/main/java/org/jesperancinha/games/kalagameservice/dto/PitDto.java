@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.jesperancinha.games.kalagameservice.model.Pit;
 import org.jesperancinha.games.kalagameservice.model.PitType;
 
 @Setter

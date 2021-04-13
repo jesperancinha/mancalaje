@@ -7,8 +7,6 @@ import {BoardListingComponent} from "./components/board.listing.component/board.
 import {MatCardModule} from "@angular/material/card";
 import {MatListModule} from "@angular/material/list";
 import {HTTP_INTERCEPTORS, HttpClientModule, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import {MatInputModule} from "@angular/material/input";
-import {MatFormFieldModule} from "@angular/material/form-field";
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {

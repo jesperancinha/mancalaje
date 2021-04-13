@@ -17,5 +17,12 @@
     "pathRewrite": {"^/api/" : "/api/"},
     "changeOrigin": true,
     "logLevel": "debug"
+  },
+  "/log": {
+    "target": "http://localhost:8081",
+    "secure": false,
+    "pathRewrite": {"^/api/" : "/log/"},
+    "changeOrigin": true,
+    "logLevel": "debug"
   }
 }

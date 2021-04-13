@@ -3,11 +3,13 @@ package org.jesperancinha.games.kalagameservice.controller;
 import org.jesperancinha.games.kalagameservice.service.PlayerService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 
 @RestController
+@RequestMapping("log")
 public class KalaGameRegistrationController {
 
     private final PlayerService playerService;
@@ -21,8 +23,8 @@ public class KalaGameRegistrationController {
         playerService.createPlayer(principal.getName());
     }
 
-    @GetMapping("/user")
+    @GetMapping("user")
     public String greetUser(Principal principal) {
-        return String.format("Hello, %s", principal.getName());
+        return principal.getName();
     }
 }
