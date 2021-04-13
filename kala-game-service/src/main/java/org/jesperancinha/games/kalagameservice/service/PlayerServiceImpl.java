@@ -1,5 +1,6 @@
 package org.jesperancinha.games.kalagameservice.service;
 
+import org.jesperancinha.games.kalagameservice.model.Board;
 import org.jesperancinha.games.kalagameservice.model.Player;
 import org.jesperancinha.games.kalagameservice.repository.KalaPlayerRepository;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,20 @@ public class PlayerServiceImpl implements PlayerService {
             return createPlayer(username);
         }
         return playerByUsernameEquals;
+    }
+
+    @Override
+    public void leaveCurrentGame(String name) {
+        final Player player = playerRepository.findPlayerByUsernameEquals(name);
+        final Board currentBoard = player.getCurrentBoard();
+        if(Objects.nonNull(currentBoard)) {
+            final Player opponent = player.getOpponent();
+            if(Objects.nonNull(opponent)){
+                opponent.setCurrentBoard(null);
+                playerRepository.save(opponent);
+            }
+            player.setCurrentBoard(null);
+            playerRepository.save(player);
+        }
     }
 }

@@ -6,4 +6,6 @@ public interface PlayerService {
     Player createPlayer(String username);
 
     Player createOrFindPlayerByName(String username);
+
+    void leaveCurrentGame(String name);
 }

@@ -40,6 +40,9 @@ public class Player {
     @OneToOne
     private Player opponent;
 
+    @OneToOne
+    private Board currentBoard;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

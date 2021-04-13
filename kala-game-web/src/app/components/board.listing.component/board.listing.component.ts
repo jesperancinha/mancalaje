@@ -14,11 +14,12 @@ export class BoardListingComponent implements OnInit {
   allPlayerBoards: Board[];
   allAvailableBoards: Board[];
   loggedUser: string;
+  currentBoardId: number;
   currentBoard: Board;
   currentPlayerOnePits: Pit[];
   currentPlayerTwoPits: Pit[];
-  currentPlayerOneKalahPit:Pit;
-  currentPlayerTwoKalahPit:Pit;
+  currentPlayerOneKalahPit: Pit;
+  currentPlayerTwoKalahPit: Pit;
 
   constructor(
     private boardService: BoardService,
@@ -38,17 +39,30 @@ export class BoardListingComponent implements OnInit {
   }
 
   private refresh() {
-    this.boardService.getAllPlayerBoards()
+    this.boardService.getCurrentBoard()
       .subscribe(data => {
-        this.allPlayerBoards = data;
-      });
-    this.boardService.getAllAvailableBoards()
-      .subscribe(data => {
-        this.allAvailableBoards = data;
-        if(this.allAvailableBoards && this.allAvailableBoards.length >0){
-          this.setCurrentBoard(this.allAvailableBoards[0]);
+        if (data) {
+          this.currentBoard = data;
+          this.setCurrentBoard(data);
+        } else {
+          this.currentBoard = null;
+          this.currentBoardId = null;
+          this.boardService.getAllPlayerBoards()
+            .subscribe(data => {
+              this.allPlayerBoards = data;
+              if (this.allPlayerBoards && this.allPlayerBoards.length > 0) {
+                this.setCurrentBoard(this.allPlayerBoards[0]);
+              }
+            });
+
+          this.boardService.getAllAvailableBoards()
+            .subscribe(data => {
+              this.allAvailableBoards = data;
+            })
         }
       })
+
+
     this.playerService.getLoggedUser()
       .subscribe(data => {
         console.log(data)
@@ -57,45 +71,61 @@ export class BoardListingComponent implements OnInit {
         }
         this.loggedUser = data;
       })
-
+    setTimeout(() => this.refresh(), 1000);
   }
 
   private setCurrentBoard(board: Board) {
-    this.currentBoard = board
+    this.currentBoardId = board.id;
+    this.currentBoard = board;
     this.currentPlayerOnePits = [];
     this.currentPlayerTwoPits = [];
     let allPits = board.pitDtos;
     let pit = allPits[0]
-    let i =0
-    while(pit.pitType === 'SMALL'){
+    let i = 0
+    while (pit.pitType === 'SMALL') {
       this.currentPlayerOnePits.push(pit);
       pit = allPits[++i];
     }
     this.currentPlayerOneKalahPit = pit;
     pit = allPits[++i];
-    while(pit.pitType === 'SMALL'){
+    while (pit.pitType === 'SMALL') {
       this.currentPlayerTwoPits.push(pit);
       pit = allPits[++i];
     }
     this.currentPlayerTwoKalahPit = pit;
   }
 
-  joinBoard() {
-
+  joinBoard(id: number) {
+    this.boardService.joinBoard(id)
+      .subscribe(data => {
+        this.currentBoard = data;
+      })
   }
 
   moveStone(id: number) {
-
+    this.boardService.move(this.currentBoard.id, id)
+      .subscribe(data => {
+        this.currentBoard = data;
+        this.setCurrentBoard(data);
+      })
   }
 
   checkTurn(playerDto: Player) {
-    if(!playerDto){
+    if (!playerDto) {
       return "disabled";
     }
-    if(playerDto.username === this.currentBoard.currentPlayerDto.username
-      && this.loggedUser === this.currentBoard.currentPlayerDto.username){
+    if(this.currentBoard.winnerDto){
+      return "disabled";
+    }
+    if (playerDto.username === this.currentBoard.currentPlayerDto.username
+      && this.loggedUser === this.currentBoard.currentPlayerDto.username) {
       return "";
     }
     return "disabled";
+  }
+
+  leaveGame() {
+    this.boardService.leaveGame()
+      .subscribe();
   }
 }

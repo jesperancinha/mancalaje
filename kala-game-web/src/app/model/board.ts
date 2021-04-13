@@ -11,4 +11,5 @@ export interface Board {
   kalahTwo: Pit;
   playerDtoTwo: Player;
   currentPlayerDto: Player;
+  winnerDto: Player;
 }

@@ -6,8 +6,11 @@ import {Board} from "../model/board";
 
 
 const createBoardUrl = "/api/create"
-const getPlayerBoarsdUrl = "/api"
+const getPlayerBoarsdUrl = "/api/current"
 const getAvailableBoarsdUrl = "/api/available"
+const joinBoardUrl = "/api/join"
+const moveUrl = "/api/move"
+const leaveUrl = "/api/leave"
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +24,9 @@ export class BoardService {
       retry(3), catchError(this.handleError()));
   }
 
-  public getSelectedBoard(id: number) {
-    return this.http.get<Board[]>(getPlayerBoarsdUrl + "/" + id)
-      .pipe(retry(3), catchError(this.handleError<Board[]>()));
+  public getCurrentBoard() {
+    return this.http.get<Board>(getPlayerBoarsdUrl)
+      .pipe(retry(3), catchError(this.handleError<Board>()));
 
   }
 
@@ -35,6 +38,21 @@ export class BoardService {
   public getAllAvailableBoards() {
     return this.http.get<Board[]>(getAvailableBoarsdUrl)
       .pipe(retry(3), catchError(this.handleError<Board[]>()));
+  }
+
+  public joinBoard(id: number) {
+    return this.http.put<Board>(joinBoardUrl + "/" + id, {})
+      .pipe(retry(3), catchError(this.handleError<Board>()));
+  }
+
+  public move(boardId: number, pitId: number) {
+    return this.http.put<Board>(moveUrl + "/" + boardId + "/" + pitId, {})
+      .pipe(retry(3), catchError(this.handleError<Board>()));
+  }
+
+  leaveGame() {
+    return this.http.put(leaveUrl, {})
+      .pipe(retry(3), catchError(this.handleError()));
   }
 
   handleError<T>(operation = 'operation', result?: T) {

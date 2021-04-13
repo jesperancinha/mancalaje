@@ -35,11 +35,16 @@ public class KalaGameController {
         this.playerService = playerService;
     }
 
-    @GetMapping("{id}")
-    public BoardDto getCurrentBoard(Principal principal,
-                                    @PathVariable
-                                            Long id) throws Throwable {
-        return BoardConverter.toDto(boardService.findBoardById(id));
+    @PutMapping("leave")
+    public void leavegae(Principal principal) throws Throwable {
+        playerService.leaveCurrentGame(principal.getName());
+    }
+
+    @GetMapping("current")
+    public BoardDto getCurrentBoard(Principal principal) throws Throwable {
+        return BoardConverter.toDto(
+                playerService.createOrFindPlayerByName(principal.getName()).getCurrentBoard()
+        );
     }
 
     @PostMapping("create")

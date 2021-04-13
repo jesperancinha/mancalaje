@@ -3,8 +3,7 @@
   <mat-card>
     <p>Logged in as: {{loggedUser}}</p>
   </mat-card>
-  <mat-card>
-
+  <mat-card *ngIf="currentBoard">
     <table>
       <tbody>
       <tr *ngIf="currentPlayerTwoKalahPit && currentPlayerOneKalahPit && currentPlayerOnePits && currentPlayerTwoPits">
@@ -27,6 +26,9 @@
       </tr>
       </tbody>
     </table>
+    <mat-card *ngIf="currentBoard.winnerDto">
+      <mat-card-title>And the winner is {{currentBoard.winnerDto.username}}!!!!!</mat-card-title>
+    </mat-card>
   </mat-card>
   <mat-card>
     <mat-card *ngIf="allPlayerBoards && allPlayerBoards.length>0">
@@ -40,13 +42,16 @@
       <mat-list>
         <mat-list-item *ngFor="let board of allAvailableBoards">
           <mat-card *ngIf="board.playerDtoOne.username !== loggedUser">
-            <input type="button" value="Join Board {{board.id}}" (click)="joinBoard()"/>
+            <input type="button" value="Join Board {{board.id}}" (click)="joinBoard(board.id)"/>
           </mat-card>
           <mat-card *ngIf="board.playerDtoOne.username === loggedUser">
             <p>Game {{board.id}}</p>
           </mat-card>
         </mat-list-item>
       </mat-list>
+    </mat-card>
+    <mat-card *ngIf="currentBoard">
+      <input type="button" value="Leave Current Game" (click)="leaveGame()"/>
     </mat-card>
     <mat-card>
       <input type="button" value="Create new board" (click)="createNewBoard()"/>

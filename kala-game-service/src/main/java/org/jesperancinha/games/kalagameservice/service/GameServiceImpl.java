@@ -175,8 +175,12 @@ public class GameServiceImpl implements GameService {
         board.getPits().forEach(pitRepository::save);
         board.setPlayerTwo(playerTwo);
         playerTwo.setOpponent(board.getPlayerOne());
+        playerTwo.setCurrentBoard(board);
+
         final Player playerOne = board.getPlayerOne();
         playerOne.setOpponent(playerTwo);
+        playerOne.setCurrentBoard(board);
+
         playerRepository.save(playerOne);
         playerRepository.save(playerTwo);
         return boardRepository.save(board);
