@@ -3,6 +3,7 @@ package org.jesperancinha.games.kalagameservice.controller;
 import org.jesperancinha.games.kalagameservice.dto.BoardDto;
 import org.jesperancinha.games.kalagameservice.dto.converters.BoardConverter;
 import org.jesperancinha.games.kalagameservice.exception.PitDoesNotExistException;
+import org.jesperancinha.games.kalagameservice.exception.ZeroStonesToMoveException;
 import org.jesperancinha.games.kalagameservice.model.Board;
 import org.jesperancinha.games.kalagameservice.model.Pit;
 import org.jesperancinha.games.kalagameservice.model.Player;
@@ -63,6 +64,9 @@ public class KalaGameController {
         var player = playerService.createOrFindPlayerByName(principal.getName());
         final Board board = boardService.findBoardById(boardId);
         final Pit startPit = board.getPits().stream().filter(pit -> pit.getId().equals(pitId)).findAny().orElseThrow((Supplier<Throwable>) PitDoesNotExistException::new);
+        if(startPit.getStones() ==0){
+            throw new ZeroStonesToMoveException();
+        }
         final Board boardUpdated = gameService.sowStonesFromPit(player, startPit, board);
         return BoardConverter.toDto(boardUpdated);
     }

@@ -77,12 +77,31 @@ class KalaGameControllerTest {
         board.setId(1L);
         final Pit pit = new Pit();
         pit.setId(1L);
+        pit.setStones(10);
         board.setPits(Collections.singletonList(pit));
         when(boardService.findBoardById(1L)).thenReturn(board);
         when(gameService.sowStonesFromPit(any(), any(), any())).thenThrow(PlayerNotJoinedYetException.class);
         mockMvc.perform(put("/api/move/1/1"))
                 .andExpect(status().isNotFound())
                 .andExpect(content().string("NOT_JOINED"));
+
+        verify(playerService, only()).createOrFindPlayerByName("player1");
+
+    }
+
+    @Test
+    @WithMockUser("player1")
+    void testMove_whenNoStones_thenFail() throws Throwable {
+        final Board board = new Board();
+        board.setId(1L);
+        final Pit pit = new Pit();
+        pit.setId(1L);
+        pit.setStones(0);
+        board.setPits(Collections.singletonList(pit));
+        when(boardService.findBoardById(1L)).thenReturn(board);
+        mockMvc.perform(put("/api/move/1/1"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("ZERO_STONES"));
 
         verify(playerService, only()).createOrFindPlayerByName("player1");
 

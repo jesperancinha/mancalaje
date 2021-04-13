@@ -10,9 +10,9 @@
         <ng-container>
           <td rowspan="2"><input type="button" value="{{currentPlayerTwoKalahPit.stones}}" disabled/></td>
         </ng-container>
-        <ng-container *ngFor="let pit of currentPlayerTwoPits">
+        <ng-container *ngFor="let pit of currentPlayerTwoPits.reverse()">
           <td><input type="button" value="{{pit.stones}}" (click)="moveStone(pit.id)"
-                     disabled="{{checkTurn(currentBoard.playerDtoTwo)}}"/></td>
+                     disabled="{{checkTurn(currentBoard.playerDtoTwo, pit)}}"/></td>
         </ng-container>
         <ng-container>
           <td rowspan="2"><input type="button" value="{{currentPlayerOneKalahPit.stones}}" disabled/></td>
@@ -21,7 +21,7 @@
       <tr>
         <ng-container *ngFor="let pit of currentPlayerOnePits">
           <td><input type="button" value="{{pit.stones}}" (click)="moveStone(pit.id)"
-                     disabled="{{checkTurn(currentBoard.playerDtoOne)}}"/></td>
+                     disabled="{{checkTurn(currentBoard.playerDtoOne,pit)}}"/></td>
         </ng-container>
       </tr>
       </tbody>

@@ -7,5 +7,6 @@ public enum KalahErrorCode {
     WRONG_TURN,
     NOT_JOINED,
     BOARD_NOT_FOUND,
-    PIT_NOT_FOUND
+    PIT_NOT_FOUND,
+    ZERO_STONES
 }

@@ -110,11 +110,14 @@ export class BoardListingComponent implements OnInit {
       })
   }
 
-  checkTurn(playerDto: Player) {
+  checkTurn(playerDto: Player, pit: Pit) {
     if (!playerDto) {
       return "disabled";
     }
-    if(this.currentBoard.winnerDto){
+    if (this.currentBoard.winnerDto) {
+      return "disabled";
+    }
+    if (pit.stones == 0) {
       return "disabled";
     }
     if (playerDto.username === this.currentBoard.currentPlayerDto.username

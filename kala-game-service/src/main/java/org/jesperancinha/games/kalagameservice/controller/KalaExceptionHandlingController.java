@@ -7,7 +7,7 @@ import org.jesperancinha.games.kalagameservice.exception.NotOwnedPitException;
 import org.jesperancinha.games.kalagameservice.exception.PitDoesNotExistException;
 import org.jesperancinha.games.kalagameservice.exception.PlayerNotJoinedYetException;
 import org.jesperancinha.games.kalagameservice.exception.WrongTurnException;
-import org.springframework.http.HttpStatus;
+import org.jesperancinha.games.kalagameservice.exception.ZeroStonesToMoveException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,6 +21,7 @@ import static org.jesperancinha.games.kalagameservice.exception.KalahErrorCode.N
 import static org.jesperancinha.games.kalagameservice.exception.KalahErrorCode.NOT_OWNED;
 import static org.jesperancinha.games.kalagameservice.exception.KalahErrorCode.PIT_NOT_FOUND;
 import static org.jesperancinha.games.kalagameservice.exception.KalahErrorCode.WRONG_TURN;
+import static org.jesperancinha.games.kalagameservice.exception.KalahErrorCode.ZERO_STONES;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @ControllerAdvice
@@ -109,5 +110,17 @@ public class KalaExceptionHandlingController {
     @ExceptionHandler(PitDoesNotExistException.class)
     public final ResponseEntity<String> handleErrorPitDoesNotExist(HttpServletRequest req, Exception ex) {
         return ResponseEntity.status(NOT_FOUND).body(PIT_NOT_FOUND.toString());
+    }
+
+    /**
+     * No Stones to move
+     *
+     * @param req
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler(ZeroStonesToMoveException.class)
+    public final ResponseEntity<String> handleErrorZeroStonesToMove(HttpServletRequest req, Exception ex) {
+        return ResponseEntity.status(NOT_FOUND).body(ZERO_STONES.toString());
     }
 }
