@@ -1,0 +1,61 @@
+<mat-card>
+  <mat-card-title>Kala Game</mat-card-title>
+  <mat-card>
+    <p>Logged in as: {{loggedUser}}</p>
+  </mat-card>
+  <mat-card *ngIf="currentBoard">
+    <table>
+      <tbody>
+      <tr *ngIf="currentPlayerTwoKalahPit && currentPlayerOneKalahPit && currentPlayerOnePits && currentPlayerTwoPits">
+        <ng-container>
+          <td rowspan="2"><input type="button" value="{{currentPlayerTwoKalahPit.stones}}" disabled/></td>
+        </ng-container>
+        <ng-container *ngFor="let pit of currentPlayerTwoPits.reverse()">
+          <td><input type="button" value="{{pit.stones}}" (click)="moveStone(pit.id)"
+                     disabled="{{checkTurn(currentBoard.playerDtoTwo, pit)}}"/></td>
+        </ng-container>
+        <ng-container>
+          <td rowspan="2"><input type="button" value="{{currentPlayerOneKalahPit.stones}}" disabled/></td>
+        </ng-container>
+      </tr>
+      <tr>
+        <ng-container *ngFor="let pit of currentPlayerOnePits">
+          <td><input type="button" value="{{pit.stones}}" (click)="moveStone(pit.id)"
+                     disabled="{{checkTurn(currentBoard.playerDtoOne,pit)}}"/></td>
+        </ng-container>
+      </tr>
+      </tbody>
+    </table>
+    <mat-card *ngIf="currentBoard.winnerDto">
+      <mat-card-title>And the winner is {{currentBoard.winnerDto.username}}!!!!!</mat-card-title>
+    </mat-card>
+  </mat-card>
+  <mat-card>
+    <mat-card *ngIf="allPlayerBoards && allPlayerBoards.length>0">
+      <mat-card-title>Player Boards</mat-card-title>
+      <mat-list>
+        <mat-list-item *ngFor="let board of allPlayerBoards">{{board.id}}</mat-list-item>
+      </mat-list>
+    </mat-card>
+    <mat-card *ngIf="allAvailableBoards && allAvailableBoards.length>0">
+      <mat-card-title><h2>Available Boards</h2></mat-card-title>
+      <mat-list>
+        <mat-list-item *ngFor="let board of allAvailableBoards">
+          <mat-card *ngIf="board.playerDtoOne.username !== loggedUser">
+            <input type="button" value="Join Board {{board.id}}" (click)="joinBoard(board.id)"/>
+          </mat-card>
+          <mat-card *ngIf="board.playerDtoOne.username === loggedUser">
+            <p>Game {{board.id}}</p>
+          </mat-card>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+    <mat-card *ngIf="currentBoard">
+      <input type="button" value="Leave Current Game" (click)="leaveGame()"/>
+    </mat-card>
+    <mat-card>
+      <input type="button" value="Create new board" (click)="createNewBoard()"/>
+    </mat-card>
+  </mat-card>
+
+</mat-card>

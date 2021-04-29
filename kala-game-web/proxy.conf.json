@@ -1,0 +1,28 @@
+{
+  "/logout": {
+    "target": "http://localhost:8081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/login": {
+    "target": "http://localhost:8081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/api": {
+    "target": "http://localhost:8081",
+    "secure": false,
+    "pathRewrite": {"^/api/" : "/api/"},
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+  "/log": {
+    "target": "http://localhost:8081",
+    "secure": false,
+    "pathRewrite": {"^/api/" : "/log/"},
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
