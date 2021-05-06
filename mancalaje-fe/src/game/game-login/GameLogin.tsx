@@ -34,9 +34,9 @@ class GameLogin extends Component<GameProps, GameProps> {
     public componentDidMount(): void {
         const intervalId = setInterval(() => {
         }, 1);
-        for (let i = 1; i < intervalId; i++) {
-            clearInterval(i);
-        }
+        // for (let i = 1; i < intervalId; i++) {
+        //     clearInterval(i);
+        // }
     }
 
     public render(): {} {
@@ -149,4 +149,4 @@ const mapStateToProps = (state: GameProps) => {
 };
 // @ts-ignore
 const GameLoginConnected = connect(mapDispatchToProps)(connect(mapStateToProps)(GameLogin));
-export {GameLoginConnected}
+export {GameLogin}

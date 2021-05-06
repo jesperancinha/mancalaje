@@ -22,17 +22,25 @@
 
 ## Introduction for the introduction
 
-This game is a slight change fromt he typical Kalah game, where in this case I'll be using coffe mugs instead of stones. This way, more original will rules will be added. Stay tuned...
+This game is a slight change from he typical Kalah game, where in this case I'll be using coffe mugs instead of stones. This way, more original will rules will be added. Stay tuned...
 
 ☕️
 
 ## Introduction
-
+ 
 According to [Ultraboard Games](https://www.ultraboardgames.com/mancala/history.php) the mancala game has existed for about 7000 years. This means that since the middle neolithic phase of History, mankind has been playing this game.
 
 This project is also the official support project of my article on medium:
 
 [Deploying Mancala with Minikube](https://medium.com/swlh/deploying-mancala-with-minikube-4bc09a15a405)
+
+## Installation notes
+
+```bash
+yarn install
+npm audit fix
+npm install coveralls --save-dev
+```
 
 ## Docker Compose
 

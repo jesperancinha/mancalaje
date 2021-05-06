@@ -196,7 +196,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 
 // @ts-ignore
 const GameRegisterConnected = connect(mapDispatchToProps)(GameRegister);
-export {GameRegisterConnected}
+export {GameRegister}
 
 
 

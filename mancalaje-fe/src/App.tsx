@@ -1,24 +1,24 @@
 import React from 'react';
 import './App.sass';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import {GameLoginConnected} from "./game/game-login/GameLogin";
+import {GameLogin} from "./game/game-login/GameLogin";
 import './index.css';
 import {connect} from "react-redux";
 import {State} from "./reducers/reducerIndex";
-import {GameListConnected} from "./game/game-list/GameList";
-import {GameStartConnected} from "./game/game-start/GameStart";
+import {GameList} from "./game/game-list/GameList";
+import {GameStart} from "./game/game-start/GameStart";
 import {Home} from "./home/Home";
-import {GameRegisterConnected} from "./game/game-login/GameRegister";
+import {GameRegister} from "./game/game-login/GameRegister";
 
 const App: React.FC = () => {
     return (
         <Router>
             <Switch>
                 <Route exact path="/" component={Home}/>
-                <Route path="/login" component={GameLoginConnected}/>
-                <Route path="/gameList" component={GameListConnected}/>
-                <Route path="/gameStart/:id" component={GameStartConnected}/>
-                <Route path="/gameRegister" component={GameRegisterConnected}/>
+                <Route path="/login" component={GameLogin}/>
+                <Route path="/gameList" component={GameList}/>
+                <Route path="/gameStart/:id" component={GameStart}/>
+                <Route path="/gameRegister" component={GameRegister}/>
             </Switch>
         </Router>
     );

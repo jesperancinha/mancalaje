@@ -1,7 +1,6 @@
 import React from "react";
-import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import {control, theme, XS_COL_SPAN} from "../../theme";
-import {Button, Grid, Typography} from "@material-ui/core";
+import {Button, Grid, MuiThemeProvider, Typography} from "@material-ui/core";
 import logo from "../../home/logo.svg";
 import {connect} from "react-redux";
 import {State} from "../../reducers/reducerIndex";
@@ -33,10 +32,10 @@ class GameStart extends React.Component<GameStartProps, GameStartProps> {
 
     public componentDidMount(): void {
         this.loadGameData();
-        const refresher: number = setInterval(() => {
+        const refresher = setInterval(() => {
             this.loadGameData();
         }, REFRESH_RATE);
-        this.state.refreshers.push(refresher);
+        // this.state.refreshers.push(refresher);
 
     }
 
@@ -149,4 +148,4 @@ const mapStateToProps = (state: GameStartProps) => {
 // @ts-ignore
 const GameStartConnected = connect(mapStateToProps)(GameStart);
 
-export {GameStartConnected};
+export {GameStart};

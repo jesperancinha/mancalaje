@@ -1,5 +1,37 @@
 # MancalaJe Front End
 
+## Updates
+
+```bash
+npx npm-check-updates -u
+yarn install
+npm install
+npm install --legacy-peer-deps
+npm audit fix
+npm install coveralls --save-dev
+npm install mocha-lcov-reporter --save-dev
+npm install --save-dev jest
+npm install --save-dev @babel/preset-react
+npx envinfo --preset jest
+npm install --save-dev ts-jest @types/jest
+npm install identity-obj-proxy --save-dev
+npm install istanbul-reports --save-dev
+npm install @testing-library/react --save-dev
+npm install nodeunit jscoverage coveralls --save-dev
+```
+
+## Global utilities
+
+```bash
+npm install -g nodeunit jscoverage coveralls jest
+```
+
+## Coverage
+
+```bash
+jest --coverage && coveralls < coverage/lcov.info
+```
+
 ## References
 
 -   [Email Address Regular Expression That 99.99% Works](https://emailregex.com/)

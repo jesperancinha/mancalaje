@@ -66,7 +66,7 @@ class GameList extends React.Component<GameListProps, GameListProps> {
         const refresher = setInterval(() => {
             this.loadAllBoards();
         }, REFRESH_RATE);
-        this.state.refreshers.push(refresher);
+        // this.state.refreshers.push(refresher);
         this.setState(this.state);
     }
 
@@ -225,4 +225,4 @@ const mapStateToProps = (state: GameListProps) => {
 // @ts-ignore
 const GameListConnected = connect(mapStateToProps)(GameList);
 
-export {GameListConnected};
+export {GameList};
