@@ -18,12 +18,13 @@ npm install identity-obj-proxy --save-dev
 npm install istanbul-reports --save-dev
 npm install @testing-library/react --save-dev
 npm install nodeunit jscoverage coveralls --save-dev
+npm install codecov --save-dev
 ```
 
 ## Global utilities
 
 ```bash
-npm install -g nodeunit jscoverage coveralls jest
+npm install -g nodeunit jscoverage coveralls jest codecov
 ```
 
 ## Coverage

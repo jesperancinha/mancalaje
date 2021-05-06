@@ -4,9 +4,10 @@ jobs:
       node_js: 12
       script:
         - cd mancalaje-fe
-        - npm install -g nodeunit jscoverage coveralls jest
+        - npm install -g nodeunit jscoverage coveralls jest codecov
         - yarn install
         - jest --coverage && coveralls < coverage/lcov.info
+        - codecov
         - cd ..
 
     - language: java
