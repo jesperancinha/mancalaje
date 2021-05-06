@@ -2,14 +2,15 @@ language: java
 jdk:
   - openjdk11
 script:
-  - mvn clean install coveralls:report -Dconsolerizer.show=false -DrepoToken=${COVERALLS_TOKEN}
-  - bash <(curl -s https://codecov.io/bash)
   - cd mancalaje-fe
   - npm cache clean -f
-  - npm install -g n
+  - sudo npm install -g n
   - n latest
   - npm update npm -g
   - npm install -g nodeunit jscoverage coveralls jest
   - yarn install
   - jest --coverage && coveralls < coverage/lcov.info
   - cd ..
+  - mvn clean install coveralls:report -Dconsolerizer.show=false -DrepoToken=${COVERALLS_TOKEN}
+  - bash <(curl -s https://codecov.io/bash)
+
