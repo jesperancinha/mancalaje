@@ -65,3 +65,9 @@ activemq-data
 ### cUrl
 cookies.txt
 cookies2.txt
+
+# Coveralls
+.coveralls.yml
+
+# Codecov
+codecov.yml
