@@ -1,11 +1,12 @@
 language: java
 jdk:
   - openjdk11
+install: mvn dependency:resolve
 script:
   - cd mancalaje-fe
   - npm cache clean -f
   - sudo npm install -g n
-  - n latest
+  - sudo n latest
   - npm update npm -g
   - npm install -g nodeunit jscoverage coveralls jest
   - yarn install
