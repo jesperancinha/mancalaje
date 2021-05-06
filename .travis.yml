@@ -1,17 +1,19 @@
-language: java
-jdk:
-  - openjdk11
-install: mvn dependency:resolve
-script:
-  - cd mancalaje-fe
-  - npm cache clean -f
-  - sudo npm install -g n
-  - sudo n latest
-  - npm update npm -g
-  - npm install -g nodeunit jscoverage coveralls jest
-  - yarn install
-  - jest --coverage && coveralls < coverage/lcov.info
-  - cd ..
-  - mvn clean install coveralls:report -Dconsolerizer.show=false -DrepoToken=${COVERALLS_TOKEN}
-  - bash <(curl -s https://codecov.io/bash)
+jobs:
+  include:
+    - language: node_js
+      node_js: 12
+      script:
+        - cd mancalaje-fe
+        - npm install -g nodeunit jscoverage coveralls jest
+        - yarn install
+        - jest --coverage && coveralls < coverage/lcov.info
+        - cd ..
+
+    - language: java
+      jdk:
+        - openjdk11
+      install: mvn dependency:resolve
+      script:
+        - mvn clean install coveralls:report -Dconsolerizer.show=false -DrepoToken=${COVERALLS_TOKEN}
+        - bash <(curl -s https://codecov.io/bash)
 
