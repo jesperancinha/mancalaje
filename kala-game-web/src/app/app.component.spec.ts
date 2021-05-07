@@ -1,15 +1,25 @@
-import {async, TestBed} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AppComponent} from './app.component';
 
+import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
+import {MatCard} from "@angular/material/card";
+import {HttpClientModule} from "@angular/common/http";
+
+beforeAll(() => {
+  TestBed.resetTestEnvironment();
+  TestBed.initTestEnvironment(BrowserDynamicTestingModule,
+    platformBrowserDynamicTesting());
+});
+
 describe('AppComponent', () => {
-  beforeEach(async(() => {
+  beforeEach((() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule, HttpClientModule
       ],
       declarations: [
-        AppComponent
+        AppComponent, MatCard
       ],
     }).compileComponents();
   }));

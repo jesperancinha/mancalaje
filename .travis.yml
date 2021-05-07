@@ -1,6 +1,7 @@
 jobs:
   include:
     - language: node_js
+      stage: Frontend Test (React Release)
       node_js: 12
       script:
         - cd mancalaje-fe
@@ -8,9 +9,19 @@ jobs:
         - yarn install
         - jest --coverage && coveralls < coverage/lcov.info
         - codecov
-        - cd ..
+
+    - language: node_js
+      stage: Frontend Test (Angular Release)
+      node_js: 12
+      script:
+        - cd kala-game-web
+        - npm install -g nodeunit jscoverage coveralls jest codecov
+        - yarn install
+        - jest --coverage && coveralls < coverage/lcov.info
+        - codecov
 
     - language: java
+      stage: Backend Test (All Java 11 Services)
       jdk:
         - openjdk11
       install: mvn dependency:resolve

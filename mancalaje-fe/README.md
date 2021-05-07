@@ -1,4 +1,4 @@
-# MancalaJe Front End
+# Kalah-Coffee-Mugs Web (React Release)
 
 ## Updates
 
