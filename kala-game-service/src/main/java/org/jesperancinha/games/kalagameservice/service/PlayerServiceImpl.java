@@ -36,9 +36,9 @@ public class PlayerServiceImpl implements PlayerService {
     public void leaveCurrentGame(String name) {
         final Player player = playerRepository.findPlayerByUsernameEquals(name);
         final Board currentBoard = player.getCurrentBoard();
-        if(Objects.nonNull(currentBoard)) {
+        if (Objects.nonNull(currentBoard)) {
             final Player opponent = player.getOpponent();
-            if(Objects.nonNull(opponent)){
+            if (Objects.nonNull(opponent)) {
                 opponent.setCurrentBoard(null);
                 playerRepository.save(opponent);
             }

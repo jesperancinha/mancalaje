@@ -29,7 +29,7 @@ This game is a slight change from he typical Kalah game, where in this case I'll
 ☕️
 
 ## Introduction
- 
+
 According to [Ultraboard Games](https://www.ultraboardgames.com/mancala/history.php) the mancala game has existed for about 7000 years. This means that since the middle neolithic phase of History, mankind has been playing this game.
 
 This project is also the official support project of my article on medium:
@@ -105,8 +105,8 @@ Have a look at [game.sh](./game.sh) for a practical example, where player 1 wins
 
 This example relies on static Id's so you can only run it once after a restart.
 
-1.  [cookies.txt](./cookies.txt) holds the session for player1
-2.  [cookies2.txt](./cookies2.txt) holds the session for player2
+1. [cookies.txt](./cookies.txt) holds the session for player1
+2. [cookies2.txt](./cookies2.txt) holds the session for player2
 
 ### Front - End - Web application
 
@@ -130,48 +130,48 @@ Please check [Ops](https://github.com/jesperancinha/project-signer/blob/master/p
 
 ### [![alt text](Documentation/mje-openshift-s.png "Openshift")](https://www.openshift.com/) Openshift
 
--   [OpenShift by Tutorials Point](https://www.tutorialspoint.com/openshift/index.htm)
--   [Learn Open Shift](https://learn.openshift.com/)
--   [Minishift](https://docs.okd.io/latest/minishift/index.html)
--   [Minishif Installation](https://docs.okd.io/latest/minishift/getting-started/installing.html)
--   [Fabric 8 maven plugin](https://github.com/fabric8io/fabric8-maven-plugin)
--   [Fabric 8](Fabric 8 maven plugin)
+- [OpenShift by Tutorials Point](https://www.tutorialspoint.com/openshift/index.htm)
+- [Learn Open Shift](https://learn.openshift.com/)
+- [Minishift](https://docs.okd.io/latest/minishift/index.html)
+- [Minishif Installation](https://docs.okd.io/latest/minishift/getting-started/installing.html)
+- [Fabric 8 maven plugin](https://github.com/fabric8io/fabric8-maven-plugin)
+- [Fabric 8](Fabric 8 maven plugin)
 
 ### [![alt text](Documentation/mje-minikube-s.png "Minikube")](https://github.com/kubernetes/minikube) Minikube
 
--   [What is minikube, kubectl and kubelet by Andreth Salazar](https://www.quora.com/What-is-minikube-kubectl-and-kubelet)
--   [Install Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
--   [Installing Kubernetes with Minikube](https://kubernetes.io/docs/setup/learning-environment/minikube/)
--   [Trigger a Spring Batch job with a JMS message](https://blog.mimacom.com/trigger-spring-batch-job-with-jms-message/)
--   [Postman](https://www.getpostman.com/)
--   [Spring Boot OAuth2 Social Login with Google, Facebook, and Github - Part 1](https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/)
--   [Shields IO](https://shields.io)
--   [How To Install Oracle Java 8 and OpenJDK 11 on Ubuntu 18.04, 19.04](https://www.linuxbabe.com/ubuntu/install-oracle-java-8-openjdk-11-ubuntu-18-04-18-10)
--   [Build and Deploy a Spring Boot App on Kubernetes (Minikube)](https://gorillalogic.com/blog/build-and-deploy-a-spring-boot-app-on-kubernetes-minikube/)
+- [What is minikube, kubectl and kubelet by Andreth Salazar](https://www.quora.com/What-is-minikube-kubectl-and-kubelet)
+- [Install Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
+- [Installing Kubernetes with Minikube](https://kubernetes.io/docs/setup/learning-environment/minikube/)
+- [Trigger a Spring Batch job with a JMS message](https://blog.mimacom.com/trigger-spring-batch-job-with-jms-message/)
+- [Postman](https://www.getpostman.com/)
+- [Spring Boot OAuth2 Social Login with Google, Facebook, and Github - Part 1](https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/)
+- [Shields IO](https://shields.io)
+- [How To Install Oracle Java 8 and OpenJDK 11 on Ubuntu 18.04, 19.04](https://www.linuxbabe.com/ubuntu/install-oracle-java-8-openjdk-11-ubuntu-18-04-18-10)
+- [Build and Deploy a Spring Boot App on Kubernetes (Minikube)](https://gorillalogic.com/blog/build-and-deploy-a-spring-boot-app-on-kubernetes-minikube/)
 
 ### Implementation related
 
--   [Apache MQ BrokerService](https://activemq.apache.org/maven/apidocs/org/apache/activemq/broker/BrokerService.html)
--   [Apache MQ BrokerFactory](https://activemq.apache.org/maven/apidocs/org/apache/activemq/broker/BrokerFactory.html)
--   [Apache MQ ActiveMQConnectionFactory](https://activemq.apache.org/maven/apidocs/org/apache/activemq/ActiveMQConnectionFactory.html)
+- [Apache MQ BrokerService](https://activemq.apache.org/maven/apidocs/org/apache/activemq/broker/BrokerService.html)
+- [Apache MQ BrokerFactory](https://activemq.apache.org/maven/apidocs/org/apache/activemq/broker/BrokerFactory.html)
+- [Apache MQ ActiveMQConnectionFactory](https://activemq.apache.org/maven/apidocs/org/apache/activemq/ActiveMQConnectionFactory.html)
 
 ### Environment related
 
--   [Using Meslo LG with the Windows Console](https://github.com/andreberg/Meslo-Font/wiki/Using-Meslo-LG-with-the-Windows-Console)
--   [Install iTerm2 with Solarized in 2017](https://gist.github.com/ZenLulz/c812f70fc86ebdbb189d9fb82f98197e)
--   [Oh My Zsh will not make you a 10x developer...but you may feel like one](https://github.com/ohmyzsh/ohmyzsh/)
--   [Oh My ZSH!](https://ohmyz.sh/)
--   [How to add Custom Fonts to Command Prompt in Windows 10](https://www.thewindowsclub.com/add-custom-fonts-to-command-prompt)
--   [How can I add additional fonts to the Windows console?](https://superuser.com/questions/1347724/how-can-i-add-additional-fonts-to-the-windows-console)
--   [Powerline fonts](https://github.com/powerline/fonts.git)
--   [Microsoft Terminal](https://github.com/Microsoft/Terminal)
--   [How To Install Minikube on Ubuntu 18.04 / Debian 10 Linux](https://computingforgeeks.com/how-to-install-minikube-on-ubuntu-18-04/)
--   [Install KVM on CentOS / RHEL / Ubuntu / Debian / SLES / Arch Linux](https://computingforgeeks.com/install-kvm-centos-rhel-ubuntu-debian-sles-arch/)
--   [choco package? #9](https://github.com/machine-drivers/docker-machine-driver-vmware/issues/9)
--   [Workstation Player](https://www.vmware.com/products/workstation-player.html)
--   [Try VMware Workstation Pro](https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html)
--   [Download VMware VIX 1.15.7](https://my.vmware.com/web/vmware/details?productId=640&downloadGroup=PLAYER-1253-VIX1157)
--   [Automation Tools and SDK(s)](https://my.vmware.com/web/vmware/free#desktop_end_user_computing/vmware_player/6_0|PLAYER-602|drivers_tools)
+- [Using Meslo LG with the Windows Console](https://github.com/andreberg/Meslo-Font/wiki/Using-Meslo-LG-with-the-Windows-Console)
+- [Install iTerm2 with Solarized in 2017](https://gist.github.com/ZenLulz/c812f70fc86ebdbb189d9fb82f98197e)
+- [Oh My Zsh will not make you a 10x developer...but you may feel like one](https://github.com/ohmyzsh/ohmyzsh/)
+- [Oh My ZSH!](https://ohmyz.sh/)
+- [How to add Custom Fonts to Command Prompt in Windows 10](https://www.thewindowsclub.com/add-custom-fonts-to-command-prompt)
+- [How can I add additional fonts to the Windows console?](https://superuser.com/questions/1347724/how-can-i-add-additional-fonts-to-the-windows-console)
+- [Powerline fonts](https://github.com/powerline/fonts.git)
+- [Microsoft Terminal](https://github.com/Microsoft/Terminal)
+- [How To Install Minikube on Ubuntu 18.04 / Debian 10 Linux](https://computingforgeeks.com/how-to-install-minikube-on-ubuntu-18-04/)
+- [Install KVM on CentOS / RHEL / Ubuntu / Debian / SLES / Arch Linux](https://computingforgeeks.com/install-kvm-centos-rhel-ubuntu-debian-sles-arch/)
+- [choco package? #9](https://github.com/machine-drivers/docker-machine-driver-vmware/issues/9)
+- [Workstation Player](https://www.vmware.com/products/workstation-player.html)
+- [Try VMware Workstation Pro](https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html)
+- [Download VMware VIX 1.15.7](https://my.vmware.com/web/vmware/details?productId=640&downloadGroup=PLAYER-1253-VIX1157)
+- [Automation Tools and SDK(s)](https://my.vmware.com/web/vmware/free#desktop_end_user_computing/vmware_player/6_0|PLAYER-602|drivers_tools)
 
 NOTE: remember to use the powershell script if trying to install the Meslo fonts in windows ([.ps1 file](https://github.com/powerline/fonts/blob/master/install.ps1)). It's located in the [fonts repo](https://github.com/powerline/fonts.git).
 

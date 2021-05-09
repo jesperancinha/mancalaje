@@ -30,7 +30,8 @@ public class GameManagerService {
     private final RoomsManagerService roomsManagerService;
     private int maxRooms;
 
-    public GameManagerService(final @Value("${mancalaje.max-rooms:20}") int maxRooms, final RoomsManagerService roomsManagerService) {
+    public GameManagerService(final @Value("${mancalaje.max-rooms:20}")
+                                      int maxRooms, final RoomsManagerService roomsManagerService) {
         this.maxRooms = maxRooms;
         this.roomsManagerService = roomsManagerService;
     }

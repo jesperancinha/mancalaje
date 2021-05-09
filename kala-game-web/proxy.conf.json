@@ -14,14 +14,18 @@
   "/api": {
     "target": "http://localhost:8081",
     "secure": false,
-    "pathRewrite": {"^/api/" : "/api/"},
+    "pathRewrite": {
+      "^/api/": "/api/"
+    },
     "changeOrigin": true,
     "logLevel": "debug"
   },
   "/log": {
     "target": "http://localhost:8081",
     "secure": false,
-    "pathRewrite": {"^/api/" : "/log/"},
+    "pathRewrite": {
+      "^/api/": "/log/"
+    },
     "changeOrigin": true,
     "logLevel": "debug"
   }

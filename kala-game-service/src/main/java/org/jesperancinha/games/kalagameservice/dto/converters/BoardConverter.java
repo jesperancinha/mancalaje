@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class BoardConverter {
     public static BoardDto toDto(Board board) {
-        if(Objects.isNull(board)){
+        if (Objects.isNull(board)) {
             return null;
         }
         return BoardDto.builder()

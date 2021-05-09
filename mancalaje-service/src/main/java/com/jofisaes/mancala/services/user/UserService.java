@@ -26,7 +26,9 @@ public class UserService {
 
     private int maxUsers;
 
-    public UserService(@Value("${mancalaje.max-users:100}") int maxUsers, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(
+            @Value("${mancalaje.max-users:100}")
+                    int maxUsers, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.maxUsers = maxUsers;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;

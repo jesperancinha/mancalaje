@@ -9,7 +9,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 
 @DataJpaTest
@@ -20,7 +19,7 @@ class KalaPlayerRepositoryTest {
 
     @BeforeEach
     @Transactional
-    public void setUp(){
+    public void setUp() {
         kalaPlayerRepository.save(Player.builder().username("player1").build());
     }
 

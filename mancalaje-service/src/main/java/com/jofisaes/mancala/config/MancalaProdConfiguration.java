@@ -17,8 +17,9 @@ import javax.sql.DataSource;
 public class MancalaProdConfiguration {
 
 
-    public MancalaProdConfiguration(DataSource dataSource, @Value("classpath:org/springframework/session/jdbc/schema-postgresql.sql")
-            Resource script) {
+    public MancalaProdConfiguration(DataSource dataSource,
+                                    @Value("classpath:org/springframework/session/jdbc/schema-postgresql.sql")
+                                            Resource script) {
         try {
             ScriptUtils.executeSqlScript(dataSource.getConnection(), script);
         } catch (Exception e) {

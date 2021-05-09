@@ -33,7 +33,10 @@ public class UsersController {
     }
 
     @PostMapping
-    public UserDto createUser(@Valid @RequestBody UserDto userDto) {
+    public UserDto createUser(
+            @Valid
+            @RequestBody
+                    UserDto userDto) {
         User user = userService.saveUser(userDto.toUser());
         mancalaJeMailService.sendRegistrationMail(userDto);
         return UserDto.builder().name(user.getName()).email(user.getEmail()).build();

@@ -21,7 +21,8 @@ import java.net.URI;
 
 @EnableJpaAuditing
 @EnableScheduling
-@EnableJpaRepositories(basePackages = "com.jofisaes.mancala.repository", transactionManagerRef = "mancalaJeTransactionManager")
+@EnableJpaRepositories(basePackages = "com.jofisaes.mancala.repository",
+        transactionManagerRef = "mancalaJeTransactionManager")
 @Configuration
 @Profile({"dev", "prod"})
 public class MancalaConfiguration {

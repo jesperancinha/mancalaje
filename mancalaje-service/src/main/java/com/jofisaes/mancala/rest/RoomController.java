@@ -18,18 +18,22 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping(MANCALA_ROOMS)
 public class RoomController extends AbstractUserController {
 
-    @PutMapping(value = "{roomId}", produces = APPLICATION_JSON_VALUE)
+    @PutMapping(value = "{roomId}",
+            produces = APPLICATION_JSON_VALUE)
     public BoardManagerDto joinGame(
-            @PathVariable("roomId") Long roomId) {
+            @PathVariable("roomId")
+                    Long roomId) {
         final Player sessionUser = userManagerService.getSessionUser();
         final BoardManager boardManager = gameManagerService.joinPlayer(roomId, sessionUser);
         return BoardManagerDto.builder().boardManager(boardManager).loggedPlayer(sessionUser).build();
     }
 
-    @DeleteMapping(value = "{roomId}", produces = APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "{roomId}",
+            produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(value = OK)
     public void leaveGame(
-            @PathVariable("roomId") Long roomId) {
+            @PathVariable("roomId")
+                    Long roomId) {
         final Player sessionUser = userManagerService.getSessionUser();
         final Player player = gameManagerService.leaveRoom(roomId, sessionUser.getEmail());
         sessionUser.reset();

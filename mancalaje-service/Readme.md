@@ -25,16 +25,16 @@ UPDATE DATABASECHANGELOGLOCK SET LOCKED=FALSE, LOCKGRANTED=null, LOCKEDBY=null w
 
 ## References
 
--   [i18n in Java 11, Spring Boot, and JavaScript](https://developer.okta.com/blog/2019/02/25/java-i18n-internationalization-localization)
--   [How To Install and Configure Postfix as a Send-Only SMTP Server on Debian 9](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-postfix-as-a-send-only-smtp-server-on-debian-9)
--   [MailSlurper](https://mailslurper.com/)
--   [How to send emails from localhost (MAC OS X El Capitan)](https://www.developerfiles.com/how-to-send-emails-from-localhost-mac-os-x-el-capitan/)
--   [PostgreSQL](https://www.postgresql.org/)
--   [How to connect to H2 database during development/testing using Spring-Boot](https://medium.com/@harittweets/how-to-connect-to-h2-database-during-development-testing-using-spring-boot-44bbb287570)
--   [SDK Man!](https://sdkman.io/)
--   [Spring Boot and OAuth2](https://spring.io/guides/tutorials/spring-boot-oauth2/)
--   [Spring Boot 2 And OAuth 2 - A Complete Guide](https://pattern-match.com/blog/2018/10/17/springboot2-with-oauth2-integration/)
--   [An OAuth 2.0 introduction for beginners](https://itnext.io/an-oauth-2-0-introduction-for-beginners-6e386b19f7a9)
+- [i18n in Java 11, Spring Boot, and JavaScript](https://developer.okta.com/blog/2019/02/25/java-i18n-internationalization-localization)
+- [How To Install and Configure Postfix as a Send-Only SMTP Server on Debian 9](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-postfix-as-a-send-only-smtp-server-on-debian-9)
+- [MailSlurper](https://mailslurper.com/)
+- [How to send emails from localhost (MAC OS X El Capitan)](https://www.developerfiles.com/how-to-send-emails-from-localhost-mac-os-x-el-capitan/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [How to connect to H2 database during development/testing using Spring-Boot](https://medium.com/@harittweets/how-to-connect-to-h2-database-during-development-testing-using-spring-boot-44bbb287570)
+- [SDK Man!](https://sdkman.io/)
+- [Spring Boot and OAuth2](https://spring.io/guides/tutorials/spring-boot-oauth2/)
+- [Spring Boot 2 And OAuth 2 - A Complete Guide](https://pattern-match.com/blog/2018/10/17/springboot2-with-oauth2-integration/)
+- [An OAuth 2.0 introduction for beginners](https://itnext.io/an-oauth-2-0-introduction-for-beginners-6e386b19f7a9)
 
 ## About me 👨🏽‍💻🚀🏳️‍🌈
 

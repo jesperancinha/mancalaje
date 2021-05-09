@@ -18,5 +18,7 @@ public interface UserRepository extends JpaRepository<User, String> {
     @Transactional(propagation = REQUIRES_NEW)
     @Modifying(clearAutomatically = true)
     @Query("DELETE FROM User u WHERE u.email = :email")
-    void deleteByEmail(@Param("email") String email);
+    void deleteByEmail(
+            @Param("email")
+                    String email);
 }

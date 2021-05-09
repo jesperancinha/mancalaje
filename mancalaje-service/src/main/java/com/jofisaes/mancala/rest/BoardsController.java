@@ -23,15 +23,20 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping(MANCALA_BOARDS)
 public class BoardsController extends AbstractUserController implements Serializable {
 
-    @PostMapping(produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
-    public BoardManagerDto createGame(@RequestBody Map<String, Object> payload) {
+    @PostMapping(produces = APPLICATION_JSON_VALUE,
+            consumes = APPLICATION_JSON_VALUE)
+    public BoardManagerDto createGame(
+            @RequestBody
+                    Map<String, Object> payload) {
         final Player sessionUser = userManagerService.getSessionUser();
         return toDto(sessionUser, gameManagerService.createBoard(sessionUser, payload.get("boardName").toString()));
     }
 
-    @GetMapping(value = "{roomId}", produces = APPLICATION_JSON_VALUE)
+    @GetMapping(value = "{roomId}",
+            produces = APPLICATION_JSON_VALUE)
     public BoardManagerDto getGame(
-            @PathVariable("roomId") Long roomId) {
+            @PathVariable("roomId")
+                    Long roomId) {
         final Player sessionUser = this.userManagerService.getSessionUser();
         final BoardManager boardManager = this.gameManagerService.handleBoardManager(roomId);
         userManagerService.setSessionUser(boardManager.refreshSessionUser(sessionUser));
@@ -41,7 +46,8 @@ public class BoardsController extends AbstractUserController implements Serializ
 
     @DeleteMapping(value = "{roomId}")
     public BoardManagerDto removeRoom(
-            @PathVariable("roomId") Long roomId) {
+            @PathVariable("roomId")
+                    Long roomId) {
         final Player sessionUser = userManagerService.getSessionUser();
         final BoardManager boardManager = gameManagerService.removeRoom(roomId, sessionUser);
         return toDto(sessionUser, boardManager);
@@ -54,7 +60,8 @@ public class BoardsController extends AbstractUserController implements Serializ
         return toDto(sessionUser, boardManager);
     }
 
-    @GetMapping(value = "all", produces = APPLICATION_JSON_VALUE)
+    @GetMapping(value = "all",
+            produces = APPLICATION_JSON_VALUE)
     public List<BoardManagerDto> listAllCurrentGames() {
         final Player sessionUser = userManagerService.getSessionUser();
         return gameManagerService.listAllGames()

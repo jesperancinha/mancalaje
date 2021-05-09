@@ -35,23 +35,24 @@ jest --coverage && coveralls < coverage/lcov.info
 
 ## References
 
--   [Email Address Regular Expression That 99.99% Works](https://emailregex.com/)
--   [Compass SASS](http://compass-style.org/install/)
--   [Material-UI](https://material-ui.com/)
--   [Adding TypeScript](https://facebook.github.io/create-react-app/docs/adding-typescript)
--   [Create a New React App](https://reactjs.org/docs/create-a-new-react-app.html)
--   [Update all the Node dependencies to their latest version](https://flaviocopes.com/update-npm-dependencies/)
--   [Creating a Single-Page App in React using React Router](https://www.kirupa.com/react/creating_single_page_app_react_using_react_router.htm)
--   [Using React Router for a Single Page Application](https://www.taniarascia.com/using-react-router-spa/)
--   [Using React's Proxy to get ahead of CORS & use HTTPS for API calls](https://blog.praveen.science/using-reacts-proxy-to-get-ahead-of-cors/)
--   [How to consume a restful api in react](https://pusher.com/tutorials/consume-restful-api-react)
--   [How to pass props to components in React](https://www.robinwieruch.de/react-pass-props-to-component/)
--   [Why use Redux? Reasons with clear examples](https://blog.logrocket.com/why-use-redux-reasons-with-clear-examples-d21bffd5835/)
--   [React Redux Basic Tutorial](https://react-redux.js.org/introduction/basic-tutorial)
--   [Fetch API POST sample](https://googlechrome.github.io/samples/fetch-api/fetch-post.html)
--   [An OAuth2 middleware for fetch()](https://evertpot.com/fetch-mw-oauth2/)
--   [Redux Tutorial For Beginners](https://www.codingame.com/playgrounds/8894/redux-tutorial-for-beginners)
--   [RealWorld example app](https://github.com/gothinkster/react-redux-realworld-example-app)
+- [Email Address Regular Expression That 99.99% Works](https://emailregex.com/)
+- [Compass SASS](http://compass-style.org/install/)
+- [Material-UI](https://material-ui.com/)
+- [Adding TypeScript](https://facebook.github.io/create-react-app/docs/adding-typescript)
+- [Create a New React App](https://reactjs.org/docs/create-a-new-react-app.html)
+- [Update all the Node dependencies to their latest version](https://flaviocopes.com/update-npm-dependencies/)
+- [Creating a Single-Page App in React using React Router](https://www.kirupa.com/react/creating_single_page_app_react_using_react_router.htm)
+- [Using React Router for a Single Page Application](https://www.taniarascia.com/using-react-router-spa/)
+- [Using React's Proxy to get ahead of CORS & use HTTPS for API calls](https://blog.praveen.science/using-reacts-proxy-to-get-ahead-of-cors/)
+- [How to consume a restful api in react](https://pusher.com/tutorials/consume-restful-api-react)
+- [How to pass props to components in React](https://www.robinwieruch.de/react-pass-props-to-component/)
+- [Why use Redux? Reasons with clear examples](https://blog.logrocket.com/why-use-redux-reasons-with-clear-examples-d21bffd5835/)
+- [React Redux Basic Tutorial](https://react-redux.js.org/introduction/basic-tutorial)
+- [Fetch API POST sample](https://googlechrome.github.io/samples/fetch-api/fetch-post.html)
+- [An OAuth2 middleware for fetch()](https://evertpot.com/fetch-mw-oauth2/)
+- [Redux Tutorial For Beginners](https://www.codingame.com/playgrounds/8894/redux-tutorial-for-beginners)
+- [RealWorld example app](https://github.com/gothinkster/react-redux-realworld-example-app)
+
 ---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

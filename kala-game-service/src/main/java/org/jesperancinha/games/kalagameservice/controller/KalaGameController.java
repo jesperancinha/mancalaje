@@ -64,7 +64,7 @@ public class KalaGameController {
         var player = playerService.createOrFindPlayerByName(principal.getName());
         final Board board = boardService.findBoardById(boardId);
         final Pit startPit = board.getPits().stream().filter(pit -> pit.getId().equals(pitId)).findAny().orElseThrow((Supplier<Throwable>) PitDoesNotExistException::new);
-        if(startPit.getStones() ==0){
+        if (startPit.getStones() == 0) {
             throw new ZeroStonesToMoveException();
         }
         final Board boardUpdated = gameService.sowStonesFromPit(player, startPit, board);

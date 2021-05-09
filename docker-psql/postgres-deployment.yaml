@@ -31,12 +31,12 @@ spec:
         - name: mancalaje-postgresql
           image: mancalaje-postgresql:latest
           env:
-          - name: POSTGRES_USER
-            value: "postgres"
-          - name: POSTGRES_PASSWORD
-            value: "admin"
-          - name: POSTGRES_DB
-            value: "mancalajedb"
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "admin"
+            - name: POSTGRES_DB
+              value: "mancalajedb"
           imagePullPolicy: Never
           ports:
             - containerPort: 5432

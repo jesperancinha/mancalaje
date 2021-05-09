@@ -2,16 +2,15 @@
 
 machine='dev'
 
-if [[ ! -z "$1" ]]
-then
-      let machine=$1
+if [[ ! -z "$1" ]]; then
+  let machine=$1
 fi
 
 docker-machine start ${machine}
 
 docker-machine env ${machine}
 
-eval $(docker-machine env  ${machine})
+eval $(docker-machine env ${machine})
 
 docker-compose down
 

@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class PitConverter {
     public static PitDto toDto(Pit pit) {
-        if(Objects.isNull(pit)){
+        if (Objects.isNull(pit)) {
             return null;
         }
         return PitDto

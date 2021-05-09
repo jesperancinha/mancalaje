@@ -93,10 +93,10 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public Board sowStonesFromPit(Player player, Pit pit, Board board) {
-        if(Objects.isNull(board.getPlayerTwo())){
+        if (Objects.isNull(board.getPlayerTwo())) {
             throw new PlayerNotJoinedYetException();
         }
-        if(Objects.nonNull(board.getWinner())){
+        if (Objects.nonNull(board.getWinner())) {
             throw new GameOverException();
         }
         if (pit.getPitType() == LARGE) {

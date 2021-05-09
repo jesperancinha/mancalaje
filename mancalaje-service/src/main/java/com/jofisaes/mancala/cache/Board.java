@@ -106,12 +106,16 @@ public class Board implements Serializable {
         });
     }
 
-    public void setPlayer1(@NonNull Player player1) {
+    public void setPlayer1(
+            @NonNull
+                    Player player1) {
         player1.setHoles(this.allPlayerOneHoles, this.playerOneStore);
         this.player1 = player1;
     }
 
-    public void setPlayer2(@NonNull Player player2) {
+    public void setPlayer2(
+            @NonNull
+                    Player player2) {
         player2.setHoles(this.allPlayerTwoHoles, this.playerTwoStore);
         this.player2 = player2;
     }
