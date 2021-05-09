@@ -5,15 +5,15 @@ import {catchError, retry} from "rxjs/operators";
 import {Board} from "../model/board";
 
 
-const createBoardUrl = "/api/create"
-const getPlayerBoarsdUrl = "/api/current"
-const getAvailableBoarsdUrl = "/api/available"
-const joinBoardUrl = "/api/join"
-const moveUrl = "/api/move"
-const leaveUrl = "/api/leave"
+const createBoardUrl = "/api/create";
+const getPlayerBoarsdUrl = "/api/current";
+const getAvailableBoarsdUrl = "/api/available";
+const joinBoardUrl = "/api/join";
+const moveUrl = "/api/move";
+const leaveUrl = "/api/leave";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class BoardService {
   constructor(private http: HttpClient) {
