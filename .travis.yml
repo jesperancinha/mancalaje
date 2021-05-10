@@ -6,9 +6,7 @@ jobs:
       script:
         - yarn config set workspaces-experimental true
         - npm install -g nodeunit jscoverage coveralls jest codecov
-        - cd packages/kala-game-web
         - yarn install
-        - cd ../..
         - jest --coverage --projects packages/kala-game-web
         - coveralls < packages/kala-game-web/coverage/lcov.info
         - cd packages/kala-game-web
@@ -20,9 +18,7 @@ jobs:
       script:
         - yarn config set workspaces-experimental true
         - npm install -g nodeunit jscoverage coveralls jest codecov
-        - cd packages/mancalaje-fe
         - yarn install
-        - cd ../..
         - jest --coverage --projects packages/mancalaje-fe
         - coveralls < packages/mancalaje-fe/coverage/lcov.info
         - cd packages/mancalaje-fe
