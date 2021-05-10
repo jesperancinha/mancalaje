@@ -12,7 +12,7 @@ jobs:
 #        - yarn workspaces run coverage
 #        - find packages -name lcov.info -exec echo -a {} \; | xargs lcov -o coverage/lcov.info
         - jest --coverage --projects packages/kala-game-web
-        - coveralls < coverage/lcov.info
+        - coveralls < packages/kala-game-web/coverage/lcov.info
 #        - codecov
 
     - language: java
