@@ -6,7 +6,7 @@ jobs:
       script:
         - yarn config set workspaces-experimental true
         - npm install -g nodeunit jscoverage coveralls jest codecov
-        - apt-get install lcov
+        - sudo apt-get install lcov
         - mkdir coverage
         - yarn install
         - yarn workspaces run coverage
