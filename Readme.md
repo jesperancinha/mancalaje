@@ -128,12 +128,25 @@ Please check [Ops](https://github.com/jesperancinha/project-signer/blob/master/p
 
 ## System utility installation
 
+-   Installing LCov
 ```bash
 brew install lcov
 ```
 
 ```bash
 apt-get install lcov
+```
+
+-   Merging reports
+
+```bash
+find packages -name lcov.info -exec echo -a {} \; | xargs lcov -o coverage/lcov.info
+```
+
+## Yarn
+
+```bash
+yarn workspaces run coverage
 ```
 
 ## References 📚
