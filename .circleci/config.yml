@@ -1,54 +1,53 @@
-# Java Maven CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-java/ for more details
-#
 version: 2
 jobs:
-  build:
+  build-service:
     docker:
-      # specify the version you desire here
       - image: circleci/openjdk:11-ea-28-jdk
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
-
-    working_directory: ~/repo
-
     environment:
-      # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
 
     steps:
       - checkout
 
-      # Download and cache dependencies
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "pom.xml" }}
-            # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
       - run:
           name: Backend build
           command: mvn clean install
-      - run:
-          name: Yarn install
-          command: apt-get install yarn
-      - run:
-          name: Set Experimental Workspaces
-          command: yarn config set workspaces-experimental true
-      - run:
-          name: Front End build (Angular + React releases)
-          command: yarn install
 
       - save_cache:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
-      # run tests!
       - run: mvn integration-test
 
+  build-front-end:
+    docker:
+        - image: cimg/node:12.22.1
+    environment:
+      JVM_OPTS: -Xmx3200m
+      TERM: dumb
 
+    steps:
+      - checkout
+      - run:
+         name: Backend build
+         command: mvn clean install
+      - run:
+         name: Set Experimental Workspaces
+         command: yarn config set workspaces-experimental true
+      - run:
+         name: Front End build (Angular + React releases)
+         command: yarn install
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build-service
+      - build-front-end
