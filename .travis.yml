@@ -7,8 +7,7 @@ jobs:
         - yarn config set workspaces-experimental true
         - npm install -g nodeunit jscoverage coveralls jest codecov
         - yarn install
-        - jest --coverage && coveralls < coverage/lcov.info
-        - codecov
+        - yarn workspaces run coverage
 
     - language: java
       stage: Backend Test (All Java 11 Services)
