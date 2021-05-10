@@ -11,7 +11,8 @@ jobs:
         - yarn install
         - yarn workspaces run coverage
         - find packages -name lcov.info -exec echo -a {} \; | xargs lcov -o coverage/lcov.info
-        - coveralls < coverage/lcov.info && codecov
+        - coveralls < coverage/lcov.info
+        - codecov
 
     - language: java
       stage: Backend Test (All Java 11 Services)
