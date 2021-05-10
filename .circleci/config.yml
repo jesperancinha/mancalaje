@@ -36,9 +36,6 @@ jobs:
     steps:
       - checkout
       - run:
-         name: Backend build
-         command: mvn clean install
-      - run:
          name: Set Experimental Workspaces
          command: yarn config set workspaces-experimental true
       - run:
