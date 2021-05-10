@@ -4,10 +4,10 @@
 [![GitHub release](https://img.shields.io/github/release-pre/jesperancinha/mancalaje.svg)](#)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f30b682f67e44391a922f62ada6b2f85)](https://www.codacy.com/app/jofisaes/mancalaje?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jesperancinha/mancalaje&amp;utm_campaign=Badge_Grade)
-[![CircleCI](https://circleci.com/gh/jesperancinha/mancalaje.svg?style=svg)](https://circleci.com/gh/jesperancinha/mancalaje)
-[![Build Status](https://travis-ci.org/jesperancinha/mancalaje.svg?branch=master)](https://travis-ci.org/jesperancinha/mancalaje)
 [![codebeat badge](https://codebeat.co/badges/eaf7a2e0-ed2c-47fb-9323-2051db72c171)](https://codebeat.co/projects/github-com-jesperancinha-mancalaje-master)
-[![BCH compliance](https://bettercodehub.com/edge/badge/jesperancinha/mancalaje?branch=master)](https://bettercodehub.com/)
+[![CircleCI](https://circleci.com/gh/jesperancinha/mancalaje.svg?style=svg)](https://circleci.com/gh/jesperancinha/mancalaje)
+[![Build Status](https://travis-ci.com/jesperancinha/mancalaje.svg?branch=master)](https://travis-ci.com/jesperancinha/mancalaje)
+[![BCH compliance](https://bettercodehub.com/edge/badge/jesperancinha/mancalaje?branch=master)](https://bettercodehub.com/results/jesperancinha/mancalaje)
 [![Known Vulnerabilities](https://snyk.io/test/github/jesperancinha/mancalaje/badge.svg)](https://snyk.io/test/github/jesperancinha/mancalaje)
 [![codecov](https://codecov.io/gh/jesperancinha/mancalaje/branch/master/graph/badge.svg?token=FytnZVKZcG)](https://codecov.io/gh/jesperancinha/mancalaje)
 [![Coverage Status](https://coveralls.io/repos/github/jesperancinha/mancalaje/badge.svg?branch=master)](https://coveralls.io/github/jesperancinha/mancalaje?branch=master)
