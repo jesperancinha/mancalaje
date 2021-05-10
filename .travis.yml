@@ -6,14 +6,16 @@ jobs:
       script:
         - yarn config set workspaces-experimental true
         - npm install -g nodeunit jscoverage coveralls jest codecov
-#        - sudo apt-get install lcov
+        - sudo apt-get install lcov
         - mkdir coverage
         - yarn install
 #        - yarn workspaces run coverage
-#        - find packages -name lcov.info -exec echo -a {} \; | xargs lcov -o coverage/lcov.info
+        - find packages -name lcov.info -exec echo -a {} \; | xargs lcov -o coverage/lcov.info
         - jest --coverage --projects packages/kala-game-web
+        - jest --coverage --projects packages/mancalaje-fe
         - coveralls < packages/kala-game-web/coverage/lcov.info
-#        - codecov
+        - coveralls < packages/mancalaje-fe/coverage/lcov.info
+        - codecov
 
     - language: java
       stage: Backend Test (All Java 11 Services)
