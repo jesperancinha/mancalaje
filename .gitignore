@@ -71,3 +71,6 @@ cookies2.txt
 
 # Codecov
 codecov.yml
+
+# Coverage documents
+coverage

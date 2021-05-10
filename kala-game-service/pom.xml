@@ -5,11 +5,11 @@
     <parent>
         <groupId>org.jesperancinha</groupId>
         <artifactId>mancalaje</artifactId>
-        <version>2.0.X-SNAPSHOT</version>
+        <version>2.0.1-SNAPSHOT</version>
     </parent>
     <groupId>org.jesperancinha.games</groupId>
     <artifactId>kala-game-service</artifactId>
-    <version>2.0.X-SNAPSHOT</version>
+    <version>2.0.1-SNAPSHOT</version>
     <name>kala-game-service</name>
     <description>Kala Stones Game</description>
     <properties>

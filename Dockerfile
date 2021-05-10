@@ -18,7 +18,7 @@ COPY docker-files/default.conf /etc/nginx/conf.d/default.conf
 
 COPY docker-files/nginx.conf /etc/nginx/nginx.conf
 
-COPY mancalaje-service/target/mancalaje-service-2.0.X-SNAPSHOT.jar ${runningFolder}
+COPY mancalaje-service/target/mancalaje-service-2.0.1-SNAPSHOT.jar ${runningFolder}
 
 COPY mancalaje-fe/docker-files/build /usr/share/nginx/html
 

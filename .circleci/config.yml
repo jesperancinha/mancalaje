@@ -30,7 +30,15 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: mvn clean install
+      - run:
+          name: Backend build
+          command: mvn clean install
+      - run:
+          name: Set Experimental Workspaces
+          command: yarn config set workspaces-experimental true
+      - run:
+          name: Front End build (Angular + React releases)
+          command: yarn install
 
       - save_cache:
           paths:
