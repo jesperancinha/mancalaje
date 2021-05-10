@@ -126,6 +126,16 @@ npm start
 
 Please check [Ops](https://github.com/jesperancinha/project-signer/blob/master/project-signer-templates/Ops.md) documentation for more info on how to deploy in K8's.
 
+## System utility installation
+
+```bash
+brew install lcov
+```
+
+```bash
+apt-get install lcov
+```
+
 ## References 📚
 
 ### [![alt text](Documentation/mje-openshift-s.png "Openshift")](https://www.openshift.com/) Openshift
