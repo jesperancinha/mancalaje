@@ -1,5 +1,12 @@
 # Kalah-Coffee-Mugs
 
+[![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/angular-50.png "Angular")](https://angular.io/)
+[![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/react-50.png "React")](https://reactjs.org/)
+[![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/openshift-50.png "Openshift")](https://www.openshift.com/)
+[![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/minikube-50.png "Minikube")](https://github.com/kubernetes/minikube)
+
+---
+
 [![Generic badge](https://img.shields.io/static/v1.svg?label=GitHub&message=Kalah%20Coffee%20Mugs&color=informational)](https://github.com/jesperancinha/mancalaje)
 [![GitHub release](https://img.shields.io/github/release-pre/jesperancinha/mancalaje.svg)](#)
 
@@ -149,7 +156,7 @@ yarn workspaces run coverage
 
 ## References 📚
 
-### [![alt text](Documentation/mje-openshift-s.png "Openshift")](https://www.openshift.com/) Openshift
+### [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/openshift-50.png "Openshift")](https://www.openshift.com/) Openshift
 
 -   [OpenShift by Tutorials Point](https://www.tutorialspoint.com/openshift/index.htm)
 -   [Learn Open Shift](https://learn.openshift.com/)
@@ -158,7 +165,7 @@ yarn workspaces run coverage
 -   [Fabric 8 maven plugin](https://github.com/fabric8io/fabric8-maven-plugin)
 -   [Fabric 8](Fabric 8 maven plugin)
 
-### [![alt text](Documentation/mje-minikube-s.png "Minikube")](https://github.com/kubernetes/minikube) Minikube
+### [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/minikube-50.png "Minikube")](https://github.com/kubernetes/minikube) Minikube
 
 -   [What is minikube, kubectl and kubelet by Andreth Salazar](https://www.quora.com/What-is-minikube-kubectl-and-kubelet)
 -   [Install Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
