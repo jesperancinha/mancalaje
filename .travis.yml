@@ -7,10 +7,6 @@ jobs:
         - yarn config set workspaces-experimental true
         - npm install -g nodeunit jscoverage coveralls jest codecov
         - yarn install
-        - jest --coverage --projects packages/kala-game-web
-        - coveralls < packages/kala-game-web/coverage/lcov.info
-        - cd packages/kala-game-web
-        - codecov
 
     - language: node_js
       stage: Frontend Test (React Releases)
@@ -19,10 +15,6 @@ jobs:
         - yarn config set workspaces-experimental true
         - npm install -g nodeunit jscoverage coveralls jest codecov
         - yarn install
-        - jest --coverage --projects packages/mancalaje-fe
-        - coveralls < packages/mancalaje-fe/coverage/lcov.info
-        - cd packages/mancalaje-fe
-        - codecov
 
     - language: java
       stage: Backend Test (All Java 11 Services)
@@ -31,5 +23,29 @@ jobs:
       install: mvn dependency:resolve
       script:
         - mvn clean install coveralls:report -Dconsolerizer.show=false -DrepoToken=${COVERALLS_TOKEN}
+        - bash <(curl -s https://codecov.io/bash)
+        - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Java Kotlin $(find **/jacoco*.xml -printf '-r %p ')
+
+    - language: java
+      stage: Coverage Report Generation
+      jdk:
+        - openjdk11
+      install: mvn dependency:resolve
+      script:
+        - mvn clean install coveralls:report -Dconsolerizer.show=false -DrepoToken=${COVERALLS_TOKEN}
+        - yarn config set workspaces-experimental true
+        - npm install -g nodeunit jscoverage coveralls jest codecov
+        - yarn install
+        - jest --coverage --projects packages/kala-game-web
+        - coveralls < packages/kala-game-web/coverage/lcov.info
+        - cd packages/kala-game-web
+        - codecov
+        - yarn config set workspaces-experimental true
+        - npm install -g nodeunit jscoverage coveralls jest codecov
+        - yarn install
+        - jest --coverage --projects packages/mancalaje-fe
+        - coveralls < packages/mancalaje-fe/coverage/lcov.info
+        - cd packages/mancalaje-fe
+        - codecov
         - bash <(curl -s https://codecov.io/bash)
         - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Java Kotlin $(find **/jacoco*.xml -printf '-r %p ')
