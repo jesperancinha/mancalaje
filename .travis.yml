@@ -2,7 +2,8 @@ jobs:
   include:
     - language: java
         stage: Coverage Report Generation
-        jdk: openjdk11
+        jdk:
+          - openjdk11
         install: mvn dependency:resolve
         script:
           - nvm install 12
