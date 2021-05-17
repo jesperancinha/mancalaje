@@ -1,28 +1,5 @@
 jobs:
   include:
-    - language: java
-      stage: Coverage Report Generation
-      jdk:
-        - openjdk11
-      install: mvn dependency:resolve
-      script:
-        - nvm install 12
-        - nvm use 12
-        - mvn clean install coveralls:report -Dconsolerizer.show=false -DrepoToken=${COVERALLS_TOKEN}
-        - yarn config set workspaces-experimental true
-        - npm install -g nodeunit jscoverage coveralls jest codecov
-        - yarn install
-        - jest --coverage --projects packages/kala-game-web
-        - cd packages/kala-game-web
-        - codecov
-        - cd ../..
-        - jest --coverage --projects packages/mancalaje-fe
-        - cd packages/mancalaje-fe
-        - codecov
-        - cd ../..
-        - bash <(curl -s https://codecov.io/bash)
-        - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Java Kotlin JavaScript $(find **/jacoco*.xml -printf '-r %p ')
-
     - language: node_js
       stage: Frontend Test (Angular Releases)
       node_js: 12
@@ -52,3 +29,26 @@ jobs:
         - mvn clean install coveralls:report -Dconsolerizer.show=false -DrepoToken=${COVERALLS_TOKEN}
         - bash <(curl -s https://codecov.io/bash)
         - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Java Kotlin $(find **/jacoco*.xml -printf '-r %p ')
+
+    - language: java
+      stage: Coverage Report Generation
+      jdk:
+        - openjdk11
+      install: mvn dependency:resolve
+      script:
+        - nvm install 12
+        - nvm use 12
+        - mvn clean install coveralls:report -Dconsolerizer.show=false -DrepoToken=${COVERALLS_TOKEN}
+        - yarn config set workspaces-experimental true
+        - npm install -g nodeunit jscoverage coveralls jest codecov
+        - yarn install
+        - jest --coverage --projects packages/kala-game-web
+        - cd packages/kala-game-web
+        - codecov
+        - cd ../..
+        - jest --coverage --projects packages/mancalaje-fe
+        - cd packages/mancalaje-fe
+        - codecov
+        - cd ../..
+        - bash <(curl -s https://codecov.io/bash)
+        - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Java Kotlin JavaScript $(find **/jacoco*.xml -printf '-r %p ')
