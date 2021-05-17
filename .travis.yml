@@ -48,4 +48,4 @@ jobs:
         - cd packages/mancalaje-fe
         - codecov
         - bash <(curl -s https://codecov.io/bash)
-        - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Java Kotlin $(find **/jacoco*.xml -printf '-r %p ')
+        - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Java Kotlin JavaScript $(find **/jacoco*.xml -printf '-r %p ')
