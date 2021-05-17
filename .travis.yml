@@ -15,11 +15,11 @@ jobs:
         - jest --coverage --projects packages/kala-game-web
         - cd packages/kala-game-web
         - codecov
-        - cd ..
+        - cd ../..
         - jest --coverage --projects packages/mancalaje-fe
         - cd packages/mancalaje-fe
         - codecov
-        - cd ..
+        - cd ../..
         - bash <(curl -s https://codecov.io/bash)
         - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Java Kotlin JavaScript $(find **/jacoco*.xml -printf '-r %p ')
 
