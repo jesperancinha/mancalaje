@@ -16,6 +16,7 @@
 [![BCH compliance](https://bettercodehub.com/edge/badge/jesperancinha/mancalaje?branch=master)](https://bettercodehub.com/results/jesperancinha/mancalaje)
 [![Known Vulnerabilities](https://snyk.io/test/github/jesperancinha/mancalaje/badge.svg)](https://snyk.io/test/github/jesperancinha/mancalaje)
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/f30b682f67e44391a922f62ada6b2f85)](https://www.codacy.com/gh/jesperancinha/mancalaje/dashboard?utm_source=github.com&utm_medium=referral&utm_content=jesperancinha/mancalaje&utm_campaign=Badge_Coverage)
 [![codecov](https://codecov.io/gh/jesperancinha/mancalaje/branch/master/graph/badge.svg?token=FytnZVKZcG)](https://codecov.io/gh/jesperancinha/mancalaje)
 [![Coverage Status](https://coveralls.io/repos/github/jesperancinha/mancalaje/badge.svg?branch=master)](https://coveralls.io/github/jesperancinha/mancalaje?branch=master)
 
