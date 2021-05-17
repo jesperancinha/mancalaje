@@ -51,4 +51,5 @@ jobs:
         - codecov
         - cd ../..
         - bash <(curl -s https://codecov.io/bash)
-        - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Java Kotlin JavaScript $(find **/jacoco*.xml -printf '-r %p ')
+        - bash <(curl -Ls https://coverage.codacy.com/get.sh) report $(find **/jacoco*.xml -printf '-r %p ')
+        - bash <(curl -Ls https://coverage.codacy.com/get.sh) report $(find **/lcov.info -printf '-r %p ')
