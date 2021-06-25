@@ -7,7 +7,6 @@
 [![GitHub License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
 
 [![CircleCI](https://circleci.com/gh/jesperancinha/mancalaje.svg?style=svg)](https://circleci.com/gh/jesperancinha/mancalaje)
-[![Build Status](https://travis-ci.com/jesperancinha/mancalaje.svg?branch=master)](https://travis-ci.com/jesperancinha/mancalaje)
 [![Build status](https://ci.appveyor.com/api/projects/status/rd3x0g0muu0se6ed?svg=true)](https://ci.appveyor.com/project/jesperancinha/mancalaje)
 [![mancalaje](https://github.com/jesperancinha/mancalaje/actions/workflows/mancalaje.yml/badge.svg)](https://github.com/jesperancinha/mancalaje/actions/workflows/mancalaje.yml)
 
