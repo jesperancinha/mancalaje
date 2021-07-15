@@ -47,9 +47,13 @@
 
 ## Introduction for the introduction
 
-This game is a slight change from he typical Kalah game, where in this case I'll be using coffe mugs instead of stones. This way, more original will rules will be added. Stay tuned...
+This game is a slight change from the typical Kalah game, where in this case I'll be using coffe mugs instead of stones. This way, more original will rules will be added. Stay tuned...
 
 ☕️
+
+Note that the above will happen along with multiple other changes.
+Check out my [planning document](./Planning.md) if you want to know more.
+
 
 ## Introduction
 
