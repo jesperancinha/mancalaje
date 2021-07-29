@@ -24,7 +24,7 @@
         <h2.version>1.4.200</h2.version>
         <spring-security-oauth2-autoconfigure.version>2.5.1</spring-security-oauth2-autoconfigure.version>
         <liquibase-core.version>3.10.3</liquibase-core.version>
-        <postgresql.version>42.2.22.jre7</postgresql.version>
+        <postgresql.version>42.2.23.jre7</postgresql.version>
         <guava.version>30.1.1-jre</guava.version>
         <jmock-junit4.version>2.12.0</jmock-junit4.version>
         <activemq-all.version>5.16.2</activemq-all.version>
