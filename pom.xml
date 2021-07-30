@@ -22,7 +22,7 @@
         <assertj-core.version>3.11.1</assertj-core.version>
         <maven.compiler>3.8.1</maven.compiler>
         <h2.version>1.4.200</h2.version>
-        <spring-security-oauth2-autoconfigure.version>2.5.1</spring-security-oauth2-autoconfigure.version>
+        <spring-security-oauth2-autoconfigure.version>2.5.2</spring-security-oauth2-autoconfigure.version>
         <liquibase-core.version>3.10.3</liquibase-core.version>
         <postgresql.version>42.2.23.jre7</postgresql.version>
         <guava.version>30.1.1-jre</guava.version>
