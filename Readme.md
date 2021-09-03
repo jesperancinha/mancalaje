@@ -39,6 +39,7 @@
 [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/openshift-50.png "Openshift")](https://www.openshift.com/)
 [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/minikube-50.png "Minikube")](https://github.com/kubernetes/minikube)
 [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/h2-50.png "H2")](https://www.h2database.com/)
+[![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/apache-maven-50.png "Maven")](https://maven.apache.org/)
 ---
 
 ## Project status
@@ -99,7 +100,7 @@ Note that I attempted to create this project with reactive programming and it is
 ### Frontend
 
 ```bash
-cd kala-game-web
+cd packages/kala-game-web
 npm start
 ```
 
@@ -175,6 +176,11 @@ find packages -name lcov.info -exec echo -a {} \; | xargs lcov -o coverage/lcov.
 ```bash
 yarn workspaces run coverage
 ```
+
+## Roadmap to version 2.0.0
+
+The intention of version 2.0.0, is layed out for you in file [Planning](./Planning.md).
+Essentially the goal is to provide an efficient and running modified version of the original Kalah game.
 
 ## References 📚
 

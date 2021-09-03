@@ -1,2 +1,0 @@
-#!/bin/sh
-sudo /usr/bin/java -jar -Dspring.profiles.active=prod /www/mancalaje/mancalaje-service/target/mancalaje-service-2.0.1-SNAPSHOT.jar
