@@ -1,13 +1,11 @@
-package org.jesperancinha.games.kalagameservice.service;
+package org.jesperancinha.games.kalagameservice.service
 
-import org.jesperancinha.games.kalagameservice.model.Board;
-import org.jesperancinha.games.kalagameservice.model.Pit;
-import org.jesperancinha.games.kalagameservice.model.Player;
+import org.jesperancinha.games.kalagameservice.model.Board
+import org.jesperancinha.games.kalagameservice.model.Pit
+import org.jesperancinha.games.kalagameservice.model.Player
 
-public interface GameService {
-    Board createNewBoard(final Player player);
-
-    Board sowStonesFromPit(final Player player, final Pit pit, final Board board);
-
-    Board joinPlayer(final Player player, final Board board);
+interface GameService {
+    fun createNewBoard(player: Player): Board?
+    fun sowStonesFromPit(player: Player, pit: Pit, board: Board?): Board?
+    fun joinPlayer(player: Player, board: Board?): Board?
 }

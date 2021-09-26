@@ -1,13 +1,11 @@
-package org.jesperancinha.games.kalagameservice;
+package org.jesperancinha.games.kalagameservice
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.Test
+import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class KalaGameServiceImplApplicationTests {
-
+internal class KalaGameServiceImplApplicationTests {
     @Test
-    void contextLoads() {
+    fun contextLoads() {
     }
-
 }

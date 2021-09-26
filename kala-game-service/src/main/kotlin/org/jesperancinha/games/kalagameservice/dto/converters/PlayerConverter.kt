@@ -1,18 +1,14 @@
-package org.jesperancinha.games.kalagameservice.dto.converters;
+package org.jesperancinha.games.kalagameservice.dto.converters
 
-import org.jesperancinha.games.kalagameservice.dto.PlayerDto;
-import org.jesperancinha.games.kalagameservice.model.Player;
+import org.jesperancinha.games.kalagameservice.dto.PlayerDto
+import org.jesperancinha.games.kalagameservice.model.Player
 
-import java.util.Objects;
-
-public class PlayerConverter {
-    public static PlayerDto toDto(Player currentPlayer) {
-        if (Objects.isNull(currentPlayer)) {
-            return null;
+object PlayerConverter {
+    fun toDto(currentPlayer: Player?): PlayerDto? {
+        return currentPlayer?.let {
+            PlayerDto(
+                id = currentPlayer.id,
+                username = currentPlayer.username)
         }
-        return PlayerDto.builder()
-                .id(currentPlayer.getId())
-                .username(currentPlayer.getUsername())
-                .build();
     }
 }

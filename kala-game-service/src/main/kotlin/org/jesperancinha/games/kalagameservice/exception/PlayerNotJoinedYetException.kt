@@ -1,4 +1,3 @@
-package org.jesperancinha.games.kalagameservice.exception;
+package org.jesperancinha.games.kalagameservice.exception
 
-public class PlayerNotJoinedYetException extends RuntimeException {
-}
+class PlayerNotJoinedYetException : RuntimeException()

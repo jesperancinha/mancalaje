@@ -1,95 +1,88 @@
-package org.jesperancinha.games.kalagameservice.controller;
+package org.jesperancinha.games.kalagameservice.controller
 
-import org.jesperancinha.games.kalagameservice.dto.BoardDto;
-import org.jesperancinha.games.kalagameservice.dto.converters.BoardConverter;
-import org.jesperancinha.games.kalagameservice.exception.PitDoesNotExistException;
-import org.jesperancinha.games.kalagameservice.exception.ZeroStonesToMoveException;
-import org.jesperancinha.games.kalagameservice.model.Board;
-import org.jesperancinha.games.kalagameservice.model.Pit;
-import org.jesperancinha.games.kalagameservice.model.Player;
-import org.jesperancinha.games.kalagameservice.service.BoardService;
-import org.jesperancinha.games.kalagameservice.service.GameService;
-import org.jesperancinha.games.kalagameservice.service.PlayerService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.security.Principal;
-import java.util.List;
-import java.util.function.Supplier;
+import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.RequestMapping
+import org.jesperancinha.games.kalagameservice.service.GameService
+import org.jesperancinha.games.kalagameservice.service.BoardService
+import org.jesperancinha.games.kalagameservice.service.PlayerService
+import org.springframework.web.bind.annotation.PutMapping
+import kotlin.Throws
+import java.security.Principal
+import org.springframework.web.bind.annotation.GetMapping
+import org.jesperancinha.games.kalagameservice.dto.BoardDto
+import org.jesperancinha.games.kalagameservice.dto.converters.BoardConverter
+import org.springframework.web.bind.annotation.PostMapping
+import org.jesperancinha.games.kalagameservice.model.Player
+import org.jesperancinha.games.kalagameservice.model.Board
+import org.springframework.web.bind.annotation.PathVariable
+import org.jesperancinha.games.kalagameservice.model.Pit
+import org.jesperancinha.games.kalagameservice.exception.PitDoesNotExistException
+import org.jesperancinha.games.kalagameservice.exception.ZeroStonesToMoveException
+import java.util.function.Supplier
 
 @RestController
 @RequestMapping("api")
-public class KalaGameController {
-
-    private final GameService gameService;
-    private final BoardService boardService;
-    private final PlayerService playerService;
-
-    public KalaGameController(GameService gameService,
-                              BoardService boardService, PlayerService playerService) {
-        this.gameService = gameService;
-        this.boardService = boardService;
-        this.playerService = playerService;
-    }
-
+class KalaGameController(
+    private val gameService: GameService,
+    private val boardService: BoardService, private val playerService: PlayerService
+) {
     @PutMapping("leave")
-    public void leavegae(Principal principal) throws Throwable {
-        playerService.leaveCurrentGame(principal.getName());
+    @Throws(Throwable::class)
+    fun leavegae(principal: Principal) {
+        playerService.leaveCurrentGame(principal.name)
     }
 
     @GetMapping("current")
-    public BoardDto getCurrentBoard(Principal principal) throws Throwable {
+    @Throws(Throwable::class)
+    fun getCurrentBoard(principal: Principal): BoardDto? {
         return BoardConverter.toDto(
-                playerService.createOrFindPlayerByName(principal.getName()).getCurrentBoard()
-        );
+            playerService.createOrFindPlayerByName(principal.name)?.currentBoard
+        )
     }
 
     @PostMapping("create")
-    public BoardDto createBoard(Principal principal) {
-        var player = playerService.createOrFindPlayerByName(principal.getName());
-        final var newBoard = gameService.createNewBoard(player);
-        return BoardConverter.toDto(newBoard);
+    fun createBoard(principal: Principal): BoardDto? {
+        val player = playerService.createOrFindPlayerByName(principal.name)
+        val newBoard = player?.let { gameService.createNewBoard(it) }
+        return BoardConverter.toDto(newBoard)
     }
 
     @PutMapping("move/{boardId}/{pitId}")
-    public BoardDto move(Principal principal,
-                         @PathVariable
-                                 Long boardId,
-                         @PathVariable
-                                 Long pitId) throws Throwable {
-        var player = playerService.createOrFindPlayerByName(principal.getName());
-        final Board board = boardService.findBoardById(boardId);
-        final Pit startPit = board.getPits().stream().filter(pit -> pit.getId().equals(pitId)).findAny().orElseThrow((Supplier<Throwable>) PitDoesNotExistException::new);
-        if (startPit.getStones() == 0) {
-            throw new ZeroStonesToMoveException();
+    @Throws(Throwable::class)
+    fun move(
+        principal: Principal,
+        @PathVariable boardId: Long,
+        @PathVariable pitId: Long
+    ): BoardDto? {
+        val player = playerService.createOrFindPlayerByName(principal.name)
+        val board = boardService.findBoardById(boardId)
+        val startPit = board?.pits?.stream()?.filter { pit: Pit -> pit.id == pitId }?.findAny()?.orElseThrow { PitDoesNotExistException() }
+        if (startPit?.stones == 0) {
+            throw ZeroStonesToMoveException()
         }
-        final Board boardUpdated = gameService.sowStonesFromPit(player, startPit, board);
-        return BoardConverter.toDto(boardUpdated);
+        val boardUpdated = startPit?.let { player?.let { it1 -> gameService.sowStonesFromPit(it1, it, board) } }
+        return BoardConverter.toDto(boardUpdated)
     }
 
     @PutMapping("join/{boardId}")
-    public BoardDto join(Principal principal,
-                         @PathVariable
-                                 Long boardId) throws Throwable {
-        var player = playerService.createOrFindPlayerByName(principal.getName());
-        final Board board = boardService.findBoardById(boardId);
-        final Board boardUpdated = gameService.joinPlayer(player, board);
-        return BoardConverter.toDto(boardUpdated);
+    @Throws(Throwable::class)
+    fun join(
+        principal: Principal,
+        @PathVariable boardId: Long
+    ): BoardDto? {
+        val player = playerService.createOrFindPlayerByName(principal.name)
+        val board = boardService.findBoardById(boardId)
+        val boardUpdated = board?.let { player?.let { it1 -> gameService.joinPlayer(it1, it) } }
+        return BoardConverter.toDto(boardUpdated)
     }
 
     @GetMapping
-    public List<BoardDto> getAllBoardsPerPlayer(Principal principal) {
-        final Player player = playerService.createOrFindPlayerByName(principal.getName());
-        return boardService.findBoardsByPlayer(player);
+    fun getAllBoardsPerPlayer(principal: Principal): MutableList<BoardDto>? {
+        val player = playerService.createOrFindPlayerByName(principal.name)
+        return player?.let { boardService.findBoardsByPlayer(it) }
     }
 
-    @GetMapping("available")
-    public List<BoardDto> getAvailableBoards() {
-        return boardService.findAvailableBoards();
-    }
+    @get:GetMapping("available")
+    val availableBoards: List<BoardDto>?
+        get() = boardService.findAvailableBoards()
 }
-

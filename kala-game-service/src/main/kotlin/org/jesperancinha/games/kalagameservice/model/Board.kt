@@ -1,20 +1,18 @@
-package org.jesperancinha.games.kalagameservice.model;
+package org.jesperancinha.games.kalagameservice.model
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import java.util.List;
+import lombok.AllArgsConstructor
+import lombok.Builder
+import lombok.EqualsAndHashCode
+import lombok.Getter
+import lombok.NoArgsConstructor
+import lombok.Setter
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+import javax.persistence.OneToMany
+import javax.persistence.OneToOne
+import javax.persistence.Table
 
 @Entity
 @Table
@@ -24,36 +22,35 @@ import java.util.List;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-public class Board {
-
+data class Board (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    internal var id: Long? = null,
 
     @OneToMany
-    private List<Pit> pits;
+    internal var pits: List<Pit>? = null,
 
     @OneToOne
-    private Pit pitOne;
+    internal var pitOne: Pit? = null,
 
     @OneToOne
-    private Pit kalahOne;
+    internal var kalahOne: Pit? = null,
 
     @OneToOne
-    private Player playerOne;
+    internal var playerOne: Player? = null,
 
     @OneToOne
-    private Pit pitTwo;
+    internal var pitTwo: Pit? = null,
 
     @OneToOne
-    private Pit kalahTwo;
+    internal var kalahTwo: Pit? = null,
 
     @OneToOne
-    private Player playerTwo;
+    internal var playerTwo: Player? = null,
 
     @OneToOne
-    private Player currentPlayer;
+    internal var currentPlayer: Player? = null,
 
     @OneToOne
-    private Player winner;
-}
+    internal var winner: Player? = null
+)

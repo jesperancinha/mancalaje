@@ -1,44 +1,33 @@
-package org.jesperancinha.games.kalagameservice.model;
+package org.jesperancinha.games.kalagameservice.model
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+import javax.persistence.OneToOne
+import javax.persistence.Table
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-@Setter
-@Getter
-@Builder
 @Entity
 @Table
-@NoArgsConstructor
-@AllArgsConstructor
-public class Pit {
-
+data class Pit(
     @Id
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    var id: Long? = null,
 
     @Column
-    private PitType pitType;
+    var pitType: PitType? = null,
 
     @Column
-    private Integer stones;
+    var stones: Int? = null,
 
     @OneToOne
-    private Pit nextPit;
+    var nextPit: Pit? = null,
 
     @OneToOne
-    private Pit oppositePit;
+    var oppositePit: Pit? = null,
 
     @OneToOne
-    private Player player;
-}
+    var player: Player? = null,
+)

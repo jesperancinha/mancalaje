@@ -1,30 +1,22 @@
-package org.jesperancinha.games.kalagameservice.controller;
+package org.jesperancinha.games.kalagameservice.controller
 
-import org.jesperancinha.games.kalagameservice.service.PlayerService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.security.Principal;
+import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.RequestMapping
+import org.jesperancinha.games.kalagameservice.service.PlayerService
+import org.springframework.web.bind.annotation.PostMapping
+import java.security.Principal
+import org.springframework.web.bind.annotation.GetMapping
 
 @RestController
 @RequestMapping("log")
-public class KalaGameRegistrationController {
-
-    private final PlayerService playerService;
-
-    public KalaGameRegistrationController(PlayerService playerService) {
-        this.playerService = playerService;
-    }
-
+class KalaGameRegistrationController(private val playerService: PlayerService) {
     @PostMapping("/")
-    public void createPlayer(Principal principal) {
-        playerService.createPlayer(principal.getName());
+    fun createPlayer(principal: Principal) {
+        playerService.createPlayer(principal.name)
     }
 
     @GetMapping("user")
-    public String greetUser(Principal principal) {
-        return principal.getName();
+    fun greetUser(principal: Principal): String {
+        return principal.name
     }
 }

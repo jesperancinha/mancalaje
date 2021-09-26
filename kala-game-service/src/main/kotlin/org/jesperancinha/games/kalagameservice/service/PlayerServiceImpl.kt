@@ -1,49 +1,37 @@
-package org.jesperancinha.games.kalagameservice.service;
+package org.jesperancinha.games.kalagameservice.service
 
-import org.jesperancinha.games.kalagameservice.model.Board;
-import org.jesperancinha.games.kalagameservice.model.Player;
-import org.jesperancinha.games.kalagameservice.repository.KalaPlayerRepository;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.util.Objects;
+import org.jesperancinha.games.kalagameservice.model.Player
+import org.jesperancinha.games.kalagameservice.repository.KalaPlayerRepository
+import org.springframework.stereotype.Service
+import java.util.*
+import javax.transaction.Transactional
 
 @Service
-public class PlayerServiceImpl implements PlayerService {
-
-    private final KalaPlayerRepository playerRepository;
-
-    public PlayerServiceImpl(KalaPlayerRepository playerRepository) {
-        this.playerRepository = playerRepository;
+open class PlayerServiceImpl(private val playerRepository: KalaPlayerRepository) : PlayerService {
+    override fun createPlayer(username: String?): Player {
+        return playerRepository.save(Player(
+            username = username))
     }
 
-    @Override
-    public Player createPlayer(String username) {
-        return playerRepository.save(Player.builder().username(username).build());
-    }
-
-    @Override
     @Transactional
-    public Player createOrFindPlayerByName(String username) {
-        var playerByUsernameEquals = playerRepository.findPlayerByUsernameEquals(username);
-        if (Objects.isNull(playerByUsernameEquals)) {
-            return createPlayer(username);
-        }
-        return playerByUsernameEquals;
+    override fun createOrFindPlayerByName(username: String): Player? {
+        val playerByUsernameEquals = playerRepository.findPlayerByUsernameEquals(username)
+        return if (Objects.isNull(playerByUsernameEquals)) {
+            createPlayer(username)
+        } else playerByUsernameEquals
     }
 
-    @Override
-    public void leaveCurrentGame(String name) {
-        final Player player = playerRepository.findPlayerByUsernameEquals(name);
-        final Board currentBoard = player.getCurrentBoard();
+    override fun leaveCurrentGame(name: String?) {
+        val player = playerRepository.findPlayerByUsernameEquals(name)
+        val currentBoard = player?.currentBoard
         if (Objects.nonNull(currentBoard)) {
-            final Player opponent = player.getOpponent();
+            val opponent = player?.opponent
             if (Objects.nonNull(opponent)) {
-                opponent.setCurrentBoard(null);
-                playerRepository.save(opponent);
+                opponent?.currentBoard = null
+                playerRepository.save(opponent)
             }
-            player.setCurrentBoard(null);
-            playerRepository.save(player);
+            player?.currentBoard = null
+            playerRepository.save(player)
         }
     }
 }

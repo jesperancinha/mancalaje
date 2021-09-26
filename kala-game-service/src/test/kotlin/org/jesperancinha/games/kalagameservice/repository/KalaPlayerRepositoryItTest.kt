@@ -1,34 +1,31 @@
-package org.jesperancinha.games.kalagameservice.repository;
+package org.jesperancinha.games.kalagameservice.repository
 
-import org.jesperancinha.games.kalagameservice.model.Player;
-import org.jesperancinha.games.kalagameservice.service.GameServiceImpl;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
-import javax.transaction.Transactional;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.assertj.core.api.Assertions.assertThat
+import org.jesperancinha.games.kalagameservice.model.Player
+import org.jesperancinha.games.kalagameservice.service.GameServiceImpl
+import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
+import javax.transaction.Transactional
 
 @SpringBootTest
 @Transactional
-class KalaPlayerRepositoryItTest {
+internal open class KalaPlayerRepositoryItTest {
     @Autowired
-    private KalaPlayerRepository kalaPlayerRepository;
+    private val kalaPlayerRepository: KalaPlayerRepository? = null
 
     @Autowired
-    private GameServiceImpl gameService;
+    private val gameService: GameServiceImpl? = null
 
     @Test
-    void testFindBoardByPlayerOneUsername_whenSearchUserName_thenFindOneBoard() {
-        var user1 = Player.builder().username("user1").build();
-        user1 = kalaPlayerRepository.save(user1);
-        gameService.createNewBoard(user1);
-
-        final Optional<Player> playerOptional = kalaPlayerRepository.findById(user1.getId());
-
-        assertThat(playerOptional.isPresent()).isTrue();
-        assertThat(playerOptional.get().getBoards()).hasSize(1);
+    fun testFindBoardByPlayerOneUsername_whenSearchUserName_thenFindOneBoard() {
+        var user1 = Player(
+            username = "user1"
+        )
+        user1 = kalaPlayerRepository!!.save<Player>(user1)
+        gameService!!.createNewBoard(user1)
+        val playerOptional = user1.id?.let { kalaPlayerRepository.findById(user1.id) }
+        assertThat(playerOptional?.isPresent).isTrue
+        assertThat(playerOptional?.get()?.boards).hasSize(1)
     }
 }

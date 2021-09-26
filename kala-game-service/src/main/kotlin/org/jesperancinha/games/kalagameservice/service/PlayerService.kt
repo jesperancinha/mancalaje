@@ -1,11 +1,9 @@
-package org.jesperancinha.games.kalagameservice.service;
+package org.jesperancinha.games.kalagameservice.service
 
-import org.jesperancinha.games.kalagameservice.model.Player;
+import org.jesperancinha.games.kalagameservice.model.Player
 
-public interface PlayerService {
-    Player createPlayer(String username);
-
-    Player createOrFindPlayerByName(String username);
-
-    void leaveCurrentGame(String name);
+interface PlayerService {
+    fun createPlayer(username: String?): Player?
+    fun createOrFindPlayerByName(username: String): Player?
+    fun leaveCurrentGame(name: String?)
 }

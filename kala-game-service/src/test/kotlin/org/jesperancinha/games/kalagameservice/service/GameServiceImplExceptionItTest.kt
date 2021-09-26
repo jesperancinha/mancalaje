@@ -1,83 +1,110 @@
-package org.jesperancinha.games.kalagameservice.service;
+package org.jesperancinha.games.kalagameservice.service
 
-import org.jesperancinha.games.kalagameservice.exception.GameOverException;
-import org.jesperancinha.games.kalagameservice.exception.InvalidPitException;
-import org.jesperancinha.games.kalagameservice.exception.NotOwnedPitException;
-import org.jesperancinha.games.kalagameservice.exception.WrongTurnException;
-import org.jesperancinha.games.kalagameservice.model.Player;
-import org.jesperancinha.games.kalagameservice.repository.KalaPlayerRepository;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
-import javax.transaction.Transactional;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import org.jesperancinha.games.kalagameservice.exception.GameOverException
+import org.jesperancinha.games.kalagameservice.exception.InvalidPitException
+import org.jesperancinha.games.kalagameservice.exception.NotOwnedPitException
+import org.jesperancinha.games.kalagameservice.exception.WrongTurnException
+import org.jesperancinha.games.kalagameservice.model.Player
+import org.jesperancinha.games.kalagameservice.repository.KalaPlayerRepository
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
+import javax.transaction.Transactional
 
 @SpringBootTest
 @Transactional
-class GameServiceImplExceptionItTest {
+internal open class GameServiceImplExceptionItTest {
+    @Autowired
+    private val gameService: GameServiceImpl? = null
 
     @Autowired
-    private GameServiceImpl gameService;
-
-    @Autowired
-    private KalaPlayerRepository kalaPlayerRepository;
+    private val kalaPlayerRepository: KalaPlayerRepository? = null
 
     @Test
-    void testSowStonesFromPit_whenTryingToSowInAWrongTurn_thenFail() {
-        final var user1 = kalaPlayerRepository.save(Player.builder().username("user1").build());
-        final var user2 = kalaPlayerRepository.save(Player.builder().username("user2").build());
-        user1.setOpponent(user2);
-        user2.setOpponent(user1);
-        final var userFinal1 = kalaPlayerRepository.save(user1);
-        final var userFinal2 = kalaPlayerRepository.save(user2);
-        final var board = gameService.createNewBoard(userFinal1);
-        final var boardFinal = gameService.joinPlayer(userFinal2, board);
-
-        assertThrows(WrongTurnException.class, () -> gameService.sowStonesFromPit(userFinal2, board.getPitTwo(), boardFinal));
+    fun testSowStonesFromPit_whenTryingToSowInAWrongTurn_thenFail() {
+        val user1 = kalaPlayerRepository!!.save(Player(
+            username= "user1"))
+        val user2 = kalaPlayerRepository.save(Player(
+            username= "user2"
+        ))
+        user1.opponent= user2
+        user2.opponent= user1
+        val userFinal1 = kalaPlayerRepository.save(user1)
+        val userFinal2 = kalaPlayerRepository.save(user2)
+        val board = gameService!!.createNewBoard(userFinal1)
+        val boardFinal = gameService.joinPlayer(userFinal2, board)
+        Assertions.assertThrows(WrongTurnException::class.java) {
+            board?.pitTwo?.let {
+                gameService.sowStonesFromPit(userFinal2,
+                    it,
+                    boardFinal)
+            }
+        }
     }
 
     @Test
-    void testSowStonesFromPit_whenTryingToSowInAWrongPit_thenFail() {
-        final var user1 = kalaPlayerRepository.save(Player.builder().username("user1").build());
-        final var user2 = kalaPlayerRepository.save(Player.builder().username("user2").build());
-        user1.setOpponent(user2);
-        user2.setOpponent(user1);
-        final var userFinal1 = kalaPlayerRepository.save(user1);
-        final var userFinal2 = kalaPlayerRepository.save(user2);
-        final var board = gameService.createNewBoard(userFinal1);
-        final var boardFinal = gameService.joinPlayer(userFinal2, board);
-
-        assertThrows(NotOwnedPitException.class, () -> gameService.sowStonesFromPit(userFinal1, board.getPitTwo(), boardFinal));
+    fun testSowStonesFromPit_whenTryingToSowInAWrongPit_thenFail() {
+        val user1 = kalaPlayerRepository!!.save(Player(
+            username= "user1"))
+        val user2 = kalaPlayerRepository.save(Player(
+            username= "user2"))
+        user1.opponent= user2
+        user2.opponent= user1
+        val userFinal1 = kalaPlayerRepository.save(user1)
+        val userFinal2 = kalaPlayerRepository.save(user2)
+        val board = gameService!!.createNewBoard(userFinal1)
+        val boardFinal = gameService.joinPlayer(userFinal2, board)
+        Assertions.assertThrows(NotOwnedPitException::class.java) {
+            board?.pitTwo?.let {
+                gameService.sowStonesFromPit(userFinal1,
+                    it,
+                    boardFinal)
+            }
+        }
     }
 
     @Test
-    void testSowStonesFromPit_whenTryingToSowFromAKalah_thenFail() {
-        final var user1 = kalaPlayerRepository.save(Player.builder().username("user1").build());
-        final var user2 = kalaPlayerRepository.save(Player.builder().username("user2").build());
-        user1.setOpponent(user2);
-        user2.setOpponent(user1);
-        final var userFinal1 = kalaPlayerRepository.save(user1);
-        final var userFinal2 = kalaPlayerRepository.save(user2);
-        final var board = gameService.createNewBoard(userFinal1);
-        final var boardFinal = gameService.joinPlayer(userFinal2, board);
-
-        assertThrows(InvalidPitException.class, () -> gameService.sowStonesFromPit(userFinal1, board.getKalahOne(), boardFinal));
+    fun testSowStonesFromPit_whenTryingToSowFromAKalah_thenFail() {
+        val user1 = kalaPlayerRepository!!.save(Player(
+            username= "user1")
+        )
+        val user2 = kalaPlayerRepository.save(Player(
+            username= "user2"))
+        user1.opponent= user2
+        user2.opponent= user1
+        val userFinal1 = kalaPlayerRepository.save(user1)
+        val userFinal2 = kalaPlayerRepository.save(user2)
+        val board = gameService!!.createNewBoard(userFinal1)
+        val boardFinal = gameService.joinPlayer(userFinal2, board)
+        Assertions.assertThrows(InvalidPitException::class.java) {
+            board?.kalahOne?.let {
+                gameService.sowStonesFromPit(userFinal1,
+                    it,
+                    boardFinal)
+            }
+        }
     }
 
     @Test
-    void testSowStonesFromPit_whenGameOver_thenFail() {
-        final var user1 = kalaPlayerRepository.save(Player.builder().username("user1").build());
-        final var user2 = kalaPlayerRepository.save(Player.builder().username("user2").build());
-        user1.setOpponent(user2);
-        user2.setOpponent(user1);
-        final var userFinal1 = kalaPlayerRepository.save(user1);
-        final var userFinal2 = kalaPlayerRepository.save(user2);
-        final var board = gameService.createNewBoard(userFinal1);
-        final var boardFinal = gameService.joinPlayer(userFinal2, board);
-        boardFinal.setWinner(user1);
-        assertThrows(GameOverException.class, () -> gameService.sowStonesFromPit(userFinal1, board.getPitOne(), boardFinal));
+    fun testSowStonesFromPit_whenGameOver_thenFail() {
+        val user1 = kalaPlayerRepository!!.save(Player(
+            username= "user1"))
+        val user2 = kalaPlayerRepository.save(Player(
+            username= "user2"))
+        user1.opponent= user2
+        user2.opponent= user1
+        val userFinal1 = kalaPlayerRepository.save(user1)
+        val userFinal2 = kalaPlayerRepository.save(user2)
+        val board = gameService!!.createNewBoard(userFinal1)
+        val boardFinal = gameService.joinPlayer(userFinal2, board)
+        boardFinal?.winner= user1
+        Assertions.assertThrows(GameOverException::class.java) {
+            board?.pitOne?.let {
+                gameService.sowStonesFromPit(userFinal1,
+                    it,
+                    boardFinal)
+            }
+        }
     }
 }

@@ -1,6 +1,5 @@
-package org.jesperancinha.games.kalagameservice.model;
+package org.jesperancinha.games.kalagameservice.model
 
-public enum PitType {
-    LARGE,
-    SMALL
+enum class PitType {
+    LARGE, SMALL
 }

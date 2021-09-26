@@ -1,74 +1,71 @@
-package org.jesperancinha.games.kalagameservice.service;
+package org.jesperancinha.games.kalagameservice.service
 
-import org.jesperancinha.games.kalagameservice.model.Board;
-import org.jesperancinha.games.kalagameservice.model.Pit;
-import org.jesperancinha.games.kalagameservice.model.Player;
-import org.jesperancinha.games.kalagameservice.repository.KalaBoardRepository;
-import org.jesperancinha.games.kalagameservice.repository.KalaPitRepository;
-import org.jesperancinha.games.kalagameservice.repository.KalaPlayerRepository;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
+import org.jesperancinha.games.kalagameservice.model.Board
+import org.jesperancinha.games.kalagameservice.model.Pit
+import org.jesperancinha.games.kalagameservice.model.PitType
+import org.jesperancinha.games.kalagameservice.model.Player
+import org.jesperancinha.games.kalagameservice.repository.KalaBoardRepository
+import org.jesperancinha.games.kalagameservice.repository.KalaPitRepository
+import org.jesperancinha.games.kalagameservice.repository.KalaPlayerRepository
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.ArgumentMatchers
+import org.mockito.InjectMocks
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.invocation.InvocationOnMock
+import org.mockito.junit.jupiter.MockitoExtension
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.jesperancinha.games.kalagameservice.model.PitType.LARGE;
-import static org.jesperancinha.games.kalagameservice.model.PitType.SMALL;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-@ExtendWith(MockitoExtension.class)
-class GameServiceImplTest {
-
+@ExtendWith(MockitoExtension::class)
+internal class GameServiceImplTest {
     @InjectMocks
-    private GameServiceImpl gameService;
+    private val gameService: GameServiceImpl? = null
 
     @Mock
-    private KalaPitRepository pitRepository;
+    private val pitRepository: KalaPitRepository? = null
 
     @Mock
-    private KalaBoardRepository boardRepository;
+    private val boardRepository: KalaBoardRepository? = null
 
     @Mock
-    private KalaPlayerRepository playerRepository;
+    private val playerRepository: KalaPlayerRepository? = null
 
     @Test
-    void testCreateNewBoard_whenCreateNewBoard_creationSuccessful() {
-        when(pitRepository.save(any(Pit.class))).thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
-        when(boardRepository.save(any(Board.class))).thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
-
-        final var user1 = Player.builder().username("user1").build();
-        final var board = gameService.createNewBoard(user1);
-
-        assertThat(board).isNotNull();
-        assertThat(board.getPits()).isNotNull();
-        assertThat(board.getPits()).hasSize(14);
-        assertThat(board.getPits().get(6).getPitType()).isEqualTo(LARGE);
-        assertThat(board.getPits().get(13).getPitType()).isEqualTo(LARGE);
-        assertThat(board.getPits().get(0)).isSameAs(board.getPits().get(13).getNextPit());
-
-        var currentPit = board.getPits().get(0);
-        for (int i = 0; i < 6; i++) {
-            assertThat(currentPit.getStones()).isEqualTo(6);
-            assertThat(currentPit.getPlayer()).isSameAs(user1);
-            assertThat(currentPit.getPitType()).isEqualTo(SMALL);
-            currentPit = currentPit.getNextPit();
+    fun testCreateNewBoard_whenCreateNewBoard_creationSuccessful() {
+        Mockito.`when`(pitRepository!!.save(ArgumentMatchers.any(Pit::class.java)))
+            .thenAnswer { invocationOnMock: InvocationOnMock -> invocationOnMock.getArgument(0) }
+        Mockito.`when`(boardRepository!!.save(ArgumentMatchers.any(Board::class.java)))
+            .thenAnswer { invocationOnMock: InvocationOnMock -> invocationOnMock.getArgument(0) }
+        val user1 = Player(
+            username = "user1"
+        )
+        val board = gameService!!.createNewBoard(user1)
+        assertThat(board).isNotNull
+        assertThat(board?.pits).isNotNull
+        assertThat(board?.pits).hasSize(14)
+        assertThat(board?.pits?.get(6)?.pitType).isEqualTo(PitType.LARGE)
+        assertThat(board?.pits?.get(13)?.pitType).isEqualTo(PitType.LARGE)
+        assertThat(board?.pits?.get(0)).isSameAs(board?.pits?.get(13)?.nextPit)
+        var currentPit = board?.pits?.get(0)
+        for (i in 0..5) {
+            assertThat(currentPit?.stones).isEqualTo(6)
+            assertThat(currentPit?.player).isSameAs(user1)
+            assertThat(currentPit?.pitType).isEqualTo(PitType.SMALL)
+            currentPit = currentPit?.nextPit
         }
-        assertThat(currentPit.getStones()).isEqualTo(0);
-        assertThat(currentPit.getPlayer()).isSameAs(user1);
-        currentPit = currentPit.getNextPit();
-        for (int i = 0; i < 6; i++) {
-            assertThat(currentPit.getStones()).isEqualTo(6);
-            assertThat(currentPit.getPlayer()).isNull();
-            currentPit = currentPit.getNextPit();
+        assertThat(currentPit?.stones).isEqualTo(0)
+        assertThat(currentPit?.player).isSameAs(user1)
+        currentPit = currentPit?.nextPit
+        for (i in 0..5) {
+            assertThat(currentPit?.stones).isEqualTo(6)
+            assertThat(currentPit?.player).isNull()
+            currentPit = currentPit?.nextPit
         }
-        assertThat(currentPit.getStones()).isEqualTo(0);
-
-        verify(pitRepository, times(28)).save(any());
-        verify(boardRepository, times(1)).save(any());
-        verify(playerRepository, times(1)).save(any());
+        assertThat(currentPit?.stones).isEqualTo(0)
+        Mockito.verify(pitRepository, Mockito.times(28)).save(ArgumentMatchers.any())
+        Mockito.verify(boardRepository, Mockito.times(1)).save(ArgumentMatchers.any())
+        Mockito.verify(playerRepository, Mockito.times(1))?.save(ArgumentMatchers.any())
     }
 }

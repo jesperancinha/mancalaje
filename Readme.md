@@ -53,7 +53,7 @@ This game is a slight change from the typical Kalah game, where in this case I'l
 ☕️
 
 Note that the above will happen along with multiple other changes.
-Check out my [planning document](./Planning.md) if you want to know more.
+Check out my [planning document](./Planning.md) to follow up with the running changes...
 
 
 ## Introduction

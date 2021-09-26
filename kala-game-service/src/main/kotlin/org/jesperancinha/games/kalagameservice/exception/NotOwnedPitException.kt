@@ -1,4 +1,3 @@
-package org.jesperancinha.games.kalagameservice.exception;
+package org.jesperancinha.games.kalagameservice.exception
 
-public class NotOwnedPitException extends RuntimeException {
-}
+class NotOwnedPitException : RuntimeException()

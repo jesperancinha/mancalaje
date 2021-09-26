@@ -1,25 +1,28 @@
-package org.jesperancinha.games.kalagameservice.dto.converters;
+package org.jesperancinha.games.kalagameservice.dto.converters
 
-import org.jesperancinha.games.kalagameservice.dto.BoardDto;
-import org.jesperancinha.games.kalagameservice.model.Board;
+import org.jesperancinha.games.kalagameservice.dto.BoardDto
+import org.jesperancinha.games.kalagameservice.model.Board
+import org.jesperancinha.games.kalagameservice.model.Pit
+import kotlin.streams.toList
 
-import java.util.Objects;
-import java.util.stream.Collectors;
-
-public class BoardConverter {
-    public static BoardDto toDto(Board board) {
-        if (Objects.isNull(board)) {
-            return null;
+object BoardConverter {
+    @JvmStatic
+    fun toDto(board: Board?): BoardDto? {
+        return board?.let {
+            board.pits?.map { obj: Pit -> PitConverter.toDto(obj) }?.let { it1 ->
+                BoardDto(
+                    id = board.id,
+                    currentPlayerDto = PlayerConverter.toDto(board.currentPlayer),
+                    playerDtoOne = PlayerConverter.toDto(board.playerOne),
+                    playerDtoTwo = PlayerConverter.toDto(board.playerTwo),
+                    pitDtoOne = PitConverter.toDto(board.pitOne),
+                    pitDtoTwo = PitConverter.toDto(board.pitTwo),
+                    pitDtos = it1.toList(),
+                    winnerDto = PlayerConverter.toDto(board.winner),
+                    kalahOne = null,
+                    kalahTwo = null
+                )
+            }
         }
-        return BoardDto.builder()
-                .id(board.getId())
-                .currentPlayerDto(PlayerConverter.toDto(board.getCurrentPlayer()))
-                .playerDtoOne(PlayerConverter.toDto(board.getPlayerOne()))
-                .playerDtoTwo(PlayerConverter.toDto(board.getPlayerTwo()))
-                .pitDtoOne(PitConverter.toDto(board.getPitOne()))
-                .pitDtoTwo(PitConverter.toDto(board.getPitTwo()))
-                .pitDtos((board.getPits().stream().map(PitConverter::toDto).collect(Collectors.toList())))
-                .winnerDto(PlayerConverter.toDto(board.getWinner()))
-                .build();
     }
 }
