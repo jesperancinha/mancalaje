@@ -71,13 +71,10 @@ class GameService(
         kalahWashers.forEach(Consumer { s: KalahWasher -> pitRepository.save(s) })
         kalahBoard.currentPlayer = player
         kalahBoard.playerOne = player
-        if (Objects.isNull(player.kalahBoards)) {
-            player.kalahBoards = ArrayList()
-        }
 //        kalahBoard.kalahOne = kalahWasher
 //        kalahBoard.kalahTwo = kalahKalahWasher2
         val registeredBoard = boardRepository.save(kalahBoard)
-        player.kalahBoards?.add(kalahBoard)
+        player.kalahBoard= kalahBoard
         playerRepository.save(player)
         return registeredBoard
     }

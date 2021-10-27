@@ -1,5 +1,7 @@
 package org.jesperancinha.games.kalagameservice.repository
 
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.nulls.shouldNotBeNull
 import org.assertj.core.api.Assertions.assertThat
 import org.jesperancinha.games.kalagameservice.model.Player
 import org.jesperancinha.games.kalagameservice.service.GameService
@@ -25,7 +27,9 @@ internal class KalaPlayerRepositoryItTest(
         user1 = kalaPlayerRepository.save(user1)
         gameService!!.createNewBoard(user1)
         val playerOptional = user1.id?.let { kalaPlayerRepository.findById(it) }
-        assertThat(playerOptional?.isPresent).isTrue
-        assertThat(playerOptional?.get()?.kalahBoards).hasSize(1)
+        playerOptional?.apply {
+            isPresent.shouldBeTrue()
+            get().shouldNotBeNull()
+        }
     }
 }

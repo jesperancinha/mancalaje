@@ -22,8 +22,8 @@ data class Player(
     @Column(unique = true)
     internal val username: String? = null,
 
-    @OneToMany(fetch = FetchType.EAGER)
-    internal var kalahBoards: MutableList<KalahBoard>? = null,
+    @OneToOne
+    internal var kalahBoard: KalahBoard? = null,
 
     @OneToOne
     internal var opponent: Player? = null,

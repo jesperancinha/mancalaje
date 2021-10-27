@@ -10,7 +10,7 @@ import javax.persistence.Table
 
 @Entity
 @Table
-class KalahTable(
+data class KalahTable(
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
