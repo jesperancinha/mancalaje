@@ -22,6 +22,9 @@ data class KalahWasher(
     var nextKalahWasher: KalahWasher? = null,
 
     @OneToOne
+    var nextKalahTable: KalahTable? = null,
+
+    @OneToOne
     var oppositeKalahWasher: KalahWasher? = null,
 
     @OneToOne

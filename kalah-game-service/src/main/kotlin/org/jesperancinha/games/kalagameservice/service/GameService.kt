@@ -41,11 +41,10 @@ class GameService(
             lastKalahWasher = pitRepository.save(lastKalahWasher)
         }
         kalahWashers.add(lastKalahWasher)
-        val kalahWasher = KalahWasher(
+        val kalahTable = KalahTable(
             player = player
         )
-        lastKalahWasher.nextKalahWasher = kalahWasher
-        lastKalahWasher = kalahWasher
+        lastKalahWasher.nextKalahTable = kalahTable
         lastKalahWasher = pitRepository.save(lastKalahWasher)
         for (i in 0..5) {
             val kalahWasher = KalahWasher()
@@ -61,9 +60,8 @@ class GameService(
             lastKalahWasher = pitRepository.save(lastKalahWasher)
         }
         kalahWashers.add(lastKalahWasher)
-        val kalahKalahWasher2 = KalahWasher()
-        lastKalahWasher.nextKalahWasher = kalahKalahWasher2
-        lastKalahWasher = kalahKalahWasher2
+        val kalahKalahWasher2 = KalahTable()
+        lastKalahWasher.nextKalahTable = kalahKalahWasher2
         lastKalahWasher = pitRepository.save(lastKalahWasher)
         kalahWashers.add(lastKalahWasher)
         lastKalahWasher.nextKalahWasher = firstPit
@@ -71,8 +69,8 @@ class GameService(
         kalahWashers.forEach(Consumer { s: KalahWasher -> pitRepository.save(s) })
         kalahBoard.currentPlayer = player
         kalahBoard.playerOne = player
-//        kalahBoard.kalahOne = kalahWasher
-//        kalahBoard.kalahTwo = kalahKalahWasher2
+        kalahBoard.kalahOne = kalahTable
+        kalahBoard.kalahTwo = kalahKalahWasher2
         val registeredBoard = boardRepository.save(kalahBoard)
         player.kalahBoard= kalahBoard
         playerRepository.save(player)

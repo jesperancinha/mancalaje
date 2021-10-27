@@ -27,7 +27,7 @@ open class SecurityPopulator(
 
     @Bean
     open fun runner(): CommandLineRunner {
-        return CommandLineRunner { args: Array<String?>? ->
+        return CommandLineRunner {
             val resource = applicationContext.getResource("classpath:schema.sql")
             ScriptUtils.executeSqlScript(dataSource.connection, resource)
             jdbcUserDetailsManager.createUser(
