@@ -14,8 +14,8 @@ The main goal of this implementation is to illustrate a couple of aspects of Sof
 This game is a variation of the original [Kalah Game](https://en.wikipedia.org/wiki/Kalah).
 Rules:
 
-1. Each player has six small bowls. They are called washers.
-2. Each player has only one table. Table is called display.
+1. Each player has six small bowls. They are called `washers`.
+2. Each player has only one table. Table is called `display`.
 3. Players can only pick their own cups in their own washers.
 4. Each time players can only pick all cups at a time and there is no option to pick an arbitrary number.
 5. The destination washer, is picked by the player and cups are rolled out one to one on a circular anti-clockwise direction.
