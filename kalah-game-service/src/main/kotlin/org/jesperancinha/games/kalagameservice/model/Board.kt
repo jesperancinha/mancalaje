@@ -3,8 +3,6 @@ package org.jesperancinha.games.kalagameservice.model
 import lombok.*
 import org.hibernate.Hibernate
 import org.jesperancinha.games.kalagameservice.dto.BoardDto
-import org.jesperancinha.games.kalagameservice.dto.converters.PitConverter
-import org.jesperancinha.games.kalagameservice.dto.converters.PlayerConverter
 import javax.persistence.*
 
 @Entity
@@ -64,16 +62,16 @@ data class Board(
 }
 
 internal val Board.toDto: BoardDto?
-    get() = this.pits?.map { obj: Pit -> PitConverter.toDto(obj) }?.let { it1 ->
+    get() = this.pits?.map { obj: Pit -> obj.toDto }?.let { it1 ->
         BoardDto(
             id = this.id,
-            currentPlayerDto = PlayerConverter.toDto(this.currentPlayer),
-            playerDtoOne = PlayerConverter.toDto(this.playerOne),
-            playerDtoTwo = PlayerConverter.toDto(this.playerTwo),
-            pitDtoOne = PitConverter.toDto(this.pitOne),
-            pitDtoTwo = PitConverter.toDto(this.pitTwo),
+            currentPlayerDto = this.currentPlayer?.toDto,
+            playerDtoOne = this.playerOne.toDto,
+            playerDtoTwo = this.playerTwo?.toDto,
+            pitDtoOne = this.pitOne.toDto,
+            pitDtoTwo = this.pitTwo?.toDto,
             pitDtos = it1.toList(),
-            winnerDto = PlayerConverter.toDto(this.winner),
+            winnerDto = this.winner?.toDto,
             kalahOne = null,
             kalahTwo = null
         )

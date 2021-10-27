@@ -42,7 +42,7 @@
     </properties>
 
     <modules>
-        <module>kala-game-service</module>
+        <module>kalah-game-service</module>
     </modules>
 
     <dependencyManagement>

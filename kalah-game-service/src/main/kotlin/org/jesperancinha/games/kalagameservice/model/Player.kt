@@ -1,6 +1,7 @@
 package org.jesperancinha.games.kalagameservice.model
 
 import org.hibernate.Hibernate
+import org.jesperancinha.games.kalagameservice.dto.PlayerDto
 import javax.persistence.*
 
 @Entity
@@ -37,3 +38,9 @@ data class Player(
         return this::class.simpleName + "(id = $id , username = $username , opponent = $opponent , currentBoard = $currentBoard )"
     }
 }
+
+val Player.toDto: PlayerDto
+    get() = PlayerDto(
+        id = this.id,
+        username = this.username
+    )

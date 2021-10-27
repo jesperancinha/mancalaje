@@ -1,5 +1,6 @@
 package org.jesperancinha.games.kalagameservice.model
 
+import org.jesperancinha.games.kalagameservice.dto.PitDto
 import javax.persistence.*
 
 @Entity
@@ -25,3 +26,11 @@ data class Pit(
     @OneToOne
     var player: Player? = null,
 )
+
+val Pit.toDto: PitDto
+    get() = PitDto(
+        id = this.id,
+        pitType = this.pitType,
+        stones = this.stones,
+        playerDto = this.player?.toDto
+    )
