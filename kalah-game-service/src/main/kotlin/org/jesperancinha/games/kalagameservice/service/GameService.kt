@@ -1,9 +1,12 @@
 package org.jesperancinha.games.kalagameservice.service
 
-import org.jesperancinha.games.kalagameservice.exception.*
-import org.jesperancinha.games.kalagameservice.model.Board
-import org.jesperancinha.games.kalagameservice.model.Pit
-import org.jesperancinha.games.kalagameservice.model.PitType
+import org.jesperancinha.games.kalagameservice.exception.GameOverException
+import org.jesperancinha.games.kalagameservice.exception.NotOwnedPitException
+import org.jesperancinha.games.kalagameservice.exception.PlayerNotJoinedYetException
+import org.jesperancinha.games.kalagameservice.exception.WrongTurnException
+import org.jesperancinha.games.kalagameservice.model.KalahBoard
+import org.jesperancinha.games.kalagameservice.model.KalahTable
+import org.jesperancinha.games.kalagameservice.model.KalahWasher
 import org.jesperancinha.games.kalagameservice.model.Player
 import org.jesperancinha.games.kalagameservice.repository.KalaBoardRepository
 import org.jesperancinha.games.kalagameservice.repository.KalaPitRepository
@@ -18,168 +21,154 @@ class GameService(
     private val pitRepository: KalaPitRepository,
     private val playerRepository: KalaPlayerRepository,
 ) {
-    fun createNewBoard(player: Player): Board {
-        val board = Board(playerOne = player, pitOne = Pit())
-        val pits = ArrayList<Pit>()
-        board.pits = pits
-        var lastPit = Pit(
-            player = player,
-            pitType = PitType.SMALL,
-            stones = 6
+    fun createNewBoard(player: Player): KalahBoard {
+        val kalahBoard = KalahBoard(playerOne = player)
+        val kalahWashers = ArrayList<KalahWasher>()
+        kalahBoard.kalahWashers = kalahWashers
+        var lastKalahWasher = KalahWasher(
+            player = player
         )
-        lastPit = pitRepository.save(lastPit)
-        board.pitOne = lastPit
-        val firstPit = lastPit
+        lastKalahWasher = pitRepository.save(lastKalahWasher)
+        kalahBoard.kalahWasherOne = lastKalahWasher
+        val firstPit = lastKalahWasher
         for (i in 0..4) {
-            val pit = Pit(
-                player = player,
-                pitType = PitType.SMALL,
-                stones = 6
+            val kalahWasher = KalahWasher(
+                player = player
             )
-            lastPit.nextPit = pit
-            pits.add(lastPit)
-            lastPit = pit
-            lastPit = pitRepository.save(lastPit)
+            lastKalahWasher.nextKalahWasher = kalahWasher
+            kalahWashers.add(lastKalahWasher)
+            lastKalahWasher = kalahWasher
+            lastKalahWasher = pitRepository.save(lastKalahWasher)
         }
-        pits.add(lastPit)
-        val kalahPit = Pit(
-            player = player,
-            pitType = PitType.LARGE,
-            stones = 0
+        kalahWashers.add(lastKalahWasher)
+        val kalahWasher = KalahWasher(
+            player = player
         )
-        lastPit.nextPit = kalahPit
-        lastPit = kalahPit
-        lastPit = pitRepository.save(lastPit)
+        lastKalahWasher.nextKalahWasher = kalahWasher
+        lastKalahWasher = kalahWasher
+        lastKalahWasher = pitRepository.save(lastKalahWasher)
         for (i in 0..5) {
-            val pit = Pit(
-                pitType = PitType.SMALL,
-                stones = 6
-            )
-            val oppositePit = pits[i]
-            pit.oppositePit = oppositePit
-            oppositePit.oppositePit = pit
+            val kalahWasher = KalahWasher()
+            val oppositePit = kalahWashers[i]
+            kalahWasher.oppositeKalahWasher = oppositePit
+            oppositePit.oppositeKalahWasher = kalahWasher
             if (i == 0) {
-                board.pitTwo = pit
+                kalahBoard.kalahWasherTwo = kalahWasher
             }
-            lastPit.nextPit = pit
-            pits.add(lastPit)
-            lastPit = pit
-            lastPit = pitRepository.save(lastPit)
+            lastKalahWasher.nextKalahWasher = kalahWasher
+            kalahWashers.add(lastKalahWasher)
+            lastKalahWasher = kalahWasher
+            lastKalahWasher = pitRepository.save(lastKalahWasher)
         }
-        pits.add(lastPit)
-        val kalahPit2 = Pit(
-            pitType = PitType.LARGE,
-            stones = 0
-        )
-        lastPit.nextPit = kalahPit2
-        lastPit = kalahPit2
-        lastPit = pitRepository.save(lastPit)
-        pits.add(lastPit)
-        lastPit.nextPit = firstPit
-        board.pits = pits
-        pits.forEach(Consumer { s: Pit -> pitRepository.save(s) })
-        board.currentPlayer = player
-        board.playerOne = player
-        if (Objects.isNull(player.boards)) {
-            player.boards = ArrayList()
+        kalahWashers.add(lastKalahWasher)
+        val kalahKalahWasher2 = KalahWasher()
+        lastKalahWasher.nextKalahWasher = kalahKalahWasher2
+        lastKalahWasher = kalahKalahWasher2
+        lastKalahWasher = pitRepository.save(lastKalahWasher)
+        kalahWashers.add(lastKalahWasher)
+        lastKalahWasher.nextKalahWasher = firstPit
+        kalahBoard.kalahWashers = kalahWashers
+        kalahWashers.forEach(Consumer { s: KalahWasher -> pitRepository.save(s) })
+        kalahBoard.currentPlayer = player
+        kalahBoard.playerOne = player
+        if (Objects.isNull(player.kalahBoards)) {
+            player.kalahBoards = ArrayList()
         }
-        board.kalahOne = kalahPit
-        board.kalahTwo = kalahPit2
-        val registeredBoard = boardRepository.save(board)
-        player.boards?.add(board)
+//        kalahBoard.kalahOne = kalahWasher
+//        kalahBoard.kalahTwo = kalahKalahWasher2
+        val registeredBoard = boardRepository.save(kalahBoard)
+        player.kalahBoards?.add(kalahBoard)
         playerRepository.save(player)
         return registeredBoard
     }
 
-    fun sowStonesFromPit(player: Player, pit: Pit?, board: Board): Board {
-        if (Objects.isNull(board.playerTwo)) {
+    fun sowStonesFromPit(player: Player, kalahWasher: KalahTable?, kalahBoard: KalahBoard): KalahBoard {
+        if (Objects.isNull(kalahBoard.playerTwo)) {
             throw PlayerNotJoinedYetException()
         }
-        if (Objects.nonNull(board.winner)) {
+        if (Objects.nonNull(kalahBoard.winner)) {
             throw GameOverException()
         }
-        if (pit?.pitType == PitType.LARGE) {
-            throw InvalidPitException()
-        }
-        if (pit?.player?.username != player.username) {
+        if (kalahWasher?.player?.username != player.username) {
             throw NotOwnedPitException()
         }
-        if (player.username != board.currentPlayer?.username) {
+        if (player.username != kalahBoard.currentPlayer?.username) {
             throw WrongTurnException()
         }
-        var stones = pit?.stones ?: 0
-        pit?.stones = 0
-        var currentPit = pit?.nextPit
-        while (stones >= 0) {
-            currentPit?.stones = (currentPit?.stones ?: 0) + 1
-            stones--
-            if (stones == 0) {
-                if (currentPit?.player?.username == player.username) {
-                    if (currentPit?.pitType == PitType.LARGE) {
-                        board?.pits?.forEach(Consumer { s: Pit -> pitRepository.save(s) })
-                        return board
-                    }
-                    val total = (currentPit?.stones ?: 0) + (currentPit?.oppositePit?.stones ?: 0)
-                    currentPit?.stones = 0
-                    currentPit?.oppositePit?.stones = 0
-                    if (player.username == board?.playerOne?.username) {
-                        board?.kalahOne?.stones = (board?.kalahOne?.stones ?: 0) + total
-                    } else if (player.username == board?.playerTwo?.username) {
-                        board?.kalahTwo?.stones = (board?.kalahOne?.stones ?: 0) + total
-                    }
-                    checkWinner(board)
-                    board?.pits?.forEach(Consumer { s: Pit -> pitRepository.save(s) })
-                    return board
-                }
-                break
-            }
-            currentPit = currentPit?.nextPit
-            if (currentPit?.pitType == PitType.LARGE && currentPit.player?.username != player.username) {
-                currentPit = currentPit.nextPit
-            }
-        }
-        board.currentPlayer = player.opponent
-        board.pits?.forEach(Consumer { s: Pit -> pitRepository.save(s) })
-        checkWinner(board)
-        return boardRepository.save(board)
+//        var stones = kalahWasher?.stones ?: 0
+//        kalahWasher?.stones = 0
+        var currentPit = kalahWasher?.nextKalahWasher
+//        while (stones >= 0) {
+//            currentPit?.stones = (currentPit?.stones ?: 0) + 1
+//            stones--
+//            if (stones == 0) {
+//                if (currentPit?.player?.username == player.username) {
+//                    if (currentPit?.washerType == WasherType.LARGE) {
+//                        kalahBoard?.kalahWashers?.forEach(Consumer { s: KalahWasher -> pitRepository.save(s) })
+//                        return kalahBoard
+//                    }
+//                    val total = (currentPit?.stones ?: 0) + (currentPit?.oppositeKalahWasher?.stones ?: 0)
+//                    currentPit?.stones = 0
+//                    currentPit?.oppositeKalahWasher?.stones = 0
+//                    if (player.username == kalahBoard?.playerOne?.username) {
+//                        kalahBoard?.kalahOne?.stones = (kalahBoard?.kalahOne?.stones ?: 0) + total
+//                    } else if (player.username == kalahBoard?.playerTwo?.username) {
+//                        kalahBoard?.kalahTwo?.stones = (kalahBoard?.kalahOne?.stones ?: 0) + total
+//                    }
+//                    checkWinner(kalahBoard)
+//                    kalahBoard?.kalahWashers?.forEach(Consumer { s: KalahWasher -> pitRepository.save(s) })
+//                    return kalahBoard
+//                }
+//                break
+//            }
+//            currentPit = currentPit?.nextKalahWasher
+//            if (currentPit?.washerType == WasherType.LARGE && currentPit.player?.username != player.username) {
+//                currentPit = currentPit.nextKalahWasher
+//            }
+//        }
+        kalahBoard.currentPlayer = player.opponent
+        kalahBoard.kalahWashers?.forEach(Consumer { s: KalahWasher -> pitRepository.save(s) })
+        checkWinner(kalahBoard)
+        return boardRepository.save(kalahBoard)
     }
 
-    private fun checkWinner(board: Board?) {
-        if (board?.pitOne?.let { isWinner(it) } == true) {
-            board.winner = board.playerOne
-        } else if (board?.pitTwo?.let { isWinner(it) } == true) {
-            board.winner = board.playerTwo
+    private fun checkWinner(kalahBoard: KalahBoard?) {
+        if (kalahBoard?.kalahWasherOne?.let { isWinner(it) } == true) {
+            kalahBoard.winner = kalahBoard.playerOne
+        } else if (kalahBoard?.kalahWasherTwo?.let { isWinner(it) } == true) {
+            kalahBoard.winner = kalahBoard.playerTwo
         }
     }
 
-    private fun isWinner(pit: Pit?): Boolean {
-        var itPit = pit
+    private fun isWinner(kalahWasher: KalahWasher?): Boolean {
+        var itPit = kalahWasher
         var winnerone = true
-        while (itPit?.pitType != PitType.LARGE) {
-            if ((itPit?.stones ?: 0) > 0) {
-                winnerone = false
-                break
-            }
-            itPit = itPit?.nextPit
-        }
+//        while (itPit?.washerType != WasherType.LARGE) {
+//            if ((itPit?.stones ?: 0) > 0) {
+//                winnerone = false
+//                break
+//            }
+//            itPit = itPit?.nextKalahWasher
+//        }
         return winnerone
     }
 
-    fun joinPlayer(playerTwo: Player, board: Board): Board {
-        var pitTwo = board.pitTwo
+    fun joinPlayer(playerTwo: Player, kalahBoard: KalahBoard): KalahBoard {
+        var pitTwo = kalahBoard.kalahWasherTwo
         while (Objects.isNull(pitTwo?.player)) {
             pitTwo?.player = playerTwo
-            pitTwo = pitTwo?.nextPit
+            pitTwo = pitTwo?.nextKalahWasher
         }
-        board.pits?.forEach(Consumer { s: Pit -> pitRepository.save(s) })
-        board.playerTwo = playerTwo
-        playerTwo.opponent = board.playerOne
-        playerTwo.currentBoard = board
-        val playerOne = board.playerOne
-        playerOne.opponent = playerTwo
-        playerOne.currentBoard = board
-        playerRepository.save(playerOne)
+        kalahBoard.kalahWashers?.forEach(Consumer { s: KalahWasher -> pitRepository.save(s) })
+        kalahBoard.playerTwo = playerTwo
+        playerTwo.opponent = kalahBoard.playerOne
+        playerTwo.currentKalahBoard = kalahBoard
+        kalahBoard.playerOne?.apply {
+            opponent = playerTwo
+            currentKalahBoard = kalahBoard
+            playerRepository.save(this)
+        }
         playerRepository.save(playerTwo)
-        return boardRepository.save(board)
+        return boardRepository.save(kalahBoard)
     }
 }

@@ -3,7 +3,8 @@ package org.jesperancinha.games.kalagameservice.controller
 import org.jesperancinha.games.kalagameservice.dto.BoardDto
 import org.jesperancinha.games.kalagameservice.exception.PitDoesNotExistException
 import org.jesperancinha.games.kalagameservice.exception.ZeroStonesToMoveException
-import org.jesperancinha.games.kalagameservice.model.Pit
+import org.jesperancinha.games.kalagameservice.model.KalahTable
+import org.jesperancinha.games.kalagameservice.model.KalahWasher
 import org.jesperancinha.games.kalagameservice.model.toDto
 import org.jesperancinha.games.kalagameservice.service.BoardService
 import org.jesperancinha.games.kalagameservice.service.GameService
@@ -27,7 +28,7 @@ class KalaGameController(
     @GetMapping("current")
     @Throws(Throwable::class)
     fun getCurrentBoard(principal: Principal): BoardDto? {
-        return playerService.createOrFindPlayerByName(principal.name)?.currentBoard?.toDto
+        return playerService.createOrFindPlayerByName(principal.name)?.currentKalahBoard?.toDto
     }
 
     @PostMapping("create")
@@ -46,12 +47,12 @@ class KalaGameController(
     ): BoardDto? {
         val player = playerService.createOrFindPlayerByName(principal.name)
         val board = boardService.findBoardById(boardId)
-        val startPit = board?.pits?.stream()?.filter { pit: Pit -> pit.id == pitId }?.findAny()
+        val startPit = board?.kalahWashers?.stream()?.filter { kalahWasher: KalahWasher -> kalahWasher.id == pitId }?.findAny()
             ?.orElseThrow { PitDoesNotExistException() }
-        if (startPit?.stones == 0) {
-            throw ZeroStonesToMoveException()
-        }
-        val boardUpdated = startPit?.let { player?.let { it1 -> gameService.sowStonesFromPit(it1, it, board) } }
+//        if (startPit?.stones == 0) {
+//            throw ZeroStonesToMoveException()
+//        }
+        val boardUpdated = startPit?.let { player?.let { it1 -> gameService.sowStonesFromPit(it1, it as KalahTable, board) } }
         return boardUpdated?.toDto
     }
 

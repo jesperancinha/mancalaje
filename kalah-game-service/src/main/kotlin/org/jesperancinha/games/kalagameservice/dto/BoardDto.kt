@@ -6,17 +6,17 @@ data class BoardDto(
     @JsonProperty("id")
     val id: Long?,
     @JsonProperty("pitDtos")
-    val pitDtos: List<PitDto?>,
+    val pitDtos: List<WasherDto?>,
     @JsonProperty("pitDtoOne")
-    val pitDtoOne: PitDto?,
+    val washerDtoOne: WasherDto?,
     @JsonProperty("kalahOne")
-    val kalahOne: PitDto?,
+    val kalahOne: WasherDto?,
     @JsonProperty("playerDtoOne")
     val playerDtoOne: PlayerDto?,
     @JsonProperty("pitDtoTwo")
-    val pitDtoTwo: PitDto?,
+    val pitDtoTwo: WasherDto?,
     @JsonProperty("kalahTwo")
-    val kalahTwo: PitDto?,
+    val kalahTwo: WasherDto?,
     @JsonProperty("playerDtoTwo")
     val playerDtoTwo: PlayerDto?,
     @JsonProperty("currentPlayerDto")

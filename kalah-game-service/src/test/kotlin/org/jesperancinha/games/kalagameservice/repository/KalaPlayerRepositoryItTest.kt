@@ -26,6 +26,6 @@ internal class KalaPlayerRepositoryItTest(
         gameService!!.createNewBoard(user1)
         val playerOptional = user1.id?.let { kalaPlayerRepository.findById(it) }
         assertThat(playerOptional?.isPresent).isTrue
-        assertThat(playerOptional?.get()?.boards).hasSize(1)
+        assertThat(playerOptional?.get()?.kalahBoards).hasSize(1)
     }
 }

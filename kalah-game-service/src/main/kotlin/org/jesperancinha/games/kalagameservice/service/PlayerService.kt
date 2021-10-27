@@ -26,15 +26,15 @@ open class PlayerService(private val playerRepository: KalaPlayerRepository) {
 
     fun leaveCurrentGame(name: String) {
         val player = playerRepository.findPlayerByUsernameEquals(name)
-        val currentBoard = player.currentBoard
+        val currentBoard = player.currentKalahBoard
         if (Objects.nonNull(currentBoard)) {
             val opponent = player.opponent
             if (Objects.nonNull(opponent)) {
-                opponent?.currentBoard = null
+                opponent?.currentKalahBoard = null
                 opponent?.let { playerRepository.save(opponent) }
 
             }
-            player.currentBoard = null
+            player.currentKalahBoard = null
             playerRepository.save(player)
         }
     }

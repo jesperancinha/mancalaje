@@ -2,8 +2,8 @@ package org.jesperancinha.games.kalagameservice.repository
 
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
-import org.jesperancinha.games.kalagameservice.model.Board
-import org.jesperancinha.games.kalagameservice.model.Pit
+import org.jesperancinha.games.kalagameservice.model.KalahBoard
+import org.jesperancinha.games.kalagameservice.model.KalahWasher
 import org.jesperancinha.games.kalagameservice.model.Player
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -14,7 +14,7 @@ import java.util.UUID.randomUUID
 
 @DataJpaTest
 @Transactional
-internal class KalaBoardRepositoryTest(
+internal class KalaKalahBoardRepositoryTest(
     @Autowired
     private val kalaPitRepository: KalaPitRepository,
 
@@ -42,14 +42,14 @@ internal class KalaBoardRepositoryTest(
 
     @BeforeEach
     fun setUp() {
-        val pitOne = Pit()
-        kalaPitRepository.save(pitOne)
-        val boardPlayerOne = Board(playerOne = player1, pitOne = pitOne)
-        val boardPlayerTwo = Board(playerOne = player2, pitOne = pitOne)
-        val boardPlayerThree = Board(playerOne = player3, playerTwo = player2, pitOne = pitOne)
-        kalaBoardRepository.save(boardPlayerOne)
-        kalaBoardRepository.save(boardPlayerTwo)
-        kalaBoardRepository.save(boardPlayerThree)
+        val kalahWasherOne = KalahWasher()
+        kalaPitRepository.save(kalahWasherOne)
+        val kalahBoardPlayerOne = KalahBoard(playerOne = player1, kalahWasherOne = kalahWasherOne)
+        val kalahBoardPlayerTwo = KalahBoard(playerOne = player2, kalahWasherOne = kalahWasherOne)
+        val kalahBoardPlayerThree = KalahBoard(playerOne = player3, playerTwo = player2, kalahWasherOne = kalahWasherOne)
+        kalaBoardRepository.save(kalahBoardPlayerOne)
+        kalaBoardRepository.save(kalahBoardPlayerTwo)
+        kalaBoardRepository.save(kalahBoardPlayerThree)
     }
 
     @Test

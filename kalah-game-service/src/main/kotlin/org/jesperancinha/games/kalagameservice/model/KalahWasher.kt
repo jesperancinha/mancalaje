@@ -1,40 +1,36 @@
 package org.jesperancinha.games.kalagameservice.model
 
 import org.hibernate.Hibernate
-import org.jesperancinha.games.kalagameservice.dto.PlayerDto
+import org.jesperancinha.games.kalagameservice.dto.WasherDto
 import javax.persistence.Column
 import javax.persistence.Entity
-import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
-import javax.persistence.OneToMany
 import javax.persistence.OneToOne
 import javax.persistence.Table
 
 @Entity
 @Table
-data class Player(
+data class KalahWasher(
     @Id
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    internal val id: Long? = null,
-
-    @Column(unique = true)
-    internal val username: String? = null,
-
-    @OneToMany(fetch = FetchType.EAGER)
-    internal var kalahBoards: MutableList<KalahBoard>? = null,
+    var id: Long? = null,
 
     @OneToOne
-    internal var opponent: Player? = null,
+    var nextKalahWasher: KalahWasher? = null,
 
     @OneToOne
-    internal var currentKalahBoard: KalahBoard? = null
-) {
+    var oppositeKalahWasher: KalahWasher? = null,
+
+    @OneToOne
+    var player: Player? = null,
+) : KalahPlace() {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
-        other as Player
+        other as KalahWasher
 
         return id != null && id == other.id
     }
@@ -43,12 +39,13 @@ data class Player(
 
     @Override
     override fun toString(): String {
-        return this::class.simpleName + "(id = $id , username = $username , opponent = $opponent , currentBoard = $currentKalahBoard )"
+        return this::class.simpleName + "(id = $id , nextWasher = $nextKalahWasher , oppositeWasher = $oppositeKalahWasher , player = $player )"
     }
+
 }
 
-val Player.toDto: PlayerDto
-    get() = PlayerDto(
+val KalahWasher.toDto: WasherDto
+    get() = WasherDto(
         id = this.id,
-        username = this.username
+        playerDto = this.player?.toDto
     )

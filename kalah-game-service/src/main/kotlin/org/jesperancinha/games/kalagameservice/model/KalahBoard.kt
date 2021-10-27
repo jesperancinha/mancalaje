@@ -1,40 +1,39 @@
 package org.jesperancinha.games.kalagameservice.model
 
-import lombok.*
 import org.hibernate.Hibernate
 import org.jesperancinha.games.kalagameservice.dto.BoardDto
-import javax.persistence.*
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+import javax.persistence.OneToMany
+import javax.persistence.OneToOne
+import javax.persistence.Table
 
 @Entity
 @Table
-@Setter
-@Getter
-@Builder
-@EqualsAndHashCode
-@NoArgsConstructor
-@AllArgsConstructor
-data class Board(
+data class KalahBoard(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     internal var id: Long? = null,
 
     @OneToMany
-    internal var pits: List<Pit>? = null,
+    internal var kalahWashers: List<KalahWasher>? = null,
 
     @OneToOne
-    internal var pitOne: Pit = Pit(),
+    internal var kalahWasherOne: KalahWasher? = null,
 
     @OneToOne
-    internal var kalahOne: Pit? = null,
+    internal var kalahOne: KalahTable? = null,
 
     @OneToOne
-    internal var playerOne: Player,
+    internal var playerOne: Player? = null,
 
     @OneToOne
-    internal var pitTwo: Pit? = null,
+    internal var kalahWasherTwo: KalahWasher? = null,
 
     @OneToOne
-    internal var kalahTwo: Pit? = null,
+    internal var kalahTwo: KalahTable? = null,
 
     @OneToOne
     internal var playerTwo: Player? = null,
@@ -48,7 +47,7 @@ data class Board(
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
-        other as Board
+        other as KalahBoard
 
         return id != null && id == other.id
     }
@@ -57,19 +56,19 @@ data class Board(
 
     @Override
     override fun toString(): String {
-        return this::class.simpleName + "(id = $id , pitOne = $pitOne , kalahOne = $kalahOne , playerOne = $playerOne , pitTwo = $pitTwo , kalahTwo = $kalahTwo , playerTwo = $playerTwo , currentPlayer = $currentPlayer , winner = $winner )"
+        return this::class.simpleName + "(id = $id , pitOne = $kalahWasherOne , kalahOne = $kalahOne , playerOne = $playerOne , pitTwo = $kalahWasherTwo , kalahTwo = $kalahTwo , playerTwo = $playerTwo , currentPlayer = $currentPlayer , winner = $winner )"
     }
 }
 
-internal val Board.toDto: BoardDto?
-    get() = this.pits?.map { obj: Pit -> obj.toDto }?.let { it1 ->
+internal val KalahBoard.toDto: BoardDto?
+    get() = this.kalahWashers?.map { obj: KalahWasher -> obj.toDto }?.let { it1 ->
         BoardDto(
             id = this.id,
             currentPlayerDto = this.currentPlayer?.toDto,
-            playerDtoOne = this.playerOne.toDto,
+            playerDtoOne = this.playerOne?.toDto,
             playerDtoTwo = this.playerTwo?.toDto,
-            pitDtoOne = this.pitOne.toDto,
-            pitDtoTwo = this.pitTwo?.toDto,
+            washerDtoOne = this.kalahWasherOne?.toDto,
+            pitDtoTwo = this.kalahWasherTwo?.toDto,
             pitDtos = it1.toList(),
             winnerDto = this.winner?.toDto,
             kalahOne = null,
