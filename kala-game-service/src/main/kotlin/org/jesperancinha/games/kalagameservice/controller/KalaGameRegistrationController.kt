@@ -1,11 +1,11 @@
 package org.jesperancinha.games.kalagameservice.controller
 
-import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.bind.annotation.RequestMapping
 import org.jesperancinha.games.kalagameservice.service.PlayerService
-import org.springframework.web.bind.annotation.PostMapping
-import java.security.Principal
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
+import java.security.Principal
 
 @RestController
 @RequestMapping("log")

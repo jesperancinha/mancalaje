@@ -1,0 +1,29 @@
+# Coffee cups Kalah Game
+
+## Goals
+The main goal of this implementation is to illustrate a couple of aspects of Software Architecture using the Spring Framework.
+
+1. Locks on JPA data
+2. Transactions
+3. Spring Reactive
+4. Spring Cache
+5. Hazelcast (maybe)
+
+## How to play
+
+This game is a variation of the original [Kalah Game](https://en.wikipedia.org/wiki/Kalah).
+Rules:
+
+1. Each player has six small bowls. They are called washers.
+2. Each player has only one table. Table is called display.
+3. Players can only pick their own cups in their own washers.
+4. Each time players can only pick all cups at a time and there is no option to pick an arbitrary number.
+5. The destination washer, is picked by the player and cups are rolled out one to one on a circular anti-clockwise direction.
+6. The destination washer must belong to the player
+7. The last location of the last cup in the rollout determines special rules
+8. If the last cup falls into the opponents display table, player can choose to eliminate as many cups of the opponent as they prefer up until the number of rolled out cups.
+9. The opponent can counter-act by emptying all cups of the display. Empty cups are worth half a point. If all cups are empty or there are no cups, the there is no way to counter-act.
+10. Cups get filled with coffee once they reach the display.
+11. Cups in the display cannot be moved.
+12. If cups fall into an empty washer belonging to the current player, then the player can pick up the cups on the washer of the opponents side, take them and put them on the display without coffee.
+13. Game ends when no more cups are available in the washers

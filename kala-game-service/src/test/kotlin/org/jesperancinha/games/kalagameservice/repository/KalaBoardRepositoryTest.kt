@@ -1,70 +1,76 @@
 package org.jesperancinha.games.kalagameservice.repository
 
-import org.assertj.core.api.Assertions
-import org.assertj.core.api.Assertions.assertThat
+import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.shouldBe
 import org.jesperancinha.games.kalagameservice.model.Board
+import org.jesperancinha.games.kalagameservice.model.Pit
 import org.jesperancinha.games.kalagameservice.model.Player
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import javax.transaction.Transactional
+import org.springframework.transaction.annotation.Transactional
+import java.util.UUID.randomUUID
 
 @DataJpaTest
-internal open class KalaBoardRepositoryTest {
+@Transactional
+internal class KalaBoardRepositoryTest(
     @Autowired
-    private val kalaBoardRepository: KalaBoardRepository? = null
+    private val kalaPitRepository: KalaPitRepository,
 
     @Autowired
-    private val kalaPlayerRepository: KalaPlayerRepository? = null
-    private var player1: Player? = null
-    private var player3: Player? = null
+    private val kalaBoardRepository: KalaBoardRepository,
+
+    @Autowired
+    private val kalaPlayerRepository: KalaPlayerRepository
+) {
+    val player1 = kalaPlayerRepository.save(
+        Player(
+            username = "player1${randomUUID()}"
+        )
+    )
+    val player2 = kalaPlayerRepository.save(
+        Player(
+            username = "player2${java.util.UUID.randomUUID()}"
+        )
+    )
+    val player3 = kalaPlayerRepository.save(
+        Player(
+            username = "player3${java.util.UUID.randomUUID()}"
+        )
+    )
 
     @BeforeEach
-    @Transactional
-    open fun setUp() {
-        val player1 = kalaPlayerRepository!!.save(Player(
-            username ="player1"
-        ))
-        var player2 = kalaPlayerRepository.save(Player(
-            username="player2")
-                )
-        player3 = kalaPlayerRepository.save(Player(
-            username="player3"
-        ))
-        val boardPlayerOne = Board()
-        val boardPlayerTwo = Board()
-        val boardPlayerThree = Board()
-        boardPlayerOne.playerOne= player1
-        boardPlayerTwo.playerOne= player2
-        boardPlayerThree.playerOne = player3
-        boardPlayerThree.playerTwo = player2
-        kalaBoardRepository!!.save(boardPlayerOne)
+    fun setUp() {
+        val pitOne = Pit()
+        kalaPitRepository.save(pitOne)
+        val boardPlayerOne = Board(playerOne = player1, pitOne = pitOne)
+        val boardPlayerTwo = Board(playerOne = player2, pitOne = pitOne)
+        val boardPlayerThree = Board(playerOne = player3, playerTwo = player2, pitOne = pitOne)
+        kalaBoardRepository.save(boardPlayerOne)
         kalaBoardRepository.save(boardPlayerTwo)
         kalaBoardRepository.save(boardPlayerThree)
     }
 
     @Test
-    @Disabled
     fun testFindBoardsByPlayerOneEquals_whenPlayerOne_thenShowPlayerOneBoards() {
-        val boardsByPlayerOneEquals = kalaBoardRepository!!.findBoardsByPlayerOneEquals(player1)
-        assertThat(boardsByPlayerOneEquals).hasSize(1)
-        assertThat(boardsByPlayerOneEquals[0]?.playerOne?.username).isEqualTo("player1")
+        val boardsByPlayerOneEquals = kalaBoardRepository.findBoardsByPlayerOneEquals(player1)
+        boardsByPlayerOneEquals.shouldHaveSize(1)
+        boardsByPlayerOneEquals[0]?.playerOne?.username shouldBe player1.username
     }
 
     @Test
     fun testFindBoardsByPlayerOneEquals_whenPlayerThree_thenShowPlayerThreeBoards() {
-        val boardsByPlayerOneEquals = kalaBoardRepository!!.findBoardsByPlayerOneEquals(player3)
-        assertThat(boardsByPlayerOneEquals).hasSize(1)
-        assertThat(boardsByPlayerOneEquals[0]?.playerOne?.username).isEqualTo("player3")
+        val boardsByPlayerOneEquals = kalaBoardRepository.findBoardsByPlayerOneEquals(player3)
+        boardsByPlayerOneEquals.shouldHaveSize(1)
+        boardsByPlayerOneEquals[0]?.playerOne?.username shouldBe player3.username
     }
 
     @Test
     fun findBoardsByPlayerTwoIsNull_whenCalled_thenShowAllBoards() {
-        val boardsByPlayerTwoIsNull = kalaBoardRepository!!.findBoardsByPlayerTwoIsNull()
-        assertThat(boardsByPlayerTwoIsNull).hasSize(2)
-        assertThat(boardsByPlayerTwoIsNull[0]?.playerOne?.username).isEqualTo("player1")
-        assertThat(boardsByPlayerTwoIsNull[1]?.playerOne?.username).isEqualTo("player2")
+        val boardsByPlayerTwoIsNull = kalaBoardRepository.findBoardsByPlayerTwoIsNull()
+        boardsByPlayerTwoIsNull.shouldHaveSize(2)
+        boardsByPlayerTwoIsNull[0]?.playerOne?.username shouldBe player1.username
+        boardsByPlayerTwoIsNull[1]?.playerOne?.username shouldBe player2.username
     }
 }

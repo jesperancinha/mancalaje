@@ -11,26 +11,28 @@ import javax.transaction.Transactional
 
 @SpringBootTest
 @Transactional
-internal open class GameServiceImplItTest {
+internal open class GameServiceItTest(
     @Autowired
-    private val gameService: GameServiceImpl? = null
+    private val gameService: GameService,
+    @Autowired
+    private val kalaPlayerRepository: KalaPlayerRepository
+) {
 
-    @Autowired
-    private val kalaPlayerRepository: KalaPlayerRepository? = null
 
     @Test
     fun testCreateNewBoard_whenCreateNewBoard_creationSuccessful() {
         val user1 = Player(
-            username = "user1")
-        kalaPlayerRepository!!.save<Player>(user1)
-        val board = gameService!!.createNewBoard(user1)
+            username = "user1"
+        )
+        kalaPlayerRepository.save(user1)
+        val board = gameService.createNewBoard(user1)
         assertThat(board).isNotNull
-        assertThat(board?.pits).isNotNull()
-        assertThat(board?.pits).hasSize(14)
-        assertThat(board?.pits?.get(6)?.pitType).isEqualTo(PitType.LARGE)
-        assertThat(board?.pits?.get(13)?.pitType).isEqualTo(PitType.LARGE)
-        assertThat(board?.pits?.get(0)).isSameAs(board?.pits?.get(13)?.nextPit)
-        var currentPit = board?.pits?.get(0)
+        assertThat(board.pits).isNotNull
+        assertThat(board.pits).hasSize(14)
+        assertThat(board.pits?.get(6)?.pitType).isEqualTo(PitType.LARGE)
+        assertThat(board.pits?.get(13)?.pitType).isEqualTo(PitType.LARGE)
+        assertThat(board.pits?.get(0)).isSameAs(board.pits?.get(13)?.nextPit)
+        var currentPit = board.pits?.get(0)
         for (i in 0..5) {
             assertThat(currentPit?.stones).isEqualTo(6)
             assertThat(currentPit?.player).isSameAs(user1)
@@ -51,25 +53,27 @@ internal open class GameServiceImplItTest {
     @Test
     fun testSowStonesFromPit_whenLandingOnKalah_thenAnotherTurn() {
         val user1 = Player(
-            username = "user1")
+            username = "user1"
+        )
         val user2 = Player(
-            username = "user2")
-        kalaPlayerRepository!!.save<Player>(user1)
-        kalaPlayerRepository.save<Player>(user2)
+            username = "user2"
+        )
+        kalaPlayerRepository.save(user1)
+        kalaPlayerRepository.save(user2)
         user1.opponent = user2
         user2.opponent = user1
-        kalaPlayerRepository.save<Player>(user1)
-        kalaPlayerRepository.save<Player>(user2)
-        var board = gameService?.createNewBoard(user1)
-        board = gameService?.joinPlayer(user2, board)
-        board = board?.pitOne?.let { gameService?.sowStonesFromPit(user1, it, board) }
+        kalaPlayerRepository.save(user1)
+        kalaPlayerRepository.save(user2)
+        var board = gameService.createNewBoard(user1)
+        board = gameService.joinPlayer(user2, board)
+        board = gameService.sowStonesFromPit(user1,  board.pitOne, board)
         assertThat(board).isNotNull
-        assertThat(board?.pits).isNotNull()
-        assertThat(board?.pits).hasSize(14)
-        assertThat(board?.pits?.get(6)?.pitType).isEqualTo(PitType.LARGE)
-        assertThat(board?.pits?.get(13)?.pitType).isEqualTo(PitType.LARGE)
-        assertThat(board?.pits?.get(0)).isSameAs(board?.pits?.get(13)?.nextPit)
-        var currentPit = board?.pits?.get(0)
+        assertThat(board.pits).isNotNull
+        assertThat(board.pits).hasSize(14)
+        assertThat(board.pits?.get(6)?.pitType).isEqualTo(PitType.LARGE)
+        assertThat(board.pits?.get(13)?.pitType).isEqualTo(PitType.LARGE)
+        assertThat(board.pits?.get(0)).isSameAs(board.pits?.get(13)?.nextPit)
+        var currentPit = board.pits?.get(0)
         assertThat(currentPit?.stones).isEqualTo(0)
         assertThat(currentPit?.player).isSameAs(user1)
         assertThat(currentPit?.pitType).isEqualTo(PitType.SMALL)
@@ -95,18 +99,20 @@ internal open class GameServiceImplItTest {
     @Test
     fun testSowStonesFromPit_whenLandingOnOpponent_thenLoseTurn() {
         var user1 = Player(
-            username = "user1")
+            username = "user1"
+        )
         var user2 = Player(
-            username = "user2")
+            username = "user2"
+        )
         kalaPlayerRepository!!.save<Player>(user1)
         kalaPlayerRepository.save<Player>(user2)
         user1.opponent = user2
         user2.opponent = user1
         user1 = kalaPlayerRepository.save<Player>(user1)
         user2 = kalaPlayerRepository.save<Player>(user2)
-        var board = gameService!!.createNewBoard(user1)
+        var board = gameService.createNewBoard(user1)
         board = gameService.joinPlayer(user2, board)
-        board = board?.pits?.get(3)?.let { gameService.sowStonesFromPit(user1, it, board) }
+        board = gameService.sowStonesFromPit(user1, board.pits?.get(3), board)
         assertThat(board).isNotNull
         assertThat(board?.pits).isNotNull
         assertThat(board?.pits).hasSize(14)
@@ -155,29 +161,31 @@ internal open class GameServiceImplItTest {
         val user2 = Player(
             username = "user2"
         )
-        kalaPlayerRepository!!.save<Player>(user1)
-        kalaPlayerRepository.save<Player>(user2)
+        kalaPlayerRepository.save(user1)
+        kalaPlayerRepository.save(user2)
         user1.opponent = user2
         user2.opponent = user1
-        kalaPlayerRepository.save<Player>(user1)
-        kalaPlayerRepository.save<Player>(user2)
-        var board = gameService!!.createNewBoard(user1)
+        kalaPlayerRepository.save(user1)
+        kalaPlayerRepository.save(user2)
+        var board = gameService.createNewBoard(user1)
         board = gameService.joinPlayer(user2, board)
-        board = board?.pitOne?.let { gameService.sowStonesFromPit(user1, it, board) }
-        board = board?.pitOne?.nextPit?.let { gameService.sowStonesFromPit(user1, it, board) }
-        board = board?.pitTwo?.let { gameService.sowStonesFromPit(user2, it, board) }
-        board = board?.pitOne?.nextPit?.nextPit?.nextPit?.nextPit?.nextPit?.let {
-            gameService.sowStonesFromPit(user1,
+        board = board.pitOne.let { gameService.sowStonesFromPit(user1, it, board) }
+        board = board.pitOne.nextPit.let { gameService.sowStonesFromPit(user1, it, board) }
+        board = board.pitTwo.let { gameService.sowStonesFromPit(user2, it, board) }
+        board = board.pitOne.nextPit?.nextPit?.nextPit?.nextPit?.nextPit.let {
+            gameService.sowStonesFromPit(
+                user1,
                 it,
-                board)
+                board
+            )
         }
         assertThat(board).isNotNull
-        assertThat(board?.pits).isNotNull
-        assertThat(board?.pits).hasSize(14)
-        assertThat(board?.pits?.get(6)?.pitType).isEqualTo(PitType.LARGE)
-        assertThat(board?.pits?.get(13)?.pitType).isEqualTo(PitType.LARGE)
-        assertThat(board?.pits?.get(0)).isSameAs(board?.pits?.get(13)?.nextPit)
-        var currentPit = board?.pits?.get(0)
+        assertThat(board.pits).isNotNull
+        assertThat(board.pits).hasSize(14)
+        assertThat(board.pits?.get(6)?.pitType).isEqualTo(PitType.LARGE)
+        assertThat(board.pits?.get(13)?.pitType).isEqualTo(PitType.LARGE)
+        assertThat(board.pits?.get(0)).isSameAs(board.pits?.get(13)?.nextPit)
+        var currentPit = board.pits?.get(0)
         assertThat(currentPit?.stones).isEqualTo(0)
         assertThat(currentPit?.player).isSameAs(user1)
         assertThat(currentPit?.pitType).isEqualTo(PitType.SMALL)

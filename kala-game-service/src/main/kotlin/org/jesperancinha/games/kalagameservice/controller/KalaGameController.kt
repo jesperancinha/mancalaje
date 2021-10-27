@@ -1,30 +1,22 @@
 package org.jesperancinha.games.kalagameservice.controller
 
-import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.bind.annotation.RequestMapping
-import org.jesperancinha.games.kalagameservice.service.GameService
-import org.jesperancinha.games.kalagameservice.service.BoardService
-import org.jesperancinha.games.kalagameservice.service.PlayerService
-import org.springframework.web.bind.annotation.PutMapping
-import kotlin.Throws
-import java.security.Principal
-import org.springframework.web.bind.annotation.GetMapping
 import org.jesperancinha.games.kalagameservice.dto.BoardDto
-import org.jesperancinha.games.kalagameservice.dto.converters.BoardConverter
-import org.springframework.web.bind.annotation.PostMapping
-import org.jesperancinha.games.kalagameservice.model.Player
-import org.jesperancinha.games.kalagameservice.model.Board
-import org.springframework.web.bind.annotation.PathVariable
-import org.jesperancinha.games.kalagameservice.model.Pit
 import org.jesperancinha.games.kalagameservice.exception.PitDoesNotExistException
 import org.jesperancinha.games.kalagameservice.exception.ZeroStonesToMoveException
-import java.util.function.Supplier
+import org.jesperancinha.games.kalagameservice.model.Pit
+import org.jesperancinha.games.kalagameservice.model.toDto
+import org.jesperancinha.games.kalagameservice.service.BoardService
+import org.jesperancinha.games.kalagameservice.service.GameService
+import org.jesperancinha.games.kalagameservice.service.PlayerService
+import org.springframework.web.bind.annotation.*
+import java.security.Principal
 
 @RestController
 @RequestMapping("api")
 class KalaGameController(
     private val gameService: GameService,
-    private val boardService: BoardService, private val playerService: PlayerService
+    private val boardService: BoardService,
+    private val playerService: PlayerService
 ) {
     @PutMapping("leave")
     @Throws(Throwable::class)
@@ -35,16 +27,14 @@ class KalaGameController(
     @GetMapping("current")
     @Throws(Throwable::class)
     fun getCurrentBoard(principal: Principal): BoardDto? {
-        return BoardConverter.toDto(
-            playerService.createOrFindPlayerByName(principal.name)?.currentBoard
-        )
+        return playerService.createOrFindPlayerByName(principal.name)?.currentBoard?.toDto
     }
 
     @PostMapping("create")
     fun createBoard(principal: Principal): BoardDto? {
         val player = playerService.createOrFindPlayerByName(principal.name)
         val newBoard = player?.let { gameService.createNewBoard(it) }
-        return BoardConverter.toDto(newBoard)
+        return newBoard?.toDto
     }
 
     @PutMapping("move/{boardId}/{pitId}")
@@ -56,12 +46,13 @@ class KalaGameController(
     ): BoardDto? {
         val player = playerService.createOrFindPlayerByName(principal.name)
         val board = boardService.findBoardById(boardId)
-        val startPit = board?.pits?.stream()?.filter { pit: Pit -> pit.id == pitId }?.findAny()?.orElseThrow { PitDoesNotExistException() }
+        val startPit = board?.pits?.stream()?.filter { pit: Pit -> pit.id == pitId }?.findAny()
+            ?.orElseThrow { PitDoesNotExistException() }
         if (startPit?.stones == 0) {
             throw ZeroStonesToMoveException()
         }
         val boardUpdated = startPit?.let { player?.let { it1 -> gameService.sowStonesFromPit(it1, it, board) } }
-        return BoardConverter.toDto(boardUpdated)
+        return boardUpdated?.toDto
     }
 
     @PutMapping("join/{boardId}")
@@ -73,7 +64,7 @@ class KalaGameController(
         val player = playerService.createOrFindPlayerByName(principal.name)
         val board = boardService.findBoardById(boardId)
         val boardUpdated = board?.let { player?.let { it1 -> gameService.joinPlayer(it1, it) } }
-        return BoardConverter.toDto(boardUpdated)
+        return boardUpdated?.toDto
     }
 
     @GetMapping

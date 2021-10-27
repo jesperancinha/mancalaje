@@ -24,6 +24,7 @@ open class SecurityPopulator(
     private val dataSource: DataSource
     private val passwordEncoder: PasswordEncoder
     private val jdbcUserDetailsManager: JdbcUserDetailsManager
+
     @Bean
     open fun runner(): CommandLineRunner {
         return CommandLineRunner { args: Array<String?>? ->

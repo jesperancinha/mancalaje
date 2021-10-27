@@ -14,6 +14,7 @@ import javax.sql.DataSource
 @Configuration
 open class SecurityConfiguration(dataSource: DataSource) {
     private val dataSource: DataSource
+
     @Bean
     open fun bCryptPasswordEncoder(): BCryptPasswordEncoder {
         return BCryptPasswordEncoder()

@@ -8,7 +8,8 @@ object PlayerConverter {
         return currentPlayer?.let {
             PlayerDto(
                 id = currentPlayer.id,
-                username = currentPlayer.username)
+                username = currentPlayer.username
+            )
         }
     }
 }

@@ -36,7 +36,6 @@
 [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/angular-50.png "Angular")](https://angular.io/)
 [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/react-50.png "React")](https://reactjs.org/)
 [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/typescript-50.png "Typescript")](https://www.typescriptlang.org/)
-[![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/openshift-50.png "Openshift")](https://www.openshift.com/)
 [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/minikube-50.png "Minikube")](https://github.com/kubernetes/minikube)
 [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/h2-50.png "H2")](https://www.h2database.com/)
 [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/apache-maven-50.png "Maven")](https://maven.apache.org/)
@@ -44,13 +43,15 @@
 
 ## Project status
 
-<i>Under construction</i>
+🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧 Under construction</i> 🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧
 
 ## Introduction for the introduction
 
 This game is a slight change from the typical Kalah game, where in this case I'll be using coffe mugs instead of stones. This way, more original will rules will be added. Stay tuned...
 
 ☕️
+
+To keep up with current changes, please have a look at the [Rules](./Rules.md) documentation.
 
 Note that the above will happen along with multiple other changes.
 Check out my [planning document](./Planning.md) to follow up with the running changes...
@@ -182,9 +183,8 @@ yarn workspaces run coverage
 The intention of version 2.0.0, is layed out for you in file [Planning](./Planning.md).
 Essentially the goal is to provide an efficient and running modified version of the original Kalah game.
 
-## References 📚
+## References
 
-### [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/openshift-50.png "Openshift")](https://www.openshift.com/) Openshift
 
 -   [OpenShift by Tutorials Point](https://www.tutorialspoint.com/openshift/index.htm)
 -   [Learn Open Shift](https://learn.openshift.com/)
@@ -192,9 +192,6 @@ Essentially the goal is to provide an efficient and running modified version of 
 -   [Minishif Installation](https://docs.okd.io/latest/minishift/getting-started/installing.html)
 -   [Fabric 8 maven plugin](https://github.com/fabric8io/fabric8-maven-plugin)
 -   [Fabric 8](Fabric 8 maven plugin)
-
-### [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-50/minikube-50.png "Minikube")](https://github.com/kubernetes/minikube) Minikube
-
 -   [What is minikube, kubectl and kubelet by Andreth Salazar](https://www.quora.com/What-is-minikube-kubectl-and-kubelet)
 -   [Install Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
 -   [Installing Kubernetes with Minikube](https://kubernetes.io/docs/setup/learning-environment/minikube/)
@@ -204,15 +201,9 @@ Essentially the goal is to provide an efficient and running modified version of 
 -   [Shields IO](https://shields.io)
 -   [How To Install Oracle Java 8 and OpenJDK 11 on Ubuntu 18.04, 19.04](https://www.linuxbabe.com/ubuntu/install-oracle-java-8-openjdk-11-ubuntu-18-04-18-10)
 -   [Build and Deploy a Spring Boot App on Kubernetes (Minikube)](https://gorillalogic.com/blog/build-and-deploy-a-spring-boot-app-on-kubernetes-minikube/)
-
-### Implementation related
-
 -   [Apache MQ BrokerService](https://activemq.apache.org/maven/apidocs/org/apache/activemq/broker/BrokerService.html)
 -   [Apache MQ BrokerFactory](https://activemq.apache.org/maven/apidocs/org/apache/activemq/broker/BrokerFactory.html)
 -   [Apache MQ ActiveMQConnectionFactory](https://activemq.apache.org/maven/apidocs/org/apache/activemq/ActiveMQConnectionFactory.html)
-
-### Environment related
-
 -   [Using Meslo LG with the Windows Console](https://github.com/andreberg/Meslo-Font/wiki/Using-Meslo-LG-with-the-Windows-Console)
 -   [Install iTerm2 with Solarized in 2017](https://gist.github.com/ZenLulz/c812f70fc86ebdbb189d9fb82f98197e)
 -   [Oh My Zsh will not make you a 10x developer...but you may feel like one](https://github.com/ohmyzsh/ohmyzsh/)

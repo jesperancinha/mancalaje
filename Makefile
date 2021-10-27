@@ -36,4 +36,5 @@ prune-all: stop
 	docker system prune --all --volumes
 stop:
 	docker-compose down --remove-orphans
-
+minikube-vmware:
+	minikube start --driver=vmware

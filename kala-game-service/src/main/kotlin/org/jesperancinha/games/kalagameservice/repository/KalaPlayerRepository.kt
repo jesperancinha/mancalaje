@@ -4,5 +4,5 @@ import org.jesperancinha.games.kalagameservice.model.Player
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface KalaPlayerRepository : JpaRepository<Player?, Long?> {
-    fun findPlayerByUsernameEquals(username: String?): Player?
+    fun findPlayerByUsernameEquals(username: String): Player
 }

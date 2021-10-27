@@ -1,14 +1,6 @@
 package org.jesperancinha.games.kalagameservice.controller;
 
-import org.jesperancinha.games.kalagameservice.exception.BoardDoesNotExistException
-import org.jesperancinha.games.kalagameservice.exception.GameOverException
-import org.jesperancinha.games.kalagameservice.exception.InvalidPitException
-import org.jesperancinha.games.kalagameservice.exception.KalahErrorCode
-import org.jesperancinha.games.kalagameservice.exception.NotOwnedPitException
-import org.jesperancinha.games.kalagameservice.exception.PitDoesNotExistException
-import org.jesperancinha.games.kalagameservice.exception.PlayerNotJoinedYetException
-import org.jesperancinha.games.kalagameservice.exception.WrongTurnException
-import org.jesperancinha.games.kalagameservice.exception.ZeroStonesToMoveException
+import org.jesperancinha.games.kalagameservice.exception.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice

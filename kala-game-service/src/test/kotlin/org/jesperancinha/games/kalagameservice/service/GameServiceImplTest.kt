@@ -1,6 +1,5 @@
 package org.jesperancinha.games.kalagameservice.service
 
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.jesperancinha.games.kalagameservice.model.Board
 import org.jesperancinha.games.kalagameservice.model.Pit
@@ -21,7 +20,7 @@ import org.mockito.junit.jupiter.MockitoExtension
 @ExtendWith(MockitoExtension::class)
 internal class GameServiceImplTest {
     @InjectMocks
-    private val gameService: GameServiceImpl? = null
+    private val gameService: GameService? = null
 
     @Mock
     private val pitRepository: KalaPitRepository? = null
