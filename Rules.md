@@ -8,6 +8,7 @@ The main goal of this implementation is to illustrate a couple of aspects of Sof
 3. Spring Reactive
 4. Spring Cache
 5. Hazelcast (maybe)
+6. Use case for AOP's
 
 ## How to play
 

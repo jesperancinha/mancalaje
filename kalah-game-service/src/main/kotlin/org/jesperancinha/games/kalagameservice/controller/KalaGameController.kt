@@ -2,22 +2,21 @@ package org.jesperancinha.games.kalagameservice.controller
 
 import org.jesperancinha.games.kalagameservice.dto.BoardDto
 import org.jesperancinha.games.kalagameservice.exception.PitDoesNotExistException
-import org.jesperancinha.games.kalagameservice.exception.ZeroStonesToMoveException
 import org.jesperancinha.games.kalagameservice.model.KalahTable
 import org.jesperancinha.games.kalagameservice.model.KalahWasher
 import org.jesperancinha.games.kalagameservice.model.toDto
-import org.jesperancinha.games.kalagameservice.service.BoardService
-import org.jesperancinha.games.kalagameservice.service.GameService
-import org.jesperancinha.games.kalagameservice.service.PlayerService
+import org.jesperancinha.games.kalagameservice.service.KalahBoardService
+import org.jesperancinha.games.kalagameservice.service.KalahGameService
+import org.jesperancinha.games.kalagameservice.service.KalahPlayerService
 import org.springframework.web.bind.annotation.*
 import java.security.Principal
 
 @RestController
 @RequestMapping("api")
 class KalaGameController(
-    private val gameService: GameService,
-    private val boardService: BoardService,
-    private val playerService: PlayerService
+    private val gameService: KalahGameService,
+    private val boardService: KalahBoardService,
+    private val playerService: KalahPlayerService
 ) {
     @PutMapping("leave")
     @Throws(Throwable::class)

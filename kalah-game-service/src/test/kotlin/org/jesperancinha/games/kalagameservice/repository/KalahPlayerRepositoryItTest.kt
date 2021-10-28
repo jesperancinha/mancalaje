@@ -3,7 +3,7 @@ package org.jesperancinha.games.kalagameservice.repository
 import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.nulls.shouldNotBeNull
 import org.jesperancinha.games.kalagameservice.model.Player
-import org.jesperancinha.games.kalagameservice.service.GameService
+import org.jesperancinha.games.kalagameservice.service.KalahGameService
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -16,7 +16,7 @@ internal class KalahPlayerRepositoryItTest(
     private val kalahPlayerRepository: KalahPlayerRepository
 ) {
     @Autowired
-    private val gameService: GameService? = null
+    private val gameService: KalahGameService? = null
 
     @Test
     fun testFindBoardByPlayerOneUsername_whenSearchUserName_thenFindOneBoard() {

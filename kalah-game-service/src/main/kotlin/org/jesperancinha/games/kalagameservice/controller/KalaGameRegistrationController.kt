@@ -1,6 +1,6 @@
 package org.jesperancinha.games.kalagameservice.controller
 
-import org.jesperancinha.games.kalagameservice.service.PlayerService
+import org.jesperancinha.games.kalagameservice.service.KalahPlayerService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -9,7 +9,7 @@ import java.security.Principal
 
 @RestController
 @RequestMapping("log")
-class KalaGameRegistrationController(private val playerService: PlayerService) {
+class KalaGameRegistrationController(private val playerService: KalahPlayerService) {
     @PostMapping("/")
     fun createPlayer(principal: Principal) {
         playerService.createPlayer(principal.name)

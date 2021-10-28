@@ -17,7 +17,7 @@ import java.util.*
 import java.util.function.Consumer
 
 @Service
-class GameService(
+class KalahGameService(
     private val tableRepository: KalahTableRepository,
     private val boardRepository: KalahBoardRepository,
     private val kalahWasherRepository: KalahWasherRepository,

@@ -4,7 +4,6 @@ import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.collections.shouldNotBeEmpty
 import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.nulls.shouldNotBeNull
-import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeSameInstanceAs
 import org.jesperancinha.games.kalagameservice.model.Player
 import org.jesperancinha.games.kalagameservice.repository.KalahPlayerRepository
@@ -18,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 internal class GameServiceTest(
     @Autowired
-    val gameService: GameService,
+    val gameService: KalahGameService,
     @Autowired
     val playerRepository: KalahPlayerRepository
 ) {

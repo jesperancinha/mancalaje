@@ -40,7 +40,7 @@
         <springmockk.version>3.0.1</springmockk.version>
         <kotest.version>5.0.0.M3</kotest.version>
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
-        <spring-boot-maven-plugin.version>2.5.6</spring-boot-maven-plugin.version>
+        <spring-boot.version>2.5.6</spring-boot.version>
     </properties>
 
     <modules>
@@ -49,6 +49,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>

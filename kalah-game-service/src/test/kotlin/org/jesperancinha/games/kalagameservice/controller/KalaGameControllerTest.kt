@@ -15,9 +15,9 @@ import org.jesperancinha.games.kalagameservice.repository.KalahCupRepository
 import org.jesperancinha.games.kalagameservice.repository.KalahPlayerRepository
 import org.jesperancinha.games.kalagameservice.repository.KalahTableRepository
 import org.jesperancinha.games.kalagameservice.repository.KalahWasherRepository
-import org.jesperancinha.games.kalagameservice.service.BoardService
-import org.jesperancinha.games.kalagameservice.service.GameService
-import org.jesperancinha.games.kalagameservice.service.PlayerService
+import org.jesperancinha.games.kalagameservice.service.KalahBoardService
+import org.jesperancinha.games.kalagameservice.service.KalahGameService
+import org.jesperancinha.games.kalagameservice.service.KalahPlayerService
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -35,13 +35,13 @@ class KalaGameControllerTest(
     private val mockMvc: MockMvc
 ) {
     @MockkBean(relaxed = true)
-    private lateinit var gameService: GameService
+    private lateinit var gameService: KalahGameService
 
     @MockkBean(relaxed = true)
-    private lateinit var boardService: BoardService
+    private lateinit var boardService: KalahBoardService
 
     @MockkBean(relaxed = true)
-    private lateinit var playerService: PlayerService
+    private lateinit var playerService: KalahPlayerService
 
     @MockkBean(relaxed = true)
     private lateinit var jdbcUserDetailsManager: JdbcUserDetailsManager
