@@ -2,13 +2,17 @@ package org.jesperancinha.kalah.controller
 
 import org.jesperancinha.kalah.dto.BoardDto
 import org.jesperancinha.kalah.exception.PitDoesNotExistException
-import org.jesperancinha.kalah.model.KalahTable
 import org.jesperancinha.kalah.model.KalahWasher
 import org.jesperancinha.kalah.model.toDto
 import org.jesperancinha.kalah.service.KalahBoardService
 import org.jesperancinha.kalah.service.KalahGameService
 import org.jesperancinha.kalah.service.KalahPlayerService
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 import java.security.Principal
 
 @RestController
@@ -43,12 +47,13 @@ class KalaGameController(
     ): BoardDto? {
         val player = playerService.createOrFindPlayerByName(principal.name)
         val board = boardService.findBoardById(boardId)
-        val startPit = board?.kalahWashers?.stream()?.filter { kalahWasher: KalahWasher -> kalahWasher.id == pitId }?.findAny()
-            ?.orElseThrow { PitDoesNotExistException() }
+        val startPit =
+            board?.kalahWashers?.stream()?.filter { kalahWasher: KalahWasher -> kalahWasher.id == pitId }?.findAny()
+                ?.orElseThrow { PitDoesNotExistException() }
 //        if (startPit?.stones == 0) {
 //            throw ZeroStonesToMoveException()
 //        }
-        val boardUpdated = startPit?.let { player?.let { it1 -> gameService.sowStonesFromPit(it1, it as KalahTable, board) } }
+        val boardUpdated = startPit?.let { player?.let { it1 -> gameService.sowCupsFromWasher(it1, it, board) } }
         return boardUpdated?.toDto
     }
 

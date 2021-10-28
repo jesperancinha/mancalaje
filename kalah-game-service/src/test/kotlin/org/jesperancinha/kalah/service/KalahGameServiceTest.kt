@@ -50,7 +50,11 @@ internal class KalahGameServiceTest(
     }
 
     @Test
-    fun sowStonesFromPit() {
+    fun `should rollout cups on the first move and the first washer`() {
+        val player = playerRepository.save(Player(username = "joao"))
+        val gameBoard = gameService.createNewBoard(player = player)
+
+//        gameService.sowCupsFromWasher()
     }
 
     @Test

@@ -5,6 +5,7 @@ import org.jesperancinha.kalah.exception.NotOwnedPitException
 import org.jesperancinha.kalah.exception.PlayerNotJoinedYetException
 import org.jesperancinha.kalah.exception.WrongTurnException
 import org.jesperancinha.kalah.model.KalahBoard
+import org.jesperancinha.kalah.model.KalahCup
 import org.jesperancinha.kalah.model.KalahTable
 import org.jesperancinha.kalah.model.KalahWasher
 import org.jesperancinha.kalah.model.Player
@@ -65,7 +66,7 @@ class KalahGameService(
         return lastKalahWasher
     }
 
-    fun sowStonesFromPit(player: Player, kalahWasher: KalahTable?, kalahBoard: KalahBoard): KalahBoard {
+    fun sowCupsFromWasher(player: Player, kalahWasher: KalahWasher?, kalahBoard: KalahBoard): KalahBoard {
         if (Objects.isNull(kalahBoard.playerTwo)) {
             throw PlayerNotJoinedYetException()
         }
@@ -78,42 +79,80 @@ class KalahGameService(
         if (player.username != kalahBoard.currentPlayer?.username) {
             throw WrongTurnException()
         }
-//        var stones = kalahWasher?.stones ?: 0
-//        kalahWasher?.stones = 0
-        var currentPit = kalahWasher?.nextKalahWasher
-//        while (stones >= 0) {
-//            currentPit?.stones = (currentPit?.stones ?: 0) + 1
-//            stones--
-//            if (stones == 0) {
-//                if (currentPit?.player?.username == player.username) {
-//                    if (currentPit?.washerType == WasherType.LARGE) {
-//                        kalahBoard?.kalahWashers?.forEach(Consumer { s: KalahWasher -> pitRepository.save(s) })
-//                        return kalahBoard
-//                    }
-//                    val total = (currentPit?.stones ?: 0) + (currentPit?.oppositeKalahWasher?.stones ?: 0)
-//                    currentPit?.stones = 0
-//                    currentPit?.oppositeKalahWasher?.stones = 0
-//                    if (player.username == kalahBoard?.playerOne?.username) {
-//                        kalahBoard?.kalahOne?.stones = (kalahBoard?.kalahOne?.stones ?: 0) + total
-//                    } else if (player.username == kalahBoard?.playerTwo?.username) {
-//                        kalahBoard?.kalahTwo?.stones = (kalahBoard?.kalahOne?.stones ?: 0) + total
-//                    }
-//                    checkWinner(kalahBoard)
-//                    kalahBoard?.kalahWashers?.forEach(Consumer { s: KalahWasher -> pitRepository.save(s) })
-//                    return kalahBoard
-//                }
-//                break
-//            }
-//            currentPit = currentPit?.nextKalahWasher
-//            if (currentPit?.washerType == WasherType.LARGE && currentPit.player?.username != player.username) {
-//                currentPit = currentPit.nextKalahWasher
-//            }
-//        }
+
+        val cups = kalahWasher.cups
+        kalahWasher.cups = null
+        kalahWasherService.update(kalahWasher)
+        sowCupsFromWasher(cups, kalahWasher, { it.nextKalahWasher?.cups }, { it.nextKalahTable?.cups })
+
         kalahBoard.currentPlayer = player.opponent
         kalahBoard.kalahWashers?.forEach(Consumer { kw: KalahWasher -> kalahWasherService.create(kw) })
         checkWinner(kalahBoard)
         return boardRepository.save(kalahBoard)
     }
+
+    private fun sowCupsFromWasher(
+        cups: MutableList<KalahCup>?,
+        kalahWasher: KalahWasher,
+        washerCups: (KalahWasher) -> MutableList<KalahCup>?,
+        tableCups: (KalahWasher) -> MutableList<KalahCup>?,
+    ) {
+        cups?.let { cupsIt ->
+            kalahWasher.nextKalahWasher?.let { nextKalahWasher ->
+                washerCups(kalahWasher)?.add(cupsIt[0])
+                if (cupsIt.size > 0) {
+                    sowCupsFromWasher(
+                        cupsIt.subList(1, cupsIt.size),
+                        nextKalahWasher,
+                        washerCups,
+                        tableCups
+                    )
+                } else {
+
+                }
+
+            } ?: {
+                tableCups(kalahWasher)?.add(cupsIt[0])
+                if (cupsIt.size > 0) {
+                    sowCupsFromTable(
+                        cupsIt.subList(1, cupsIt.size),
+                        kalahWasher.nextKalahTable,
+                        washerCups,
+                        tableCups
+                    )
+                } else {
+
+                }
+            }
+
+        }
+    }
+
+
+    private fun sowCupsFromTable(
+        cups: MutableList<KalahCup>?,
+        kalahTable: KalahTable?,
+        washerCups: (KalahWasher) -> MutableList<KalahCup>?,
+        tableCups: (KalahWasher) -> MutableList<KalahCup>?,
+    ) {
+        cups?.let { cupsIt ->
+            kalahTable?.nextKalahWasher?.let { nextKalahWasher ->
+                kalahTable.nextKalahWasher?.cups?.add(cupsIt[0])
+                if (cupsIt.size > 0) {
+                    sowCupsFromWasher(
+                        cupsIt.subList(1, cupsIt.size),
+                        nextKalahWasher,
+                        washerCups,
+                        tableCups
+                    )
+                } else {
+
+                }
+
+            }
+        }
+    }
+
 
     private fun checkWinner(kalahBoard: KalahBoard?) {
         if (kalahBoard?.kalahWasherOne?.let { isWinner(it) } == true) {

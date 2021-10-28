@@ -93,7 +93,7 @@ class KalaGameControllerTest(
 //        kalahWasher.stones = 10
         kalahBoard.kalahWashers = listOf(kalahWasher)
         every { boardService.findBoardById(1L) } returns kalahBoard
-        every { gameService.sowStonesFromPit(any(), any(), any()) } throws PlayerNotJoinedYetException()
+        every { gameService.sowCupsFromWasher(any(), any(), any()) } throws PlayerNotJoinedYetException()
         mockMvc.perform(MockMvcRequestBuilders.put("/api/move/1/1"))
             .andExpect(MockMvcResultMatchers.status().isNotFound)
             .andExpect(MockMvcResultMatchers.content().string("NOT_JOINED"))
