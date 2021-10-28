@@ -23,41 +23,45 @@ class KalahGameService(
     private val playerRepository: KalahPlayerRepository,
 ) {
     fun createNewBoard(player: Player): KalahBoard {
-        val kalahBoard = KalahBoard(owner = player)
-        val kalahWashers = mutableListOf<KalahWasher>()
-        kalahBoard.kalahWashers = kalahWashers
-        val kalahTable = KalahTable()
-        val lastWasher = generateHalfBoard(kalahBoard, kalahWashers, kalahTable)
-        val kalahTable2 = KalahTable()
-        lastWasher.nextKalahTable = kalahTable2
-        val lastWasher2 = generateHalfBoard(kalahBoard, kalahWashers, kalahTable2)
-        lastWasher2.nextKalahTable = kalahTable
-        kalahWashers.forEach { kalahWasher: KalahWasher -> kalahWasherService.create(kalahWasher) }
-        kalahBoard.kalahOne = kalahTable
-        kalahBoard.kalahTwo = kalahTable2
-        val registeredBoard = boardRepository.save(kalahBoard)
+        val registeredBoard = createKalahBoard(player)
         player.kalahBoard = registeredBoard
         playerRepository.save(player)
         return registeredBoard
     }
 
+    private fun createKalahBoard(player: Player): KalahBoard {
+        val kalahBoard = KalahBoard(owner = player)
+        val kalahWashers = mutableListOf<KalahWasher>()
+        kalahBoard.kalahWashers = kalahWashers
+        val kalahTable = KalahTable()
+        val lastWasher = generateHalfBoard(kalahWashers, kalahTable) { kalahBoard.kalahWasherOne = it }
+        val kalahTable2 = KalahTable()
+        lastWasher.nextKalahTable = kalahTable2
+        val lastWasher2 = generateHalfBoard(kalahWashers, kalahTable2) { kalahBoard.kalahWasherOne = it }
+        lastWasher2.nextKalahTable = kalahTable
+        kalahWashers.forEach { kalahWasher: KalahWasher -> kalahWasherService.create(kalahWasher) }
+        kalahBoard.kalahOne = kalahTable
+        kalahBoard.kalahTwo = kalahTable2
+        return boardRepository.save(kalahBoard)
+    }
+
     private fun generateHalfBoard(
-        kalahBoard: KalahBoard,
         kalahWashers: MutableList<KalahWasher>,
-        kalahTable: KalahTable
+        kalahTable: KalahTable,
+        pivotTo: (KalahWasher) -> Unit,
     ): KalahWasher {
         tableRepository.save(kalahTable)
         var lastKalahWasher = KalahWasher()
         kalahTable.nextKalahWasher = lastKalahWasher
-        kalahBoard.kalahWasherOne = lastKalahWasher
-        for (i in 0..5) {
+        pivotTo(lastKalahWasher)
+        kalahWashers.add(lastKalahWasher)
+        repeat(5) {
             val kalahWasher = KalahWasher()
             lastKalahWasher.nextKalahWasher = kalahWasher
             kalahWashers.add(lastKalahWasher)
             lastKalahWasher = kalahWasher
             lastKalahWasher = kalahWasherService.create(lastKalahWasher)
         }
-
         return lastKalahWasher
     }
 
