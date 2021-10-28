@@ -2,7 +2,6 @@ package org.jesperancinha.games.kalagameservice.repository
 
 import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.nulls.shouldNotBeNull
-import org.assertj.core.api.Assertions.assertThat
 import org.jesperancinha.games.kalagameservice.model.Player
 import org.jesperancinha.games.kalagameservice.service.GameService
 import org.junit.jupiter.api.Test
@@ -12,9 +11,9 @@ import javax.transaction.Transactional
 
 @SpringBootTest
 @Transactional
-internal class KalaPlayerRepositoryItTest(
+internal class KalahPlayerRepositoryItTest(
     @Autowired
-    private val kalaPlayerRepository: KalaPlayerRepository
+    private val kalahPlayerRepository: KalahPlayerRepository
 ) {
     @Autowired
     private val gameService: GameService? = null
@@ -24,9 +23,9 @@ internal class KalaPlayerRepositoryItTest(
         var user1 = Player(
             username = "user1"
         )
-        user1 = kalaPlayerRepository.save(user1)
+        user1 = kalahPlayerRepository.save(user1)
         gameService!!.createNewBoard(user1)
-        val playerOptional = user1.id?.let { kalaPlayerRepository.findById(it) }
+        val playerOptional = user1.id?.let { kalahPlayerRepository.findById(it) }
         playerOptional?.apply {
             isPresent.shouldBeTrue()
             get().shouldNotBeNull()

@@ -1,5 +1,6 @@
 package org.jesperancinha.games.kalagameservice.model
 
+import org.springframework.data.annotation.Version
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -23,5 +24,8 @@ data class KalahCup(
     var washer: KalahWasher? = null,
 
     @OneToOne
-    var table: KalahTable? = null
+    var table: KalahTable? = null,
+
+    @Version
+    internal var version: Int
 )

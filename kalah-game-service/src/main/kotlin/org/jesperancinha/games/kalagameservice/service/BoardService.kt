@@ -5,12 +5,12 @@ import org.jesperancinha.games.kalagameservice.exception.BoardDoesNotExistExcept
 import org.jesperancinha.games.kalagameservice.model.KalahBoard
 import org.jesperancinha.games.kalagameservice.model.Player
 import org.jesperancinha.games.kalagameservice.model.toDto
-import org.jesperancinha.games.kalagameservice.repository.KalaBoardRepository
+import org.jesperancinha.games.kalagameservice.repository.KalahBoardRepository
 import org.springframework.stereotype.Service
 import java.util.stream.Collectors
 
 @Service
-class BoardService(private val boardRepository: KalaBoardRepository) {
+class BoardService(private val boardRepository: KalahBoardRepository) {
     fun findBoardById(id: Long): KalahBoard? {
         return boardRepository.findById(id).orElseThrow { BoardDoesNotExistException() }
     }

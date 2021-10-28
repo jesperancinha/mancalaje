@@ -8,18 +8,18 @@ import org.jesperancinha.games.kalagameservice.model.KalahBoard
 import org.jesperancinha.games.kalagameservice.model.KalahTable
 import org.jesperancinha.games.kalagameservice.model.KalahWasher
 import org.jesperancinha.games.kalagameservice.model.Player
-import org.jesperancinha.games.kalagameservice.repository.KalaBoardRepository
-import org.jesperancinha.games.kalagameservice.repository.KalaPitRepository
-import org.jesperancinha.games.kalagameservice.repository.KalaPlayerRepository
+import org.jesperancinha.games.kalagameservice.repository.KalahBoardRepository
+import org.jesperancinha.games.kalagameservice.repository.KalahWasherRepository
+import org.jesperancinha.games.kalagameservice.repository.KalahPlayerRepository
 import org.springframework.stereotype.Service
 import java.util.*
 import java.util.function.Consumer
 
 @Service
 class GameService(
-    private val boardRepository: KalaBoardRepository,
-    private val pitRepository: KalaPitRepository,
-    private val playerRepository: KalaPlayerRepository,
+    private val boardRepository: KalahBoardRepository,
+    private val pitRepository: KalahWasherRepository,
+    private val playerRepository: KalahPlayerRepository,
 ) {
     fun createNewBoard(player: Player): KalahBoard {
         val kalahBoard = KalahBoard(playerOne = player)

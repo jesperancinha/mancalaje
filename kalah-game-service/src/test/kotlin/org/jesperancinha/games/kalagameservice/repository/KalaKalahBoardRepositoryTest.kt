@@ -16,25 +16,25 @@ import java.util.UUID.randomUUID
 @Transactional
 internal class KalaKalahBoardRepositoryTest(
     @Autowired
-    private val kalaPitRepository: KalaPitRepository,
+    private val kalahWasherRepository: KalahWasherRepository,
 
     @Autowired
-    private val kalaBoardRepository: KalaBoardRepository,
+    private val kalahBoardRepository: KalahBoardRepository,
 
     @Autowired
-    private val kalaPlayerRepository: KalaPlayerRepository
+    private val kalahPlayerRepository: KalahPlayerRepository
 ) {
-    val player1 = kalaPlayerRepository.save(
+    val player1 = kalahPlayerRepository.save(
         Player(
             username = "player1${randomUUID()}"
         )
     )
-    val player2 = kalaPlayerRepository.save(
+    val player2 = kalahPlayerRepository.save(
         Player(
             username = "player2${java.util.UUID.randomUUID()}"
         )
     )
-    val player3 = kalaPlayerRepository.save(
+    val player3 = kalahPlayerRepository.save(
         Player(
             username = "player3${java.util.UUID.randomUUID()}"
         )
@@ -43,32 +43,32 @@ internal class KalaKalahBoardRepositoryTest(
     @BeforeEach
     fun setUp() {
         val kalahWasherOne = KalahWasher()
-        kalaPitRepository.save(kalahWasherOne)
+        kalahWasherRepository.save(kalahWasherOne)
         val kalahBoardPlayerOne = KalahBoard(playerOne = player1, kalahWasherOne = kalahWasherOne)
         val kalahBoardPlayerTwo = KalahBoard(playerOne = player2, kalahWasherOne = kalahWasherOne)
         val kalahBoardPlayerThree = KalahBoard(playerOne = player3, playerTwo = player2, kalahWasherOne = kalahWasherOne)
-        kalaBoardRepository.save(kalahBoardPlayerOne)
-        kalaBoardRepository.save(kalahBoardPlayerTwo)
-        kalaBoardRepository.save(kalahBoardPlayerThree)
+        kalahBoardRepository.save(kalahBoardPlayerOne)
+        kalahBoardRepository.save(kalahBoardPlayerTwo)
+        kalahBoardRepository.save(kalahBoardPlayerThree)
     }
 
     @Test
     fun testFindBoardsByPlayerOneEquals_whenPlayerOne_thenShowPlayerOneBoards() {
-        val boardsByPlayerOneEquals = kalaBoardRepository.findBoardsByPlayerOneEquals(player1)
+        val boardsByPlayerOneEquals = kalahBoardRepository.findBoardsByPlayerOneEquals(player1)
         boardsByPlayerOneEquals.shouldHaveSize(1)
         boardsByPlayerOneEquals[0]?.playerOne?.username shouldBe player1.username
     }
 
     @Test
     fun testFindBoardsByPlayerOneEquals_whenPlayerThree_thenShowPlayerThreeBoards() {
-        val boardsByPlayerOneEquals = kalaBoardRepository.findBoardsByPlayerOneEquals(player3)
+        val boardsByPlayerOneEquals = kalahBoardRepository.findBoardsByPlayerOneEquals(player3)
         boardsByPlayerOneEquals.shouldHaveSize(1)
         boardsByPlayerOneEquals[0]?.playerOne?.username shouldBe player3.username
     }
 
     @Test
     fun findBoardsByPlayerTwoIsNull_whenCalled_thenShowAllBoards() {
-        val boardsByPlayerTwoIsNull = kalaBoardRepository.findBoardsByPlayerTwoIsNull()
+        val boardsByPlayerTwoIsNull = kalahBoardRepository.findBoardsByPlayerTwoIsNull()
         boardsByPlayerTwoIsNull.shouldHaveSize(2)
         boardsByPlayerTwoIsNull[0]?.playerOne?.username shouldBe player1.username
         boardsByPlayerTwoIsNull[1]?.playerOne?.username shouldBe player2.username

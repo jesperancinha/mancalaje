@@ -2,6 +2,7 @@ package org.jesperancinha.games.kalagameservice.model
 
 import org.hibernate.Hibernate
 import org.jesperancinha.games.kalagameservice.dto.WasherDto
+import org.springframework.data.annotation.Version
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -29,6 +30,9 @@ data class KalahWasher(
 
     @OneToOne
     var player: Player? = null,
+
+    @Version
+    internal var version: Int? = null
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

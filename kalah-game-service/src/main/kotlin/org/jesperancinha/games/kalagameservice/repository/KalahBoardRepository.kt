@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.transaction.annotation.Transactional
 
 @Transactional
-interface KalaBoardRepository : JpaRepository<KalahBoard?, Long?> {
+interface KalahBoardRepository : JpaRepository<KalahBoard?, Long?> {
     fun findBoardsByPlayerOneEquals(player: Player?): List<KalahBoard?>
     fun findBoardsByPlayerTwoIsNull(): List<KalahBoard?>
 }

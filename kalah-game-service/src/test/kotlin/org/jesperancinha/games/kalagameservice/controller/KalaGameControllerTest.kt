@@ -8,11 +8,13 @@ import io.mockk.verify
 import org.jesperancinha.games.kalagameservice.dto.BoardDto
 import org.jesperancinha.games.kalagameservice.exception.PlayerNotJoinedYetException
 import org.jesperancinha.games.kalagameservice.model.KalahBoard
+import org.jesperancinha.games.kalagameservice.model.KalahCup
 import org.jesperancinha.games.kalagameservice.model.KalahWasher
 import org.jesperancinha.games.kalagameservice.model.Player
-import org.jesperancinha.games.kalagameservice.repository.KalaBoardRepository
-import org.jesperancinha.games.kalagameservice.repository.KalaPitRepository
-import org.jesperancinha.games.kalagameservice.repository.KalaPlayerRepository
+import org.jesperancinha.games.kalagameservice.repository.KalahBoardRepository
+import org.jesperancinha.games.kalagameservice.repository.KalahCupRepository
+import org.jesperancinha.games.kalagameservice.repository.KalahWasherRepository
+import org.jesperancinha.games.kalagameservice.repository.KalahPlayerRepository
 import org.jesperancinha.games.kalagameservice.service.BoardService
 import org.jesperancinha.games.kalagameservice.service.GameService
 import org.jesperancinha.games.kalagameservice.service.PlayerService
@@ -32,7 +34,8 @@ import javax.sql.DataSource
 @MockkBean(
     classes = [
         DataSource::class, JdbcUserDetailsManager::class, PasswordEncoder::class,
-        KalaPlayerRepository::class, KalaPitRepository::class, KalaBoardRepository::class]
+        KalahPlayerRepository::class, KalahWasherRepository::class, KalahBoardRepository::class,
+    KalahCupRepository::class]
 )
 internal class KalaGameControllerTest(
     @Autowired

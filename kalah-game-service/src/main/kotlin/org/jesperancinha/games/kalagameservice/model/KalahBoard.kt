@@ -2,6 +2,7 @@ package org.jesperancinha.games.kalagameservice.model
 
 import org.hibernate.Hibernate
 import org.jesperancinha.games.kalagameservice.dto.BoardDto
+import org.springframework.data.annotation.Version
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -42,7 +43,10 @@ data class KalahBoard(
     internal var currentPlayer: Player? = null,
 
     @OneToOne
-    internal var winner: Player? = null
+    internal var winner: Player? = null,
+
+    @Version
+    internal var version: Int?=null
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
