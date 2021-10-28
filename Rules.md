@@ -27,3 +27,10 @@ Rules:
 11. Cups in the display cannot be moved.
 12. If cups fall into an empty washer belonging to the current player, then the player can pick up the cups on the washer of the opponents side, take them and put them on the display without coffee.
 13. Game ends when no more cups are available in the washers
+
+## Management Rule
+
+1. The user who created the board has to give permission to other players if they want to play in that board.
+2. The user who created does not need permission to join a game.
+3. The user who created the game can interrupt or delete the game at any time without warning to the players
+4. Once a user joins a game, they need to way for just one more to join in.
