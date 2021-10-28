@@ -13,6 +13,7 @@ import org.jesperancinha.games.kalagameservice.model.Player
 import org.jesperancinha.games.kalagameservice.repository.KalahBoardRepository
 import org.jesperancinha.games.kalagameservice.repository.KalahCupRepository
 import org.jesperancinha.games.kalagameservice.repository.KalahPlayerRepository
+import org.jesperancinha.games.kalagameservice.repository.KalahTableRepository
 import org.jesperancinha.games.kalagameservice.repository.KalahWasherRepository
 import org.jesperancinha.games.kalagameservice.service.BoardService
 import org.jesperancinha.games.kalagameservice.service.GameService
@@ -27,16 +28,9 @@ import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
-import javax.sql.DataSource
 
 @WebMvcTest(controllers = [KalaGameController::class])
-@MockkBean(
-    classes = [
-        DataSource::class, JdbcUserDetailsManager::class, PasswordEncoder::class,
-        KalahPlayerRepository::class, KalahWasherRepository::class, KalahBoardRepository::class,
-        KalahCupRepository::class]
-)
-internal class KalaGameControllerTest(
+class KalaGameControllerTest(
     @Autowired
     private val mockMvc: MockMvc
 ) {
@@ -48,6 +42,27 @@ internal class KalaGameControllerTest(
 
     @MockkBean(relaxed = true)
     private lateinit var playerService: PlayerService
+
+    @MockkBean(relaxed = true)
+    private lateinit var jdbcUserDetailsManager: JdbcUserDetailsManager
+
+    @MockkBean(relaxed = true)
+    private lateinit var passwordEncoder: PasswordEncoder
+
+    @MockkBean(relaxed = true)
+    private lateinit var kalahWasherRepository: KalahWasherRepository
+
+    @MockkBean(relaxed = true)
+    private lateinit var kalahTableRepository: KalahTableRepository
+
+    @MockkBean(relaxed = true)
+    private lateinit var kalahBoardRepository: KalahBoardRepository
+
+    @MockkBean(relaxed = true)
+    private lateinit var kalahCupRepository: KalahCupRepository
+
+    @MockkBean(relaxed = true)
+    private lateinit var kalahPlayerRepository: KalahPlayerRepository
 
     private val objectMapper = ObjectMapper()
 
