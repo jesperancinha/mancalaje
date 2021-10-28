@@ -1,16 +1,21 @@
 package org.jesperancinha.games.kalagameservice.service
 
+import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.collections.shouldNotBeEmpty
+import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.nulls.shouldNotBeNull
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.types.shouldBeSameInstanceAs
 import org.jesperancinha.games.kalagameservice.model.Player
 import org.jesperancinha.games.kalagameservice.repository.KalahPlayerRepository
 import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
+import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
+@Transactional
 internal class GameServiceTest(
     @Autowired
     val gameService: GameService,
@@ -19,11 +24,24 @@ internal class GameServiceTest(
 ) {
 
     @Test
-    fun createNewBoard() {
-        val player = playerRepository.save(Player())
-        val createNewBoard = gameService.createNewBoard(player = player)
+    fun `should create a simple board everytime it gets called`() {
+        val player = playerRepository.save(Player(username = "joao"))
+        val gameBoard = gameService.createNewBoard(player = player)
 
-        createNewBoard.shouldNotBeNull()
+        gameBoard.kalahWashers.shouldNotBeNull()
+        gameBoard.kalahWashers.shouldNotBeEmpty()
+        gameBoard.kalahWashers?.shouldHaveSize(12)
+
+        gameBoard.currentPlayer.shouldBeNull()
+        gameBoard.playerOne.shouldBeNull()
+        gameBoard.playerTwo.shouldBeNull()
+        gameBoard.kalahOne.shouldNotBeNull()
+        gameBoard.kalahTwo.shouldNotBeNull()
+        gameBoard.owner shouldBeSameInstanceAs player
+        gameBoard.winner.shouldBeNull()
+        gameBoard.version.shouldBeNull()
+
+        gameBoard.shouldNotBeNull()
     }
 
     @Test

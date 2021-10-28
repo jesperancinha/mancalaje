@@ -19,7 +19,7 @@ data class Player(
     internal val id: Long? = null,
 
     @Column(unique = true)
-    internal val username: String? = null,
+    internal val username: String,
 
     @OneToOne
     internal var kalahBoard: KalahBoard? = null,

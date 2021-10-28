@@ -66,7 +66,7 @@ class KalaGameControllerTest(
 
     private val objectMapper = ObjectMapper()
 
-    private val kalahBoard = KalahBoard(owner = Player())
+    private val kalahBoard = KalahBoard(owner = Player(username = "Joao"))
 
     @Test
     @WithMockUser("player1")

@@ -9,9 +9,9 @@ import org.jesperancinha.games.kalagameservice.model.KalahTable
 import org.jesperancinha.games.kalagameservice.model.KalahWasher
 import org.jesperancinha.games.kalagameservice.model.Player
 import org.jesperancinha.games.kalagameservice.repository.KalahBoardRepository
-import org.jesperancinha.games.kalagameservice.repository.KalahWasherRepository
 import org.jesperancinha.games.kalagameservice.repository.KalahPlayerRepository
 import org.jesperancinha.games.kalagameservice.repository.KalahTableRepository
+import org.jesperancinha.games.kalagameservice.repository.KalahWasherRepository
 import org.springframework.stereotype.Service
 import java.util.*
 import java.util.function.Consumer
@@ -25,28 +25,26 @@ class GameService(
 ) {
     fun createNewBoard(player: Player): KalahBoard {
         val kalahBoard = KalahBoard(owner = player)
-        val kalahWashers = ArrayList<KalahWasher>()
+        val kalahWashers = mutableListOf<KalahWasher>()
         kalahBoard.kalahWashers = kalahWashers
         val kalahTable = KalahTable()
         val lastWasher = generateHalfBoard(kalahBoard, kalahWashers, kalahTable)
         val kalahTable2 = KalahTable()
         lastWasher.nextKalahTable = kalahTable2
-        val lastWasher2 =  generateHalfBoard(kalahBoard, kalahWashers, kalahTable2)
-        lastWasher2.nextKalahTable= kalahTable
-        kalahWashers.forEach(Consumer { s: KalahWasher -> kalahWasherRepository.save(s) })
-        kalahBoard.currentPlayer = player
-        kalahBoard.playerOne = player
+        val lastWasher2 = generateHalfBoard(kalahBoard, kalahWashers, kalahTable2)
+        lastWasher2.nextKalahTable = kalahTable
+        kalahWashers.forEach { s: KalahWasher -> kalahWasherRepository.save(s) }
         kalahBoard.kalahOne = kalahTable
         kalahBoard.kalahTwo = kalahTable2
         val registeredBoard = boardRepository.save(kalahBoard)
-        player.kalahBoard= kalahBoard
+        player.kalahBoard = registeredBoard
         playerRepository.save(player)
         return registeredBoard
     }
 
     private fun generateHalfBoard(
         kalahBoard: KalahBoard,
-        kalahWashers: ArrayList<KalahWasher>,
+        kalahWashers: MutableList<KalahWasher>,
         kalahTable: KalahTable
     ): KalahWasher {
         tableRepository.save(kalahTable)
@@ -54,7 +52,7 @@ class GameService(
         kalahTable.nextKalahWasher = lastKalahWasher
         lastKalahWasher = kalahWasherRepository.save(lastKalahWasher)
         kalahBoard.kalahWasherOne = lastKalahWasher
-
+        kalahWashers.add(lastKalahWasher)
         for (i in 0..4) {
             val kalahWasher = KalahWasher()
             lastKalahWasher.nextKalahWasher = kalahWasher

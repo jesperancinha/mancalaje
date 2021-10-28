@@ -8,7 +8,7 @@ import javax.transaction.Transactional
 
 @Service
 class PlayerService(private val playerRepository: KalahPlayerRepository) {
-    fun createPlayer(username: String?): Player {
+    fun createPlayer(username: String): Player {
         return playerRepository.save(
             Player(
                 username = username,
