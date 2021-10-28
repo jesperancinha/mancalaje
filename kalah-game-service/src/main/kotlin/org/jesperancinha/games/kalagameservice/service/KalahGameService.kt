@@ -11,7 +11,6 @@ import org.jesperancinha.games.kalagameservice.model.Player
 import org.jesperancinha.games.kalagameservice.repository.KalahBoardRepository
 import org.jesperancinha.games.kalagameservice.repository.KalahPlayerRepository
 import org.jesperancinha.games.kalagameservice.repository.KalahTableRepository
-import org.jesperancinha.games.kalagameservice.repository.KalahWasherRepository
 import org.springframework.stereotype.Service
 import java.util.*
 import java.util.function.Consumer
@@ -20,7 +19,7 @@ import java.util.function.Consumer
 class KalahGameService(
     private val tableRepository: KalahTableRepository,
     private val boardRepository: KalahBoardRepository,
-    private val kalahWasherRepository: KalahWasherRepository,
+    private val kalahWasherService: KalahWasherService,
     private val playerRepository: KalahPlayerRepository,
 ) {
     fun createNewBoard(player: Player): KalahBoard {
@@ -33,7 +32,7 @@ class KalahGameService(
         lastWasher.nextKalahTable = kalahTable2
         val lastWasher2 = generateHalfBoard(kalahBoard, kalahWashers, kalahTable2)
         lastWasher2.nextKalahTable = kalahTable
-        kalahWashers.forEach { s: KalahWasher -> kalahWasherRepository.save(s) }
+        kalahWashers.forEach { kalahWasher: KalahWasher -> kalahWasherService.create(kalahWasher) }
         kalahBoard.kalahOne = kalahTable
         kalahBoard.kalahTwo = kalahTable2
         val registeredBoard = boardRepository.save(kalahBoard)
@@ -50,7 +49,7 @@ class KalahGameService(
         tableRepository.save(kalahTable)
         var lastKalahWasher = KalahWasher()
         kalahTable.nextKalahWasher = lastKalahWasher
-        lastKalahWasher = kalahWasherRepository.save(lastKalahWasher)
+        lastKalahWasher = kalahWasherService.create(lastKalahWasher)
         kalahBoard.kalahWasherOne = lastKalahWasher
         kalahWashers.add(lastKalahWasher)
         for (i in 0..4) {
@@ -58,7 +57,7 @@ class KalahGameService(
             lastKalahWasher.nextKalahWasher = kalahWasher
             kalahWashers.add(lastKalahWasher)
             lastKalahWasher = kalahWasher
-            lastKalahWasher = kalahWasherRepository.save(lastKalahWasher)
+            lastKalahWasher = kalahWasherService.create(lastKalahWasher)
         }
 
         return lastKalahWasher
@@ -109,7 +108,7 @@ class KalahGameService(
 //            }
 //        }
         kalahBoard.currentPlayer = player.opponent
-        kalahBoard.kalahWashers?.forEach(Consumer { s: KalahWasher -> kalahWasherRepository.save(s) })
+        kalahBoard.kalahWashers?.forEach(Consumer { kw: KalahWasher -> kalahWasherService.create(kw) })
         checkWinner(kalahBoard)
         return boardRepository.save(kalahBoard)
     }
@@ -141,7 +140,7 @@ class KalahGameService(
             pitTwo?.player = playerTwo
             pitTwo = pitTwo?.nextKalahWasher
         }
-        kalahBoard.kalahWashers?.forEach(Consumer { s: KalahWasher -> kalahWasherRepository.save(s) })
+        kalahBoard.kalahWashers?.forEach(Consumer { s: KalahWasher -> kalahWasherService.create(s) })
         kalahBoard.playerTwo = playerTwo
         playerTwo.opponent = kalahBoard.playerOne
         playerTwo.currentKalahBoard = kalahBoard

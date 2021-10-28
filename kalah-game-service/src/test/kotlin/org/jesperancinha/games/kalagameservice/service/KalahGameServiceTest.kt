@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @Transactional
-internal class GameServiceTest(
+internal class KalahGameServiceTest(
     @Autowired
     val gameService: KalahGameService,
     @Autowired
