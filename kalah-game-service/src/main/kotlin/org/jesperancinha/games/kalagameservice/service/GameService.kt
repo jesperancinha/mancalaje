@@ -20,61 +20,50 @@ import java.util.function.Consumer
 class GameService(
     private val tableRepository: KalahTableRepository,
     private val boardRepository: KalahBoardRepository,
-    private val pitRepository: KalahWasherRepository,
+    private val kalahWasherRepository: KalahWasherRepository,
     private val playerRepository: KalahPlayerRepository,
 ) {
     fun createNewBoard(player: Player): KalahBoard {
         val kalahBoard = KalahBoard(owner = player)
         val kalahWashers = ArrayList<KalahWasher>()
-        val kalahTable = KalahTable()
         kalahBoard.kalahWashers = kalahWashers
+        val kalahTable = KalahTable()
+        val lastWasher = generateHalfBoard(kalahBoard, kalahWashers, kalahTable)
+        val kalahTable2 = KalahTable()
+        lastWasher.nextKalahTable = kalahTable2
+        val lastWasher2 =  generateHalfBoard(kalahBoard, kalahWashers, kalahTable2)
+        lastWasher2.nextKalahTable= kalahTable
+        kalahWashers.forEach(Consumer { s: KalahWasher -> kalahWasherRepository.save(s) })
+        kalahBoard.currentPlayer = player
+        kalahBoard.playerOne = player
+        kalahBoard.kalahOne = kalahTable
+        kalahBoard.kalahTwo = kalahTable2
+        val registeredBoard = boardRepository.save(kalahBoard)
+        player.kalahBoard= kalahBoard
+        playerRepository.save(player)
+        return registeredBoard
+    }
+
+    private fun generateHalfBoard(
+        kalahBoard: KalahBoard,
+        kalahWashers: ArrayList<KalahWasher>,
+        kalahTable: KalahTable
+    ): KalahWasher {
         tableRepository.save(kalahTable)
         var lastKalahWasher = KalahWasher()
         kalahTable.nextKalahWasher = lastKalahWasher
-        lastKalahWasher = pitRepository.save(lastKalahWasher)
+        lastKalahWasher = kalahWasherRepository.save(lastKalahWasher)
         kalahBoard.kalahWasherOne = lastKalahWasher
 
-        val firstPit = lastKalahWasher
         for (i in 0..4) {
             val kalahWasher = KalahWasher()
             lastKalahWasher.nextKalahWasher = kalahWasher
             kalahWashers.add(lastKalahWasher)
             lastKalahWasher = kalahWasher
-            lastKalahWasher = pitRepository.save(lastKalahWasher)
+            lastKalahWasher = kalahWasherRepository.save(lastKalahWasher)
         }
 
-        kalahWashers.add(lastKalahWasher)
-        lastKalahWasher.nextKalahTable = kalahTable
-        lastKalahWasher = pitRepository.save(lastKalahWasher)
-        for (i in 0..5) {
-            val kalahWasher = KalahWasher()
-            val oppositePit = kalahWashers[i]
-            kalahWasher.oppositeKalahWasher = oppositePit
-            oppositePit.oppositeKalahWasher = kalahWasher
-            if (i == 0) {
-                kalahBoard.kalahWasherTwo = kalahWasher
-            }
-            lastKalahWasher.nextKalahWasher = kalahWasher
-            kalahWashers.add(lastKalahWasher)
-            lastKalahWasher = kalahWasher
-            lastKalahWasher = pitRepository.save(lastKalahWasher)
-        }
-        kalahWashers.add(lastKalahWasher)
-        val kalahKalahWasher2 = KalahTable()
-        lastKalahWasher.nextKalahTable = kalahKalahWasher2
-        lastKalahWasher = pitRepository.save(lastKalahWasher)
-        kalahWashers.add(lastKalahWasher)
-        lastKalahWasher.nextKalahWasher = firstPit
-        kalahBoard.kalahWashers = kalahWashers
-        kalahWashers.forEach(Consumer { s: KalahWasher -> pitRepository.save(s) })
-        kalahBoard.currentPlayer = player
-        kalahBoard.playerOne = player
-        kalahBoard.kalahOne = kalahTable
-        kalahBoard.kalahTwo = kalahKalahWasher2
-        val registeredBoard = boardRepository.save(kalahBoard)
-        player.kalahBoard= kalahBoard
-        playerRepository.save(player)
-        return registeredBoard
+        return lastKalahWasher
     }
 
     fun sowStonesFromPit(player: Player, kalahWasher: KalahTable?, kalahBoard: KalahBoard): KalahBoard {
@@ -122,7 +111,7 @@ class GameService(
 //            }
 //        }
         kalahBoard.currentPlayer = player.opponent
-        kalahBoard.kalahWashers?.forEach(Consumer { s: KalahWasher -> pitRepository.save(s) })
+        kalahBoard.kalahWashers?.forEach(Consumer { s: KalahWasher -> kalahWasherRepository.save(s) })
         checkWinner(kalahBoard)
         return boardRepository.save(kalahBoard)
     }
@@ -154,7 +143,7 @@ class GameService(
             pitTwo?.player = playerTwo
             pitTwo = pitTwo?.nextKalahWasher
         }
-        kalahBoard.kalahWashers?.forEach(Consumer { s: KalahWasher -> pitRepository.save(s) })
+        kalahBoard.kalahWashers?.forEach(Consumer { s: KalahWasher -> kalahWasherRepository.save(s) })
         kalahBoard.playerTwo = playerTwo
         playerTwo.opponent = kalahBoard.playerOne
         playerTwo.currentKalahBoard = kalahBoard
