@@ -31,12 +31,12 @@ internal class KalaKalahBoardRepositoryTest(
     )
     val player2 = kalahPlayerRepository.save(
         Player(
-            username = "player2${java.util.UUID.randomUUID()}"
+            username = "player2${randomUUID()}"
         )
     )
     val player3 = kalahPlayerRepository.save(
         Player(
-            username = "player3${java.util.UUID.randomUUID()}"
+            username = "player3${randomUUID()}"
         )
     )
 
@@ -44,9 +44,9 @@ internal class KalaKalahBoardRepositoryTest(
     fun setUp() {
         val kalahWasherOne = KalahWasher()
         kalahWasherRepository.save(kalahWasherOne)
-        val kalahBoardPlayerOne = KalahBoard(playerOne = player1, kalahWasherOne = kalahWasherOne)
-        val kalahBoardPlayerTwo = KalahBoard(playerOne = player2, kalahWasherOne = kalahWasherOne)
-        val kalahBoardPlayerThree = KalahBoard(playerOne = player3, playerTwo = player2, kalahWasherOne = kalahWasherOne)
+        val kalahBoardPlayerOne = KalahBoard(playerOne = player1, kalahWasherOne = kalahWasherOne, owner = player1)
+        val kalahBoardPlayerTwo = KalahBoard(playerOne = player2, kalahWasherOne = kalahWasherOne, owner = player1)
+        val kalahBoardPlayerThree = KalahBoard(playerOne = player3, playerTwo = player2, kalahWasherOne = kalahWasherOne, owner = player1)
         kalahBoardRepository.save(kalahBoardPlayerOne)
         kalahBoardRepository.save(kalahBoardPlayerTwo)
         kalahBoardRepository.save(kalahBoardPlayerThree)

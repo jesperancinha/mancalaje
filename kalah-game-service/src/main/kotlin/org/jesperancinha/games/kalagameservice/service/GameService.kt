@@ -11,39 +11,39 @@ import org.jesperancinha.games.kalagameservice.model.Player
 import org.jesperancinha.games.kalagameservice.repository.KalahBoardRepository
 import org.jesperancinha.games.kalagameservice.repository.KalahWasherRepository
 import org.jesperancinha.games.kalagameservice.repository.KalahPlayerRepository
+import org.jesperancinha.games.kalagameservice.repository.KalahTableRepository
 import org.springframework.stereotype.Service
 import java.util.*
 import java.util.function.Consumer
 
 @Service
 class GameService(
+    private val tableRepository: KalahTableRepository,
     private val boardRepository: KalahBoardRepository,
     private val pitRepository: KalahWasherRepository,
     private val playerRepository: KalahPlayerRepository,
 ) {
     fun createNewBoard(player: Player): KalahBoard {
-        val kalahBoard = KalahBoard(playerOne = player)
+        val kalahBoard = KalahBoard(owner = player)
         val kalahWashers = ArrayList<KalahWasher>()
+        val kalahTable = KalahTable()
         kalahBoard.kalahWashers = kalahWashers
-        var lastKalahWasher = KalahWasher(
-            player = player
-        )
+        tableRepository.save(kalahTable)
+        var lastKalahWasher = KalahWasher()
+        kalahTable.nextKalahWasher = lastKalahWasher
         lastKalahWasher = pitRepository.save(lastKalahWasher)
         kalahBoard.kalahWasherOne = lastKalahWasher
+
         val firstPit = lastKalahWasher
         for (i in 0..4) {
-            val kalahWasher = KalahWasher(
-                player = player
-            )
+            val kalahWasher = KalahWasher()
             lastKalahWasher.nextKalahWasher = kalahWasher
             kalahWashers.add(lastKalahWasher)
             lastKalahWasher = kalahWasher
             lastKalahWasher = pitRepository.save(lastKalahWasher)
         }
+
         kalahWashers.add(lastKalahWasher)
-        val kalahTable = KalahTable(
-            player = player
-        )
         lastKalahWasher.nextKalahTable = kalahTable
         lastKalahWasher = pitRepository.save(lastKalahWasher)
         for (i in 0..5) {

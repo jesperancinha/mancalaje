@@ -8,13 +8,12 @@ import io.mockk.verify
 import org.jesperancinha.games.kalagameservice.dto.BoardDto
 import org.jesperancinha.games.kalagameservice.exception.PlayerNotJoinedYetException
 import org.jesperancinha.games.kalagameservice.model.KalahBoard
-import org.jesperancinha.games.kalagameservice.model.KalahCup
 import org.jesperancinha.games.kalagameservice.model.KalahWasher
 import org.jesperancinha.games.kalagameservice.model.Player
 import org.jesperancinha.games.kalagameservice.repository.KalahBoardRepository
 import org.jesperancinha.games.kalagameservice.repository.KalahCupRepository
-import org.jesperancinha.games.kalagameservice.repository.KalahWasherRepository
 import org.jesperancinha.games.kalagameservice.repository.KalahPlayerRepository
+import org.jesperancinha.games.kalagameservice.repository.KalahWasherRepository
 import org.jesperancinha.games.kalagameservice.service.BoardService
 import org.jesperancinha.games.kalagameservice.service.GameService
 import org.jesperancinha.games.kalagameservice.service.PlayerService
@@ -35,7 +34,7 @@ import javax.sql.DataSource
     classes = [
         DataSource::class, JdbcUserDetailsManager::class, PasswordEncoder::class,
         KalahPlayerRepository::class, KalahWasherRepository::class, KalahBoardRepository::class,
-    KalahCupRepository::class]
+        KalahCupRepository::class]
 )
 internal class KalaGameControllerTest(
     @Autowired
@@ -52,7 +51,7 @@ internal class KalaGameControllerTest(
 
     private val objectMapper = ObjectMapper()
 
-    private val kalahBoard = KalahBoard(playerOne = Player())
+    private val kalahBoard = KalahBoard(owner = Player())
 
     @Test
     @WithMockUser("player1")

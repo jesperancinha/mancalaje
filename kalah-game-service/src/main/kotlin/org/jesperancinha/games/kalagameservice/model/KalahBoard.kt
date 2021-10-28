@@ -3,6 +3,8 @@ package org.jesperancinha.games.kalagameservice.model
 import org.hibernate.Hibernate
 import org.jesperancinha.games.kalagameservice.dto.BoardDto
 import org.springframework.data.annotation.Version
+import java.time.Instant
+import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -46,8 +48,15 @@ data class KalahBoard(
     internal var winner: Player? = null,
 
     @Version
-    internal var version: Int?=null
-) {
+    internal var version: Int? = null,
+
+    @OneToOne
+    internal val owner: Player,
+
+    @Column
+    internal val createdAt: Long = Instant.now().toEpochMilli()
+
+    ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
