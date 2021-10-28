@@ -19,13 +19,11 @@ class KalaGameController(
     private val playerService: KalahPlayerService
 ) {
     @PutMapping("leave")
-    @Throws(Throwable::class)
     fun leavegae(principal: Principal) {
         playerService.leaveCurrentGame(principal.name)
     }
 
     @GetMapping("current")
-    @Throws(Throwable::class)
     fun getCurrentBoard(principal: Principal): BoardDto? {
         return playerService.createOrFindPlayerByName(principal.name)?.currentKalahBoard?.toDto
     }
@@ -38,7 +36,6 @@ class KalaGameController(
     }
 
     @PutMapping("move/{boardId}/{pitId}")
-    @Throws(Throwable::class)
     fun move(
         principal: Principal,
         @PathVariable boardId: Long,
@@ -56,7 +53,6 @@ class KalaGameController(
     }
 
     @PutMapping("join/{boardId}")
-    @Throws(Throwable::class)
     fun join(
         principal: Principal,
         @PathVariable boardId: Long

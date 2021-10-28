@@ -5,6 +5,7 @@ import io.kotest.matchers.collections.shouldNotBeEmpty
 import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.types.shouldBeSameInstanceAs
+import org.jesperancinha.kalah.model.KalahWasher
 import org.jesperancinha.kalah.model.Player
 import org.jesperancinha.kalah.repository.KalahPlayerRepository
 import org.junit.jupiter.api.Test
@@ -42,6 +43,9 @@ internal class KalahGameServiceTest(
         gameBoard.winner.shouldBeNull()
         gameBoard.version.shouldBeNull()
 
+        gameBoard.kalahWasherOne shouldHaveWashersConnectionSizeOf 6
+        gameBoard.kalahWasherTwo shouldHaveWashersConnectionSizeOf 6
+
         gameBoard.shouldNotBeNull()
     }
 
@@ -51,5 +55,16 @@ internal class KalahGameServiceTest(
 
     @Test
     fun joinPlayer() {
+    }
+}
+
+infix fun KalahWasher?.shouldHaveWashersConnectionSizeOf(size: Int) {
+    if (size == 1) {
+        this?.nextKalahWasher.shouldBeNull()
+        this?.nextKalahTable.shouldNotBeNull()
+    } else {
+        this?.nextKalahWasher.shouldNotBeNull()
+        this?.nextKalahTable.shouldBeNull()
+        this?.nextKalahWasher shouldHaveWashersConnectionSizeOf (size - 1)
     }
 }
