@@ -27,16 +27,16 @@ data class KalahBoard(
     internal var kalahWasherOne: KalahWasher? = null,
 
     @OneToOne
-    internal var kalahOne: KalahTable? = null,
-
-    @OneToOne
-    internal var playerOne: Player? = null,
-
-    @OneToOne
     internal var kalahWasherTwo: KalahWasher? = null,
 
     @OneToOne
-    internal var kalahTwo: KalahTable? = null,
+    internal var kalahTableOne: KalahTable? = null,
+
+    @OneToOne
+    internal var kalahTableTwo: KalahTable? = null,
+
+    @OneToOne
+    internal var playerOne: Player? = null,
 
     @OneToOne
     internal var playerTwo: Player? = null,
@@ -69,7 +69,7 @@ data class KalahBoard(
 
     @Override
     override fun toString(): String {
-        return this::class.simpleName + "(id = $id , pitOne = $kalahWasherOne , kalahOne = $kalahOne , playerOne = $playerOne , pitTwo = $kalahWasherTwo , kalahTwo = $kalahTwo , playerTwo = $playerTwo , currentPlayer = $currentPlayer , winner = $winner )"
+        return this::class.simpleName + "(id = $id , pitOne = $kalahWasherOne , kalahOne = $kalahTableOne , playerOne = $playerOne , pitTwo = $kalahWasherTwo , kalahTwo = $kalahTableTwo , playerTwo = $playerTwo , currentPlayer = $currentPlayer , winner = $winner )"
     }
 }
 

@@ -37,11 +37,11 @@ class KalahGameService(
         val lastWasher = generateHalfBoard(kalahWashers, kalahTable) { kalahBoard.kalahWasherOne = it }
         val kalahTable2 = KalahTable()
         lastWasher.nextKalahTable = kalahTable2
-        val lastWasher2 = generateHalfBoard(kalahWashers, kalahTable2) { kalahBoard.kalahWasherOne = it }
+        val lastWasher2 = generateHalfBoard(kalahWashers, kalahTable2) { kalahBoard.kalahWasherTwo = it }
         lastWasher2.nextKalahTable = kalahTable
         kalahWashers.forEach { kalahWasher: KalahWasher -> kalahWasherService.create(kalahWasher) }
-        kalahBoard.kalahOne = kalahTable
-        kalahBoard.kalahTwo = kalahTable2
+        kalahBoard.kalahTableOne = kalahTable
+        kalahBoard.kalahTableTwo = kalahTable2
         return boardRepository.save(kalahBoard)
     }
 

@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.ManyToOne
-import javax.persistence.OneToOne
 import javax.persistence.Table
 
 @Entity
@@ -24,7 +23,7 @@ data class KalahCup(
     @ManyToOne
     var washer: KalahWasher? = null,
 
-    @OneToOne
+    @ManyToOne
     var table: KalahTable? = null,
 
     @Version

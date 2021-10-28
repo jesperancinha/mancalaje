@@ -34,8 +34,10 @@ internal class KalahGameServiceTest(
         gameBoard.currentPlayer.shouldBeNull()
         gameBoard.playerOne.shouldBeNull()
         gameBoard.playerTwo.shouldBeNull()
-        gameBoard.kalahOne.shouldNotBeNull()
-        gameBoard.kalahTwo.shouldNotBeNull()
+        gameBoard.kalahWasherOne.shouldNotBeNull()
+        gameBoard.kalahWasherTwo.shouldNotBeNull()
+        gameBoard.kalahTableOne.shouldNotBeNull()
+        gameBoard.kalahTableTwo.shouldNotBeNull()
         gameBoard.owner shouldBeSameInstanceAs player
         gameBoard.winner.shouldBeNull()
         gameBoard.version.shouldBeNull()

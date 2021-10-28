@@ -25,9 +25,10 @@ Rules:
 8. If the last cup falls into the opponents display table, player can choose to eliminate as many cups of the opponent as they prefer up until the number of rolled out cups.
 9. The opponent can counter-act by emptying all cups of the display. Empty cups are worth half a point. If all cups are empty or there are no cups, the there is no way to counter-act.
 10. Cups get filled with coffee once they reach the display.
-11. Cups in the display cannot be moved.
-12. If cups fall into an empty washer belonging to the current player, then the player can pick up the cups on the washer of the opponents side, take them and put them on the display without coffee.
-13. Game ends when no more cups are available in the washers
+11. If the last cup in the rollout falls into a table the current player gets anpther turn regardless
+12. Cups in the display cannot be moved.
+13. If cups fall into an empty washer belonging to the current player, then the player can pick up the cups on the washer of the opponents side, take them and put them on the display without coffee.
+14. Game ends when no more cups are available in the washers
 
 ## Management Rule
 
