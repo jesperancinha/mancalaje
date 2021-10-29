@@ -33,7 +33,7 @@ data class KalahWasher(
     var player: Player? = null,
 
     @OneToMany
-    var cups: MutableList<KalahCup>? = null,
+    var cups: MutableList<KalahCup> = mutableListOf(),
 
     @Version
     internal var version: Int? = null

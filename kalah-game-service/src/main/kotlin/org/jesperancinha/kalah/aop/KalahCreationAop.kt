@@ -15,10 +15,10 @@ class KalahCreationAop(
 ) {
 
     @Before("execution(* org.jesperancinha.kalah.service.KalahWasherService.create(..)) and args(kalahWasher)")
-    fun logAfterAllMethods(joinPoint: JoinPoint, kalahWasher: KalahWasher) {
+    fun createCups(joinPoint: JoinPoint, kalahWasher: KalahWasher) {
         val kalahCup1 = kalahCupRepository.save(KalahCup(full = false, washer = kalahWasher))
         val kalahCup2 = kalahCupRepository.save(KalahCup(full = false, washer = kalahWasher))
         val kalahCup3 = kalahCupRepository.save(KalahCup(full = false, washer = kalahWasher))
-        kalahWasher.cups = mutableListOf(kalahCup1, kalahCup2, kalahCup3)
+        kalahWasher.cups.addAll(mutableListOf(kalahCup1, kalahCup2, kalahCup3))
     }
 }

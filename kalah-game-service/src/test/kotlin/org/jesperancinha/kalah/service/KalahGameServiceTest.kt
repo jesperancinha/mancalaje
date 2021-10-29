@@ -1,5 +1,6 @@
 package org.jesperancinha.kalah.service
 
+import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.collections.shouldNotBeEmpty
 import io.kotest.matchers.nulls.shouldBeNull
@@ -61,8 +62,9 @@ internal class KalahGameServiceTest(
         val rolloutCupsFromPayersWasherOnBoard =
             gameService.rolloutCupsFromPayersWasherOnBoard(playerOne, gameBoard.kalahWasherOne, testGameBoard)
 
-        rolloutCupsFromPayersWasherOnBoard.kalahWasherOne?.cups.shouldBeNull()
-        val secondWasher = rolloutCupsFromPayersWasherOnBoard.kalahWasherOne?.nextKalahWasher
+        val firstWasher = rolloutCupsFromPayersWasherOnBoard.kalahWasherOne
+        firstWasher?.cups.shouldBeEmpty()
+        val secondWasher = firstWasher?.nextKalahWasher
         secondWasher?.cups?.size shouldBe 4
         val thirdWasher = secondWasher?.nextKalahWasher
         thirdWasher?.cups?.size shouldBe 4
@@ -74,7 +76,7 @@ internal class KalahGameServiceTest(
         sixthWasher?.cups?.size shouldBe 3
         sixthWasher?.nextKalahWasher.shouldBeNull()
         sixthWasher?.nextKalahTable.shouldNotBeNull()
-        sixthWasher?.nextKalahTable?.cups.shouldBeNull()
+        sixthWasher?.nextKalahTable?.cups.shouldBeEmpty()
     }
 
     @Test

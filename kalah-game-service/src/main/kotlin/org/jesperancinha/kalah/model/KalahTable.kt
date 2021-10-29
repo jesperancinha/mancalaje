@@ -25,7 +25,7 @@ data class KalahTable(
     var player: Player? = null,
 
     @OneToMany
-    var cups: MutableList<KalahCup>? = null,
+    val cups: MutableList<KalahCup> = mutableListOf(),
 
     @Version
     internal var version: Int? = null
