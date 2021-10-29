@@ -9,13 +9,13 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import javax.transaction.Transactional
 
 @DataJpaTest
-internal open class KalahPlayerRepositoryTest {
+internal class KalahPlayerRepositoryTest {
     @Autowired
     private val kalahPlayerRepository: KalahPlayerRepository? = null
 
     @BeforeEach
     @Transactional
-    open fun setUp() {
+    fun setUp() {
         kalahPlayerRepository!!.save(Player(
             username = "player1"
         ))
@@ -25,6 +25,6 @@ internal open class KalahPlayerRepositoryTest {
     fun testFindPlayerByUsernameEquals_whenLookingPerName_thenFindIt() {
         val player1 = kalahPlayerRepository!!.findPlayerByUsernameEquals("player1")
         assertThat(player1).isNotNull
-        assertThat(player1?.username).isEqualTo("player1")
+        assertThat(player1.username).isEqualTo("player1")
     }
 }

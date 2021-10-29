@@ -24,7 +24,8 @@ internal class KalahPlayerRepositoryItTest(
             username = "user1"
         )
         user1 = kalahPlayerRepository.save(user1)
-        gameService!!.createNewBoard(user1)
+        gameService.shouldNotBeNull()
+        gameService.createNewBoard(user1)
         val playerOptional = user1.id?.let { kalahPlayerRepository.findById(it) }
         playerOptional?.apply {
             isPresent.shouldBeTrue()
