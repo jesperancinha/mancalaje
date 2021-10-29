@@ -1,4 +1,4 @@
-## Koffee Kups Kalah Gama Service
+## Coffee Cups Kalah Service
 
 ## References
 
