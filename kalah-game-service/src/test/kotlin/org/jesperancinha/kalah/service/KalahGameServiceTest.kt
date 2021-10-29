@@ -79,6 +79,49 @@ internal class KalahGameServiceTest(
         sixthWasher?.nextKalahTable?.cups.shouldBeEmpty()
     }
 
+
+    @Test
+    fun `should rollout cups on the first move and the last washer`() {
+        val playerOne = playerRepository.save(Player(username = "joao"))
+        val playerTwo = playerRepository.save(Player(username = "submarine"))
+        val gameBoard = gameService.createNewBoard(player = playerOne)
+        gameService.joinPlayer(playerOne, kalahBoard = gameBoard)
+        val testGameBoard = gameService.joinPlayer(playerTwo, kalahBoard = gameBoard)
+        testGameBoard.currentPlayer = playerOne
+        val firstWasher = testGameBoard.kalahWasherOne
+        val secondWasher = firstWasher?.nextKalahWasher
+        val thirdWasher = secondWasher?.nextKalahWasher
+        val fourthWasher = thirdWasher?.nextKalahWasher
+        val fifthWasher = fourthWasher?.nextKalahWasher
+        val sixthWasher = fifthWasher?.nextKalahWasher
+
+        gameService.rolloutCupsFromPayersWasherOnBoard(playerOne, sixthWasher, testGameBoard)
+
+        firstWasher?.cups?.size shouldBe 3
+        secondWasher?.cups?.size shouldBe 3
+        thirdWasher?.cups?.size shouldBe 3
+        fourthWasher?.cups?.size shouldBe 3
+        fifthWasher?.cups?.size shouldBe 3
+        sixthWasher?.cups?.shouldBeEmpty()
+        sixthWasher?.nextKalahWasher.shouldBeNull()
+        sixthWasher?.nextKalahTable.shouldNotBeNull()
+        sixthWasher?.nextKalahTable?.cups?.size shouldBe 1
+        val p2FirstWasher = sixthWasher?.nextKalahTable?.nextKalahWasher
+        p2FirstWasher?.cups?.size shouldBe 4
+        val p2SecondWasher = p2FirstWasher?.nextKalahWasher
+        p2SecondWasher?.cups?.size shouldBe 4
+        val p2ThirdWasher = p2SecondWasher?.nextKalahWasher
+        p2ThirdWasher?.cups?.size shouldBe 3
+        val p2FourthWasher = p2ThirdWasher?.nextKalahWasher
+        p2FourthWasher?.cups?.size shouldBe 3
+        val p2FifthWasher = p2FourthWasher?.nextKalahWasher
+        p2FifthWasher?.cups?.size shouldBe 3
+        val p2SixthWasher = p2FifthWasher?.nextKalahWasher
+        p2SixthWasher?.cups?.size shouldBe 3
+        p2SixthWasher?.nextKalahWasher.shouldBeNull()
+        p2SixthWasher?.nextKalahTable?.cups?.size shouldBe 0
+    }
+
     @Test
     fun `should join player one and player two, register them as opponents and associate the correct table and washer`() {
         val playerOne = playerRepository.save(Player(username = "joao"))

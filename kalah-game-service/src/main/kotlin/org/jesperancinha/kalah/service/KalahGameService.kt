@@ -92,7 +92,7 @@ class KalahGameService(
         kalahBoard.currentPlayer = player.opponent
         kalahBoard.kalahWashers?.forEach(Consumer { kw: KalahWasher -> kalahWasherService.update(kw) })
         checkWinner(kalahBoard)
-         return kalahBoard
+        return kalahBoard
     }
 
     private fun rolloutCupsFromPayersWasherOnBoard(
@@ -101,7 +101,7 @@ class KalahGameService(
         washerCups: (KalahWasher) -> MutableList<KalahCup>?,
         tableCups: (KalahTable?) -> MutableList<KalahCup>?,
     ) {
-        if (cups.isNotEmpty()){
+        if (cups.isNotEmpty()) {
             kalahWasher.nextKalahWasher?.let { nextKalahWasher ->
                 washerCups(nextKalahWasher)?.add(cups[0])
                 if (cups.size > 1) {
@@ -112,12 +112,13 @@ class KalahGameService(
                         tableCups
                     )
                 }
-            } ?: {
-                tableCups(kalahWasher.nextKalahTable)?.add(cups[0])
+            }
+            kalahWasher.nextKalahTable?.let { nextKalahTable ->
+                tableCups(nextKalahTable)?.add(cups[0])
                 if (cups.size > 1) {
                     sowCupsFromTable(
                         cups.subList(1, cups.size),
-                        kalahWasher.nextKalahTable,
+                        nextKalahTable,
                         washerCups,
                         tableCups
                     )
@@ -127,17 +128,17 @@ class KalahGameService(
     }
 
     private fun sowCupsFromTable(
-        cups: MutableList<KalahCup>?,
+        cups: MutableList<KalahCup>,
         kalahTable: KalahTable?,
         washerCups: (KalahWasher) -> MutableList<KalahCup>?,
         tableCups: (KalahTable?) -> MutableList<KalahCup>?,
     ) {
-        cups?.let { cupsIt ->
+        if (cups.isNotEmpty()) {
             kalahTable?.nextKalahWasher?.let { nextKalahWasher ->
-                kalahTable.nextKalahWasher?.cups?.add(cupsIt[0])
-                if (cupsIt.size > 1) {
+                kalahTable.nextKalahWasher?.cups?.add(cups[0])
+                if (cups.size > 1) {
                     rolloutCupsFromPayersWasherOnBoard(
-                        cupsIt.subList(1, cupsIt.size),
+                        cups.subList(1, cups.size),
                         nextKalahWasher,
                         washerCups,
                         tableCups
