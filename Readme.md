@@ -1,8 +1,8 @@
-# Kalah-Coffee-Mugs
+# Koffee Kups Kalah Game
 
 ---
 
-[![Generic badge](https://img.shields.io/static/v1.svg?label=GitHub&message=Kalah%20Coffee%20Mugs&color=informational)](https://github.com/jesperancinha/mancalaje)
+[![Generic badge](https://img.shields.io/static/v1.svg?label=GitHub&message=Koffee%20Kups%20Kalah%20Game&color=informational)](https://github.com/jesperancinha/mancalaje)
 [![GitHub release](https://img.shields.io/github/release-pre/jesperancinha/mancalaje.svg)](#)
 [![GitHub License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
 
