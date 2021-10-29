@@ -19,16 +19,17 @@ Rules:
 2. Each player has only one table. Table is called `display`.
 3. Players can only pick their own cups in their own washers.
 4. Each time players can only pick all cups at a time and there is no option to pick an arbitrary number.
-5. The destination washer, is picked by the player and cups are rolled out one to one on a circular anti-clockwise direction.
-6. The destination washer must belong to the player
-7. The last location of the last cup in the rollout determines special rules
-8. If the last cup falls into the opponents display table, player can choose to eliminate as many cups of the opponent as they prefer up until the number of rolled out cups.
-9. The opponent can counter-act by emptying all cups of the display. Empty cups are worth half a point. If all cups are empty or there are no cups, the there is no way to counter-act.
-10. Cups get filled with coffee once they reach the display.
-11. If the last cup in the rollout falls into a table the current player gets anpther turn regardless
-12. Cups in the display cannot be moved.
-13. If cups fall into an empty washer belonging to the current player, then the player can pick up the cups on the washer of the opponents side, take them and put them on the display without coffee.
+5. The destination washer, is the last of the rollout and the user cannot choose it and cups are rolled out one by one sequential washers on a circular anti-clockwise direction.
+6. The last location of the last cup in the rollout determines special rules
+7. If the last cup falls into the opponents display table, player eliminates as many cups of the opponent as the number of rolled out cups. Cups to be removed are chosen randomly.
+8. The opponent can counter-act by emptying all cups of the display. Empty cups are worth half a point. If all cups are empty or there are no cups, then there is no way to counter-act.
+9. Cups get filled with coffee once they reach the display of the current player. One for each hit.
+10. If the last cup in the rollout falls into a table the current player gets another turn regardless
+11. Cups in the display cannot be moved.
+12. If the last cup falls into an empty washer belonging to the current player, then the player can pick up the cups on the washer of the opponents side, take them and put them on the display without coffee.
+13. If the last cup falls into an empty washer belonging to the opponent, then one coffee cup gets filled automatically in the display. If no cup is there, the player gets a free turn.
 14. Game ends when no more cups are available in the washers
+15. The winner is the player with more points. Each empty cup counts half a point and each filled cup counts one point. Points are rounded down or floored. This means that players can lose half a point in such cases.
 
 ## Management Rule
 
