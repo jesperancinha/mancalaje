@@ -107,10 +107,7 @@ class KalahGameService(
                         washerCups,
                         tableCups
                     )
-                } else {
-
                 }
-
             } ?: {
                 tableCups(kalahWasher)?.add(cupsIt[0])
                 if (cupsIt.size > 0) {
@@ -120,8 +117,6 @@ class KalahGameService(
                         washerCups,
                         tableCups
                     )
-                } else {
-
                 }
             }
 
@@ -145,10 +140,7 @@ class KalahGameService(
                         washerCups,
                         tableCups
                     )
-                } else {
-
                 }
-
             }
         }
     }
@@ -175,22 +167,32 @@ class KalahGameService(
         return winnerone
     }
 
-    fun joinPlayer(playerTwo: Player, kalahBoard: KalahBoard): KalahBoard {
-        var pitTwo = kalahBoard.kalahWasherTwo
-        while (Objects.isNull(pitTwo?.player)) {
-            pitTwo?.player = playerTwo
-            pitTwo = pitTwo?.nextKalahWasher
+    fun joinPlayer(player: Player, kalahBoard: KalahBoard): KalahBoard {
+        return kalahBoard.playerOne?.let {
+            joinPlayer(player, kalahBoard, { kalahBoard.setPlayerTwo(player) }, { kalahBoard.kalahTableTwo })
+        } ?: joinPlayer(player, kalahBoard, { kalahBoard.playerOne = player }, { kalahBoard.kalahTableOne })
+    }
+
+    private fun joinPlayer(
+        player: Player,
+        kalahBoard: KalahBoard,
+        setPlayer: () -> Unit,
+        getTable: () -> KalahTable?
+    ): KalahBoard {
+        val table = getTable()
+        table?.player = player
+        table?.nextKalahWasher?.also { firstKalahWasher ->
+            var currKalahWasher: KalahWasher? = firstKalahWasher
+            while (currKalahWasher != null) {
+                currKalahWasher.player = player
+                currKalahWasher = currKalahWasher.nextKalahWasher
+            }
         }
-        kalahBoard.kalahWashers?.forEach(Consumer { s: KalahWasher -> kalahWasherService.create(s) })
-        kalahBoard.playerTwo = playerTwo
-        playerTwo.opponent = kalahBoard.playerOne
-        playerTwo.currentKalahBoard = kalahBoard
-        kalahBoard.playerOne?.apply {
-            opponent = playerTwo
-            currentKalahBoard = kalahBoard
-            playerRepository.save(this)
-        }
-        playerRepository.save(playerTwo)
+
+        kalahBoard.kalahWashers?.forEach { kw: KalahWasher -> kalahWasherService.update(kw) }
+        setPlayer()
+        player.currentKalahBoard = kalahBoard
+        playerRepository.save(player)
         return boardRepository.save(kalahBoard)
     }
 }

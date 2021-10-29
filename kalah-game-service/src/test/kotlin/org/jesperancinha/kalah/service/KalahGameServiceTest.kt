@@ -4,6 +4,7 @@ import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.collections.shouldNotBeEmpty
 import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.nulls.shouldNotBeNull
+import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeSameInstanceAs
 import org.jesperancinha.kalah.model.KalahWasher
 import org.jesperancinha.kalah.model.Player
@@ -58,7 +59,31 @@ internal class KalahGameServiceTest(
     }
 
     @Test
-    fun joinPlayer() {
+    fun `should join player one and player two, register them as opponents and associate the correct table and washer`() {
+        val playerOne = playerRepository.save(Player(username = "joao"))
+        val playerTwo = playerRepository.save(Player(username = "submarine"))
+        val gameBoard = gameService.createNewBoard(player = playerOne)
+        val gameBoardUpdate1 = gameService.joinPlayer(playerOne, kalahBoard = gameBoard)
+
+        gameBoardUpdate1.playerOne shouldBe playerOne
+        gameBoardUpdate1.playerTwo.shouldBeNull()
+        gameBoardUpdate1.kalahTableOne.shouldNotBeNull()
+        gameBoardUpdate1.kalahTableOne?.player shouldBe playerOne
+        gameBoardUpdate1.kalahTableTwo.shouldNotBeNull()
+        gameBoardUpdate1.kalahTableTwo?.player.shouldBeNull()
+
+        val gameBoardUpdate2 = gameService.joinPlayer(playerTwo, kalahBoard = gameBoard)
+
+        gameBoardUpdate2.playerTwo shouldBe playerTwo
+        gameBoardUpdate2.playerOne shouldBe playerOne
+        gameBoardUpdate2.playerOne.shouldNotBeNull()
+        gameBoardUpdate2.playerOne?.opponent shouldBe playerTwo
+        gameBoardUpdate2.playerTwo.shouldNotBeNull()
+        gameBoardUpdate2.playerTwo?.opponent shouldBe playerOne
+        gameBoardUpdate1.kalahTableOne.shouldNotBeNull()
+        gameBoardUpdate1.kalahTableOne?.player shouldBe playerOne
+        gameBoardUpdate1.kalahTableTwo.shouldNotBeNull()
+        gameBoardUpdate1.kalahTableTwo?.player shouldBe playerTwo
     }
 }
 
