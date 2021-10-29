@@ -14,7 +14,7 @@ class KalahCreationAop(
     val kalahCupRepository: KalahCupRepository
 ) {
 
-    @Before("execution(* org.jesperancinha.kalah.service.KalahWasherService.*(..)) and args(kalahWasher)")
+    @Before("execution(* org.jesperancinha.kalah.service.KalahWasherService.create(..)) and args(kalahWasher)")
     fun logAfterAllMethods(joinPoint: JoinPoint, kalahWasher: KalahWasher) {
         val kalahCup1 = kalahCupRepository.save(KalahCup(full = false, washer = kalahWasher))
         val kalahCup2 = kalahCupRepository.save(KalahCup(full = false, washer = kalahWasher))

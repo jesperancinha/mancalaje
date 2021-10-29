@@ -52,10 +52,29 @@ internal class KalahGameServiceTest(
 
     @Test
     fun `should rollout cups on the first move and the first washer`() {
-        val player = playerRepository.save(Player(username = "joao"))
-        val gameBoard = gameService.createNewBoard(player = player)
+        val playerOne = playerRepository.save(Player(username = "joao"))
+        val playerTwo = playerRepository.save(Player(username = "submarine"))
+        val gameBoard = gameService.createNewBoard(player = playerOne)
+        gameService.joinPlayer(playerOne, kalahBoard = gameBoard)
+        val testGameBoard = gameService.joinPlayer(playerTwo, kalahBoard = gameBoard)
+        testGameBoard.currentPlayer = playerOne
+        val rolloutCupsFromPayersWasherOnBoard =
+            gameService.rolloutCupsFromPayersWasherOnBoard(playerOne, gameBoard.kalahWasherOne, testGameBoard)
 
-//        gameService.sowCupsFromWasher()
+        rolloutCupsFromPayersWasherOnBoard.kalahWasherOne?.cups.shouldBeNull()
+        val secondWasher = rolloutCupsFromPayersWasherOnBoard.kalahWasherOne?.nextKalahWasher
+        secondWasher?.cups?.size shouldBe 4
+        val thirdWasher = secondWasher?.nextKalahWasher
+        thirdWasher?.cups?.size shouldBe 4
+        val fourthWasher = thirdWasher?.nextKalahWasher
+        fourthWasher?.cups?.size shouldBe 4
+        val fifthWasher = fourthWasher?.nextKalahWasher
+        fifthWasher?.cups?.size shouldBe 3
+        val sixthWasher = fifthWasher?.nextKalahWasher
+        sixthWasher?.cups?.size shouldBe 3
+        sixthWasher?.nextKalahWasher.shouldBeNull()
+        sixthWasher?.nextKalahTable.shouldNotBeNull()
+        sixthWasher?.nextKalahTable?.cups.shouldBeNull()
     }
 
     @Test
@@ -80,10 +99,21 @@ internal class KalahGameServiceTest(
         gameBoardUpdate2.playerOne?.opponent shouldBe playerTwo
         gameBoardUpdate2.playerTwo.shouldNotBeNull()
         gameBoardUpdate2.playerTwo?.opponent shouldBe playerOne
-        gameBoardUpdate1.kalahTableOne.shouldNotBeNull()
-        gameBoardUpdate1.kalahTableOne?.player shouldBe playerOne
-        gameBoardUpdate1.kalahTableTwo.shouldNotBeNull()
-        gameBoardUpdate1.kalahTableTwo?.player shouldBe playerTwo
+        gameBoardUpdate2.kalahTableOne.shouldNotBeNull()
+        gameBoardUpdate2.kalahTableOne?.player shouldBe playerOne
+        gameBoardUpdate2.kalahTableTwo.shouldNotBeNull()
+        gameBoardUpdate2.kalahTableTwo?.player shouldBe playerTwo
+
+        gameBoardUpdate2.kalahWasherOne.shouldHaveWashersConnectionSizeOfWithPlayerAndNextTableOfPlayer(
+            6,
+            playerOne,
+            playerTwo
+        )
+        gameBoardUpdate2.kalahWasherTwo.shouldHaveWashersConnectionSizeOfWithPlayerAndNextTableOfPlayer(
+            6,
+            playerTwo,
+            playerOne
+        )
     }
 }
 
@@ -93,6 +123,21 @@ infix fun KalahWasher?.shouldHaveWashersConnectionSizeOf(size: Int) {
         this?.nextKalahTable.shouldNotBeNull()
     } else {
         this?.nextKalahWasher.shouldNotBeNull()
+        this?.nextKalahTable.shouldBeNull()
+        this?.nextKalahWasher shouldHaveWashersConnectionSizeOf (size - 1)
+    }
+}
+
+fun KalahWasher?.shouldHaveWashersConnectionSizeOfWithPlayerAndNextTableOfPlayer(
+    size: Int,
+    player: Player,
+    player2: Player
+) {
+    if (size == 1) {
+        this?.nextKalahWasher.shouldBeNull()
+        this?.nextKalahTable.shouldNotBeNull().also { it.player shouldBe player2 }
+    } else {
+        this?.nextKalahWasher.shouldNotBeNull().also { it.player shouldBe player }
         this?.nextKalahTable.shouldBeNull()
         this?.nextKalahWasher shouldHaveWashersConnectionSizeOf (size - 1)
     }

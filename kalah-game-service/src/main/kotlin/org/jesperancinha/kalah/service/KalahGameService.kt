@@ -66,7 +66,7 @@ class KalahGameService(
         return lastKalahWasher
     }
 
-    fun sowCupsFromWasher(player: Player, kalahWasher: KalahWasher?, kalahBoard: KalahBoard): KalahBoard {
+    fun rolloutCupsFromPayersWasherOnBoard(player: Player, kalahWasher: KalahWasher?, kalahBoard: KalahBoard): KalahBoard {
         if (Objects.isNull(kalahBoard.playerTwo)) {
             throw PlayerNotJoinedYetException()
         }
@@ -82,26 +82,25 @@ class KalahGameService(
 
         val cups = kalahWasher.cups
         kalahWasher.cups = null
-        kalahWasherService.update(kalahWasher)
-        sowCupsFromWasher(cups, kalahWasher, { it.nextKalahWasher?.cups }, { it.nextKalahTable?.cups })
+        rolloutCupsFromPayersWasherOnBoard(cups, kalahWasher, { it.cups }, { it?.cups })
 
         kalahBoard.currentPlayer = player.opponent
-        kalahBoard.kalahWashers?.forEach(Consumer { kw: KalahWasher -> kalahWasherService.create(kw) })
+        kalahBoard.kalahWashers?.forEach(Consumer { kw: KalahWasher -> kalahWasherService.update(kw) })
         checkWinner(kalahBoard)
-        return boardRepository.save(kalahBoard)
+        return kalahBoard
     }
 
-    private fun sowCupsFromWasher(
+    private fun rolloutCupsFromPayersWasherOnBoard(
         cups: MutableList<KalahCup>?,
         kalahWasher: KalahWasher,
         washerCups: (KalahWasher) -> MutableList<KalahCup>?,
-        tableCups: (KalahWasher) -> MutableList<KalahCup>?,
+        tableCups: (KalahTable?) -> MutableList<KalahCup>?,
     ) {
         cups?.let { cupsIt ->
             kalahWasher.nextKalahWasher?.let { nextKalahWasher ->
-                washerCups(kalahWasher)?.add(cupsIt[0])
-                if (cupsIt.size > 0) {
-                    sowCupsFromWasher(
+                washerCups(nextKalahWasher)?.add(cupsIt[0])
+                if (cupsIt.size > 1) {
+                     rolloutCupsFromPayersWasherOnBoard(
                         cupsIt.subList(1, cupsIt.size),
                         nextKalahWasher,
                         washerCups,
@@ -109,8 +108,8 @@ class KalahGameService(
                     )
                 }
             } ?: {
-                tableCups(kalahWasher)?.add(cupsIt[0])
-                if (cupsIt.size > 0) {
+                tableCups(kalahWasher.nextKalahTable)?.add(cupsIt[0])
+                if (cupsIt.size > 1) {
                     sowCupsFromTable(
                         cupsIt.subList(1, cupsIt.size),
                         kalahWasher.nextKalahTable,
@@ -128,13 +127,13 @@ class KalahGameService(
         cups: MutableList<KalahCup>?,
         kalahTable: KalahTable?,
         washerCups: (KalahWasher) -> MutableList<KalahCup>?,
-        tableCups: (KalahWasher) -> MutableList<KalahCup>?,
+        tableCups: (KalahTable?) -> MutableList<KalahCup>?,
     ) {
         cups?.let { cupsIt ->
             kalahTable?.nextKalahWasher?.let { nextKalahWasher ->
                 kalahTable.nextKalahWasher?.cups?.add(cupsIt[0])
-                if (cupsIt.size > 0) {
-                    sowCupsFromWasher(
+                if (cupsIt.size > 1) {
+                    rolloutCupsFromPayersWasherOnBoard(
                         cupsIt.subList(1, cupsIt.size),
                         nextKalahWasher,
                         washerCups,

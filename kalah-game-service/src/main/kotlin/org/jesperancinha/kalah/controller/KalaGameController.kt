@@ -53,7 +53,7 @@ class KalaGameController(
 //        if (startPit?.stones == 0) {
 //            throw ZeroStonesToMoveException()
 //        }
-        val boardUpdated = startPit?.let { player?.let { it1 -> gameService.sowCupsFromWasher(it1, it, board) } }
+        val boardUpdated = startPit?.let { player?.let { it1 -> gameService.rolloutCupsFromPayersWasherOnBoard(it1, it, board) } }
         return boardUpdated?.toDto
     }
 
