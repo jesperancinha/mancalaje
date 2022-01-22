@@ -21,7 +21,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <assertj-core.version>3.11.1</assertj-core.version>
         <maven.compiler>3.8.1</maven.compiler>
-        <h2.version>2.0.206</h2.version>
+        <h2.version>2.1.210</h2.version>
         <spring-security-oauth2-autoconfigure.version>2.5.2</spring-security-oauth2-autoconfigure.version>
         <liquibase-core.version>3.10.3</liquibase-core.version>
         <postgresql.version>42.2.23.jre7</postgresql.version>
