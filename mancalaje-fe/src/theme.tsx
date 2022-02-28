@@ -1,7 +1,7 @@
-import createMuiTheme, {Theme} from "@material-ui/core/styles/createMuiTheme";
 import {blue, green, red} from "@material-ui/core/colors";
 import {createStyles} from "@material-ui/styles";
 import makeStyles from "@material-ui/styles/makeStyles";
+import {createMuiTheme, Theme} from "@material-ui/core/styles";
 
 export const BLUE_WEIGHT = 500;
 export const GREEN_LIGHT_WEIGHT = 100;
