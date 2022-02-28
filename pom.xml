@@ -17,7 +17,7 @@
         <maven.compiler>3.8.1</maven.compiler>
         <h2.version>2.1.210</h2.version>
         <spring-security-oauth2-autoconfigure.version>2.5.2</spring-security-oauth2-autoconfigure.version>
-        <liquibase-core.version>3.10.3</liquibase-core.version>
+        <liquibase-core.version>4.8.0</liquibase-core.version>
         <postgresql.version>42.3.2</postgresql.version>
         <guava.version>31.0.1-jre</guava.version>
         <jmock-junit4.version>2.12.0</jmock-junit4.version>
