@@ -17,11 +17,11 @@
         <maven.compiler>3.8.1</maven.compiler>
         <h2.version>2.1.210</h2.version>
         <spring-security-oauth2-autoconfigure.version>2.5.2</spring-security-oauth2-autoconfigure.version>
-        <liquibase-core.version>3.10.3</liquibase-core.version>
-        <postgresql.version>42.2.23.jre7</postgresql.version>
-        <guava.version>30.1.1-jre</guava.version>
+        <liquibase-core.version>4.8.0</liquibase-core.version>
+        <postgresql.version>42.3.2</postgresql.version>
+        <guava.version>31.0.1-jre</guava.version>
         <jmock-junit4.version>2.12.0</jmock-junit4.version>
-        <activemq-all.version>5.16.2</activemq-all.version>
+        <activemq-all.version>5.16.4</activemq-all.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
@@ -29,10 +29,10 @@
         <jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
         <coveralls-maven-plugin.version>4.3.0</coveralls-maven-plugin.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
-        <kotlin.version>1.6.0-M1</kotlin.version>
+        <kotlin.version>1.6.20-RC</kotlin.version>
         <reactor-test.version>3.4.11</reactor-test.version>
         <springmockk.version>3.0.1</springmockk.version>
-        <kotest.version>5.0.0.M3</kotest.version>
+        <kotest.version>5.1.0</kotest.version>
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
         <dependency-check-maven.version>6.5.3</dependency-check-maven.version>
         <spring-boot.version>2.6.4</spring-boot.version>
