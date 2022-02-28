@@ -56,6 +56,7 @@
     "nodeunit": "^0.9.2",
     "protractor": "~7.0.0",
     "require-context.macro": "^1.2.2",
+    "snyk": "^1.858.0",
     "ts-jest": "^26.5.6",
     "ts-node": "~9.1.1",
     "tslint": "~6.1.3",

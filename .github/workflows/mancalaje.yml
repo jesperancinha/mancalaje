@@ -1,25 +1,56 @@
 name: mancalaje
 
-on: [push]
+on:
+  push:
+    branches: [ master ]
+
 jobs:
-  build:
+  build-test-coverage-report:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 11
-      uses: actions/setup-java@v2
-      with:
-        java-version: '11'
-        distribution: 'adopt'
-    - name: Build
-      run: mvn clean install package
-      env:
-         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-    - name: Coverage with Codecov
-      run: bash <(curl -s https://codecov.io/bash)
-      env:
-         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-    - name: Coverage with Codacy
-      run: bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l Java Kotlin $(find **/jacoco*.xml -printf '-r %p ')
-      env:
-         CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+        - uses: actions/checkout@v2
+        - name: Set up JDK 17
+          uses: actions/setup-java@v2
+          with:
+            java-version: '17'
+            distribution: 'adopt'
+        - uses: actions/setup-node@v2
+          with:
+            node-version: '16'
+
+        - name: Helper Check JEsperancinha.Org
+          run:  curl https://gitlab.com/jesperancinha/joao-filipe-sabino-esperancinha-home/-/raw/master/jesperancinha.org.check.sh -o jesperancinha.org.check.sh &&
+                chmod +x jesperancinha.org.check.sh &&
+                ./jesperancinha.org.check.sh
+
+        - name: Install Jest
+          run: cd buy-odd-yucca-gui && yarn && yarn add jest --dev
+
+        - name: Build and Test
+          run:  mvn clean install jacoco:prepare-agent package jacoco:report
+
+        - name: Node Coverage Kala Game Weg
+          run: cd kala-game-web && npm run coverage
+
+        - name: Node Coverage Mancala Je Fe
+          run: cd mancalaje-fe && npm run coverage
+
+        - name: Coverage Reports
+          run: mvn omni-coveragereporter:report
+          env:
+             COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+             CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+             CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+
+        - name: Maven OWASP Security Check
+          run: mvn clean install -Powasp
+
+        - name: NPM Snyk Security Check Kalah Game Web
+          run: cd kala-game-web && yarn install && npm run snyk
+          env:
+             SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+        - name: NPM Snyk Security Check Mancala Je Fe
+          run: cd mancalaje-fe && yarn install && npm run snyk
+          env:
+             SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}

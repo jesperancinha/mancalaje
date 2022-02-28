@@ -1,0 +1,14 @@
+version: 2
+updates:
+  - package-ecosystem: "maven"
+    directory: "/"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "npm"
+    directory: "/mancalaje-fe"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "npm"
+    directory: "/kala-game-web"
+    schedule:
+      interval: "daily"
