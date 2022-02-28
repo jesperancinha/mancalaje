@@ -34,7 +34,8 @@
     "test": "snyk test && react-scripts test",
     "eject": "react-scripts eject",
     "postbuild": "rm -r docker-files/build && mv build docker-files/",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "snyk": "snyk test"
   },
   "eslintConfig": {
     "extends": "react-app"
