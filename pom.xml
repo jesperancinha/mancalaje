@@ -29,7 +29,7 @@
         <jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
         <coveralls-maven-plugin.version>4.3.0</coveralls-maven-plugin.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
-        <kotlin.version>1.6.0-M1</kotlin.version>
+        <kotlin.version>1.6.20-RC</kotlin.version>
         <reactor-test.version>3.4.11</reactor-test.version>
         <springmockk.version>3.0.1</springmockk.version>
         <kotest.version>5.0.0.M3</kotest.version>
