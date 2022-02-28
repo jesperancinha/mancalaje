@@ -23,13 +23,16 @@ jobs:
                 chmod +x jesperancinha.org.check.sh &&
                 ./jesperancinha.org.check.sh
 
-        - name: Install Jest
-          run: cd buy-odd-yucca-gui && yarn && yarn add jest --dev
+        - name: Install Jest Kala Game Web
+          run: cd kala-game-web && yarn && yarn add jest --dev
+
+        - name: Install Jest Mancala Je Fe
+          run: cd mancalaje-fe && yarn && yarn add jest --dev
 
         - name: Build and Test
           run:  mvn clean install jacoco:prepare-agent package jacoco:report
 
-        - name: Node Coverage Kala Game Weg
+        - name: Node Coverage Kala Game Web
           run: cd kala-game-web && npm run coverage
 
         - name: Node Coverage Mancala Je Fe
