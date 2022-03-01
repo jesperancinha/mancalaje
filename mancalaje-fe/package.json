@@ -23,7 +23,7 @@
     "react-twitter-embed": "^4.0.4",
     "redux": "^4.1.2",
     "styled-components": "latest",
-    "typescript": "4.5.5",
+    "typescript": "4.6.2",
     "yarn": "^1.22.17"
   },
   "scripts": {
