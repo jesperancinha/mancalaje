@@ -56,9 +56,9 @@
     "require-context.macro": "^1.2.2",
     "snyk": "^1.859.0",
     "ts-jest": "^27.1.3",
-    "ts-node": "~10.5.0",
+    "ts-node": "~10.6.0",
     "tslint": "~6.1.3",
-    "typescript": "~4.5.5",
+    "typescript": "~4.6.2",
     "zone.js": "^0.11.4"
   }
 }
