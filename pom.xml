@@ -30,7 +30,7 @@
         <coveralls-maven-plugin.version>4.3.0</coveralls-maven-plugin.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
         <kotlin.version>1.6.20-RC</kotlin.version>
-        <reactor-test.version>3.4.15</reactor-test.version>
+        <reactor-test.version>3.4.16</reactor-test.version>
         <springmockk.version>3.1.1</springmockk.version>
         <kotest.version>5.2.1</kotest.version>
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
