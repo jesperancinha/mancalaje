@@ -39,8 +39,9 @@ stop:
 	docker-compose down --remove-orphans
 minikube-vmware:
 	minikube start --driver=vmware
-install-update:
+install-snyk:
 	npm i -g snyk
+install-update:
 	npm install -g npm-check-updates
 	cd kala-game-web && ncu -u && yarn
 	cd mancalaje-fe && ncu -u && yarn
