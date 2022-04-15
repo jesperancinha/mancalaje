@@ -36,7 +36,7 @@
     "@types/jasmine": "~4.0.3",
     "@types/jasminewd2": "~2.0.10",
     "@types/jest": "^27.4.1",
-    "@types/node": "~17.0.23",
+    "@types/node": "~17.0.24",
     "babel-cli": "^6.26.0",
     "codelyzer": "^6.0.2",
     "identity-obj-proxy": "^3.0.0",
