@@ -35,7 +35,7 @@
         <kotest.version>5.2.3</kotest.version>
         <maven-surefire-plugin.version>3.0.0-M6</maven-surefire-plugin.version>
         <dependency-check-maven.version>7.0.4</dependency-check-maven.version>
-        <spring-boot.version>2.6.6</spring-boot.version>
+        <spring-boot.version>2.6.7</spring-boot.version>
         <omni-coveragereporter-maven-plugin.version>0.3.0</omni-coveragereporter-maven-plugin.version>
         <mockk.version>1.12.3</mockk.version>
     </properties>
