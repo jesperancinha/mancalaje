@@ -51,3 +51,5 @@ audit:
 npm-test:
 	cd kala-game-web && npm run coverage
 	cd mancalaje-fe && npm run coverage
+update-mac-os:
+	brew upgrade npm
