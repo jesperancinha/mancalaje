@@ -41,11 +41,13 @@ minikube-vmware:
 	minikube start --driver=vmware
 install-snyk:
 	npm i -g snyk
-install-update:
+update:
 	npm install -g npm-check-updates
 	cd kala-game-web && ncu -u && yarn
 	cd mancalaje-fe && ncu -u && yarn
 audit:
 	cd kala-game-web && npm audit fix && yarn
 	cd mancalaje-fe && npm audit fix && yarn
-
+npm-test:
+	cd kala-game-web && npm run coverage
+	cd mancalaje-fe && npm run coverage
