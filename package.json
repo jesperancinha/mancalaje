@@ -1,8 +1,0 @@
-{
-  "private": true,
-  "name": "mancalaje",
-  "workspaces": [
-    "packages/kala-game-web",
-    "packages/mancalaje-fe"
-  ]
-}
