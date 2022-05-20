@@ -9585,10 +9585,10 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-snyk@^1.933.0:
-  version "1.933.0"
-  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.933.0.tgz#a8f83734fcb367e49a043b84adab502e9a2decc0"
-  integrity sha512-sLElZCPo+lAzjZNws0eDt2edBDDJqGs2ZVLsWs7dKTF4/tkxxPDKrjvgGSTEde8DLx2XrIWrUS4efKPZRMkVOw==
+snyk@^1.934.0:
+  version "1.934.0"
+  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.934.0.tgz#a0ac84b8a2c2c7cf273db6bad6092e1c22533def"
+  integrity sha512-OMNE2NDjUREcCkaeGHoSyLbrINj4nF5SO9Zx8E5lcNXgU+zxvl3ei0tjbWe0oFkNdGRrQfsodlunVDO22KkLrQ==
 
 sockjs@^0.3.21:
   version "0.3.24"
