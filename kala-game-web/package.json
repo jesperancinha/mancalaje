@@ -42,7 +42,7 @@
     "identity-obj-proxy": "^3.0.0",
     "is-utf8": "^0.2.1",
     "istanbul-reports": "^3.1.4",
-    "jasmine-core": "~4.1.1",
+    "jasmine-core": "~4.2.0",
     "jasmine-spec-reporter": "~7.0.0",
     "jest": "^28.1.1",
     "jest-preset-angular": "^12.1.0",
