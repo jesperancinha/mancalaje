@@ -1602,13 +1602,6 @@
     terminal-link "^2.0.0"
     v8-to-istanbul "^9.0.1"
 
-"@jest/schemas@^28.0.2":
-  version "28.0.2"
-  resolved "https://registry.npmjs.org/@jest/schemas/-/schemas-28.0.2.tgz"
-  integrity sha512-YVDJZjd4izeTDkij00vHHAymNXQ6WWsdChFRK86qck6Jpr3DCL5W3Is3vslviRlP+bLuMYRLbdp98amMvqudhA==
-  dependencies:
-    "@sinclair/typebox" "^0.23.3"
-
 "@jest/schemas@^28.1.3":
   version "28.1.3"
   resolved "https://registry.yarnpkg.com/@jest/schemas/-/schemas-28.1.3.tgz#ad8b86a66f11f33619e3d7e1dcddd7f2d40ff905"
@@ -1889,11 +1882,6 @@
   version "1.1.3"
   resolved "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.1.3.tgz"
   integrity sha512-WiBSI6JBIhC6LRIsB2Kwh8DsGTlbBU+mLRxJmAe3LjHTdkDpwIbEOZgoXBbZilk/vlfjK8i6nKRAvIRn1XaIMw==
-
-"@sinclair/typebox@^0.23.3":
-  version "0.23.5"
-  resolved "https://registry.npmjs.org/@sinclair/typebox/-/typebox-0.23.5.tgz"
-  integrity sha512-AFBVi/iT4g20DHoujvMH1aEDn8fGJh4xsRGCP6d8RpLPMqsNPvW01Jcn0QysXTsg++/xj25NmJsGyH9xug/wKg==
 
 "@sinclair/typebox@^0.24.1":
   version "0.24.19"
@@ -6647,10 +6635,10 @@ jest-pnp-resolver@^1.2.2:
   resolved "https://registry.npmjs.org/jest-pnp-resolver/-/jest-pnp-resolver-1.2.2.tgz"
   integrity sha512-olV41bKSMm8BdnuMsewT4jqlZ8+3TCARAXjZGT9jcoSnrfUnRCqnMoF9XEeoWjbzObpqF9dRhHQj0Xb9QdF6/w==
 
-jest-preset-angular@^12.1.0:
-  version "12.1.0"
-  resolved "https://registry.yarnpkg.com/jest-preset-angular/-/jest-preset-angular-12.1.0.tgz#ab853bc26c7a4920a2b3a66ea3de6533379badd7"
-  integrity sha512-zOiUvAMqIYkr8yRRO9x2NwVD8rzx0GtDaWxxox5GdgFQ/EEeIMI2Wqf5gfuX0t3Cnrq+K6cJCr181VMrjPkLPA==
+jest-preset-angular@^12.2.0:
+  version "12.2.0"
+  resolved "https://registry.yarnpkg.com/jest-preset-angular/-/jest-preset-angular-12.2.0.tgz#05515d751feda968161db29569e59ff20b888090"
+  integrity sha512-dXnPdcglVcJeXdnxrws3M/gxLlYWaZGU7JS+ffuiCfMzG0AO3EDo/wpsPsxvnjCZiov1uV7g7UD1dHtmOW/sEw==
   dependencies:
     bs-logger "^0.2.6"
     esbuild-wasm ">=0.13.8"
@@ -8783,17 +8771,7 @@ pretty-format@^27.0.2, pretty-format@^27.5.1:
     ansi-styles "^5.0.0"
     react-is "^17.0.1"
 
-pretty-format@^28.0.0, pretty-format@^28.0.2, pretty-format@^28.1.1:
-  version "28.1.1"
-  resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-28.1.1.tgz#f731530394e0f7fcd95aba6b43c50e02d86b95cb"
-  integrity sha512-wwJbVTGFHeucr5Jw2bQ9P+VYHyLdAqedFLEkdQUVaBF/eiidDwH5OpilINq4mEfhbCjLnirt6HTTDhv1HaTIQw==
-  dependencies:
-    "@jest/schemas" "^28.0.2"
-    ansi-regex "^5.0.1"
-    ansi-styles "^5.0.0"
-    react-is "^18.0.0"
-
-pretty-format@^28.1.3:
+pretty-format@^28.0.0, pretty-format@^28.0.2, pretty-format@^28.1.1, pretty-format@^28.1.3:
   version "28.1.3"
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-28.1.3.tgz#c9fba8cedf99ce50963a11b27d982a9ae90970d5"
   integrity sha512-8gFb/To0OmxHR9+ZTb14Df2vNxdGCX8g1xWGUTqUw5TiZvcQf5sHKObd5UcPyLLyowNwDAMTF3XWOG1B6mxl1Q==
