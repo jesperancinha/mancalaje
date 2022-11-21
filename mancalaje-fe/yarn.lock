@@ -9914,10 +9914,10 @@ slash@^4.0.0:
   resolved "https://registry.npmjs.org/slash/-/slash-4.0.0.tgz"
   integrity sha512-3dOsAHXXUkQTpOYcoAxLIorMTp4gIQr5IW3iVb7A7lFIp0VHhnynm9izx6TssdrIcVIESAlVjtnO2K8bg+Coew==
 
-snyk@^1.1060.0:
-  version "1.1060.0"
-  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.1060.0.tgz#42ecc48cee64167cc29321cb9fc4a75c3f54ad5a"
-  integrity sha512-WAYComfIYczRf/BnXNOTnmboGuyX6zkYznqJReKxb+h6AbG6IzC5O9qOWe6ws3v3BXDpfi4AjcaaBeo4WHOxMw==
+snyk@^1.1061.0:
+  version "1.1061.0"
+  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.1061.0.tgz#08b75b3ff1e6480cd388381af8af773ffe48ce15"
+  integrity sha512-kPy4Wi/Nt3zIzm+D3H1OX0lWrHm7L7jWSp7HJeZQ9udqPk5KaLLwszWxZXvw3p6RGvafR+O3Hlb7z+RY4DMi4w==
 
 sockjs@^0.3.21:
   version "0.3.24"
