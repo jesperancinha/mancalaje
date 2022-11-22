@@ -7897,10 +7897,10 @@ nested-error-stacks@^2.0.0:
   resolved "https://registry.yarnpkg.com/nested-error-stacks/-/nested-error-stacks-2.1.0.tgz#0fbdcf3e13fe4994781280524f8b96b0cdff9c61"
   integrity sha512-AO81vsIO1k1sM4Zrd6Hu7regmJN1NSiAja10gc4bX3F0wd+9rQmcuHQaHVQCYIEC8iFXnE+mavh23GOt7wBgug==
 
-ngx-pagination@^6.0.2:
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/ngx-pagination/-/ngx-pagination-6.0.2.tgz#8a633a254c093ff0b058f94192447d6c788b6d0b"
-  integrity sha512-7N4FA244ls7h/977EqvcDXuyB/U5rPJI+FD0Zj9orrXb+kX2SOX0WP+yQw50Gm/Dy9aPOE91FkgoYzGyRSPY0A==
+ngx-pagination@^6.0.3:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/ngx-pagination/-/ngx-pagination-6.0.3.tgz#083f77a5c9c3ebf5800fb57a280da71aacc10a18"
+  integrity sha512-lONjTQ7hFPh1SyhwDrRd5ZwM4NMGQ7bNR6vLrs6mrU0Z8Q1zCcWbf/pvyp4DOlGyd9uyZxRy2wUsSZLeIPjbAw==
   dependencies:
     tslib "^2.3.0"
 
