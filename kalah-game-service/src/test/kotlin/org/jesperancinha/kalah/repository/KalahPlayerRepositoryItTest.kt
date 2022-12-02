@@ -2,15 +2,18 @@ package org.jesperancinha.kalah.repository
 
 import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.nulls.shouldNotBeNull
+import jakarta.transaction.Transactional
+import org.jesperancinha.kalah.containers.AbstractTestContainersIT.DockerPostgresDataInitializer
 import org.jesperancinha.kalah.model.Player
 import org.jesperancinha.kalah.service.KalahGameService
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import jakarta.transaction.Transactional
+import org.springframework.test.context.ContextConfiguration
 
 @SpringBootTest
 @Transactional
+@ContextConfiguration(initializers = [DockerPostgresDataInitializer::class])
 internal class KalahPlayerRepositoryItTest(
     @Autowired
     private val kalahPlayerRepository: KalahPlayerRepository

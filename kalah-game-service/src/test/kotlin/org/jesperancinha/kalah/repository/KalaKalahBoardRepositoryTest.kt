@@ -3,6 +3,7 @@ package org.jesperancinha.kalah.repository
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import org.jesperancinha.kalah.containers.AbstractTestContainersIT
+import org.jesperancinha.kalah.containers.AbstractTestContainersIT.DockerPostgresDataInitializer
 import org.jesperancinha.kalah.model.KalahBoard
 import org.jesperancinha.kalah.model.KalahWasher
 import org.jesperancinha.kalah.model.Player
@@ -16,7 +17,7 @@ import java.util.UUID.randomUUID
 
 @SpringBootTest
 @Transactional
-@ContextConfiguration(initializers = [AbstractTestContainersIT.DockerPostgresDataInitializer::class])
+@ContextConfiguration(initializers = [DockerPostgresDataInitializer::class])
 internal class KalaKalahBoardRepositoryTest(
     @Autowired
     private val kalahWasherRepository: KalahWasherRepository,

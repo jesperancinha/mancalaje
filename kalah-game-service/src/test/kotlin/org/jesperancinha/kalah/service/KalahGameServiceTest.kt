@@ -7,6 +7,8 @@ import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeSameInstanceAs
+import org.jesperancinha.kalah.containers.AbstractTestContainersIT
+import org.jesperancinha.kalah.containers.AbstractTestContainersIT.DockerPostgresDataInitializer
 import org.jesperancinha.kalah.model.KalahCup
 import org.jesperancinha.kalah.model.KalahWasher
 import org.jesperancinha.kalah.model.Player
@@ -15,9 +17,11 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
+import org.springframework.test.context.ContextConfiguration
 import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
+@ContextConfiguration(initializers = [DockerPostgresDataInitializer::class])
 @Transactional
 internal class KalahGameServiceTest(
     @Autowired
