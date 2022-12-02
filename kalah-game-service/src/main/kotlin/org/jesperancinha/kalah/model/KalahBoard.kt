@@ -1,17 +1,11 @@
 package org.jesperancinha.kalah.model
 
+import jakarta.persistence.*
+import jakarta.persistence.FetchType.LAZY
 import org.hibernate.Hibernate
 import org.jesperancinha.kalah.dto.BoardDto
 import org.springframework.data.annotation.Version
 import java.time.Instant
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.OneToMany
-import javax.persistence.OneToOne
-import javax.persistence.Table
 
 @Entity
 @Table
@@ -20,37 +14,37 @@ data class KalahBoard(
     @GeneratedValue(strategy = GenerationType.AUTO)
     internal var id: Long? = null,
 
-    @OneToMany
+    @OneToMany(fetch = LAZY)
     internal var kalahWashers: List<KalahWasher>? = null,
 
-    @OneToOne
+    @OneToOne(fetch = LAZY)
     internal var kalahWasherOne: KalahWasher? = null,
 
-    @OneToOne
+    @OneToOne(fetch = LAZY)
     internal var kalahWasherTwo: KalahWasher? = null,
 
-    @OneToOne
+    @OneToOne(fetch = LAZY)
     internal var kalahTableOne: KalahTable? = null,
 
-    @OneToOne
+    @OneToOne(fetch = LAZY)
     internal var kalahTableTwo: KalahTable? = null,
 
-    @OneToOne
+    @OneToOne(fetch = LAZY)
     internal var playerOne: Player? = null,
 
-    @OneToOne
+    @OneToOne(fetch = LAZY)
     internal var playerTwo: Player? = null,
 
-    @OneToOne
+    @OneToOne(fetch = LAZY)
     internal var currentPlayer: Player? = null,
 
-    @OneToOne
+    @OneToOne(fetch = LAZY)
     internal var winner: Player? = null,
 
     @Version
     internal var version: Int? = null,
 
-    @OneToOne
+    @OneToOne(fetch = LAZY)
     internal val owner: Player,
 
     @Column

@@ -2,18 +2,22 @@ package org.jesperancinha.kalah.repository
 
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
+import org.jesperancinha.kalah.containers.AbstractTestContainersIT
+import org.jesperancinha.kalah.containers.AbstractTestContainersIT.DockerPostgresDataInitializer
 import org.jesperancinha.kalah.model.KalahBoard
 import org.jesperancinha.kalah.model.KalahWasher
 import org.jesperancinha.kalah.model.Player
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.ContextConfiguration
 import org.springframework.transaction.annotation.Transactional
 import java.util.UUID.randomUUID
 
-@DataJpaTest
+@SpringBootTest
 @Transactional
+@ContextConfiguration(initializers = [DockerPostgresDataInitializer::class])
 internal class KalaKalahBoardRepositoryTest(
     @Autowired
     private val kalahWasherRepository: KalahWasherRepository,
@@ -46,7 +50,8 @@ internal class KalaKalahBoardRepositoryTest(
         kalahWasherRepository.save(kalahWasherOne)
         val kalahBoardPlayerOne = KalahBoard(playerOne = player1, kalahWasherOne = kalahWasherOne, owner = player1)
         val kalahBoardPlayerTwo = KalahBoard(playerOne = player2, kalahWasherOne = kalahWasherOne, owner = player1)
-        val kalahBoardPlayerThree = KalahBoard(playerOne = player3, playerTwo = player2, kalahWasherOne = kalahWasherOne, owner = player1)
+        val kalahBoardPlayerThree =
+            KalahBoard(playerOne = player3, playerTwo = player2, kalahWasherOne = kalahWasherOne, owner = player1)
         kalahBoardRepository.save(kalahBoardPlayerOne)
         kalahBoardRepository.save(kalahBoardPlayerTwo)
         kalahBoardRepository.save(kalahBoardPlayerThree)

@@ -14,7 +14,7 @@ import javax.sql.DataSource
  * Created by jofisaes on 06/09/2021
  */
 @Configuration
-open class SecurityPopulator(
+class SecurityPopulator(
     applicationContext: ApplicationContext,
     dataSource: DataSource,
     passwordEncoder: PasswordEncoder,

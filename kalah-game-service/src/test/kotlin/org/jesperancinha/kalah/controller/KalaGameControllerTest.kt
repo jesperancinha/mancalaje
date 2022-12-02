@@ -5,6 +5,8 @@ import com.ninjasquad.springmockk.MockkBean
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.verify
+import org.jesperancinha.kalah.containers.AbstractTestContainersIT
+import org.jesperancinha.kalah.containers.AbstractTestContainersIT.DockerPostgresDataInitializer
 import org.jesperancinha.kalah.dto.BoardDto
 import org.jesperancinha.kalah.exception.PlayerNotJoinedYetException
 import org.jesperancinha.kalah.model.KalahBoard
@@ -21,15 +23,21 @@ import org.jesperancinha.kalah.service.KalahPlayerService
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.provisioning.JdbcUserDetailsManager
 import org.springframework.security.test.context.support.WithMockUser
+import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 
-@WebMvcTest(controllers = [KalaGameController::class])
+@SpringBootTest
+@AutoConfigureMockMvc
+@ContextConfiguration(initializers = [DockerPostgresDataInitializer::class])
 class KalaGameControllerTest(
     @Autowired
     private val mockMvc: MockMvc
@@ -47,7 +55,7 @@ class KalaGameControllerTest(
     private lateinit var jdbcUserDetailsManager: JdbcUserDetailsManager
 
     @MockkBean(relaxed = true)
-    private lateinit var passwordEncoder: PasswordEncoder
+    private lateinit var bCryptPasswordEncoder: BCryptPasswordEncoder
 
     @MockkBean(relaxed = true)
     private lateinit var kalahWasherRepository: KalahWasherRepository
@@ -85,15 +93,19 @@ class KalaGameControllerTest(
 
     @Test
     @WithMockUser("player1")
-    @Disabled
     fun testMove_whenPlayer2NotJoined_thenFail() {
         kalahBoard.id = 1L
         val kalahWasher = KalahWasher()
         kalahWasher.id = 1L
-//        kalahWasher.stones = 10
         kalahBoard.kalahWashers = listOf(kalahWasher)
         every { boardService.findBoardById(1L) } returns kalahBoard
-        every { gameService.rolloutCupsFromPayersWasherOnBoard(any(), any(), any()) } throws PlayerNotJoinedYetException()
+        every {
+            gameService.rolloutCupsFromPayersWasherOnBoard(
+                any(),
+                any(),
+                any()
+            )
+        } throws PlayerNotJoinedYetException()
         mockMvc.perform(MockMvcRequestBuilders.put("/api/move/1/1"))
             .andExpect(MockMvcResultMatchers.status().isNotFound)
             .andExpect(MockMvcResultMatchers.content().string("NOT_JOINED"))
@@ -107,7 +119,6 @@ class KalaGameControllerTest(
         kalahBoard.id = 1L
         val kalahWasher = KalahWasher()
         kalahWasher.id = 1L
-//        kalahWasher.stones = 0
         kalahBoard.kalahWashers = listOf(kalahWasher)
         every { boardService.findBoardById(1L) } returns kalahBoard
         mockMvc.perform(MockMvcRequestBuilders.put("/api/move/1/1"))

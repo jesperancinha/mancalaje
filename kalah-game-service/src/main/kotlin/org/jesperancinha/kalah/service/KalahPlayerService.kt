@@ -4,7 +4,7 @@ import org.jesperancinha.kalah.model.Player
 import org.jesperancinha.kalah.repository.KalahPlayerRepository
 import org.springframework.stereotype.Service
 import java.util.*
-import javax.transaction.Transactional
+import jakarta.transaction.Transactional
 
 @Service
 class KalahPlayerService(private val playerRepository: KalahPlayerRepository) {
