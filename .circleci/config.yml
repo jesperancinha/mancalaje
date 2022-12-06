@@ -1,10 +1,13 @@
 version: 2
 jobs:
-  build-service:
-    docker:
-      - image: circleci/openjdk:11-ea-28-jdk
+   build-service:
+    machine:
+      image: ubuntu-2004:202010-01
+
+    working_directory: ~/repo
 
     environment:
+      # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
 
     steps:
