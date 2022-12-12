@@ -52,3 +52,6 @@ jobs:
           run: cd mancalaje-fe && yarn install && npm run snyk
           env:
              SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+        - name: Version statuses
+          run: make version-status
