@@ -18,7 +18,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven.compiler>3.8.1</maven.compiler>
         <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
-        <versions-maven-plugin.version>2.14.1</versions-maven-plugin.version>
+        <versions-maven-plugin.version>2.14.2</versions-maven-plugin.version>
         <dependency-check-maven.version>7.4.1</dependency-check-maven.version>
 
         <kotlin.version>1.7.22</kotlin.version>
