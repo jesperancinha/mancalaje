@@ -2,7 +2,8 @@ b: build-npm build-maven
 build: build-npm
 	mvn clean install
 build-npm:
-	yarn install
+	cd kala-game-web && yarn
+	cd mancalaje-fe && yarn
 build-maven:
 	mvn clean install -Pdemo -DskipTests
 test:
@@ -43,8 +44,11 @@ install-snyk:
 	npm i -g snyk
 update:
 	npm install -g npm-check-updates
-	cd kala-game-web && ncu -u && yarn
-	cd mancalaje-fe && ncu -u && yarn
+	cd kala-game-web && ncu -u
+	cd mancalaje-fe && ncu -u
+update-browsers:
+	cd kala-game-web && npx browserslist@latest --update-db
+	cd mancalaje-fe && npx browserslist@latest --update-db
 audit:
 	cd kala-game-web && npm audit fix && yarn
 	cd mancalaje-fe && npm audit fix && yarn
