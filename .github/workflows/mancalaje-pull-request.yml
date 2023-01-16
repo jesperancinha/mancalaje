@@ -18,6 +18,12 @@ jobs:
           with:
             node-version: '16'
 
+        - name: Install Jest Kala Game Web
+          run: cd kala-game-web && yarn && yarn add jest --dev
+
+        - name: Install Jest Mancala Je Fe
+          run: cd mancalaje-fe && yarn && yarn add jest --dev
+
         - name: Build and Test
           run:  mvn clean install jacoco:prepare-agent package jacoco:report
 
