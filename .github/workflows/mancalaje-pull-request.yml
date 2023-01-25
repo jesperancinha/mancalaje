@@ -27,6 +27,9 @@ jobs:
         - name: Build and Test
           run:  mvn clean install jacoco:prepare-agent package jacoco:report
 
+        - name: Install SNYK
+          run: npm install -g snyk
+
         - name: Node Coverage Kala Game Web
           run: cd kala-game-web && npm run coverage
 
