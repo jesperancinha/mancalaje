@@ -43,6 +43,9 @@ jobs:
         - name: Maven OWASP Security Check
           run: mvn clean install -Powasp
 
+        - name: Install SNYK
+          run: npm install -g snyk
+
         - name: NPM Snyk Security Check Kalah Game Web
           run: cd kala-game-web && yarn install && npm run snyk
           env:
