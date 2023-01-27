@@ -220,10 +220,10 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/language-service@~15.1.1":
-  version "15.1.1"
-  resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-15.1.1.tgz#5975d520eb0c266be91f135ff615bf6e890fec64"
-  integrity sha512-Wjn1t5ZjEuEJ3i2xdBArFadq4Aq7h95owiI1AcrjJ8/jjSHzszbTcQ1qs+FMKuq37A3pcpgXx6myekftRuNBkw==
+"@angular/language-service@~15.1.2":
+  version "15.1.2"
+  resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-15.1.2.tgz#ef7d422a8c46d09cfd8138f71f880142c6391a28"
+  integrity sha512-TMGoJRe6eQZxRe3uy/3yP5OTJHn+swtWd8qvvlmgMiqITW2m9MSnqIpOrEaJOtNrzhBoM5b/QxRXJrg9qD1ffQ==
 
 "@angular/material@^15.1.0":
   version "15.1.0"
@@ -9934,11 +9934,6 @@ snapdragon@^0.8.1:
     source-map "^0.5.6"
     source-map-resolve "^0.5.0"
     use "^3.1.0"
-
-snyk@^1.1089.0:
-  version "1.1089.0"
-  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.1089.0.tgz#3af9c8b4866bfdfc9799d89f4054cf1f1c53d932"
-  integrity sha512-2NOszQsDjkxmcL+ZrYz2GgHKfoI8A+8rp4DFPFSTdkni0bzDeGx8LD5pLScDTT393j7w46TT0z7NZX8gZY5tAA==
 
 sockjs@^0.3.24:
   version "0.3.24"
