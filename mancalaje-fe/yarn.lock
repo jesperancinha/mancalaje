@@ -1677,7 +1677,7 @@
     "@types/node" "*"
     jest-mock "^28.1.3"
 
-"@jest/environment@^29.3.1", "@jest/environment@^29.4.0":
+"@jest/environment@^29.4.0":
   version "29.4.0"
   resolved "https://registry.yarnpkg.com/@jest/environment/-/environment-29.4.0.tgz#b15d7bfc873d6348dfd7323e50083d2c1e067750"
   integrity sha512-ocl1VGDcZHfHnYLTqkBY7yXme1bF4x0BevJ9wb6y0sLOSyBCpp8L5fEASChB+wU53WMrIK6kBfGt+ZYoM2kcdw==
@@ -1736,7 +1736,7 @@
     jest-mock "^28.1.3"
     jest-util "^28.1.3"
 
-"@jest/fake-timers@^29.3.1", "@jest/fake-timers@^29.4.0":
+"@jest/fake-timers@^29.4.0":
   version "29.4.0"
   resolved "https://registry.yarnpkg.com/@jest/fake-timers/-/fake-timers-29.4.0.tgz#9a2409cae63eb1d0122edc21783ef88c67e6face"
   integrity sha512-8sitzN2QrhDwEwH3kKcMMgrv/UIkmm9AUgHixmn4L++GQ0CqVTIztm3YmaIQooLmW3O4GhizNTTCyq3iLbWcMw==
@@ -1846,13 +1846,6 @@
   integrity sha512-/l/VWsdt/aBXgjshLWOFyFt3IVdYypu5y2Wn2rOO1un6nkqIn8SLXzgIMYXFyYsRWDyF5EthmKJMIdJvk08grg==
   dependencies:
     "@sinclair/typebox" "^0.24.1"
-
-"@jest/schemas@^29.4.0":
-  version "29.4.0"
-  resolved "https://registry.yarnpkg.com/@jest/schemas/-/schemas-29.4.0.tgz#0d6ad358f295cc1deca0b643e6b4c86ebd539f17"
-  integrity sha512-0E01f/gOZeNTG76i5eWWSupvSHaIINrTie7vCyjiYFKgzNdyEGd12BUv4oNBFHOqlHDbtoJi3HrQ38KCC90NsQ==
-  dependencies:
-    "@sinclair/typebox" "^0.25.16"
 
 "@jest/schemas@^29.4.0":
   version "29.4.0"
@@ -1994,7 +1987,7 @@
     "@types/yargs" "^17.0.8"
     chalk "^4.0.0"
 
-"@jest/types@^29.3.1", "@jest/types@^29.4.1":
+"@jest/types@^29.4.0", "@jest/types@^29.4.1":
   version "29.4.1"
   resolved "https://registry.yarnpkg.com/@jest/types/-/types-29.4.1.tgz#f9f83d0916f50696661da72766132729dcb82ecb"
   integrity sha512-zbrAXDUOnpJ+FMST2rV7QZOgec8rskg2zv8g2ajeqitp4tvZiyqTCYXANrKsM+ryj5o+LI+ZN2EgU9drrkiwSA==
@@ -2116,10 +2109,10 @@
     schema-utils "^3.0.0"
     source-map "^0.7.3"
 
-"@reduxjs/toolkit@^1.9.1":
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/@reduxjs/toolkit/-/toolkit-1.9.1.tgz#4c34dc4ddcec161535288c60da5c19c3ef15180e"
-  integrity sha512-HikrdY+IDgRfRYlCTGUQaiCxxDDgM1mQrRbZ6S1HFZX5ZYuJ4o8EstNmhTwHdPl2rTmLxzwSu0b3AyeyTlR+RA==
+"@reduxjs/toolkit@^1.9.2":
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/@reduxjs/toolkit/-/toolkit-1.9.2.tgz#4cd153491118038e2eebcb63b2264e42a8a2d74c"
+  integrity sha512-5ZAZ7hwAKWSii5T6NTPmgIBUqyVdlDs+6JjThz6J6dmHLDm6zCzv2OjHIFAi3Vvs1qjmXU0bm6eBojukYXjVMQ==
   dependencies:
     immer "^9.0.16"
     redux "^4.2.0"
@@ -6947,18 +6940,18 @@ jest-message-util@^28.1.3:
     slash "^3.0.0"
     stack-utils "^2.0.3"
 
-jest-message-util@^29.3.1:
-  version "29.3.1"
-  resolved "https://registry.yarnpkg.com/jest-message-util/-/jest-message-util-29.3.1.tgz#37bc5c468dfe5120712053dd03faf0f053bd6adb"
-  integrity sha512-lMJTbgNcDm5z+6KDxWtqOFWlGQxD6XaYwBqHR8kmpkP+WWWG90I35kdtQHY67Ay5CSuydkTBbJG+tH9JShFCyA==
+jest-message-util@^29.4.0:
+  version "29.4.0"
+  resolved "https://registry.yarnpkg.com/jest-message-util/-/jest-message-util-29.4.0.tgz#60d3f3dd6b5ef08ec9b698f434fbbafdb0af761d"
+  integrity sha512-0FvobqymmhE9pDEifvIcni9GeoKLol8eZspzH5u41g1wxYtLS60a9joT95dzzoCgrKRidNz64eaAXyzaULV8og==
   dependencies:
     "@babel/code-frame" "^7.12.13"
-    "@jest/types" "^29.3.1"
+    "@jest/types" "^29.4.0"
     "@types/stack-utils" "^2.0.0"
     chalk "^4.0.0"
     graceful-fs "^4.2.9"
     micromatch "^4.0.4"
-    pretty-format "^29.3.1"
+    pretty-format "^29.4.0"
     slash "^3.0.0"
     stack-utils "^2.0.3"
 
@@ -6974,21 +6967,6 @@ jest-message-util@^29.4.1:
     graceful-fs "^4.2.9"
     micromatch "^4.0.4"
     pretty-format "^29.4.1"
-    slash "^3.0.0"
-    stack-utils "^2.0.3"
-
-jest-message-util@^29.4.0:
-  version "29.4.0"
-  resolved "https://registry.yarnpkg.com/jest-message-util/-/jest-message-util-29.4.0.tgz#60d3f3dd6b5ef08ec9b698f434fbbafdb0af761d"
-  integrity sha512-0FvobqymmhE9pDEifvIcni9GeoKLol8eZspzH5u41g1wxYtLS60a9joT95dzzoCgrKRidNz64eaAXyzaULV8og==
-  dependencies:
-    "@babel/code-frame" "^7.12.13"
-    "@jest/types" "^29.4.0"
-    "@types/stack-utils" "^2.0.0"
-    chalk "^4.0.0"
-    graceful-fs "^4.2.9"
-    micromatch "^4.0.4"
-    pretty-format "^29.4.0"
     slash "^3.0.0"
     stack-utils "^2.0.3"
 
@@ -7008,7 +6986,7 @@ jest-mock@^28.1.3:
     "@jest/types" "^28.1.3"
     "@types/node" "*"
 
-jest-mock@^29.3.1, jest-mock@^29.4.0:
+jest-mock@^29.4.0:
   version "29.4.0"
   resolved "https://registry.yarnpkg.com/jest-mock/-/jest-mock-29.4.0.tgz#efb5d99da5e4548ea02d505c89aafdd06d899cb8"
   integrity sha512-+ShT5i+hcu/OFQRV0f/V/YtwpdFcHg64JZ9A8b40JueP+X9HNrZAYGdkupGIzsUK8AucecxCt4wKauMchxubLQ==
@@ -7308,7 +7286,7 @@ jest-util@^28.0.0, jest-util@^28.0.2, jest-util@^28.1.3:
     graceful-fs "^4.2.9"
     picomatch "^2.2.3"
 
-jest-util@^29.0.0, jest-util@^29.3.1, jest-util@^29.4.0:
+jest-util@^29.0.0, jest-util@^29.4.0:
   version "29.4.0"
   resolved "https://registry.yarnpkg.com/jest-util/-/jest-util-29.4.0.tgz#1f3743c3dda843049623501c7e6f8fa5efdc2c2f"
   integrity sha512-lCCwlze7UEV8TpR9ArS8w0cTbcMry5tlBkg7QSc5og5kNyV59dnY2aKHu5fY2k5aDJMQpCUGpvL2w6ZU44lveA==
@@ -9245,7 +9223,7 @@ pretty-format@^28.0.0, pretty-format@^28.0.2, pretty-format@^28.1.3:
     ansi-styles "^5.0.0"
     react-is "^18.0.0"
 
-pretty-format@^29.0.0, pretty-format@^29.3.1, pretty-format@^29.4.1:
+pretty-format@^29.0.0, pretty-format@^29.4.1:
   version "29.4.1"
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-29.4.1.tgz#0da99b532559097b8254298da7c75a0785b1751c"
   integrity sha512-dt/Z761JUVsrIKaY215o1xQJBGlSmTx/h4cSqXqjHLnU1+Kt+mavVE7UgqJJO5ukx5HjSswHfmXz4LjS2oIJfg==
