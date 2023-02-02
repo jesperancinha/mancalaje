@@ -37,7 +37,7 @@
         <kotest.version>5.5.4</kotest.version>
         <reactor-test.version>3.5.2</reactor-test.version>
 
-        <omni-coveragereporter-maven-plugin.version>0.4.0</omni-coveragereporter-maven-plugin.version>
+        <omni-coveragereporter-maven-plugin.version>0.4.1</omni-coveragereporter-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
     </properties>
 
