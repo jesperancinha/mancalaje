@@ -7335,10 +7335,10 @@ jest-preset-angular@^13.0.0:
   optionalDependencies:
     esbuild ">=0.13.8"
 
-jest-puppeteer@^8.0.3:
-  version "8.0.3"
-  resolved "https://registry.yarnpkg.com/jest-puppeteer/-/jest-puppeteer-8.0.3.tgz#d5355e59b1cda70a11407b3c95b97e1de020edb6"
-  integrity sha512-Klv1r1BsYwSjS3DNdmYiwF9+XI3giNHrb9Q+M5aR6OPy++K8TZQ+1DBP8fgXK/T3ygbn3Yf3PV6PPFk5NKz+rg==
+jest-puppeteer@^8.0.4:
+  version "8.0.4"
+  resolved "https://registry.yarnpkg.com/jest-puppeteer/-/jest-puppeteer-8.0.4.tgz#963f3404c3acb82aca08b4516c455507d6f594e7"
+  integrity sha512-dQBg0RWl5371cfwPeQ1dsML0N15bYDn1wb5mNEUlLT8fgWUzNp48pm0jznFg2P/4NPYh3ytanDTStEbkNJSohg==
   dependencies:
     expect-puppeteer "^8.0.3"
     jest-environment-puppeteer "^8.0.3"
