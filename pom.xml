@@ -22,7 +22,7 @@
         <dependency-check-maven.version>8.2.1</dependency-check-maven.version>
 
         <kotlin.version>1.8.21</kotlin.version>
-        <kotlinx-coroutines-debug.version>1.7.0</kotlinx-coroutines-debug.version>
+        <kotlinx-coroutines-debug.version>1.7.1</kotlinx-coroutines-debug.version>
 
         <postgresql.version>42.6.0</postgresql.version>
         <h2.version>2.1.214</h2.version>
