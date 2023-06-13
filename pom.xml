@@ -19,7 +19,7 @@
         <maven.compiler>3.8.1</maven.compiler>
         <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
         <versions-maven-plugin.version>2.16.0</versions-maven-plugin.version>
-        <dependency-check-maven.version>8.2.1</dependency-check-maven.version>
+        <dependency-check-maven.version>8.3.1</dependency-check-maven.version>
 
         <kotlin.version>1.8.22</kotlin.version>
         <kotlinx-coroutines-debug.version>1.7.1</kotlinx-coroutines-debug.version>
