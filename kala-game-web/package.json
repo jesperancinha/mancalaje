@@ -30,9 +30,9 @@
   "devDependencies": {
     "@angular-builders/jest": "15.0.0",
     "@angular-devkit/build-angular": "~15.2.7",
-    "@angular/cli": "~16.0.5",
+    "@angular/cli": "~16.1.0",
     "@angular/compiler-cli": "~15.1.0",
-    "@angular/language-service": "~16.0.5",
+    "@angular/language-service": "~16.1.0",
     "@types/jasmine": "~4.3.2",
     "@types/jasminewd2": "~2.0.10",
     "@types/jest": "^29.5.2",
