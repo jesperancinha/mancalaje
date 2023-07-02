@@ -12,6 +12,7 @@ import org.jesperancinha.kalah.model.Player
 import org.jesperancinha.kalah.repository.KalahBoardRepository
 import org.jesperancinha.kalah.repository.KalahPlayerRepository
 import org.jesperancinha.kalah.repository.KalahTableRepository
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.util.*
 import java.util.function.Consumer
@@ -41,8 +42,8 @@ class KalahGameService(
         val lastWasher2 = generateHalfBoard(kalahWashers, kalahTable2) { kalahBoard.kalahWasherTwo = it }
         lastWasher2.nextKalahTable = kalahTable
         kalahWashers.forEach { kalahWasher: KalahWasher -> kalahWasherService.update(kalahWasher) }
-        kalahBoard.kalahTableOne = kalahTable
-        kalahBoard.kalahTableTwo = kalahTable2
+        kalahBoard.kalahTableOne = tableRepository.findByIdOrNull(kalahTable.id)
+        kalahBoard.kalahTableTwo = tableRepository.findByIdOrNull(kalahTable2.id)
         return boardRepository.save(kalahBoard)
     }
 
@@ -52,20 +53,22 @@ class KalahGameService(
         pivotTo: (KalahWasher) -> Unit,
     ): KalahWasher {
         tableRepository.save(kalahTable)
-        var lastKalahWasher = KalahWasher()
+        var lastKalahWasher = createKalahWasher()
         kalahTable.nextKalahWasher = lastKalahWasher
         pivotTo(lastKalahWasher)
         kalahWashers.add(lastKalahWasher)
         lastKalahWasher = kalahWasherService.create(lastKalahWasher)
         repeat(5) {
-            val kalahWasher = KalahWasher()
+            val kalahWasher = createKalahWasher()
             lastKalahWasher.nextKalahWasher = kalahWasher
             kalahWashers.add(lastKalahWasher)
             lastKalahWasher = kalahWasher
-            lastKalahWasher = kalahWasherService.create(lastKalahWasher)
+            lastKalahWasher = kalahWasherService.update(lastKalahWasher)
         }
         return lastKalahWasher
     }
+
+    private fun createKalahWasher() = kalahWasherService.create(KalahWasher())
 
     fun rolloutCupsFromPayersWasherOnBoard(
         player: Player,

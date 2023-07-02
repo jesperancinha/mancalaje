@@ -46,8 +46,7 @@ internal class KalaKalahBoardRepositoryTest(
 
     @BeforeEach
     fun setUp() {
-        val kalahWasherOne = KalahWasher()
-        kalahWasherRepository.save(kalahWasherOne)
+        val kalahWasherOne = kalahWasherRepository.save(KalahWasher())
         val kalahBoardPlayerOne = KalahBoard(playerOne = player1, kalahWasherOne = kalahWasherOne, owner = player1)
         val kalahBoardPlayerTwo = KalahBoard(playerOne = player2, kalahWasherOne = kalahWasherOne, owner = player1)
         val kalahBoardPlayerThree =
@@ -61,14 +60,14 @@ internal class KalaKalahBoardRepositoryTest(
     fun testFindBoardsByPlayerOneEquals_whenPlayerOne_thenShowPlayerOneBoards() {
         val boardsByPlayerOneEquals = kalahBoardRepository.findBoardsByPlayerOneEquals(player1)
         boardsByPlayerOneEquals.shouldHaveSize(1)
-        boardsByPlayerOneEquals[0]?.playerOne?.username shouldBe player1.username
+        boardsByPlayerOneEquals[0].playerOne?.username shouldBe player1.username
     }
 
     @Test
     fun testFindBoardsByPlayerOneEquals_whenPlayerThree_thenShowPlayerThreeBoards() {
         val boardsByPlayerOneEquals = kalahBoardRepository.findBoardsByPlayerOneEquals(player3)
         boardsByPlayerOneEquals.shouldHaveSize(1)
-        boardsByPlayerOneEquals[0]?.playerOne?.username shouldBe player3.username
+        boardsByPlayerOneEquals[0].playerOne?.username shouldBe player3.username
     }
 
     @Test

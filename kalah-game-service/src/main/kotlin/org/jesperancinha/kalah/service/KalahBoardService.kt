@@ -7,11 +7,12 @@ import org.jesperancinha.kalah.model.Player
 import org.jesperancinha.kalah.model.toDto
 import org.jesperancinha.kalah.repository.KalahBoardRepository
 import org.springframework.stereotype.Service
+import java.util.UUID
 import java.util.stream.Collectors
 
 @Service
 class KalahBoardService(private val boardRepository: KalahBoardRepository) {
-    fun findBoardById(id: Long): KalahBoard? {
+    fun findBoardById(id: UUID): KalahBoard? {
         return boardRepository.findById(id).orElseThrow { BoardDoesNotExistException() }
     }
 

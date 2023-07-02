@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.security.Principal
+import java.util.UUID
 
 @RestController
 @RequestMapping("api")
@@ -42,8 +43,8 @@ class KalaGameController(
     @PutMapping("move/{boardId}/{pitId}")
     fun move(
         principal: Principal,
-        @PathVariable boardId: Long,
-        @PathVariable pitId: Long
+        @PathVariable boardId: UUID,
+        @PathVariable pitId: UUID
     ): BoardDto? {
         val player = playerService.createOrFindPlayerByName(principal.name)
         val board = boardService.findBoardById(boardId)
@@ -60,7 +61,7 @@ class KalaGameController(
     @PutMapping("join/{boardId}")
     fun join(
         principal: Principal,
-        @PathVariable boardId: Long
+        @PathVariable boardId: UUID
     ): BoardDto? {
         val player = playerService.createOrFindPlayerByName(principal.name)
         val board = boardService.findBoardById(boardId)

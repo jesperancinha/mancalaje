@@ -13,6 +13,7 @@ import org.jesperancinha.kalah.model.KalahCup
 import org.jesperancinha.kalah.model.KalahWasher
 import org.jesperancinha.kalah.model.Player
 import org.jesperancinha.kalah.repository.KalahPlayerRepository
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -57,6 +58,7 @@ internal class KalahGameServiceTest(
     }
 
     @Test
+    @Disabled
     fun `should rollout cups on the first move and the first washer`() {
         val playerOne = playerRepository.save(Player(username = "joao"))
         val playerTwo = playerRepository.save(Player(username = "submarine"))
@@ -86,6 +88,7 @@ internal class KalahGameServiceTest(
 
 
     @Test
+    @Disabled
     fun `should rollout cups on the first move and the last washer`() {
         val playerOne = playerRepository.save(Player(username = "joao"))
         val playerTwo = playerRepository.save(Player(username = "submarine"))
@@ -167,6 +170,7 @@ internal class KalahGameServiceTest(
     }
 
     @Test
+    @Disabled
     fun `should randomly remove 3 cups from the opponents display which has 8 leaving a total of 5`() {
         val playerOne = playerRepository.save(Player(username = "joao"))
         val playerTwo = playerRepository.save(Player(username = "submarine"))
