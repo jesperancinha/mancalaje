@@ -10,13 +10,14 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
+import java.util.UUID
 
 @Entity
 @Table
 data class Player(
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    internal val id: Long? = null,
+    @GeneratedValue(strategy = GenerationType.UUID)
+    internal val id: UUID = UUID.randomUUID(),
 
     @Column(unique = true)
     internal val username: String,
@@ -38,7 +39,7 @@ data class Player(
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
         other as Player
 
-        return id != null && id == other.id
+        return id == other.id
     }
 
     override fun hashCode(): Int = 0

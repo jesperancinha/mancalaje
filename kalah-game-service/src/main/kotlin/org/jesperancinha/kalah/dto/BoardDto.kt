@@ -1,10 +1,11 @@
 package org.jesperancinha.kalah.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import java.util.UUID
 
 data class BoardDto(
     @JsonProperty("id")
-    val id: Long?,
+    val id: UUID?,
     @JsonProperty("pitDtos")
     val pitDtos: List<WasherDto?>,
     @JsonProperty("pitDtoOne")

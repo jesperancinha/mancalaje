@@ -2,6 +2,7 @@ package org.jesperancinha.kalah.controller
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.ninjasquad.springmockk.MockkBean
+import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.verify
@@ -34,6 +35,9 @@ import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import java.util.*
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -79,14 +83,13 @@ class KalaGameControllerTest(
     @Test
     @WithMockUser("player1")
     fun testCreateBoard_whenRequest_thenBoardIsCreated() {
-        kalahBoard.id = 1L
         kalahBoard.kalahWashers = mutableListOf()
         every { gameService.createNewBoard(any()) } returns kalahBoard
         val mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/api/create"))
             .andReturn()
         val contentAsString = mvcResult.response.contentAsString
         val (id) = objectMapper.readValue(contentAsString, BoardDto::class.java)
-        id shouldBe 1L
+        id shouldBe kalahBoard.id
         verify(exactly = 1) { playerService.createOrFindPlayerByName("player1") }
         verify(exactly = 1) { gameService.createNewBoard(any()) }
     }
@@ -94,11 +97,9 @@ class KalaGameControllerTest(
     @Test
     @WithMockUser("player1")
     fun testMove_whenPlayer2NotJoined_thenFail() {
-        kalahBoard.id = 1L
         val kalahWasher = KalahWasher()
-        kalahWasher.id = 1L
         kalahBoard.kalahWashers = listOf(kalahWasher)
-        every { boardService.findBoardById(1L) } returns kalahBoard
+        every { boardService.findBoardById( kalahBoard.id) } returns kalahBoard
         every {
             gameService.rolloutCupsFromPayersWasherOnBoard(
                 any(),
@@ -106,9 +107,9 @@ class KalaGameControllerTest(
                 any()
             )
         } throws PlayerNotJoinedYetException()
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/move/1/1"))
-            .andExpect(MockMvcResultMatchers.status().isNotFound)
-            .andExpect(MockMvcResultMatchers.content().string("NOT_JOINED"))
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/move/${kalahBoard.id}/${kalahWasher.id}"))
+            .andExpect(status().isNotFound)
+            .andExpect(content().string("NOT_JOINED"))
         verify(exactly = 1) { playerService.createOrFindPlayerByName("player1") }
     }
 
@@ -116,26 +117,23 @@ class KalaGameControllerTest(
     @WithMockUser("player1")
     @Disabled
     fun testMove_whenNoStones_thenFail() {
-        kalahBoard.id = 1L
         val kalahWasher = KalahWasher()
-        kalahWasher.id = 1L
         kalahBoard.kalahWashers = listOf(kalahWasher)
-        every { boardService.findBoardById(1L) } returns kalahBoard
+        every { boardService.findBoardById( kalahBoard.id.shouldNotBeNull()) } returns kalahBoard
         mockMvc.perform(MockMvcRequestBuilders.put("/api/move/1/1"))
-            .andExpect(MockMvcResultMatchers.status().isNotFound)
-            .andExpect(MockMvcResultMatchers.content().string("ZERO_STONES"))
+            .andExpect(status().isNotFound)
+            .andExpect(content().string("ZERO_STONES"))
         verify(exactly = 1) { playerService.createOrFindPlayerByName("player1") }
     }
 
     @Test
     @WithMockUser("player1")
     fun testMove_whenPitDoesntExist_thenFail() {
-        kalahBoard.id = 1L
         kalahBoard.kalahWashers = mutableListOf()
-        every { boardService.findBoardById(1L) } returns kalahBoard
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/move/1/1"))
-            .andExpect(MockMvcResultMatchers.status().isNotFound)
-            .andExpect(MockMvcResultMatchers.content().string("PIT_NOT_FOUND"))
+        every { boardService.findBoardById(kalahBoard.id.shouldNotBeNull()) } returns kalahBoard
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/move/${kalahBoard.id}/${UUID.randomUUID()}"))
+            .andExpect(status().isNotFound)
+            .andExpect(content().string("PIT_NOT_FOUND"))
         verify(exactly = 1) { playerService.createOrFindPlayerByName("player1") }
     }
 }

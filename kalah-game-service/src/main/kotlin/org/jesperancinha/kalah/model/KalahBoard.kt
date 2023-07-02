@@ -6,21 +6,22 @@ import org.hibernate.Hibernate
 import org.jesperancinha.kalah.dto.BoardDto
 import org.springframework.data.annotation.Version
 import java.time.Instant
+import java.util.UUID
 
 @Entity
 @Table
 data class KalahBoard(
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    internal var id: Long? = null,
+    @GeneratedValue(strategy = GenerationType.UUID)
+    internal val id: UUID = UUID.randomUUID(),
 
     @OneToMany(fetch = LAZY)
     internal var kalahWashers: List<KalahWasher>? = null,
 
-    @OneToOne(fetch = LAZY)
+    @ManyToOne(fetch = LAZY)
     internal var kalahWasherOne: KalahWasher? = null,
 
-    @OneToOne(fetch = LAZY)
+    @ManyToOne(fetch = LAZY)
     internal var kalahWasherTwo: KalahWasher? = null,
 
     @OneToOne(fetch = LAZY)
@@ -44,7 +45,7 @@ data class KalahBoard(
     @Version
     internal var version: Int? = null,
 
-    @OneToOne(fetch = LAZY)
+    @ManyToOne(fetch = LAZY)
     internal val owner: Player,
 
     @Column
@@ -56,21 +57,6 @@ data class KalahBoard(
         this.playerTwo = playerTwo
         this.playerOne?.opponent = playerTwo
         this.playerTwo?.opponent = playerOne
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
-        other as KalahBoard
-
-        return id != null && id == other.id
-    }
-
-    override fun hashCode(): Int = 0
-
-    @Override
-    override fun toString(): String {
-        return this::class.simpleName + "(id = $id , pitOne = $kalahWasherOne , kalahOne = $kalahTableOne , playerOne = $playerOne , pitTwo = $kalahWasherTwo , kalahTwo = $kalahTableTwo , playerTwo = $playerTwo , currentPlayer = $currentPlayer , winner = $winner )"
     }
 }
 

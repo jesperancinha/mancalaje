@@ -11,14 +11,15 @@ import jakarta.persistence.Id
 import jakarta.persistence.OneToMany
 import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
+import java.util.UUID
 
 @Entity
 @Table
 data class KalahWasher(
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    var id: Long? = null,
+    @GeneratedValue(strategy = GenerationType.UUID)
+    val id: UUID = UUID.randomUUID(),
 
     @OneToOne
     var nextKalahWasher: KalahWasher? = null,
