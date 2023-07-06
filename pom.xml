@@ -25,7 +25,7 @@
         <kotlinx-coroutines-debug.version>1.7.2</kotlinx-coroutines-debug.version>
 
         <postgresql.version>42.6.0</postgresql.version>
-        <h2.version>2.1.214</h2.version>
+        <h2.version>2.2.220</h2.version>
         <liquibase-core.version>4.23.0</liquibase-core.version>
         <spring-security-oauth2-autoconfigure.version>2.6.8</spring-security-oauth2-autoconfigure.version>
 
