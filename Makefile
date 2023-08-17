@@ -65,3 +65,5 @@ version-update-maven:
 	mvn versions:use-releases
 owasp:
 	mvn clean install -Powasp
+coverage-npm:
+	cd mancalaje-fe && sudo npm i -g jest && npm run coverage
