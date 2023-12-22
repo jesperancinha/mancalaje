@@ -21,7 +21,7 @@
         <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
         <dependency-check-maven.version>9.0.7</dependency-check-maven.version>
 
-        <kotlin.version>1.9.21</kotlin.version>
+        <kotlin.version>1.9.22</kotlin.version>
         <kotlinx-coroutines-debug.version>1.7.3</kotlinx-coroutines-debug.version>
 
         <postgresql.version>42.7.1</postgresql.version>
