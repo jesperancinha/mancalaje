@@ -7492,10 +7492,10 @@ jest-environment-node@^29.7.0:
     jest-mock "^29.7.0"
     jest-util "^29.7.0"
 
-jest-environment-puppeteer@^10.0.0:
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/jest-environment-puppeteer/-/jest-environment-puppeteer-10.0.0.tgz#1465eda02d9931e196a80f30c078bc0b46c71525"
-  integrity sha512-U9SrZp0RK4ZrtsT2InEfj5WuZnZ/fFA+6PfDBAH4KJWPiVqRcDH2ZYC4B3k+3amD4YMCA8lDk9iq6X4XfR+FhA==
+jest-environment-puppeteer@^10.0.1:
+  version "10.0.1"
+  resolved "https://registry.yarnpkg.com/jest-environment-puppeteer/-/jest-environment-puppeteer-10.0.1.tgz#f69a62606b51beee2d6f21494218bea2ad6643a5"
+  integrity sha512-FxMzVRyqieQqSy5CPWiwdK5t9dkRHid5eoRTVa8RtYeXLlpW6lU0dAmxEfPkdnDVCiPUhC2APeKOXq0J72bgag==
   dependencies:
     chalk "^4.1.2"
     cosmiconfig "^8.3.6"
@@ -7648,13 +7648,13 @@ jest-preset-angular@^14.0.2:
   optionalDependencies:
     esbuild ">=0.15.13"
 
-jest-puppeteer@^10.0.0:
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/jest-puppeteer/-/jest-puppeteer-10.0.0.tgz#0bc227396105255cb5e1cf15f2d3f4bdb55deedf"
-  integrity sha512-owfupmFfg3TFeDAUUS70tUt58eeGTwHpKf33zJGYJ/BhJwCMf04y1tcDZ4k1ofto3zfUyK6nmHenx73CUMEEfg==
+jest-puppeteer@^10.0.1:
+  version "10.0.1"
+  resolved "https://registry.yarnpkg.com/jest-puppeteer/-/jest-puppeteer-10.0.1.tgz#c9537ed42b98f6764dc91fa33819e0b20aaaf83b"
+  integrity sha512-FzC35XbqeuQEt1smXh1EOqhJaRkWqJkyWDMfGkcZ8C59QHXeJ7F/iOmiNqYi6l/OsycUuOPCk+IkjfGfS9YbrQ==
   dependencies:
     expect-puppeteer "^10.0.0"
-    jest-environment-puppeteer "^10.0.0"
+    jest-environment-puppeteer "^10.0.1"
 
 jest-regex-util@^29.6.3:
   version "29.6.3"
