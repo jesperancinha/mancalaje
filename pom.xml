@@ -19,12 +19,12 @@
         <maven.compiler>3.8.1</maven.compiler>
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
         <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
-        <dependency-check-maven.version>9.0.9</dependency-check-maven.version>
+        <dependency-check-maven.version>9.0.10</dependency-check-maven.version>
 
         <kotlin.version>1.9.23</kotlin.version>
         <kotlinx-coroutines-debug.version>1.8.0</kotlinx-coroutines-debug.version>
 
-        <postgresql.version>42.7.2</postgresql.version>
+        <postgresql.version>42.7.3</postgresql.version>
         <h2.version>2.2.224</h2.version>
         <liquibase-core.version>4.26.0</liquibase-core.version>
         <spring-security-oauth2-autoconfigure.version>2.6.8</spring-security-oauth2-autoconfigure.version>
@@ -34,8 +34,8 @@
 
         <springmockk.version>4.0.2</springmockk.version>
         <mockk.version>1.13.10</mockk.version>
-        <kotest.version>5.8.0</kotest.version>
-        <reactor-test.version>3.6.2</reactor-test.version>
+        <kotest.version>5.8.1</kotest.version>
+        <reactor-test.version>3.6.4</reactor-test.version>
 
         <omni-coveragereporter-maven-plugin.version>0.4.3</omni-coveragereporter-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
