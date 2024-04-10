@@ -3,7 +3,6 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {AppComponent} from './app.component';
 
 import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
-import {MatCard} from "@angular/material/card";
 import {HttpClientModule} from "@angular/common/http";
 
 beforeAll(() => {
@@ -19,7 +18,7 @@ describe('AppComponent', () => {
         RouterTestingModule, HttpClientModule
       ],
       declarations: [
-        AppComponent, MatCard
+        AppComponent
       ],
     }).compileComponents();
   }));

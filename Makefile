@@ -42,10 +42,19 @@ minikube-vmware:
 	minikube start --driver=vmware
 install-snyk:
 	npm i -g snyk
-update:
+remove-lock-files:
+	find . -name "package-lock.json" | xargs -I {} rm {}; \
+	find . -name "yarn.lock" | xargs -I {} rm {};
+update: remove-lock-files
 	npm install -g npm-check-updates
-	cd kala-game-web && ncu -u
-	cd mancalaje-fe && ncu -u
+	cd kala-game-web; \
+ 		npx browserslist --update-db; \
+ 		ncu -u; \
+ 		yarn
+	cd mancalaje-fe; \
+ 		npx browserslist --update-db; \
+ 		ncu -u; \
+ 		yarn
 update-browsers:
 	cd kala-game-web && npx browserslist@latest --update-db
 	cd mancalaje-fe && npx browserslist@latest --update-db
