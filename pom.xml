@@ -34,7 +34,7 @@
 
         <springmockk.version>4.0.2</springmockk.version>
         <mockk.version>1.13.10</mockk.version>
-        <kotest.version>5.8.1</kotest.version>
+        <kotest.version>5.9.0</kotest.version>
         <reactor-test.version>3.6.5</reactor-test.version>
 
         <omni-coveragereporter-maven-plugin.version>0.4.3</omni-coveragereporter-maven-plugin.version>
