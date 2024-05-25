@@ -4,11 +4,24 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+
   - package-ecosystem: "npm"
     directory: "/mancalaje-fe"
     schedule:
       interval: "daily"
+    groups:
+      react:
+        patterns:
+          - "@react*"
+          - "react*"
+          - "@types/react*"
+
   - package-ecosystem: "npm"
     directory: "/kala-game-web"
     schedule:
       interval: "daily"
+    groups:
+      angular:
+        patterns:
+          - "@angular*"
+          - "angular*"
