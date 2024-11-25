@@ -6,7 +6,14 @@ import {AppComponent} from './app.component';
 import {BoardListingComponent} from "./components/board.listing.component/board.listing.component";
 import {MatCardModule} from "@angular/material/card";
 import {MatListModule} from "@angular/material/list";
-import {HTTP_INTERCEPTORS, HttpClientModule, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
+import {
+  HTTP_INTERCEPTORS,
+  HttpClientModule,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+  provideHttpClient
+} from "@angular/common/http";
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -28,11 +35,12 @@ export class XhrInterceptor implements HttpInterceptor {
     MatListModule,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    MatCardModule,
     MatListModule,
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true}],
+  providers: [
+    provideHttpClient(),
+    {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
