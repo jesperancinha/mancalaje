@@ -8,7 +8,8 @@ import {Player} from "../../model/player";
 @Component({
   selector: 'board-listing',
   templateUrl: './board.listing.component.html',
-  styleUrls: ['./board.listing.component.scss']
+  styleUrls: ['./board.listing.component.scss'],
+  standalone: false
 })
 export class BoardListingComponent implements OnInit {
   allPlayerBoards: Board[];

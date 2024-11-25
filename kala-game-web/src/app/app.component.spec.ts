@@ -3,7 +3,8 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {AppComponent} from './app.component';
 
 import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule, provideHttpClient} from "@angular/common/http";
+import {MatCardModule} from "@angular/material/card";
 
 beforeAll(() => {
   TestBed.resetTestEnvironment();
@@ -15,11 +16,14 @@ describe('AppComponent', () => {
   beforeEach((() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule, HttpClientModule
+        RouterTestingModule, MatCardModule
       ],
       declarations: [
         AppComponent
       ],
+      providers: [
+        provideHttpClient()
+      ]
     }).compileComponents();
   }));
 
