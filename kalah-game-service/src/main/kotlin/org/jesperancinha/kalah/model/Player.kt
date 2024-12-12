@@ -17,7 +17,7 @@ import java.util.UUID
 data class Player(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    internal val id: UUID = UUID.randomUUID(),
+    internal var id: UUID? = null,
 
     @Column(unique = true)
     internal val username: String,

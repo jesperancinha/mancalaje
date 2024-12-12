@@ -13,7 +13,7 @@ import java.util.UUID
 data class KalahBoard(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    internal val id: UUID = UUID.randomUUID(),
+    internal var id: UUID? = null,
 
     @OneToMany(fetch = LAZY)
     internal var kalahWashers: List<KalahWasher>? = null,

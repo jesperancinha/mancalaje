@@ -17,7 +17,7 @@ data class KalahCup(
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long? = null,
 
-    @Column
+    @Column(name = "full_cup")
     var full: Boolean,
 
     @ManyToOne

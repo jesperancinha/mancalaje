@@ -19,7 +19,7 @@ data class KalahWasher(
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.UUID)
-    val id: UUID = UUID.randomUUID(),
+    val id: UUID? = null,
 
     @OneToOne
     var nextKalahWasher: KalahWasher? = null,
