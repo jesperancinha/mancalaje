@@ -15,21 +15,22 @@ import org.springframework.test.context.ContextConfiguration
 
 @SpringBootTest
 @ContextConfiguration(initializers = [DockerPostgresDataInitializer::class])
-internal class KalahPlayerRepositoryTest {
+class KalahPlayerRepositoryTest @Autowired constructor(
     @Autowired
-    private val kalahPlayerRepository: KalahPlayerRepository? = null
+    private val kalahPlayerRepository: KalahPlayerRepository
+) {
 
     @BeforeEach
     @Transactional
     fun setUp() {
-        kalahPlayerRepository!!.save(Player(
+        kalahPlayerRepository.save(Player(
             username = "player1"
         ))
     }
 
     @Test
     fun testFindPlayerByUsernameEquals_whenLookingPerName_thenFindIt() {
-        val player1 = kalahPlayerRepository!!.findPlayerByUsernameEquals("player1")
+        val player1 = kalahPlayerRepository.findPlayerByUsernameEquals("player1")
         assertThat(player1).isNotNull
         assertThat(player1.username).isEqualTo("player1")
     }
