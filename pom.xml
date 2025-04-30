@@ -33,7 +33,7 @@
         <validation-api.version>2.0.1.Final</validation-api.version>
 
         <springmockk.version>4.0.2</springmockk.version>
-        <mockk.version>1.14.0</mockk.version>
+        <mockk.version>1.14.2</mockk.version>
         <kotest.version>5.9.1</kotest.version>
         <reactor-test.version>3.7.5</reactor-test.version>
 
