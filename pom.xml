@@ -26,7 +26,7 @@
 
         <postgresql.version>42.7.5</postgresql.version>
         <h2.version>2.3.232</h2.version>
-        <liquibase-core.version>4.31.1</liquibase-core.version>
+        <liquibase-core.version>4.32.0</liquibase-core.version>
         <spring-security-oauth2-autoconfigure.version>2.6.8</spring-security-oauth2-autoconfigure.version>
 
         <spring-boot.version>3.4.5</spring-boot.version>
