@@ -19,7 +19,7 @@
         <maven.compiler>3.8.1</maven.compiler>
         <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
         <versions-maven-plugin.version>2.18.0</versions-maven-plugin.version>
-        <dependency-check-maven.version>12.1.1</dependency-check-maven.version>
+        <dependency-check-maven.version>12.1.2</dependency-check-maven.version>
 
         <kotlin.version>2.1.21</kotlin.version>
         <kotlinx-coroutines-debug.version>1.10.2</kotlinx-coroutines-debug.version>
@@ -29,7 +29,7 @@
         <liquibase-core.version>4.32.0</liquibase-core.version>
         <spring-security-oauth2-autoconfigure.version>2.6.8</spring-security-oauth2-autoconfigure.version>
 
-        <spring-boot.version>3.4.5</spring-boot.version>
+        <spring-boot.version>3.5.0</spring-boot.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
 
         <springmockk.version>4.0.2</springmockk.version>
